@@ -1,4 +1,4 @@
-import 'package:power_one/Objects/Score.dart';
+import 'package:power_one/Objects/Score/Score.dart';
 
 import 'Command.dart';
 
@@ -11,11 +11,11 @@ class Miss extends Command {
 
   @override
   void execute() {
-    p.miss();
+    // p.miss();
   }
 
   @override
   void undo() {
-    p.undoMiss();
+    // p.undoMiss();
   }
 }

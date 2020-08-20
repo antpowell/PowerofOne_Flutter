@@ -1,35 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
+import 'package:power_one/Objects/Score/cubit/score_cubit.dart';
 import './Objects/Play.dart';
 import './Objects/Point.dart';
-import 'Objects/Score.dart';
-
-// import 'Data/Point.dart';
+import 'Objects/Score/Score.dart';
 
 class TrackerButton extends StatelessWidget {
-  TrackerButton(this.p);
-  final Score p;
+  final Score activity;
+  TrackerButton(this.activity);
 
   @override
   Widget build(BuildContext context) {
-    return (p is Point)
+    return BlocConsumer<ActivitiesCubit, ActivitiesState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return BlocProvider(
+          create: (context) => ScoreCubit(activity),
+          child: BlocConsumer<ScoreCubit, ScoreState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return pointOrPlayTrackerBuilder(context, state);
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget pointOrPlayTrackerBuilder(BuildContext context, ScoreState state) {
+    final scoreCubit = context.bloc<ScoreCubit>();
+
+    return (activity is Point)
         ? Row(
             children: [
               buildTrackerButton(
                 Icon(Icons.check),
                 Colors.green,
-                p.make,
+                scoreCubit.make,
               ),
               buildTrackerButton(
                 Icon(Icons.clear),
                 Colors.red,
-                p.miss,
+                scoreCubit.miss,
               ),
             ],
           )
         : buildTrackerButton(
-            Text(p.title),
+            Text(activity.title),
             Colors.green,
-            p.make,
+            scoreCubit.make,
           );
   }
 
@@ -48,7 +70,6 @@ class TrackerButton extends StatelessWidget {
             borderSide: BorderSide(width: 2, color: c),
             onPressed: () {
               f();
-              debugPrint('${p.title} : ${p.total()}');
             },
           ),
         ),

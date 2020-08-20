@@ -7,9 +7,9 @@ const kLabels = {
     '1PT',
     '2PTs',
     '3PTs',
-    'STLS',
   ],
   'plays': [
+    'STLS',
     'ORB',
     'ASST',
     'BLKS',

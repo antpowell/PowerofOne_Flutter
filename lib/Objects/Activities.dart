@@ -1,24 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Command.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
+import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
 
 import 'Made.dart';
 import 'Miss.dart';
+import 'Score/Score.dart';
 
 class Activities {
   static final Activities _singleton = Activities._initializer();
+
   List<Command> history = [];
 
-  Point freeThrow = new Point("freeThrow");
-  Point twoPoint = new Point("twoPoint");
-  Point threePoint = new Point("threePoint");
-  Point turnOver = new Point("turnOver");
+  Map<String, Point> _pointsMap = {};
+  Map<String, Point> get pointsMap => _pointsMap;
 
-  Play assist = new Play("ssist");
-  Play offRebound = new Play("ffRebound");
-  Play steal = new Play("teal");
-  Play block = new Play("lock");
+  Map<String, Play> _playsMap = {};
+  Map<String, Play> get playsMap => _playsMap;
 
   List<Point> _points = [];
   List<Point> get points => _points;
@@ -26,23 +28,19 @@ class Activities {
   List<Play> _plays = [];
   List<Play> get plays => _plays;
 
-  Made made;
-  Miss miss;
-
   factory Activities() {
     return _singleton;
   }
 
   Activities._initializer() {
-    _points.add(freeThrow);
-    _points.add(twoPoint);
-    _points.add(threePoint);
-    _points.add(turnOver);
-
-    _plays.add(assist);
-    _plays.add(offRebound);
-    _plays.add(steal);
-    _plays.add(block);
+    kLabels["points"].forEach((element) {
+      _points.add(new Point(element));
+      _pointsMap[element] = new Point(element);
+    });
+    kLabels["plays"].forEach((element) {
+      _plays.add(new Play(element));
+      _playsMap[element] = new Play(element);
+    });
     debugPrint('IPoints created!');
   }
 

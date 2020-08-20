@@ -1,15 +1,16 @@
-import 'Score.dart';
+import 'Score/Score.dart';
 
 class Play extends Score {
-  Play(String title) : super(title);
+  //Play type doesn't have a negative value
+  Play(String title, [int pos = 0]) : super(title, pos, 0);
 
-  @override
-  void miss() {
-    print('miss not valid on Play object');
-  }
+  // @override
+  // void miss() {
+  //   print('miss not valid on Play object');
+  // }
 
-  @override
-  void undoMiss() {
-    print('undo a miss not valid on Play object');
-  }
+  // @override
+  // void undoMiss() {
+  //   print('undo a miss not valid on Play object');
+  // }
 }

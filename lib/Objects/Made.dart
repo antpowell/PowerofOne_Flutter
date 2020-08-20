@@ -1,4 +1,4 @@
-import 'package:power_one/Objects/Score.dart';
+import 'package:power_one/Objects/Score/Score.dart';
 
 import 'Command.dart';
 
@@ -11,11 +11,11 @@ class Made extends Command {
 
   @override
   void execute() {
-    p.make();
+    // p.make();
   }
 
   @override
   void undo() {
-    p.undoMake();
+    // p.undoMake();
   }
 }

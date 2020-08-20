@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
 import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
 
 import '../../TrackerButton.dart';
 
 class PlaysSection extends StatelessWidget {
   List<Widget> sectionList = [];
-
-  _createPlaysButtonFrom() {}
+  Activities _activities = new Activities();
 
   _createSectionList() {
-    kLabels["plays"].forEach((element) {
-      String name = element.toString();
-      Play play = new Play(element.toString());
-      sectionList.add(TrackerButton(play));
+    _activities.plays.forEach((element) {
+      sectionList.add(TrackerButton(element));
     });
     return sectionList;
   }
