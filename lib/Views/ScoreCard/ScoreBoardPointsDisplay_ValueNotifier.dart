@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:power_one/Data/constants.dart';
+import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Objects/Point.dart';
 import 'package:power_one/Objects/Score/Score.dart';
 import 'package:power_one/Objects/Score/cubit/score_cubit.dart';
@@ -26,16 +27,16 @@ class ScoreBoardPointsDisplayNotifier extends StatelessWidget {
           listener: (context, state) {
             if (state is ScoreMade) {
               debugPrint('Listener ScoreMade Fired');
-              buildScoreDisplay(state.activity);
+              buildScoreDisplay(Activities().pointsMap[activity.title]);
             }
           },
           builder: (context, state) {
             if (state is ScoreMade) {
               debugPrint('Builder ScoreMade Fired');
-              return buildScoreDisplay(state.activity);
+              return buildScoreDisplay(Activities().pointsMap[activity.title]);
             } else if (state is ScoreMiss) {
               debugPrint('Builder ScoreMissed Fired');
-              return buildScoreDisplay(state.activity);
+              return buildScoreDisplay(Activities().pointsMap[activity.title]);
             }
           },
         ),

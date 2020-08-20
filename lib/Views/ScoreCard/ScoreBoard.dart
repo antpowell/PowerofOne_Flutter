@@ -12,7 +12,7 @@ class ScoreBoard extends StatelessWidget {
 
   _createDualScoreSectionLists() {
     _activities.pointsMap.forEach((key, value) {
-      _dualScoreSection.add(ScoreBoardPointsDisplay(activity: value));
+      _dualScoreSection.add(ScoreBoardPointsDisplay(key));
     });
 
     return _dualScoreSection;
@@ -20,7 +20,7 @@ class ScoreBoard extends StatelessWidget {
 
   _createSignleScoreSectionLists() {
     _activities.playsMap.forEach((key, value) {
-      _singleScoreSection.add(ScoreBoardPointsDisplay(activity: value));
+      _singleScoreSection.add(ScoreBoardPointsDisplay(key));
     });
 
     return _singleScoreSection;
