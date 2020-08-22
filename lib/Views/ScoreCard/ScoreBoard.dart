@@ -12,7 +12,7 @@ class ScoreBoard extends StatelessWidget {
 
   _createDualScoreSectionLists() {
     _activities.pointsMap.forEach((key, value) {
-      _dualScoreSection.add(ScoreBoardPointsDisplay(key));
+      _dualScoreSection.add(ScoreBoardPointsDisplay(value));
     });
 
     return _dualScoreSection;
@@ -20,7 +20,7 @@ class ScoreBoard extends StatelessWidget {
 
   _createSignleScoreSectionLists() {
     _activities.playsMap.forEach((key, value) {
-      _singleScoreSection.add(ScoreBoardPointsDisplay(key));
+      _singleScoreSection.add(ScoreBoardPointsDisplay(value));
     });
 
     return _singleScoreSection;
@@ -28,24 +28,72 @@ class ScoreBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: Wrap(
-        alignment: WrapAlignment.spaceEvenly,
-        direction: Axis.horizontal,
-        children: <Widget>[
-          Text(
+    return Column(
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Text(
             'Player Name',
             style: TextStyle(fontSize: 42, color: Colors.white),
             textAlign: TextAlign.center,
           ),
-          Column(children: _createDualScoreSectionLists()),
-          Wrap(
-            spacing: 24.0,
+        ),
+        Expanded(
+          flex: 4,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ScoreBoardPointsDisplay(Activities().points[index]);
+            },
+            itemCount: Activities().points.length,
+            physics: NeverScrollableScrollPhysics(),
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Wrap(
+            spacing: 8.0,
             runSpacing: 8,
             children: _createSignleScoreSectionLists(),
-          )
-        ],
-      ),
+          ),
+        ),
+
+        // ListView.builder(
+        //   shrinkWrap: true,
+        //   itemBuilder: (context, index) {
+        //     ScoreBoardPointsDisplay(Activities().points[index]);
+        //   },
+        //   itemCount: Activities().points.length,
+        // ),
+        // Column(children: _createDualScoreSectionLists()),
+      ],
     );
+
+    // SizedBox.expand(
+    //   child: Wrap(
+    //     alignment: WrapAlignment.spaceEvenly,
+    //     direction: Axis.horizontal,
+    //     children: <Widget>[
+    //       Text(
+    //         'Player Name',
+    //         style: TextStyle(fontSize: 42, color: Colors.white),
+    //         textAlign: TextAlign.center,
+    //       ),
+    //       // ListView.builder(
+    //       //   shrinkWrap: true,
+    //       //   itemBuilder: (context, index) {
+    //       //     ScoreBoardPointsDisplay(Activities().points[index]);
+    //       //   },
+    //       //   itemCount: Activities().points.length,
+    //       // ),
+    //       // Column(children: _createDualScoreSectionLists()),
+    //       Wrap(
+    //         spacing: 8.0,
+    //         runSpacing: 8,
+    //         children: _createSignleScoreSectionLists(),
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 }

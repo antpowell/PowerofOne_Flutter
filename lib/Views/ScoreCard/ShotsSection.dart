@@ -6,10 +6,10 @@ import '../../TrackerButton.dart';
 
 class ShotsSection extends StatelessWidget {
   List<Widget> sectionList = [];
-  // Activities _activities = new Activities();
+  Activities _activities = new Activities();
 
-  _createSectionList(Activities activities) {
-    activities.points.forEach((element) {
+  _createSectionList() {
+    _activities.points.forEach((element) {
       sectionList.add(TrackerButton(element));
     });
     return sectionList;
@@ -17,19 +17,20 @@ class ShotsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ActivitiesCubit, ActivitiesState>(
-      listener: (context, state) {
-        // TODO: implement listener
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return TrackerButton(Activities().points[index]);
       },
-      builder: (context, state) {
-        return SizedBox.expand(
-          child: Wrap(
-            alignment: WrapAlignment.spaceEvenly,
-            direction: Axis.vertical,
-            children: _createSectionList(state.activities),
-          ),
-        );
-      },
+      itemCount: Activities().points.length,
+      physics: NeverScrollableScrollPhysics(),
     );
+
+    // return SizedBox.expand(
+    //   child: Wrap(
+    //     alignment: WrapAlignment.spaceEvenly,
+    //     direction: Axis.vertical,
+    //     children: _createSectionList(),
+    //   ),
+    // );
   }
 }

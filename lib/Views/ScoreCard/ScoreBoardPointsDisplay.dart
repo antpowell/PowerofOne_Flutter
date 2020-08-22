@@ -7,7 +7,7 @@ import 'package:power_one/Objects/Score/Score.dart';
 import 'package:power_one/Objects/Score/cubit/score_cubit.dart';
 
 class ScoreBoardPointsDisplay extends StatelessWidget {
-  final String activity;
+  final Score activity;
   ScoreBoardPointsDisplay(this.activity);
 
   Text _scoreBoardText(label) {
@@ -19,12 +19,8 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Score thisActivity = Activities().pointsMap[activity];
-    return BlocBuilder<ScoreCubit, ScoreState>(builder: (context, state) {
-      if (state is ScoreMade) {
-        buildScoreDisplay(thisActivity);
-      }
-    });
+    // final Score thisActivity = Activities().pointsMap[activity];
+    return buildScoreDisplay(activity);
   }
 
   Column buildScoreDisplay(Score activity) {

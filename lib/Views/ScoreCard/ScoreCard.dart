@@ -37,16 +37,16 @@ class ScoreCardScreen extends StatelessWidget {
                 // TODO: TRYING TO IMPLEMENT THE COMMAND PATTEREN
                 children: <Widget>[
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: PlaysSection(),
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: ScoreBoard(),
                     // child: Container(),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: ShotsSection(),
                   ),
                 ],
