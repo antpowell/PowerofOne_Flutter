@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Objects/Point.dart';
-import 'package:power_one/Objects/Score/Score.dart';
-import 'package:power_one/Objects/Score/cubit/score_cubit.dart';
 
 class ScoreBoardPointsDisplay extends StatelessWidget {
   final String activityName;
@@ -29,14 +27,20 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _scoreBoardText(activitiesProvider
-                          .getActivity(activityName)
-                          .pos
-                          .toString()),
-                      _scoreBoardText(activitiesProvider
-                          .getActivity(activityName)
-                          .neg
-                          .toString()),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4, right: 4),
+                        child: _scoreBoardText(activitiesProvider
+                            .getActivity(activityName)
+                            .pos
+                            .toString()),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4, right: 4),
+                        child: _scoreBoardText(activitiesProvider
+                            .getActivity(activityName)
+                            .neg
+                            .toString()),
+                      ),
                     ],
                   )
                 : _scoreBoardText(activitiesProvider

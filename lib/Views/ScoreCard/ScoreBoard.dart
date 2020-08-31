@@ -11,9 +11,6 @@ class ScoreBoard extends StatelessWidget {
   _createSignleScoreSectionLists(Activities a) {
     a.hustlePointsMap.keys.forEach(
         (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
-    // a.hustlePointsMap.forEach((key, value) {
-    //   _singleScoreSection.add(ScoreBoardPointsDisplay(key));
-    // });
 
     return _singleScoreSection;
   }
@@ -34,7 +31,7 @@ class ScoreBoard extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 4,
+          flex: 5,
           child: ListView.builder(
             shrinkWrap: true,
             itemBuilder: (context, index) {
@@ -53,43 +50,7 @@ class ScoreBoard extends StatelessWidget {
             children: _createSignleScoreSectionLists(activities),
           ),
         ),
-
-        // ListView.builder(
-        //   shrinkWrap: true,
-        //   itemBuilder: (context, index) {
-        //     ScoreBoardPointsDisplay(Activities().points[index]);
-        //   },
-        //   itemCount: Activities().points.length,
-        // ),
-        // Column(children: _createDualScoreSectionLists()),
       ],
     );
-
-    // SizedBox.expand(
-    //   child: Wrap(
-    //     alignment: WrapAlignment.spaceEvenly,
-    //     direction: Axis.horizontal,
-    //     children: <Widget>[
-    //       Text(
-    //         'Player Name',
-    //         style: TextStyle(fontSize: 42, color: Colors.white),
-    //         textAlign: TextAlign.center,
-    //       ),
-    //       // ListView.builder(
-    //       //   shrinkWrap: true,
-    //       //   itemBuilder: (context, index) {
-    //       //     ScoreBoardPointsDisplay(Activities().points[index]);
-    //       //   },
-    //       //   itemCount: Activities().points.length,
-    //       // ),
-    //       // Column(children: _createDualScoreSectionLists()),
-    //       Wrap(
-    //         spacing: 8.0,
-    //         runSpacing: 8,
-    //         children: _createSignleScoreSectionLists(),
-    //       )
-    //     ],
-    //   ),
-    // );
   }
 }

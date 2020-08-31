@@ -18,7 +18,8 @@ class HustlePointsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Activities a = Provider.of<Activities>(context);
+    // final Activities a = Provider.of<Activities>(context);
+    final Activities a = context.select((Activities a) => a);
 
     // return ListView.builder(
     //   itemBuilder: (context, index) {

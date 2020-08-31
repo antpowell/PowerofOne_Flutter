@@ -28,15 +28,19 @@ abstract class Score {
   }
 
   miss() {
-    (this is Point)
-        ? _neg++
-        : debugPrint("Only Points have can call the miss function.");
+    if (this is Point) {
+      _neg++;
+      return this;
+    }
+    debugPrint("Only Points have can call the miss function.");
   }
 
   undoMiss() {
-    (this is Point)
-        ? _neg--
-        : debugPrint("Only Points have can call the miss function.");
+    if (this is Point) {
+      _neg--;
+      return this;
+    }
+    debugPrint("Only Points have can call the miss function.");
   }
 
   int total() {

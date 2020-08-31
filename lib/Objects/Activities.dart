@@ -46,7 +46,7 @@ class Activities extends ChangeNotifier {
   }
 
   missed(Score activity) {
-    _pointsMap[activity.title] = activity.make();
+    _pointsMap[activity.title] = activity.miss();
     debugPrint('Action: $activity : neg-> ${activity.neg}');
     notifyListeners();
   }
