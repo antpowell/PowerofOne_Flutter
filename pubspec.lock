@@ -241,12 +241,12 @@ packages:
     source: hosted
     version: "1.0.2"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.2"
+    version: "4.3.2+1"
   quiver:
     dependency: transitive
     description:

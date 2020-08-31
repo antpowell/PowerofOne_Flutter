@@ -7,15 +7,14 @@ class Point extends Score {
 
   // @override
   // Point miss() {
-  //   int newNeg = neg+1;
-  //   this = new Point(title, pos, newNeg);
+  //   this.neg++;
   //   debugPrint('${this.title}: -${this.neg}');
   //   return this;
   // }
 
   // @override
   // Point undoMiss() {
-  //   --neg;
+  //   this.neg--;
   //   debugPrint('${this.title}: -${this.neg}');
   //   return this;
   // }

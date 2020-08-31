@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:power_one/Objects/Activities.dart';
-import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoardPointsDisplay.dart';
 
 // ignore: must_be_immutable
 class ScoreBoard extends StatelessWidget {
-  List<Widget> _dualScoreSection = [];
+  // List<Widget> _dualScoreSection = [];
   List<Widget> _singleScoreSection = [];
-  Activities _activities = new Activities();
 
-  _createDualScoreSectionLists() {
-    _activities.pointsMap.forEach((key, value) {
-      _dualScoreSection.add(ScoreBoardPointsDisplay(value));
-    });
-
-    return _dualScoreSection;
-  }
-
-  _createSignleScoreSectionLists() {
-    _activities.playsMap.forEach((key, value) {
-      _singleScoreSection.add(ScoreBoardPointsDisplay(value));
-    });
+  _createSignleScoreSectionLists(Activities a) {
+    a.hustlePointsMap.keys.forEach(
+        (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
+    // a.hustlePointsMap.forEach((key, value) {
+    //   _singleScoreSection.add(ScoreBoardPointsDisplay(key));
+    // });
 
     return _singleScoreSection;
   }
 
   @override
   Widget build(BuildContext context) {
+    final Activities activities =
+        Provider.of<Activities>(context, listen: false);
+
     return Column(
       children: <Widget>[
         Expanded(
@@ -43,9 +38,10 @@ class ScoreBoard extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return ScoreBoardPointsDisplay(Activities().points[index]);
+              String name = activities.pointsMap.keys.elementAt(index);
+              return ScoreBoardPointsDisplay(name);
             },
-            itemCount: Activities().points.length,
+            itemCount: activities.pointsMap.length,
             physics: NeverScrollableScrollPhysics(),
           ),
         ),
@@ -54,7 +50,7 @@ class ScoreBoard extends StatelessWidget {
           child: Wrap(
             spacing: 8.0,
             runSpacing: 8,
-            children: _createSignleScoreSectionLists(),
+            children: _createSignleScoreSectionLists(activities),
           ),
         ),
 

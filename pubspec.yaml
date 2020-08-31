@@ -19,17 +19,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc:
+  bloc: null
   flutter_bloc: ^6.0.1
 
-  firebase_core:
+  firebase_core: null
   firebase_auth: ^0.15.5+3
-  google_sign_in:
+  google_sign_in: null
   cloud_firestore: ^0.13.4+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  provider: ^4.3.2+1
 
 dev_dependencies:
   flutter_test:
@@ -37,7 +38,6 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -72,3 +72,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

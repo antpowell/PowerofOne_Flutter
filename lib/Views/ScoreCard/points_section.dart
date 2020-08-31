@@ -3,25 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
 import '../../TrackerButton.dart';
+import 'package:provider/provider.dart';
 
-class ShotsSection extends StatelessWidget {
-  List<Widget> sectionList = [];
-  Activities _activities = new Activities();
-
-  _createSectionList() {
-    _activities.points.forEach((element) {
-      sectionList.add(TrackerButton(element));
-    });
-    return sectionList;
-  }
+class PointsSection extends StatelessWidget {
+  // _createSectionList() {
+  //   _activities.points.forEach((element) {
+  //     sectionList.add(TrackerButton(element));
+  //   });
+  //   return sectionList;
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final Activities a = Provider.of<Activities>(context);
     return ListView.builder(
       itemBuilder: (context, index) {
-        return TrackerButton(Activities().points[index]);
+        return TrackerButton(a.pointsMap.values.elementAt(index));
       },
-      itemCount: Activities().points.length,
+      itemCount: a.pointsMap.length,
       physics: NeverScrollableScrollPhysics(),
     );
 

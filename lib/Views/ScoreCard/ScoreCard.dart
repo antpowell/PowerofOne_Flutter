@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Data/Points.dart';
 import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
 import 'package:power_one/TrackerButton.dart';
-import 'package:power_one/Views/ScoreCard/PlaysSection.dart';
+import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
-import 'package:power_one/Views/ScoreCard/ShotsSection.dart';
+import 'package:power_one/Views/ScoreCard/points_section.dart';
 
 class ScoreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ActivitiesCubit(),
-      child: ScoreCardScreen(),
-    );
+    return ScoreCardScreen();
   }
 }
 
@@ -38,7 +34,7 @@ class ScoreCardScreen extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     flex: 2,
-                    child: PlaysSection(),
+                    child: HustlePointsSection(),
                   ),
                   Expanded(
                     flex: 3,
@@ -47,7 +43,7 @@ class ScoreCardScreen extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 2,
-                    child: ShotsSection(),
+                    child: PointsSection(),
                   ),
                 ],
               ),

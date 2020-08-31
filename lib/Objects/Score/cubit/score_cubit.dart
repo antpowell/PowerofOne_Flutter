@@ -21,7 +21,8 @@ class ScoreCubit extends Cubit<ScoreState> {
     (_score is Point)
         ? Activities().pointsMap[_score.title] =
             new Point(_score.title, newPos, _score.neg)
-        : Activities().playsMap[_score.title] = new Play(_score.title, newPos);
+        : Activities().hustlePointsMap[_score.title] =
+            new Play(_score.title, newPos);
 
     emit(ScoreMade());
   }

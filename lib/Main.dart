@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
+import 'package:provider/provider.dart';
 
 import 'Views/PlayerName/PlayerName.dart';
 
@@ -16,29 +18,32 @@ Future main() async {
 class Power1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Power of 1 Basketball',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xff33333D),
-        dialogBackgroundColor: Color(0xff33333D),
-        backgroundColor: Color(0xff33333D),
+    return ChangeNotifierProvider<Activities>(
+      create: (BuildContext context) => Activities(),
+      child: MaterialApp(
+        title: 'Power of 1 Basketball',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Color(0xff33333D),
+          dialogBackgroundColor: Color(0xff33333D),
+          backgroundColor: Color(0xff33333D),
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => SigninSignup(),
+          '/register': (context) => SigninSignup(),
+          '/playerName': (context) => PlayerNameScene(),
+          '/scoreCard': (context) => ScoreCard(),
+          '/power1ScoreCard': (context) => ReportCard(),
+        },
+        // home: Scaffold(
+        //   backgroundColor: Color(0xff33333D),
+        //   resizeToAvoidBottomPadding: false,
+        //   resizeToAvoidBottomInset: false,
+        //   body: SafeArea(
+        //     child: ScoreCard(),
+        //   ),
+        // ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SigninSignup(),
-        '/register': (context) => SigninSignup(),
-        '/playerName': (context) => PlayerNameScene(),
-        '/scoreCard': (context) => ScoreCard(),
-        '/power1ScoreCard': (context) => ReportCard(),
-      },
-      // home: Scaffold(
-      //   backgroundColor: Color(0xff33333D),
-      //   resizeToAvoidBottomPadding: false,
-      //   resizeToAvoidBottomInset: false,
-      //   body: SafeArea(
-      //     child: ScoreCard(),
-      //   ),
-      // ),
     );
   }
 }
