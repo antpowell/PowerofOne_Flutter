@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/Command.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
 
@@ -11,7 +10,7 @@ import 'Score/Score.dart';
 class Activities extends ChangeNotifier {
   // static final Activities _singleton = Activities._initializer();
 
-  List<Command> history = [];
+  Queue<Score> history = new Queue();
 
   LinkedHashMap<String, Point> _pointsMap = new LinkedHashMap();
   LinkedHashMap<String, Point> get pointsMap => _pointsMap;
@@ -55,5 +54,12 @@ class Activities extends ChangeNotifier {
     return (_pointsMap.containsKey(activtyName))
         ? _pointsMap[activtyName]
         : _hustlePointsMap[activtyName];
+  }
+
+  Score history() {
+    // TODO 1: push Score + action onto a stack;
+    // https://github.com/szabgab/slides/blob/main/dart/examples/dart-intro/stack.dart
+    // TODO 2: upon undo pop Score off stack with opp action;
+    return null;
   }
 }

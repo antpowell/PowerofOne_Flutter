@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/Activities.dart';
-import 'package:power_one/Objects/Score/cubit/activities_cubit.dart';
-import 'package:power_one/TrackerButton.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
@@ -39,7 +34,6 @@ class ScoreCardScreen extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: ScoreBoard(),
-                    // child: Container(),
                   ),
                   Expanded(
                     flex: 2,
@@ -57,6 +51,12 @@ class ScoreCardScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text('Reset Player'),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      // TODO: clear both hustle points and points values,
+                    },
+                    child: Text('Undo'),
                   ),
                   MaterialButton(
                     onPressed: () {
