@@ -21,17 +21,16 @@ class ScoreBoard extends StatelessWidget {
         Provider.of<Activities>(context, listen: false);
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Expanded(
-          flex: 1,
+        Container(
           child: Text(
             'Player Name',
             style: TextStyle(fontSize: 42, color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ),
-        Expanded(
-          flex: 5,
+        Container(
           child: ListView.builder(
             shrinkWrap: true,
             itemBuilder: (context, index) {
@@ -42,8 +41,7 @@ class ScoreBoard extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
           ),
         ),
-        Expanded(
-          flex: 2,
+        Container(
           child: Wrap(
             spacing: 8.0,
             runSpacing: 8,
