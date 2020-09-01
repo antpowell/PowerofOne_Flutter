@@ -32,7 +32,7 @@ class ScoreCardScreen extends StatelessWidget {
                     child: HustlePointsSection(),
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: ScoreBoard(),
                   ),
                   Expanded(

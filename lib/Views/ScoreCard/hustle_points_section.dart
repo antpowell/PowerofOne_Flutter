@@ -30,6 +30,8 @@ class HustlePointsSection extends StatelessWidget {
 
     return Container(
       child: Wrap(
+        alignment: WrapAlignment.spaceEvenly,
+        runAlignment: WrapAlignment.spaceAround,
         direction: Axis.vertical,
         children: _createSectionList(a),
       ),

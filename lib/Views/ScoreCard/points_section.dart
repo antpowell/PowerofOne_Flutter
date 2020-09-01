@@ -13,6 +13,7 @@ class PointsSection extends StatelessWidget {
         context.select((Activities a) => a.pointsMap.values);
     return ListView.builder(
       itemBuilder: (context, index) {
+        // TODO: fix layout of buttons
         return TrackerButton(pointsList.elementAt(index));
       },
       itemCount: pointsList.length,
