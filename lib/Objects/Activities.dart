@@ -56,7 +56,7 @@ class Activities extends ChangeNotifier {
         : _hustlePointsMap[activtyName];
   }
 
-  Score history() {
+  Score scoreHistory() {
     // TODO 1: push Score + action onto a stack;
     // https://github.com/szabgab/slides/blob/main/dart/examples/dart-intro/stack.dart
     // TODO 2: upon undo pop Score off stack with opp action;

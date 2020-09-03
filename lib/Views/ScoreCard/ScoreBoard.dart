@@ -5,10 +5,17 @@ import 'package:power_one/Views/ScoreCard/ScoreBoardPointsDisplay.dart';
 
 // ignore: must_be_immutable
 class ScoreBoard extends StatelessWidget {
-  // List<Widget> _dualScoreSection = [];
+  List<Widget> _dualScoreSection = [];
   List<Widget> _singleScoreSection = [];
 
   _createSignleScoreSectionLists(Activities a) {
+    a.hustlePointsMap.keys.forEach(
+        (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
+
+    return _singleScoreSection;
+  }
+
+  _createDualScoreSectionLists(Activities a) {
     a.hustlePointsMap.keys.forEach(
         (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
 

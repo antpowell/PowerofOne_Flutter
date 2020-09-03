@@ -14,7 +14,9 @@ class PointsSection extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, index) {
         // TODO: fix layout of buttons
-        return TrackerButton(pointsList.elementAt(index));
+        return TrackerButton(
+          pointsList.elementAt(index),
+        );
       },
       itemCount: pointsList.length,
       physics: NeverScrollableScrollPhysics(),
