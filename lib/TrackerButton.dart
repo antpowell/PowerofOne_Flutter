@@ -12,6 +12,7 @@ class TrackerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return (_activity is Point)
         ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildTrackerButton(
                 Icon(Icons.check),

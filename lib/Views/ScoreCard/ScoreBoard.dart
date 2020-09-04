@@ -15,11 +15,11 @@ class ScoreBoard extends StatelessWidget {
     return _singleScoreSection;
   }
 
-  _createDualScoreSectionLists(Activities a) {
-    a.hustlePointsMap.keys.forEach(
-        (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
+  List<Widget> _createDualScoreSectionLists(Activities a) {
+    a.pointsMap.keys.forEach(
+        (element) => _dualScoreSection.add(ScoreBoardPointsDisplay(element)));
 
-    return _singleScoreSection;
+    return _dualScoreSection;
   }
 
   @override
@@ -28,25 +28,28 @@ class ScoreBoard extends StatelessWidget {
         Provider.of<Activities>(context, listen: false);
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
           child: Text(
             'Player Name',
-            style: TextStyle(fontSize: 42, color: Colors.white),
+            style: TextStyle(fontSize: 36, color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ),
         Container(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              String name = activities.pointsMap.keys.elementAt(index);
-              return ScoreBoardPointsDisplay(name);
-            },
-            itemCount: activities.pointsMap.length,
-            physics: NeverScrollableScrollPhysics(),
+          child: Column(
+            children: _createDualScoreSectionLists(activities),
           ),
+          // ListView.builder(
+          //   shrinkWrap: true,
+          //   itemBuilder: (context, index) {
+          //     String name = activities.pointsMap.keys.elementAt(index);
+          //     return ScoreBoardPointsDisplay(name);
+          //   },
+          //   itemCount: activities.pointsMap.length,
+          //   physics: NeverScrollableScrollPhysics(),
+          // ),
         ),
         Container(
           child: Wrap(

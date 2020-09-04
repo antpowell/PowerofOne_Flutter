@@ -11,15 +11,16 @@ class PointsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final Iterable<Point> pointsList =
         context.select((Activities a) => a.pointsMap.values);
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        // TODO: fix layout of buttons
-        return TrackerButton(
-          pointsList.elementAt(index),
-        );
-      },
-      itemCount: pointsList.length,
-      physics: NeverScrollableScrollPhysics(),
-    );
+
+    Widget pointsButtonsGroup() {
+      List<Widget> _pointButtons = [];
+      pointsList
+          .forEach((element) => _pointButtons.add(TrackerButton(element)));
+      return Column(
+        children: _pointButtons,
+      );
+    }
+
+    return pointsButtonsGroup();
   }
 }

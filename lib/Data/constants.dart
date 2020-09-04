@@ -18,7 +18,7 @@ const kLabels = {
 };
 
 const TextStyle kLabelTextStyle = TextStyle(
-  fontSize: 24,
+  fontSize: 18,
   color: Colors.white,
 );
 

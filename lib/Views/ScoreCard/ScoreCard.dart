@@ -91,14 +91,14 @@ class ScoreCardScreenWidget extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: HustlePointsSection(),
               ),
               Expanded(
-                child: Text('second'),
+                child: ScoreBoard(),
               ),
               Expanded(
                 child: PointsSection(),
