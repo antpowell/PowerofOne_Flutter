@@ -114,14 +114,32 @@ class ScoreCardScreenWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                  child: Text("first"),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                      onPressed: () => {},
+                      child: Text('Back'),
+                    ),
+                  ),
                 ),
-                Container(
-                  child: Text('second'),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                      onPressed: () => {},
+                      child: Text("Undo"),
+                    ),
+                  ),
                 ),
-                Container(
-                  child: Text('third'),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                      onPressed: () => {},
+                      child: Text("first"),
+                    ),
+                  ),
                 ),
               ],
             ),

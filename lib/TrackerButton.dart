@@ -40,7 +40,7 @@ class TrackerButton extends StatelessWidget {
     return Expanded(
       child: Container(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(2.0),
           child: SizedBox(
             width: 70,
             height: 70,
