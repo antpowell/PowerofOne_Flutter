@@ -89,35 +89,42 @@ class ScoreCardScreenWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: HustlePointsSection(),
-              ),
-              Expanded(
-                child: ScoreBoard(),
-              ),
-              Expanded(
-                child: PointsSection(),
-              ),
-            ],
+          Flexible(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: HustlePointsSection(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: ScoreBoard(),
+                ),
+                Expanded(
+                  child: PointsSection(),
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                child: Text("first"),
-              ),
-              Container(
-                child: Text('second'),
-              ),
-              Container(
-                child: Text('third'),
-              ),
-            ],
+          Flexible(
+            flex: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  child: Text("first"),
+                ),
+                Container(
+                  child: Text('second'),
+                ),
+                Container(
+                  child: Text('third'),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -30,12 +30,10 @@ class ScoreBoard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Container(
-          child: Text(
-            'Player Name',
-            style: TextStyle(fontSize: 36, color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
+        Text(
+          'Player Name',
+          style: TextStyle(fontSize: 36, color: Colors.white),
+          textAlign: TextAlign.center,
         ),
         Container(
           child: Column(
