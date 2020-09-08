@@ -37,21 +37,19 @@ class TrackerButton extends StatelessWidget {
   }
 
   Widget buildTrackerButton(Widget w, Color c, Function f, Score activity) {
-    return Expanded(
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: SizedBox(
-            width: 70,
-            height: 70,
-            child: OutlineButton(
-              shape: CircleBorder(),
-              child: w,
-              textColor: c,
-              highlightedBorderColor: c,
-              borderSide: BorderSide(width: 2, color: c),
-              onPressed: () => f(activity),
-            ),
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: SizedBox(
+          width: 70,
+          height: 70,
+          child: OutlineButton(
+            shape: CircleBorder(),
+            child: w,
+            textColor: c,
+            highlightedBorderColor: c,
+            borderSide: BorderSide(width: 2, color: c),
+            onPressed: () => f(activity),
           ),
         ),
       ),

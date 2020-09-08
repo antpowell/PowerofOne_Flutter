@@ -39,15 +39,6 @@ class ScoreBoard extends StatelessWidget {
           child: Column(
             children: _createDualScoreSectionLists(activities),
           ),
-          // ListView.builder(
-          //   shrinkWrap: true,
-          //   itemBuilder: (context, index) {
-          //     String name = activities.pointsMap.keys.elementAt(index);
-          //     return ScoreBoardPointsDisplay(name);
-          //   },
-          //   itemCount: activities.pointsMap.length,
-          //   physics: NeverScrollableScrollPhysics(),
-          // ),
         ),
         Container(
           child: Wrap(
