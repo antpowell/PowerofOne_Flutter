@@ -2,16 +2,16 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/Command.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
+import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
 
 class Activities extends ChangeNotifier {
   // static final Activities _singleton = Activities._initializer();
 
-  List<Command> history = [];
+  Queue<Map<String, Score>> history = new Queue();
 
   LinkedHashMap<String, Point> _pointsMap = new LinkedHashMap();
   LinkedHashMap<String, Point> get pointsMap => _pointsMap;
@@ -38,16 +38,44 @@ class Activities extends ChangeNotifier {
   }
 
   made(Score activity) {
-    (_hustlePointsMap.containsValue(activity))
-        ? _hustlePointsMap[activity.title] = activity.make()
-        : _pointsMap[activity.title] = activity.make();
+    Map<String, Score> madeHistoryEvent;
+    if (_hustlePointsMap.containsValue(activity)) {
+      _hustlePointsMap[activity.title] = activity.make();
+      madeHistoryEvent = {"made": _hustlePointsMap[activity.title]};
+    } else {
+      _pointsMap[activity.title] = activity.make();
+      madeHistoryEvent = {"made": _pointsMap[activity.title]};
+    }
+
     debugPrint('Action: $activity : pos-> ${activity.pos}');
+    history.addLast(madeHistoryEvent);
     notifyListeners();
   }
 
   missed(Score activity) {
     _pointsMap[activity.title] = activity.miss();
+    history.addLast({"miss": _pointsMap[activity.title]});
     debugPrint('Action: $activity : neg-> ${activity.neg}');
+    notifyListeners();
+  }
+
+  undo() {
+    dev.log('History state', name: 'history', error: {'data': history});
+    if (history.isNotEmpty) {
+      Map<String, Score> undoEvent = history.removeLast();
+      (undoEvent.keys.first == "made")
+          ? (_hustlePointsMap.containsValue(undoEvent.values.first))
+              ? _hustlePointsMap[undoEvent.values.first.title] =
+                  undoEvent.values.first.undoMake()
+              : _pointsMap[undoEvent.values.first.title] =
+                  undoEvent.values.first.undoMake()
+          : _pointsMap[undoEvent.values.first.title] =
+              undoEvent.values.first.undoMiss();
+    } else {
+      dev.log("Empty history list",
+          name: 'Empty history list',
+          error: {'data': 'Event history is empty, no prior events'});
+    }
     notifyListeners();
   }
 
@@ -56,4 +84,11 @@ class Activities extends ChangeNotifier {
         ? _pointsMap[activtyName]
         : _hustlePointsMap[activtyName];
   }
+
+  // Score scoreHistory() {
+  //   // TODO 1: push Score + action onto a stack;
+  //   // https://github.com/szabgab/slides/blob/main/dart/examples/dart-intro/stack.dart
+  //   // TODO 2: upon undo pop Score off stack with opp action;
+  //   return null;
+  // }
 }

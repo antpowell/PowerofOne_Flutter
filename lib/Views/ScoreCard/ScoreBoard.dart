@@ -5,7 +5,7 @@ import 'package:power_one/Views/ScoreCard/ScoreBoardPointsDisplay.dart';
 
 // ignore: must_be_immutable
 class ScoreBoard extends StatelessWidget {
-  // List<Widget> _dualScoreSection = [];
+  List<Widget> _dualScoreSection = [];
   List<Widget> _singleScoreSection = [];
 
   _createSignleScoreSectionLists(Activities a) {
@@ -15,35 +15,32 @@ class ScoreBoard extends StatelessWidget {
     return _singleScoreSection;
   }
 
+  List<Widget> _createDualScoreSectionLists(Activities a) {
+    a.pointsMap.keys.forEach(
+        (element) => _dualScoreSection.add(ScoreBoardPointsDisplay(element)));
+
+    return _dualScoreSection;
+  }
+
   @override
   Widget build(BuildContext context) {
     final Activities activities =
         Provider.of<Activities>(context, listen: false);
 
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: Text(
-            'Player Name',
-            style: TextStyle(fontSize: 42, color: Colors.white),
-            textAlign: TextAlign.center,
+        Text(
+          'Player Name',
+          style: TextStyle(fontSize: 36, color: Colors.white),
+          textAlign: TextAlign.center,
+        ),
+        Container(
+          child: Column(
+            children: _createDualScoreSectionLists(activities),
           ),
         ),
-        Expanded(
-          flex: 5,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              String name = activities.pointsMap.keys.elementAt(index);
-              return ScoreBoardPointsDisplay(name);
-            },
-            itemCount: activities.pointsMap.length,
-            physics: NeverScrollableScrollPhysics(),
-          ),
-        ),
-        Expanded(
-          flex: 2,
+        Container(
           child: Wrap(
             spacing: 8.0,
             runSpacing: 8,

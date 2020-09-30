@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Objects/Point.dart';
 import '../../TrackerButton.dart';
@@ -11,12 +12,25 @@ class PointsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final Iterable<Point> pointsList =
         context.select((Activities a) => a.pointsMap.values);
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return TrackerButton(pointsList.elementAt(index));
-      },
-      itemCount: pointsList.length,
-      physics: NeverScrollableScrollPhysics(),
-    );
+
+    Widget pointsButtonsGroup() {
+      List<Widget> _pointButtons = [];
+      pointsList.forEach((element) => _pointButtons.add(Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                element.title,
+                style: kLabelTextStyle,
+              ),
+              TrackerButton(element),
+            ],
+          )));
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: _pointButtons,
+      );
+    }
+
+    return pointsButtonsGroup();
   }
 }

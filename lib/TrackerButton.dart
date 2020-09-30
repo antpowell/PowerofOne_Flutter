@@ -12,6 +12,7 @@ class TrackerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return (_activity is Point)
         ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildTrackerButton(
                 Icon(Icons.check),
@@ -35,13 +36,13 @@ class TrackerButton extends StatelessWidget {
           );
   }
 
-  Container buildTrackerButton(Widget w, Color c, Function f, Score activity) {
+  Widget buildTrackerButton(Widget w, Color c, Function f, Score activity) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(2.0),
         child: SizedBox(
-          width: 80,
-          height: 80,
+          width: 70,
+          height: 70,
           child: OutlineButton(
             shape: CircleBorder(),
             child: w,

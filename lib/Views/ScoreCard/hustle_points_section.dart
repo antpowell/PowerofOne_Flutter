@@ -5,7 +5,7 @@ import 'package:power_one/Objects/Activities.dart';
 import '../../TrackerButton.dart';
 
 class HustlePointsSection extends StatelessWidget {
-  List<Widget> sectionList = [];
+  final List<Widget> sectionList = [];
 
   _createSectionList(Activities activities) {
     activities.hustlePointsMap.values.forEach(
@@ -18,21 +18,16 @@ class HustlePointsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Activities a = Provider.of<Activities>(context);
+    // final Activities a = Provider.of<Activities>(context);_pointButtons
     final Activities a = context.select((Activities a) => a);
 
-    // return ListView.builder(
-    //   itemBuilder: (context, index) {
-    //     return TrackerButton(Activities().plays[index]);
-    //   },
-    //   itemCount: Activities().plays.length,
-    // );
-
-    return Container(
-      child: Wrap(
-        direction: Axis.vertical,
-        children: _createSectionList(a),
-      ),
+    return Wrap(
+      alignment: WrapAlignment.spaceEvenly,
+      crossAxisAlignment: WrapCrossAlignment.start,
+      spacing: 16,
+      runSpacing: 16,
+      direction: Axis.horizontal,
+      children: _createSectionList(a),
     );
   }
 }
