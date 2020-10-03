@@ -4,6 +4,7 @@ import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer' as dev;
 
 class ScoreCard extends StatelessWidget {
   @override
@@ -83,7 +84,10 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     child: RaisedButton.icon(
-                      onPressed: () => {},
+                      onPressed: () => {
+                        dev.log("Player + Game data to be sent",
+                            name: "Report Card Button pressed")
+                      },
                       // icon: Icon(Icons.arrow_back_ios),
                       icon: Icon(null),
                       label: Text("Report Card"),

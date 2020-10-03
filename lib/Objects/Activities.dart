@@ -8,6 +8,8 @@ import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
 
+enum _powerOfOneGrades { A, B, C, D, F }
+
 class Activities extends ChangeNotifier {
   // static final Activities _singleton = Activities._initializer();
 
@@ -19,19 +21,13 @@ class Activities extends ChangeNotifier {
   LinkedHashMap<String, Play> _hustlePointsMap = new LinkedHashMap();
   LinkedHashMap<String, Play> get hustlePointsMap => _hustlePointsMap;
 
-  List<Point> _points = [];
-  List<Point> get points => _points;
-
-  List<Play> _hustlePoints = [];
-  List<Play> get hustlePoints => _hustlePoints;
+  List<Score> improvementAreas = [];
 
   Activities() {
     kLabels["points"].forEach((element) {
-      _points.add(new Point(element));
       _pointsMap[element] = new Point(element);
     });
     kLabels["hustle_points"].forEach((element) {
-      _hustlePoints.add(new Play(element));
       _hustlePointsMap[element] = new Play(element);
     });
     debugPrint('IPoints created!');
@@ -79,16 +75,55 @@ class Activities extends ChangeNotifier {
     notifyListeners();
   }
 
-  Score getActivity(String activtyName) {
-    return (_pointsMap.containsKey(activtyName))
-        ? _pointsMap[activtyName]
-        : _hustlePointsMap[activtyName];
+  Score getActivity(String activityName) {
+    return (_pointsMap.containsKey(activityName))
+        ? _pointsMap[activityName]
+        : _hustlePointsMap[activityName];
   }
 
-  // Score scoreHistory() {
-  //   // TODO 1: push Score + action onto a stack;
-  //   // https://github.com/szabgab/slides/blob/main/dart/examples/dart-intro/stack.dart
-  //   // TODO 2: upon undo pop Score off stack with opp action;
-  //   return null;
-  // }
+  Set<LinkedHashMap<String, Score>> returnPowerOfOneCollectionSet() {
+    return {_hustlePointsMap, _pointsMap};
+  }
+
+  int getTotalPointsScored() {
+    int totalPointsScored = 0;
+    _pointsMap.forEach((key, value) {
+      totalPointsScored += value.total();
+    });
+    return totalPointsScored;
+  }
+
+  int _getPowerOfOneScore() {
+    int powerOfOneScore = 0;
+
+    _pointsMap.forEach((key, value) {
+      powerOfOneScore += value.total();
+      if (value.total() < 0) {
+        improvementAreas.add(value);
+      }
+    });
+
+    return powerOfOneScore;
+  }
+
+  String powerOfOneGrade() {
+    final int powerOfOneScore = _getPowerOfOneScore();
+    return metPlaytimeThreshold()
+        ? powerOfOneScore > 8
+            ? "A"
+            : (powerOfOneScore > 6
+                ? "B"
+                : (powerOfOneScore > 4
+                    ? "C"
+                    : (powerOfOneScore > 2 ? "D" : "F")))
+        : "NA";
+  }
+
+  bool metPlaytimeThreshold() {
+    if (history.length > 2) {
+      return true;
+    }
+
+    return false;
+  }
 }

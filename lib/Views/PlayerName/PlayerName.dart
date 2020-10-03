@@ -28,7 +28,7 @@ class PlayerNameScene extends StatelessWidget {
               child: Container(
                 // decoration: BoxDecoration(
                 //   border: Border(
-                //     bottom: BorderSide(
+                //     bottom:BorderSide(
                 //       color: Colors.grey[100],
                 //     ),
                 //   ),
@@ -43,10 +43,6 @@ class PlayerNameScene extends StatelessWidget {
                       hintStyle: TextStyle(
                         color: Colors.grey[400],
                       ),
-                      // labelText: 'Player Name',
-                      // labelStyle: TextStyle(
-                      //   color: Colors.grey[400],
-                      // ),
                     ),
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 24),
