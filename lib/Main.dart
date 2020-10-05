@@ -29,8 +29,8 @@ class Power1 extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          //'/': (context) => SigninSignup(),
-          '/': (context) => ReportCard(),
+          '/': (context) => SigninSignup(),
+          '/reportCard': (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
           '/playerName': (context) => PlayerNameScene(),
           '/scoreCard': (context) => ScoreCard(),

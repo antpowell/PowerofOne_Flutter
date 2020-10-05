@@ -30,20 +30,16 @@ class ScoreBoard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Text(
-          'Player Name',
-          style: TextStyle(fontSize: 36, color: Colors.white),
-          textAlign: TextAlign.center,
-        ),
         Container(
           child: Column(
             children: _createDualScoreSectionLists(activities),
           ),
         ),
         Container(
-          child: Wrap(
-            spacing: 8.0,
-            runSpacing: 8,
+          child: Row(
+            // spacing: 8.0,
+            // runSpacing: 8,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _createSignleScoreSectionLists(activities),
           ),
         ),

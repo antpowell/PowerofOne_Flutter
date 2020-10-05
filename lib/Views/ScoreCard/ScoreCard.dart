@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
@@ -34,6 +35,11 @@ class ScoreCardScreenWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+          Text(
+            'Player Name',
+            style: TextStyle(fontSize: 36, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
           Flexible(
             flex: 1,
             child: Row(
@@ -57,42 +63,35 @@ class ScoreCardScreenWidget extends StatelessWidget {
           Flexible(
             flex: 0,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Container(
+                Container(
                     alignment: Alignment.center,
-                    child: RaisedButton.icon(
-                      onPressed: () => {},
-                      onLongPress: () => {Navigator.pop(context)},
-                      label: Text('Back'),
-                      icon: Icon(Icons.arrow_back_ios),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: RaisedButton.icon(
-                      onPressed: Provider.of<Activities>(context).undo,
-                      label: Text("Undo"),
-                      icon: Icon(Icons.refresh),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: RaisedButton.icon(
-                      onPressed: () => {
-                        dev.log("Player + Game data to be sent",
-                            name: "Report Card Button pressed")
+                    child: PO1Button(
+                      'Back',
+                      onPress: () {},
+                      onLongPress: () {
+                        Navigator.pop(context);
                       },
-                      // icon: Icon(Icons.arrow_back_ios),
-                      icon: Icon(null),
-                      label: Text("Report Card"),
-                    ),
-                  ),
+                      onLeft: true,
+                      icon:
+                          Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
+                    )),
+                Container(
+                    alignment: Alignment.center,
+                    child: PO1Button(
+                      "Undo",
+                      onPress: Provider.of<Activities>(context).undo,
+                      icon: Icon(Icons.restore_outlined, color: Colors.white),
+                    )),
+                Container(
+                  alignment: Alignment.center,
+                  child: PO1Button('Report Card', onPress: () {
+                    Navigator.pushNamed(context, '/reportCard');
+                    // Navigator.pushNamed(context, '/register');
+                  },
+                      icon: Icon(Icons.arrow_forward_ios_sharp,
+                          color: Colors.white)),
                 ),
               ],
             ),

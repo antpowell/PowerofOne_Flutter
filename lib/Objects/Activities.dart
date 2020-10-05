@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
+import 'package:power_one/models/User.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
@@ -22,6 +23,7 @@ class Activities extends ChangeNotifier {
   LinkedHashMap<String, Play> get hustlePointsMap => _hustlePointsMap;
 
   List<Score> improvementAreas = [];
+  User user;
 
   Activities() {
     kLabels["points"].forEach((element) {
@@ -31,6 +33,10 @@ class Activities extends ChangeNotifier {
       _hustlePointsMap[element] = new Play(element);
     });
     debugPrint('IPoints created!');
+  }
+
+  assignUser(User user) {
+    this.user = user;
   }
 
   made(Score activity) {

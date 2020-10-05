@@ -1,19 +1,18 @@
-
 //import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
-Column baseColumnButton(Color color, IconData icon, String label){
+Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      Icon(icon,color: color),
+      Icon(icon, color: color),
       Container(
         margin: const EdgeInsets.only(top: 8),
         child: Text(
           label,
-          style:TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
             color: color,
@@ -23,7 +22,8 @@ Column baseColumnButton(Color color, IconData icon, String label){
     ],
   );
 }
-Column columnTitleTotalPointsScored(int points, String label){
+
+Column columnTitleTotalPointsScored(int points, String label) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +32,7 @@ Column columnTitleTotalPointsScored(int points, String label){
         margin: const EdgeInsets.only(top: 8),
         child: Text(
           label,
-          style:TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
@@ -42,10 +42,7 @@ Column columnTitleTotalPointsScored(int points, String label){
   );
 }
 
-
-
 void main() => runApp(ReportCard());
-
 
 class ReportCard extends StatelessWidget {
   const ReportCard({Key key, this.title}) : super(key: key);
@@ -55,52 +52,17 @@ class ReportCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
 
-
     Widget feedbacktextSection = Container(
       width: 150,
       height: 150,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:[
-              Text('FEEDBACK',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                  )
-              ),
-              Column(
-                children:[
-                  Container(
-                    height: 100,
-                    width: 145,
-                    color: Colors.white10,
-                    child: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        )
-                    ),
-                  ),
-
-                ],
-              ),
-            ],
-      ),
-    );
-    Widget powerof1gradetextSection = Container(
-      width: 150,
-      height: 150,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children:[
-          Text('Power of 1 Grade',
-            style: TextStyle(
+        children: [
+          Text('FEEDBACK',
+              style: TextStyle(
                 fontSize: 15,
                 color: Colors.white,
-            )
-          ),
+              )),
           Column(
             children: [
               Container(
@@ -108,18 +70,46 @@ class ReportCard extends StatelessWidget {
                 width: 145,
                 color: Colors.white10,
                 child: Text(
-                    'A',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 80,
+                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+                    softWrap: true,
+                    style: TextStyle(
                       color: Colors.white,
-                      //backgroundColor: Colors.white24,
-                    )
-                ),
+                      fontSize: 12,
+                    )),
               ),
             ],
           ),
         ],
-
+      ),
+    );
+    Widget powerof1gradetextSection = Container(
+      width: 150,
+      height: 150,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text('Power of 1 Grade',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              )),
+          Column(
+            children: [
+              Container(
+                height: 100,
+                width: 145,
+                color: Colors.white10,
+                child: Text('A',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 80,
+                      color: Colors.white,
+                      //backgroundColor: Colors.white24,
+                    )),
+              ),
+            ],
+          ),
+        ],
       ),
     );
     Widget totalpointstextSection = Container(
@@ -127,142 +117,127 @@ class ReportCard extends StatelessWidget {
       height: 150,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children:[
+        children: [
           Text('Total Points Scored',
-        style: TextStyle(
-            fontSize: 15,
-            color: Colors.white
-        )
-          ),
+              style: TextStyle(fontSize: 15, color: Colors.white)),
           Container(
             height: 100,
             width: 145,
             color: Colors.white10,
-            child: Text(
-              '0',
+            child: Text('0',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 80,
-                    color: Colors.white
-                )
-            ),
+                style: TextStyle(fontSize: 80, color: Colors.white)),
           ),
         ],
       ),
     );
 
-
-  return Scaffold(
-    appBar: AppBar(
-      backgroundColor:Colors.black12 ,
-      title: Text('Power of 1 Score',
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black12,
+        title: Text(
+          'Power of 1 Score',
           style: TextStyle(
             fontSize: 30,
           ),
-
+        ),
+        centerTitle: true,
       ),
-      centerTitle: true,
-    ),
       body: SafeArea(
-      child: Stack(
-        children:[
-          Positioned(
-            bottom: 10,
-            right: 10,
-            child: OutlineButton(
-              disabledBorderColor: Colors.white,
-              child: Text("New Game",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white
-              )
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 150,
-            child: OutlineButton(
-              disabledBorderColor: Colors.white,
-              child: Text("Save Game",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white
-                  )
-              ),
-            ),
-          ),
-          Positioned(
-            top: 40,
-            left: 40,
-            child: Container(
-              height:50,
-              width: 200,
-             child:
-             Text('Player Name',
-             style: TextStyle(
-               decoration: TextDecoration.underline,
-               fontSize: 30,
-               color: Colors.white,
-             ),
-             ),
-            ),
-          ),
-
-          Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Stack(
           children: [
-            //ColumnOne
-            //const SizedBox(width:50),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-              /* Text('Player Name',
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: OutlineButton(
+                disabledBorderColor: Colors.white,
+                child: Text("New Game",
+                    style: TextStyle(fontSize: 20, color: Colors.white)),
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 150,
+              child: OutlineButton(
+                disabledBorderColor: Colors.white,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/playerName');
+                },
+                child: Text(
+                  "Save Game",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 40,
+              left: 40,
+              child: Container(
+                height: 50,
+                width: 200,
+                child: Text(
+                  'Player Name',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //ColumnOne
+                //const SizedBox(width:50),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    /* Text('Player Name',
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,
                     )
                 ),*/
-                totalpointstextSection,
-              ],
-            ),
-           // const SizedBox(width:50),
-            Container(
-              height: 210,
-              decoration: const BoxDecoration(
-                border: Border(
-                  left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
+                    totalpointstextSection,
+                  ],
                 ),
-              ),
-            ),
+                // const SizedBox(width:50),
+                Container(
+                  height: 210,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
+                    ),
+                  ),
+                ),
 
-            //ColumnTwo
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                powerof1gradetextSection,
+                //ColumnTwo
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    powerof1gradetextSection,
+                  ],
+                ),
+                Container(
+                  height: 210,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    feedbacktextSection,
+                  ],
+                ),
               ],
             ),
-            Container(
-              height: 210,
-              decoration: const BoxDecoration(
-                border: Border(
-                  left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
-                ),
-              ),
-            ),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  feedbacktextSection,
-                ],
-              ),
           ],
-          ),
-        ],
-      ),
+        ),
       ),
     );
-
-      }
+  }
 }
-

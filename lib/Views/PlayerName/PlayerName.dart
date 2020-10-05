@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/InputArea.dart';
+import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/models/User.dart';
 
 class PlayerNameScene extends StatelessWidget {
   @override
@@ -26,13 +29,6 @@ class PlayerNameScene extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                // decoration: BoxDecoration(
-                //   border: Border(
-                //     bottom:BorderSide(
-                //       color: Colors.grey[100],
-                //     ),
-                //   ),
-                // ),
                 padding: EdgeInsets.symmetric(horizontal: 60, vertical: 16),
                 child: Center(
                   child: TextField(
@@ -45,7 +41,7 @@ class PlayerNameScene extends StatelessWidget {
                       ),
                     ),
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
                 ),
               ),
@@ -57,36 +53,22 @@ class PlayerNameScene extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     MaterialButton(
-                        onPressed: () {
-                          debugPrint(
-                              'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.');
-                        },
-                        child: Text(
-                          'Recent Games',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                    MaterialButton(
-                      color: Color(0xff070707),
-                      elevation: 9,
                       onPressed: () {
                         debugPrint(
-                            'User pressed Start Game button, save the player name to the user and take them to the score card view.');
-                        Navigator.pushNamed(context, '/scoreCard');
+                            'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.');
+                        Navigator.pushNamed(context, '/reportCard');
                       },
-                      textColor: Colors.white,
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Start Game",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Icon(Icons.keyboard_arrow_right),
-                        ],
+                      child: Text(
+                        'Recent Games',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
+                    PO1Button("Start Game", onPress: () {
+                      debugPrint(
+                          'User pressed Start Game button, save the player name to the user and take them to the score card view.');
+                      Activities().assignUser(User('tempemail', 'playername'));
+                      Navigator.pushNamed(context, '/scoreCard');
+                    }),
                   ],
                 ),
               ),
