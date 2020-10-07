@@ -207,6 +207,21 @@ class ReportCard extends StatelessWidget {
              ),
             ),
           ),
+          Positioned(
+              top:175 ,
+              right: 50,
+              child:
+              OutlineButton(
+                disabledBorderColor: Colors.white,
+                child: Text("->",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    )
+                ),
+              ),
+            ),
+
 
           Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
