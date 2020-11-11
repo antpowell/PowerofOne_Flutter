@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/InputArea.dart';
+import 'package:power_one/models/User.dart';
 
 class SigninSignup extends StatelessWidget {
   @override
@@ -45,7 +46,7 @@ class SigninSignup extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.w200),
                     ),
                     onPressed: () => {
-                      // TODO: Forgot password trigger [maybe just an Alert]
+                      // TODO: Forgot password trigger [maybe just an Alert
                       debugPrint(
                           'User forgot password and is trying to reset.'),
                     },
@@ -54,9 +55,15 @@ class SigninSignup extends StatelessWidget {
                     icon: Icon(Icons.keyboard_arrow_right),
                     color: Colors.white,
                     iconSize: 25,
-                    onPressed: () => {
-                      // TODO: Player Name scene trigger
-                      Navigator.pushNamed(context, '/playerName'),
+                    onPressed: () {
+                      // TODO: Check if InputArea() is valid before progressing.
+                      User currUser =
+                          User(InputArea().emailTxtFieldController.text);
+                      Navigator.pushNamed(
+                        context,
+                        '/playerName',
+                        arguments: {currUser},
+                      );
                     },
                   ),
                 ],
@@ -68,3 +75,7 @@ class SigninSignup extends StatelessWidget {
     );
   }
 }
+
+// bool inputValidator() => {
+// return false;
+// }

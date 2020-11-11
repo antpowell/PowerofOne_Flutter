@@ -21,7 +21,7 @@ When running this application on a different system from the one it was created 
 
 - First update flutter packages with
 
-  - `flutter packages get`
+  - `flutter pub get`
 
 - Then the flutter project with
 

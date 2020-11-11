@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoardPointsDisplay.dart';
 
 // ignore: must_be_immutable
@@ -8,14 +8,14 @@ class ScoreBoard extends StatelessWidget {
   List<Widget> _dualScoreSection = [];
   List<Widget> _singleScoreSection = [];
 
-  _createSignleScoreSectionLists(Activities a) {
+  _createSignleScoreSectionLists(PO1Score a) {
     a.hustlePointsMap.keys.forEach(
         (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
 
     return _singleScoreSection;
   }
 
-  List<Widget> _createDualScoreSectionLists(Activities a) {
+  List<Widget> _createDualScoreSectionLists(PO1Score a) {
     a.pointsMap.keys.forEach(
         (element) => _dualScoreSection.add(ScoreBoardPointsDisplay(element)));
 
@@ -24,8 +24,7 @@ class ScoreBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Activities activities =
-        Provider.of<Activities>(context, listen: false);
+    final PO1Score activities = Provider.of<PO1Score>(context, listen: false);
 
     return Column(
       mainAxisSize: MainAxisSize.max,

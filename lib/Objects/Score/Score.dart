@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:power_one/Objects/Point.dart';
 
-abstract class Score {
+abstract class IScore {
   int _pos;
   int get pos => _pos;
 
@@ -13,7 +13,7 @@ abstract class Score {
   final String _title;
   String get title => _title;
 
-  Score(this._title, this._pos, this._neg);
+  IScore(this._title, this._pos, this._neg);
 
   make() {
     _pos++;

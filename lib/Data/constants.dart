@@ -51,3 +51,7 @@ TextStyle fScoreBoardPointsTextStyle(Color fontColor) {
     color: fontColor,
   );
 }
+
+enum kPlayerLevel { elementry, middle, high, college, pro }
+enum kPlayerCategory { amature, pro }
+enum GRADE { A, B, C, D, F, NA }

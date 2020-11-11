@@ -211,7 +211,6 @@ class ReportCard extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 //ColumnTwo
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
