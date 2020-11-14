@@ -4,6 +4,7 @@ import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
+import 'package:power_one/Views/SignUpForm.dart';
 import 'package:provider/provider.dart';
 
 import 'Views/PlayerName/PlayerName.dart';
@@ -29,7 +30,7 @@ class Power1 extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => SigninSignup(),
+          '/': (context) => SignInUpFormScreen(),
           '/reportCard': (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
           '/playerName': (context) => PlayerNameScene(),

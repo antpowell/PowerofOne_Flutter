@@ -45,10 +45,15 @@ class SigninSignup extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w200),
                     ),
-                    onPressed: () => {
+                    onPressed: () {
                       // TODO: Forgot password trigger [maybe just an Alert
                       debugPrint(
-                          'User forgot password and is trying to reset.'),
+                          'User forgot password and is trying to reset.');
+                      debugPrint(
+                          'InputArea Data ${InputArea().emailTxtFieldController.text}');
+                      User currUser =
+                          User(InputArea().emailTxtFieldController.text);
+                      debugPrint("new current user, ${currUser.email}");
                     },
                   ),
                   IconButton(
