@@ -8,10 +8,17 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
   final String activityName;
   ScoreBoardPointsDisplay(this.activityName);
 
-  Text _scoreBoardText(label) {
+  Text _scoreBoardLabelText(label) {
     return Text(
       label,
-      style: kLabelTextStyle,
+      style: kScoreBoardLabelsTextStyle,
+    );
+  }
+
+  Text _scoreBoardPointText(label, color) {
+    return Text(
+      label,
+      style: kScoreBoardPointsTextStyle,
     );
   }
 
@@ -19,56 +26,40 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _scoreBoardText(activityName),
+        _scoreBoardLabelText(activityName),
         Consumer<Activities>(
           builder: (context, activitiesProvider, child) => Container(
             child: (activitiesProvider.getActivity(activityName) is Point)
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 4, right: 4),
-                        child: _scoreBoardText(activitiesProvider
-                            .getActivity(activityName)
-                            .pos
-                            .toString()),
+                        child: _scoreBoardPointText(
+                            activitiesProvider
+                                .getActivity(activityName)
+                                .pos
+                                .toString(),
+                            Colors.green),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 4, right: 4),
-                        child: _scoreBoardText(activitiesProvider
-                            .getActivity(activityName)
-                            .neg
-                            .toString()),
+                        child: _scoreBoardPointText(
+                            activitiesProvider
+                                .getActivity(activityName)
+                                .neg
+                                .toString(),
+                            Colors.red),
                       ),
                     ],
                   )
-                : _scoreBoardText(activitiesProvider
-                    .getActivity(activityName)
-                    .pos
-                    .toString()),
+                : _scoreBoardPointText(
+                    activitiesProvider.getActivity(activityName).pos.toString(),
+                    Colors.white),
           ),
         ),
       ],
     );
   }
-
-  // Column buildScoreDisplay(Score activity) {
-  //   return Column(
-  //     children: [
-  //       _scoreBoardText(activity.title),
-  //       Container(
-  //         child: (activity is Point)
-  //             ? Row(
-  //                 crossAxisAlignment: CrossAxisAlignment.center,
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 children: [
-  //                   _scoreBoardText('${activity.pos}'),
-  //                   _scoreBoardText('${activity.neg}'),
-  //                 ],
-  //               )
-  //             : _scoreBoardText('${activity.pos}'),
-  //       ),
-  //     ],
-  //   );
 }

@@ -6,6 +6,7 @@ import 'Objects/Score/Score.dart';
 
 class TrackerButton extends StatelessWidget {
   final Score _activity;
+  final double _boxSize = 70;
   TrackerButton(this._activity);
 
   @override
@@ -41,8 +42,8 @@ class TrackerButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: SizedBox(
-          width: 70,
-          height: 70,
+          width: _boxSize,
+          height: _boxSize,
           child: OutlineButton(
             shape: CircleBorder(),
             child: w,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
@@ -31,14 +32,16 @@ class Power1 extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          //'/': (context) => SigninSignup(),
-          '/': (context) => TermsAndConditions(),
+
+          '/': (context) => ScoreCard(),
+          '/reportCard': (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
           '/playerName': (context) => PlayerNameScene(),
           '/scoreCard': (context) => ScoreCard(),
           '/power1ScoreCard': (context) => ReportCard(),
           '/termsAndConditions': (context) => TermsAndConditions(),
           '/FeedBack': (context) => FeedBack(),
+          '/Help': (context) => HelpPage(),
         },
         // home: Scaffold(
         //   backgroundColor: Color(0xff33333D),
