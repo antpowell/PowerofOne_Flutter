@@ -45,6 +45,20 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
     );
   }
 
+  Widget _buildForm() {
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 600),
+        child: Column(
+          children: [
+            _buildEmail(),
+            _buildPassword(),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildPassword() {
     return TextFormField(
       style: _formStyle,
@@ -70,6 +84,49 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
     );
   }
 
+  Widget _buildLogo() {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 300,
+        maxHeight: 85,
+        minWidth: 100,
+        minHeight: 50,
+      ),
+      child: Center(
+        child: Image(
+          image: AssetImage('assets/images/POWER_OF_1_SPORT_LO-FF.png'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButtonGroup() {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          RaisedButton(
+            onPressed: null,
+          ),
+          IconButton(
+            icon: Icon(Icons.keyboard_arrow_right),
+            color: Colors.white,
+            iconSize: 25,
+            onPressed: () {
+              dev.log('SignInUp Form Submit button pressed');
+              if (!_formKey.currentState.validate()) {
+                return;
+              }
+              _formKey.currentState.save();
+              print('email $_email || pass $_password');
+              Navigator.pushNamed(context, '/register', arguments: {_user});
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,25 +137,12 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildEmail(),
-              _buildPassword(),
-              SizedBox(
-                height: 140,
-              ),
-              IconButton(
-                icon: Icon(Icons.keyboard_arrow_right),
-                color: Colors.white,
-                iconSize: 25,
-                onPressed: () {
-                  dev.log('SignInUp Form Submit button pressed');
-                  if (!_formKey.currentState.validate()) {
-                    return;
-                  }
-                  _formKey.currentState.save();
-                  print('email $_email || pass $_password');
-                  Navigator.pushNamed(context, '/register', arguments: {_user});
-                },
-              ),
+              _buildLogo(),
+              _buildForm(),
+              // SizedBox(
+              //   height: 140,
+              // ),
+              _buildButtonGroup(),
               // RaisedButton(
               //     child: Text('Submit'),
               //     onPressed: () {
