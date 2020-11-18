@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
 import 'package:power_one/Objects/Activities.dart';
 import 'package:power_one/Views/Help/helpPage.dart';
+=======
+import 'package:power_one/Objects/PO1Score.dart';
+>>>>>>> origin/master
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
@@ -21,8 +25,8 @@ Future main() async {
 class Power1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Activities>(
-      create: (BuildContext context) => Activities(),
+    return ChangeNotifierProvider<PO1Score>(
+      create: (BuildContext context) => PO1Score(),
       child: MaterialApp(
         title: 'Power of 1 Basketball',
         theme: ThemeData(
@@ -43,14 +47,6 @@ class Power1 extends StatelessWidget {
           '/FeedBack': (context) => FeedBack(),
           '/Help': (context) => HelpPage(),
         },
-        // home: Scaffold(
-        //   backgroundColor: Color(0xff33333D),
-        //   resizeToAvoidBottomPadding: false,
-        //   resizeToAvoidBottomInset: false,
-        //   body: SafeArea(
-        //     child: ScoreCard(),
-        //   ),
-        // ),
       ),
     );
   }

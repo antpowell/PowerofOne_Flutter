@@ -4,17 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
+import 'package:power_one/models/PO1Grade.dart';
 import 'package:power_one/models/User.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
 
 enum _powerOfOneGrades { A, B, C, D, F }
+enum _playerLevel { elementry, middle, college, pro }
 
-class Activities extends ChangeNotifier {
-  // static final Activities _singleton = Activities._initializer();
+class PO1Score extends ChangeNotifier {
+  static final int minimumThreshold = 5;
+  static User _user;
 
-  Queue<Map<String, Score>> history = new Queue();
+  Queue<Map<String, IScore>> history = new Queue();
 
   LinkedHashMap<String, Point> _pointsMap = new LinkedHashMap();
   LinkedHashMap<String, Point> get pointsMap => _pointsMap;
@@ -22,10 +25,9 @@ class Activities extends ChangeNotifier {
   LinkedHashMap<String, Play> _hustlePointsMap = new LinkedHashMap();
   LinkedHashMap<String, Play> get hustlePointsMap => _hustlePointsMap;
 
-  List<Score> improvementAreas = [];
-  User user;
+  List<IScore> improvementAreas = [];
 
-  Activities() {
+  PO1Score() {
     kLabels["points"].forEach((element) {
       _pointsMap[element] = new Point(element);
     });
@@ -36,11 +38,11 @@ class Activities extends ChangeNotifier {
   }
 
   assignUser(User user) {
-    this.user = user;
+    _user = user;
   }
 
-  made(Score activity) {
-    Map<String, Score> madeHistoryEvent;
+  made(IScore activity) {
+    Map<String, IScore> madeHistoryEvent;
     if (_hustlePointsMap.containsValue(activity)) {
       _hustlePointsMap[activity.title] = activity.make();
       madeHistoryEvent = {"made": _hustlePointsMap[activity.title]};
@@ -54,7 +56,7 @@ class Activities extends ChangeNotifier {
     notifyListeners();
   }
 
-  missed(Score activity) {
+  missed(IScore activity) {
     _pointsMap[activity.title] = activity.miss();
     history.addLast({"miss": _pointsMap[activity.title]});
     debugPrint('Action: $activity : neg-> ${activity.neg}');
@@ -64,7 +66,7 @@ class Activities extends ChangeNotifier {
   undo() {
     dev.log('History state', name: 'history', error: {'data': history});
     if (history.isNotEmpty) {
-      Map<String, Score> undoEvent = history.removeLast();
+      Map<String, IScore> undoEvent = history.removeLast();
       (undoEvent.keys.first == "made")
           ? (_hustlePointsMap.containsValue(undoEvent.values.first))
               ? _hustlePointsMap[undoEvent.values.first.title] =
@@ -81,13 +83,13 @@ class Activities extends ChangeNotifier {
     notifyListeners();
   }
 
-  Score getActivity(String activityName) {
+  IScore getActivity(String activityName) {
     return (_pointsMap.containsKey(activityName))
         ? _pointsMap[activityName]
         : _hustlePointsMap[activityName];
   }
 
-  Set<LinkedHashMap<String, Score>> returnPowerOfOneCollectionSet() {
+  Set<LinkedHashMap<String, IScore>> returnPowerOfOneCollectionSet() {
     return {_hustlePointsMap, _pointsMap};
   }
 
@@ -113,20 +115,11 @@ class Activities extends ChangeNotifier {
   }
 
   String powerOfOneGrade() {
-    final int powerOfOneScore = _getPowerOfOneScore();
-    return metPlaytimeThreshold()
-        ? powerOfOneScore > 8
-            ? "A"
-            : (powerOfOneScore > 6
-                ? "B"
-                : (powerOfOneScore > 4
-                    ? "C"
-                    : (powerOfOneScore > 2 ? "D" : "F")))
-        : "NA";
+    return metPlaytimeThreshold() ? PO1Grade(_getPowerOfOneScore()) : GRADE.NA;
   }
 
   bool metPlaytimeThreshold() {
-    if (history.length > 2) {
+    if (history.length > minimumThreshold) {
       return true;
     }
 

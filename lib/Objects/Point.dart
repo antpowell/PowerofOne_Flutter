@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'Score/Score.dart';
 
-class Point extends Score {
+class Point extends IScore {
   Point(String title, [int pos = 0, int neg = 0]) : super(title, pos, neg);
 
   // @override

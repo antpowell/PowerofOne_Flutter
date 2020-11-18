@@ -21,7 +21,11 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "6.1.0"
+=======
+    version: "6.0.3"
+>>>>>>> origin/master
   boolean_selector:
     dependency: transitive
     description:
@@ -133,7 +137,11 @@ packages:
       name: firebase
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "7.3.2"
+=======
+    version: "7.3.0"
+>>>>>>> origin/master
   firebase_auth:
     dependency: "direct main"
     description:
@@ -187,7 +195,18 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "6.0.6"
+=======
+    version: "6.0.5"
+  flutter_neumorphic:
+    dependency: "direct main"
+    description:
+      name: flutter_neumorphic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.3"
+>>>>>>> origin/master
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -211,7 +230,11 @@ packages:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "4.5.5"
+=======
+    version: "4.5.4"
+>>>>>>> origin/master
   google_sign_in_platform_interface:
     dependency: transitive
     description:
@@ -330,7 +353,11 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.9.2"
+=======
+    version: "1.9.0"
+>>>>>>> origin/master
   platform:
     dependency: transitive
     description:
@@ -447,7 +474,7 @@ packages:
       name: xdg_directories
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.0"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
   flutter: ">=1.17.0 <2.0.0"

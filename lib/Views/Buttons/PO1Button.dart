@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class PO1Button extends StatelessWidget {
   String label;
@@ -7,6 +10,7 @@ class PO1Button extends StatelessWidget {
   Icon icon;
   bool onLeft;
   double height = 36;
+  double width = 145;
   double outlineSize = 1;
 
   // final ButtonStyle buttonStyle = ButtonStyle(side:);
@@ -22,55 +26,104 @@ class PO1Button extends StatelessWidget {
     return icon != null ? icon : Container();
   }
 
+  Widget BaseButton() {
+    // return NeumorphicButton(
+    //   onPressed: onLongPress,
+    //   child: Text(
+    //     this.label,
+    //     style: TextStyle(fontSize: 16, color: Colors.white),
+    //   ),
+    //   style: NeumorphicStyle(
+    //     color: Color(0xff32333D),
+    //     shape: NeumorphicShape.flat,
+    //     surfaceIntensity: 0.05,
+    //     intensity: 0.25,
+    //     oppositeShadowLightSource: true,
+    //   ),
+    // );
+    return Container(
+      height: height,
+      child: OutlinedButton(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            displayIcon(),
+            Text(
+              label,
+              style: TextStyle(fontSize: 14, color: Colors.white),
+            ),
+          ],
+        ),
+        onPressed: onPress,
+        onLongPress: onLongPress,
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(
+            color: Colors.white,
+            width: outlineSize,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget LeftIconButton() {
+    // return NeumorphicButton(
+    //   onPressed: onPress,
+    //   child: Text(
+    //     this.label,
+    //     style: TextStyle(fontSize: 16, color: Colors.white),
+    //   ),
+    //   style: NeumorphicStyle(
+    //     color: Color(0xff32333D),
+    //     shape: NeumorphicShape.flat,
+    //     surfaceIntensity: 0.05,
+    //     intensity: 0.25,
+    //     oppositeShadowLightSource: true,
+    //   ),
+    // );
+    return Container(
+      height: height,
+      child: OutlinedButton(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              label,
+              style: TextStyle(fontSize: 14, color: Colors.white),
+            ),
+            displayIcon(),
+          ],
+        ),
+        onPressed: onPress,
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(
+            color: Colors.white,
+            width: outlineSize,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget btn() {
-    return onLeft
-        ? Container(
-            height: height,
-            child: OutlinedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  displayIcon(),
-                  Text(
-                    label,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ],
-              ),
-              onPressed: onPress,
-              onLongPress: onLongPress,
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  color: Colors.white,
-                  width: outlineSize,
-                ),
-              ),
-            ),
-          )
-        : Container(
-            height: height,
-            child: OutlinedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    label,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  displayIcon(),
-                ],
-              ),
-              onPressed: onPress,
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  color: Colors.white,
-                  width: outlineSize,
-                ),
-              ),
-            ),
-          );
+    // return NeumorphicButton(child: Text(this.label));
+    return onLeft ? BaseButton() : LeftIconButton();
+    return NeumorphicButton(
+      onPressed: () {},
+      child: Text(
+        this.label,
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
+      style: NeumorphicStyle(
+        color: Color(0xff32333D),
+        shape: NeumorphicShape.flat,
+        surfaceIntensity: 0.05,
+        intensity: 0.25,
+        // oppositeShadowLightSource: true,
+      ),
+    );
   }
 
   @override

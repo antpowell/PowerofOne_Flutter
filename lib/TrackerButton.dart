@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 import 'package:provider/provider.dart';
 import './Objects/Point.dart';
 import 'Objects/Score/Score.dart';
 
 class TrackerButton extends StatelessWidget {
-  final Score _activity;
+  final IScore _activity;
   final double _boxSize = 70;
   TrackerButton(this._activity);
 
@@ -18,13 +18,13 @@ class TrackerButton extends StatelessWidget {
               buildTrackerButton(
                 Icon(Icons.check),
                 Colors.green,
-                Provider.of<Activities>(context).made,
+                Provider.of<PO1Score>(context).made,
                 _activity,
               ),
               buildTrackerButton(
                 Icon(Icons.clear),
                 Colors.red,
-                Provider.of<Activities>(context).missed,
+                Provider.of<PO1Score>(context).missed,
                 _activity,
               ),
             ],
@@ -32,12 +32,12 @@ class TrackerButton extends StatelessWidget {
         : buildTrackerButton(
             Text(_activity.title),
             Colors.green,
-            Provider.of<Activities>(context).made,
+            Provider.of<PO1Score>(context).made,
             _activity,
           );
   }
 
-  Widget buildTrackerButton(Widget w, Color c, Function f, Score activity) {
+  Widget buildTrackerButton(Widget w, Color c, Function f, IScore activity) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(2.0),

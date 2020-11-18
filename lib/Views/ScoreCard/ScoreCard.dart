@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
@@ -66,26 +66,24 @@ class ScoreCardScreenWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    alignment: Alignment.center,
-                    child: PO1Button(
-                      'Back',
-                      onPress: () {},
-                      onLongPress: () {
-                        Navigator.pop(context);
-                      },
-                      onLeft: true,
-                      icon:
-                          Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
-                    )),
+                  child: PO1Button(
+                    'Back',
+                    onPress: () {},
+                    onLongPress: () {
+                      Navigator.pop(context);
+                    },
+                    onLeft: true,
+                    icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
+                  ),
+                ),
                 Container(
-                    alignment: Alignment.center,
-                    child: PO1Button(
-                      "Undo",
-                      onPress: Provider.of<Activities>(context).undo,
-                      icon: Icon(Icons.restore_outlined, color: Colors.white),
-                    )),
+                  child: PO1Button(
+                    "Undo",
+                    onPress: Provider.of<PO1Score>(context).undo,
+                    icon: Icon(Icons.restore_outlined, color: Colors.white),
+                  ),
+                ),
                 Container(
-                  alignment: Alignment.center,
                   child: PO1Button('Report Card', onPress: () {
                     Navigator.pushNamed(context, '/reportCard');
                     // Navigator.pushNamed(context, '/register');

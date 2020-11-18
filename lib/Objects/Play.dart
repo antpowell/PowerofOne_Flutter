@@ -1,6 +1,6 @@
 import 'Score/Score.dart';
 
-class Play extends Score {
+class Play extends IScore {
   //Play type doesn't have a negative value
   Play(String title, [int pos = 0]) : super(title, pos, 0);
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Objects/Point.dart';
 
 class ScoreBoardPointsDisplay extends StatelessWidget {
@@ -27,7 +27,7 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
     return Column(
       children: [
         _scoreBoardLabelText(activityName),
-        Consumer<Activities>(
+        Consumer<PO1Score>(
           builder: (context, activitiesProvider, child) => Container(
             child: (activitiesProvider.getActivity(activityName) is Point)
                 ? Row(

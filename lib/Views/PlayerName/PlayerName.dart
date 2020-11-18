@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/InputArea.dart';
-import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/models/User.dart';
 
@@ -41,7 +41,10 @@ class PlayerNameScene extends StatelessWidget {
                       ),
                     ),
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -52,6 +55,10 @@ class PlayerNameScene extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
+                    PO1Button(
+                      "Recent Games",
+                      onPress: () => {},
+                    ),
                     MaterialButton(
                       onPressed: () {
                         debugPrint(
@@ -66,7 +73,8 @@ class PlayerNameScene extends StatelessWidget {
                     PO1Button("Start Game", onPress: () {
                       debugPrint(
                           'User pressed Start Game button, save the player name to the user and take them to the score card view.');
-                      Activities().assignUser(User('tempemail', 'playername'));
+                      PO1Score().assignUser(
+                          User('email', playerName: 'Player Name2'));
                       Navigator.pushNamed(context, '/scoreCard');
                     }),
                   ],

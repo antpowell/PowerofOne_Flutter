@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:power_one/Objects/Activities.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 
 import '../../TrackerButton.dart';
 
 class HustlePointsSection extends StatelessWidget {
   final List<Widget> sectionList = [];
 
-  _createSectionList(Activities activities) {
+  _createSectionList(PO1Score activities) {
     activities.hustlePointsMap.values.forEach(
       (element) {
         sectionList.add(TrackerButton(element));
@@ -19,7 +19,7 @@ class HustlePointsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final Activities a = Provider.of<Activities>(context);_pointButtons
-    final Activities a = context.select((Activities a) => a);
+    final PO1Score a = context.select((PO1Score a) => a);
 
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
