@@ -105,8 +105,30 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          RaisedButton(
-            onPressed: null,
+          FlatButton(
+            child: Text(
+              'New User? Sign Up!',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+            ),
+            onPressed: () => {
+              // TODO: Register and create new user [maybe just an Alert]
+              Navigator.pushNamed(context, '/register'),
+              debugPrint('New user, needs to register.'),
+            },
+          ),
+          FlatButton(
+            child: Text(
+              'Forgot Password?',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+            ),
+            onPressed: () {
+              // TODO: Forgot password trigger [maybe just an Alert
+              debugPrint('User forgot password and is trying to reset.');
+              User currUser = User(_email);
+              debugPrint("new current user, ${currUser.email}");
+            },
           ),
           IconButton(
             icon: Icon(Icons.keyboard_arrow_right),
@@ -119,7 +141,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               }
               _formKey.currentState.save();
               print('email $_email || pass $_password');
-              Navigator.pushNamed(context, '/register', arguments: {_user});
+              Navigator.pushNamed(context, '/playerName', arguments: {_user});
             },
           ),
         ],
@@ -131,29 +153,19 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
         margin: EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildLogo(),
-              _buildForm(),
-              // SizedBox(
-              //   height: 140,
-              // ),
-              _buildButtonGroup(),
-              // RaisedButton(
-              //     child: Text('Submit'),
-              //     onPressed: () {
-              //       dev.log('SignInUp Form Submit button pressed');
-              //       if (!_formKey.currentState.validate()) {
-              //         return;
-              //       }
-              //       _formKey.currentState.save();
-              //       print('email $_email || pass $_password');
-              //     }),
-            ],
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildLogo(),
+                _buildForm(),
+                _buildButtonGroup(),
+              ],
+            ),
           ),
         ),
       ),
