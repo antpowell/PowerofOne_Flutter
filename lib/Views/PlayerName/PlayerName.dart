@@ -5,6 +5,49 @@ import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/models/User.dart';
 
 class PlayerNameScene extends StatelessWidget {
+  String _palyerName;
+
+  static const _formStyle =
+      TextStyle(color: Colors.white, fontWeight: FontWeight.w300, fontSize: 58);
+
+  Widget _buildPlayerName() {
+    return TextFormField(
+      style: _formStyle,
+      keyboardType: TextInputType.name,
+      decoration: InputDecoration(
+        labelText: 'PlayerName',
+        labelStyle: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Player Name is required';
+        }
+        return null;
+      },
+      onSaved: (String newValue) {
+        _palyerName = newValue;
+      },
+    );
+  }
+
+  Widget _buildPlayerNameForm() {
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 600),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 300,
+            ),
+            _buildPlayerName()
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

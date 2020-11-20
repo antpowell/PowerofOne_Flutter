@@ -51,8 +51,7 @@ class SigninSignup extends StatelessWidget {
                           'User forgot password and is trying to reset.');
                       debugPrint(
                           'InputArea Data ${InputArea().emailTxtFieldController.text}');
-                      User currUser =
-                          User(InputArea().emailTxtFieldController.text);
+                      User currUser = User();
                       debugPrint("new current user, ${currUser.email}");
                     },
                   ),
@@ -62,13 +61,7 @@ class SigninSignup extends StatelessWidget {
                     iconSize: 25,
                     onPressed: () {
                       // TODO: Check if InputArea() is valid before progressing.
-                      User currUser =
-                          User(InputArea().emailTxtFieldController.text);
-                      Navigator.pushNamed(
-                        context,
-                        '/playerName',
-                        arguments: {currUser},
-                      );
+                      Navigator.pushNamed(context, '/playerName');
                     },
                   ),
                 ],

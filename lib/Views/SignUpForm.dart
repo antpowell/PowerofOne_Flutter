@@ -13,7 +13,7 @@ class SignInUpFormScreen extends StatefulWidget {
 class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   String _email;
   String _password;
-  User _user;
+  User _currentUser = User();
   RegExp emailExp = RegExp(r"^$|^.*@.*\..*$");
   RegExp passwordExp = RegExp(r'^.*(?=.{8,}).*$');
 
@@ -40,7 +40,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
       },
       onSaved: (String newValue) {
         _email = newValue;
-        _user = new User(_email);
+        _currentUser.setEmail(_email);
       },
     );
   }
@@ -126,8 +126,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
             onPressed: () {
               // TODO: Forgot password trigger [maybe just an Alert
               debugPrint('User forgot password and is trying to reset.');
-              User currUser = User(_email);
-              debugPrint("new current user, ${currUser.email}");
+              debugPrint("new current user, ${_currentUser.email}");
             },
           ),
           IconButton(
@@ -141,7 +140,8 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               }
               _formKey.currentState.save();
               print('email $_email || pass $_password');
-              Navigator.pushNamed(context, '/playerName', arguments: {_user});
+              Navigator.pushNamed(context, '/playerName',
+                  arguments: {_currentUser});
             },
           ),
         ],

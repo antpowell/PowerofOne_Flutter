@@ -5,6 +5,7 @@ import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/SignUpForm.dart';
+import 'package:power_one/models/User.dart';
 import 'package:provider/provider.dart';
 
 import 'Views/PlayerName/PlayerName.dart';
@@ -17,6 +18,7 @@ Future main() async {
 }
 
 class Power1 extends StatelessWidget {
+  User _user = User();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<PO1Score>(
