@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
+import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/SignUpForm.dart';
@@ -35,7 +36,8 @@ class Power1 extends StatelessWidget {
           '/': (context) => SignInUpFormScreen(),
           '/reportCard': (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
-          '/playerName': (context) => PlayerNameScene(),
+          // '/playerName': (context) => PlayerNameScene(),
+          '/playerName': (context) => PlayerNameForm(),
           '/scoreCard': (context) => ScoreCard(),
           '/power1ScoreCard': (context) => ReportCard(),
         },

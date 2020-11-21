@@ -5,6 +5,7 @@ import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/models/User.dart';
 
 class PlayerNameScene extends StatelessWidget {
+  User _user;
   String _palyerName;
 
   static const _formStyle =
@@ -116,8 +117,7 @@ class PlayerNameScene extends StatelessWidget {
                     PO1Button("Start Game", onPress: () {
                       debugPrint(
                           'User pressed Start Game button, save the player name to the user and take them to the score card view.');
-                      PO1Score().assignUser(
-                          User('email', playerName: 'Player Name2'));
+                      // PO1Score().assignUser();
                       Navigator.pushNamed(context, '/scoreCard');
                     }),
                   ],
