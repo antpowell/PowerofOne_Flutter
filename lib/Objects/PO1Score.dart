@@ -96,7 +96,17 @@ class PO1Score extends ChangeNotifier {
   int getTotalPointsScored() {
     int totalPointsScored = 0;
     _pointsMap.forEach((key, value) {
-      totalPointsScored += value.total();
+      switch (key) {
+        case '1PT':
+          totalPointsScored += value.total();
+          break;
+        case '2PTs':
+          totalPointsScored += (value.total() * 2);
+          break;
+        case '3PTs':
+          totalPointsScored += (value.total() * 3);
+          break;
+      }
     });
     return totalPointsScored;
   }
@@ -115,7 +125,9 @@ class PO1Score extends ChangeNotifier {
   }
 
   String powerOfOneGrade() {
-    return metPlaytimeThreshold() ? PO1Grade(_getPowerOfOneScore()) : GRADE.NA;
+    return metPlaytimeThreshold()
+        ? PO1Grade().CalculateGrade(_getPowerOfOneScore())
+        : 'NA';
   }
 
   bool metPlaytimeThreshold() {

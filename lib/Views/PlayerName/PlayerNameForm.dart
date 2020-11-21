@@ -1,8 +1,9 @@
 import 'dart:ui';
-
+import 'dart:developer' as dev;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/models/User.dart';
 
 class PlayerNameForm extends StatefulWidget {
   PlayerNameForm({Key key}) : super(key: key);
@@ -13,6 +14,8 @@ class PlayerNameForm extends StatefulWidget {
 
 class _PlayerNameFormState extends State<PlayerNameForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final double pageMargin = 24;
+  static final User _user = User();
 
   Widget _buildNameField() {
     return TextFormField(
@@ -33,6 +36,16 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
         fontSize: 24,
         color: Colors.white,
       ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Player Name is required';
+        }
+        return null;
+      },
+      onSaved: (String newValue) {
+        dev.log(newValue);
+        _user.setPlayerName(newValue);
+      },
     );
   }
 
@@ -66,11 +79,14 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
           ),
           PO1Button(
             "Start Game",
-            onPress: () => {
+            onPress: () {
               debugPrint(
-                  'User pressed Start Game button, save the player name to the user and take them to the score card view.'),
-              // PO1Score().assignUser();
-              Navigator.pushNamed(context, '/scoreCard'),
+                  'User pressed Start Game button, save the player name to the user and take them to the score card view.');
+              if (!_formKey.currentState.validate()) {
+                return;
+              }
+              _formKey.currentState.save();
+              Navigator.pushNamed(context, '/scoreCard');
             },
           ),
         ],
@@ -84,8 +100,6 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
         constraints: BoxConstraints(maxWidth: 600),
         child: Column(
           children: [
-            _buildHeader(),
-            SizedBox(height: 120),
             _buildNameField(),
           ],
         ),
@@ -96,23 +110,32 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        margin: EdgeInsets.all(24),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Flex(
-              direction: Axis.vertical,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                _buildForm(),
-                _buildButtonGroup(),
-              ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(pageMargin),
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight - (pageMargin * 2)),
+                child: Form(
+                  key: _formKey,
+                  child: Flex(
+                    direction: Axis.vertical,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildHeader(),
+                      _buildForm(),
+                      _buildButtonGroup(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

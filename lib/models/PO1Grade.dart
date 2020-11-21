@@ -4,11 +4,7 @@ import 'package:power_one/Objects/PO1Score.dart';
 import 'User.dart';
 
 class PO1Grade {
-  final int pO1Score;
-
-  PO1Grade(this.pO1Score);
-
-  CalculateGrade() {
+  CalculateGradeEnum(int pO1Score) {
     return (pO1Score > 8)
         ? GRADE.A
         : (pO1Score > 6)
@@ -18,5 +14,17 @@ class PO1Grade {
                 : (pO1Score > 2)
                     ? GRADE.D
                     : GRADE.F;
+  }
+
+  String CalculateGrade(int pO1Score) {
+    return (pO1Score > 8)
+        ? 'A'
+        : (pO1Score > 6)
+            ? 'B'
+            : (pO1Score > 4)
+                ? 'C'
+                : (pO1Score > 2)
+                    ? 'D'
+                    : 'F';
   }
 }

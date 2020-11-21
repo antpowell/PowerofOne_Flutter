@@ -8,24 +8,28 @@ class User {
   String _email;
   String get email => _email;
   setEmail(String email) {
+    dev.log('recieved email as $email');
     _email = email;
   }
 
   String _playerName;
   String get playerName => _playerName;
   setPlayerName(String name) {
+    dev.log('recieved player name as $name');
     _playerName = name;
   }
 
   PO1Score _score;
   PO1Score get score => _score;
   setPlayerScore(PO1Score score) {
+    dev.log('recieved PO1 Score $score');
     _score = score;
   }
 
   bool _tAndD;
   bool get tAndC => _tAndD;
   setTandC(bool accepted) {
+    dev.log('Terms and Conditions signed? $accepted');
     _tAndD = accepted;
   }
 

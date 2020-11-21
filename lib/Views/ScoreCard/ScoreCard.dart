@@ -4,6 +4,7 @@ import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
+import 'package:power_one/models/User.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer' as dev;
 
@@ -24,6 +25,7 @@ class ScoreCardScreen extends StatelessWidget {
 }
 
 class ScoreCardScreenWidget extends StatelessWidget {
+  static final User _user = User();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +38,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            'Player Name',
+            _user.playerName.toString(),
             style: TextStyle(fontSize: 36, color: Colors.white),
             textAlign: TextAlign.center,
           ),
@@ -85,8 +87,9 @@ class ScoreCardScreenWidget extends StatelessWidget {
                 ),
                 Container(
                   child: PO1Button('Report Card', onPress: () {
+                    _user.setPlayerScore(
+                        Provider.of<PO1Score>(context, listen: false));
                     Navigator.pushNamed(context, '/reportCard');
-                    // Navigator.pushNamed(context, '/register');
                   },
                       icon: Icon(Icons.arrow_forward_ios_sharp,
                           color: Colors.white)),

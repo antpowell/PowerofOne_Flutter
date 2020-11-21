@@ -1,6 +1,7 @@
 //import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:power_one/models/User.dart';
 
 Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
@@ -42,11 +43,9 @@ Column columnTitleTotalPointsScored(int points, String label) {
   );
 }
 
-void main() => runApp(ReportCard());
-
 class ReportCard extends StatelessWidget {
-  const ReportCard({Key key, this.title}) : super(key: key);
-  final title;
+  const ReportCard({Key key}) : super(key: key);
+  static final User _user = User();
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +98,7 @@ class ReportCard extends StatelessWidget {
                 height: 100,
                 width: 145,
                 color: Colors.white10,
-                child: Text('A',
+                child: Text(_user.score.powerOfOneGrade(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 80,
@@ -124,7 +123,7 @@ class ReportCard extends StatelessWidget {
             height: 100,
             width: 145,
             color: Colors.white10,
-            child: Text('0',
+            child: Text(_user.score.getTotalPointsScored().toString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 80, color: Colors.white)),
           ),
@@ -176,9 +175,9 @@ class ReportCard extends StatelessWidget {
                 height: 50,
                 width: 200,
                 child: Text(
-                  'Player Name',
+                  _user.playerName.toString(),
                   style: TextStyle(
-                    decoration: TextDecoration.underline,
+                    // decoration: TextDecoration.underline,
                     fontSize: 30,
                     color: Colors.white,
                   ),

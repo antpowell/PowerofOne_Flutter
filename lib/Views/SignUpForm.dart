@@ -140,8 +140,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               }
               _formKey.currentState.save();
               print('email $_email || pass $_password');
-              Navigator.pushNamed(context, '/playerName',
-                  arguments: {_currentUser});
+              Navigator.pushNamed(context, '/playerName');
             },
           ),
         ],
