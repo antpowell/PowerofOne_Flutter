@@ -131,7 +131,7 @@ class PO1Score extends ChangeNotifier {
   }
 
   bool metPlaytimeThreshold() {
-    if (history.length > minimumThreshold) {
+    if (history.length >= minimumThreshold) {
       return true;
     }
 

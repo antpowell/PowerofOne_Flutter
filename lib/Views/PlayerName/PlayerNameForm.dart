@@ -22,11 +22,12 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
       obscureText: false,
       decoration: InputDecoration(
         border: InputBorder.none,
-        hintText: "Player Name",
+        // hintText: "What's your athlete's name?",
+        hintText: "What's the name of your athlete?",
         hintStyle: TextStyle(
           color: Colors.grey[400],
         ),
-        // labelText: "PlayerName",
+        // labelText: "Player Name",
         labelStyle: TextStyle(
           color: Colors.white,
         ),
