@@ -121,13 +121,16 @@ class PO1Score extends ChangeNotifier {
       }
     });
     _hustlePointsMap.forEach((key, value) {
-      dev.log('found key $key');
-      powerOfOneScore += value.total();
+      if (key == 'TO') {
+        powerOfOneScore -= value.total();
+      } else {
+        powerOfOneScore += value.total();
+      }
       if (value.total() < 0) {
         improvementAreas.add(value);
       }
     });
-
+    dev.log('PO1 Score: --> $powerOfOneScore');
     return powerOfOneScore;
   }
 

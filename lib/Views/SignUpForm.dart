@@ -139,7 +139,6 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 return;
               }
               _formKey.currentState.save();
-              print('email $_email || pass $_password');
               Navigator.pushNamed(context, '/playerName');
             },
           ),
