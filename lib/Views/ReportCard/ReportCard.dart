@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:power_one/models/User.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
 
 Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
@@ -148,24 +149,16 @@ class ReportCard extends StatelessWidget {
             Positioned(
               bottom: 10,
               right: 10,
-              child: OutlineButton(
-                disabledBorderColor: Colors.white,
-                child: Text("New Game",
-                    style: TextStyle(fontSize: 20, color: Colors.white)),
-              ),
+              child: PO1Button("New Game"),
             ),
             Positioned(
               bottom: 10,
               right: 150,
-              child: OutlineButton(
-                disabledBorderColor: Colors.white,
-                onPressed: () {
-                  Navigator.pushNamed(context, '/playerName');
+              child: PO1Button(
+                "Save Game",
+                onPress: () {
+                  Navigator.pushNamed(context, '/FeedBack');
                 },
-                child: Text(
-                  "Save Game",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
               ),
             ),
             Positioned(
@@ -183,6 +176,18 @@ class ReportCard extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            Positioned(
+              top: 175,
+              right: 50,
+              child: IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  tooltip: 'Click here for more info',
+                  color: Colors.white,
+                  iconSize: 15,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/FeedBack');
+                  }),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

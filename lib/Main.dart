@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
@@ -7,6 +8,8 @@ import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/SignUpForm.dart';
 import 'package:power_one/models/User.dart';
+import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
+import 'package:power_one/Views/FeedBack/FeedBack.dart';
 import 'package:provider/provider.dart';
 
 import 'Views/PlayerName/PlayerName.dart';
@@ -40,6 +43,9 @@ class Power1 extends StatelessWidget {
           '/playerName': (context) => PlayerNameForm(),
           '/scoreCard': (context) => ScoreCard(),
           '/power1ScoreCard': (context) => ReportCard(),
+          '/termsAndConditions': (context) => TermsAndConditions(),
+          '/FeedBack': (context) => FeedBack(),
+          '/Help': (context) => HelpPage(),
         },
       ),
     );
