@@ -120,6 +120,13 @@ class PO1Score extends ChangeNotifier {
         improvementAreas.add(value);
       }
     });
+    _hustlePointsMap.forEach((key, value) {
+      dev.log('found key $key');
+      powerOfOneScore += value.total();
+      if (value.total() < 0) {
+        improvementAreas.add(value);
+      }
+    });
 
     return powerOfOneScore;
   }
