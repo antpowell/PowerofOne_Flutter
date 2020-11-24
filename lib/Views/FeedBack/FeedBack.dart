@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-
 void main() => runApp(FeedBack());
-
 
 class FeedBack extends StatelessWidget {
   const FeedBack({Key key, this.title}) : super(key: key);
@@ -15,20 +12,18 @@ class FeedBack extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.black12 ,
-        title: Text('Power of 1 Score Feed Back',
+        backgroundColor: Colors.black12,
+        title: Text(
+          'Power of 1 Score Feed Back',
           style: TextStyle(
             fontSize: 30,
           ),
-
         ),
         centerTitle: true,
       ),
-      body:
-
-      SafeArea(
+      body: SafeArea(
         child: Stack(
-          children:[
+          children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -36,12 +31,11 @@ class FeedBack extends StatelessWidget {
                   flex: 1,
                   child: new SingleChildScrollView(
                     scrollDirection: Axis.vertical,
-                    child: new Text(
-                        "Shooting Percentage\n",
+                    child: new Text("Shooting Percentage\n",
                         style: new TextStyle(
-                          fontSize: 16.0, color: Colors.white,
-                        )
-                    ),
+                          fontSize: 16.0,
+                          color: Colors.white,
+                        )),
                   ),
                 ),
               ],
@@ -49,16 +43,20 @@ class FeedBack extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar:new BottomNavigationBar(
-        backgroundColor: Colors.black12,
-        fixedColor: Colors.white,items:[
-        new BottomNavigationBarItem(
-            icon:new Icon(Icons.arrow_back),
-            title: new Text("Back")
-        ),
-      ],
-      ),
+      // bottomNavigationBar: new BottomNavigationBar(
+      //   backgroundColor: Colors.black12,
+      //   fixedColor: Colors.white,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.arrow_back),
+      //       label: "Back",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.backpack_outlined),
+      //       label: 'Test',
+      //     ),
+      //   ],
+      // ),
     );
-
   }
 }

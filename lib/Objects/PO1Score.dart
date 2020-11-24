@@ -28,13 +28,7 @@ class PO1Score extends ChangeNotifier {
   List<IScore> improvementAreas = [];
 
   PO1Score() {
-    kLabels["points"].forEach((element) {
-      _pointsMap[element] = new Point(element);
-    });
-    kLabels["hustle_points"].forEach((element) {
-      _hustlePointsMap[element] = new Play(element);
-    });
-    debugPrint('IPoints created!');
+    init();
   }
 
   assignUser(User user) {
@@ -81,6 +75,28 @@ class PO1Score extends ChangeNotifier {
           error: {'data': 'Event history is empty, no prior events'});
     }
     notifyListeners();
+  }
+
+  clear() {
+    // FIXME: crashes on clearing data.
+    if (history.isNotEmpty) {
+      history.clear();
+      init();
+      dev.log(_pointsMap.toString());
+    } else {
+      dev.log('history is already clear.');
+    }
+    // notifyListeners();
+  }
+
+  init() {
+    kLabels["points"].forEach((element) {
+      _pointsMap[element] = new Point(element);
+    });
+    kLabels["hustle_points"].forEach((element) {
+      _hustlePointsMap[element] = new Play(element);
+    });
+    debugPrint('IPoints created!');
   }
 
   IScore getActivity(String activityName) {

@@ -82,6 +82,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: PO1Button(
                     "Undo",
                     onPress: Provider.of<PO1Score>(context).undo,
+                    onLongPress: Provider.of<PO1Score>(context).clear,
                     icon: Icon(Icons.restore_outlined, color: Colors.white),
                   ),
                 ),

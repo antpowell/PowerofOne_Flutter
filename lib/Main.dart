@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:power_one/Views/Help/helpPage.dart';
@@ -16,6 +17,7 @@ import 'Views/PlayerName/PlayerName.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   runApp(Power1());
@@ -25,8 +27,12 @@ class Power1 extends StatelessWidget {
   User _user = User();
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PO1Score>(
-      create: (BuildContext context) => PO1Score(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PO1Score>(
+          create: (BuildContext context) => PO1Score(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Power of 1 Basketball',
         theme: ThemeData(
@@ -39,7 +45,6 @@ class Power1 extends StatelessWidget {
           '/': (context) => SignInUpFormScreen(),
           '/reportCard': (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
-          // '/playerName': (context) => PlayerNameScene(),
           '/playerName': (context) => PlayerNameForm(),
           '/scoreCard': (context) => ScoreCard(),
           '/power1ScoreCard': (context) => ReportCard(),

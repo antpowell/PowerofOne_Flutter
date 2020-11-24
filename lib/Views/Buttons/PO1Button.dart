@@ -83,6 +83,7 @@ class PO1Button extends StatelessWidget {
           ],
         ),
         onPressed: onPress,
+        onLongPress: onLongPress,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
             color: Colors.white,
