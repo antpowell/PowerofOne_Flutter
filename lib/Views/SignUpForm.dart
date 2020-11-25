@@ -113,7 +113,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
             ),
             onPressed: () => {
               // TODO: Register and create new user [maybe just an Alert]
-              Navigator.pushNamed(context, '/register'),
+              Navigator.pushNamed(context, '/termsAndConditions'),
               debugPrint('New user, needs to register.'),
             },
           ),

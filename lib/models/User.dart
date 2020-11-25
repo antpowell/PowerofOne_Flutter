@@ -26,13 +26,6 @@ class User {
     _score = score;
   }
 
-  bool _tAndD;
-  bool get tAndC => _tAndD;
-  setTandC(bool accepted) {
-    dev.log('Terms and Conditions signed? $accepted');
-    _tAndD = accepted;
-  }
-
   kPlayerCategory _level;
 
   factory User() {
