@@ -1,7 +1,7 @@
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 
-import 'User.dart';
+import 'PO1User.dart';
 
 class PO1Grade {
   CalculateGradeEnum(int pO1Score) {

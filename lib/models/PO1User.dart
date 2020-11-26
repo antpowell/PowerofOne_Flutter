@@ -2,8 +2,8 @@ import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'dart:developer' as dev;
 
-class User {
-  static final User _instance = User._init();
+class PO1User {
+  static final PO1User _instance = PO1User._init();
 
   String _email;
   String get email => _email;
@@ -28,11 +28,11 @@ class User {
 
   kPlayerCategory _level;
 
-  factory User() {
+  factory PO1User() {
     return _instance;
   }
 
-  User._init() {
+  PO1User._init() {
     dev.log('user created as: ${this._email}');
   }
 }

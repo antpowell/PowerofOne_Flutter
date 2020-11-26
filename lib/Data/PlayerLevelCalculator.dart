@@ -1,12 +1,12 @@
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 
 const scoreing = {
   'amature': {'A': 9, 'B': 7, 'C': 5, 'D': 3},
   'pro': {'A': 13, 'B': 10, 'C': 5, 'D': 3},
 };
 
-String powerOfOneScoreCalculator(num _po1Score, User user) {
+String powerOfOneScoreCalculator(num _po1Score, PO1User user) {
   // String byLevel = (user.level == kPlayserCategory.amature)? : ;
   String eanrdPO1Score = (_po1Score >= 9)
       ? 'A'

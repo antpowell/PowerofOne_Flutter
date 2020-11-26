@@ -1,9 +1,12 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Services/authentication_service.dart';
 import 'dart:developer' as dev;
 
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
+import 'package:provider/provider.dart';
 
 class SignInUpFormScreen extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class SignInUpFormScreen extends StatefulWidget {
 class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   String _email;
   String _password;
-  User _currentUser = User();
+  PO1User _currentUser = PO1User();
   RegExp emailExp = RegExp(r"^$|^.*@.*\..*$");
   RegExp passwordExp = RegExp(r'^.*(?=.{8,}).*$');
 
@@ -139,7 +142,10 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 return;
               }
               _formKey.currentState.save();
-              Navigator.pushNamed(context, '/playerName');
+              final _authService =
+                  Provider.of<AuthenticationService>(context, listen: false);
+              _authService.signIn(email: _email, password: _password);
+              // Navigator.pushNamed(context, '/playerName');
             },
           ),
         ],
@@ -149,6 +155,8 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final User firebaseUser = Provider.of<User>(context);
+    bool hasUser = firebaseUser != null;
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -162,11 +170,42 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 _buildLogo(),
                 _buildForm(),
                 _buildButtonGroup(),
+                if (hasUser) ...[
+                  Text('Do we have a user $hasUser'),
+                ]
               ],
             ),
           ),
         ),
       ),
     );
+
+    @override
+    Widget build(BuildContext context) {
+      final User firebaseUser = context.watch<User>();
+
+      if (firebaseUser != null) {
+        dev.log('Found user in Firebase: $firebaseUser');
+        return Text('User Found');
+      }
+      dev.log('No user found in Firebase');
+      return Text('No user found');
+    }
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final User firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      dev.log('Found user in Firebase: $firebaseUser');
+      return Text('User Found');
+    }
+    dev.log('No user found in Firebase');
+    return Text('No user found');
   }
 }

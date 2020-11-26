@@ -4,7 +4,7 @@ import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer' as dev;
 
@@ -25,7 +25,7 @@ class ScoreCardScreen extends StatelessWidget {
 }
 
 class ScoreCardScreenWidget extends StatelessWidget {
-  static final User _user = User();
+  static final PO1User _user = PO1User();
   @override
   Widget build(BuildContext context) {
     return Container(

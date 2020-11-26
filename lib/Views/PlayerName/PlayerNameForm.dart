@@ -3,7 +3,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 
 class PlayerNameForm extends StatefulWidget {
   PlayerNameForm({Key key}) : super(key: key);
@@ -15,7 +15,7 @@ class PlayerNameForm extends StatefulWidget {
 class _PlayerNameFormState extends State<PlayerNameForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final double pageMargin = 24;
-  static final User _user = User();
+  static final PO1User _user = PO1User();
 
   Widget _buildNameField() {
     return TextFormField(

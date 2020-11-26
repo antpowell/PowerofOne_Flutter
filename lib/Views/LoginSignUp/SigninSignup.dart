@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/InputArea.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 
 class SigninSignup extends StatelessWidget {
   @override
@@ -51,7 +51,7 @@ class SigninSignup extends StatelessWidget {
                           'User forgot password and is trying to reset.');
                       debugPrint(
                           'InputArea Data ${InputArea().emailTxtFieldController.text}');
-                      User currUser = User();
+                      PO1User currUser = PO1User();
                       debugPrint("new current user, ${currUser.email}");
                     },
                   ),

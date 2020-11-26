@@ -20,8 +20,23 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_neumorphic: ^3.0.3
-  firebase_core: ^0.5.2
-  firebase_auth: ^0.18.3
+  firebase_core: "^0.5.2+1"
+  # Newly reworked plugins covered by this migration guide:
+  firebase_auth: "^0.18.3+1"
+  firebase_crashlytics: "^0.2.3+1"
+  cloud_firestore: "^0.14.3+1"
+  cloud_functions: "^0.7.1"
+  firebase_storage: "^5.1.0"
+  firebase_messaging: "^8.0.0-dev.9"
+  # Updated to work with new core only plugins (no new changes):
+  firebase_admob: "^0.10.2"
+  firebase_analytics: "^6.2.0"
+  firebase_database: "^4.3.0"
+  firebase_dynamic_links: "^0.6.2"
+  firebase_in_app_messaging: "^0.2.2"
+  firebase_performance: "^0.4.2"
+  firebase_remote_config: "^0.4.2"
+  
   flutter_spinkit: "^4.1.2"
 
   # The following adds the Cupertino Icons font to your application.

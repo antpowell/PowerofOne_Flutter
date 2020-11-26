@@ -5,7 +5,7 @@ import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
 import 'package:power_one/models/PO1Grade.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
@@ -15,7 +15,7 @@ enum _playerLevel { elementry, middle, college, pro }
 
 class PO1Score extends ChangeNotifier {
   static final int minimumThreshold = 5;
-  static User _user;
+  static PO1User _user;
 
   Queue<Map<String, IScore>> history = new Queue();
 
@@ -31,7 +31,7 @@ class PO1Score extends ChangeNotifier {
     init();
   }
 
-  assignUser(User user) {
+  assignUser(PO1User user) {
     _user = user;
   }
 
