@@ -35,4 +35,11 @@ class PO1User {
   PO1User._init() {
     dev.log('user created as: ${this._email}');
   }
+
+  clearData() {
+    _email = null;
+    _playerName = null;
+    _score.clear();
+    dev.log('Local user data cleared');
+  }
 }

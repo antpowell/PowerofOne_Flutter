@@ -149,9 +149,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               _formKey.currentState.save();
 
               _authService.signIn(email: _email, password: _password);
-              if (hasUser) {
-                Navigator.pushNamed(context, '/playerName');
-              }
+              Navigator.pushNamed(context, '/playerName');
             },
           ),
         ],
@@ -176,8 +174,9 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 _buildLogo(),
                 _buildForm(),
                 _buildButtonGroup(),
+                AuthWrapper(),
                 if (hasUser) ...[
-                  Text('Do we have a user $hasUser'),
+                  // Text('Do we have a user $hasUser'),
                 ]
               ],
             ),
@@ -185,18 +184,6 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
         ),
       ),
     );
-
-    @override
-    Widget build(BuildContext context) {
-      final User firebaseUser = context.watch<User>();
-
-      if (firebaseUser != null) {
-        dev.log('Found user in Firebase: $firebaseUser');
-        return Text('User Found');
-      }
-      dev.log('No user found in Firebase');
-      return Text('No user found');
-    }
   }
 }
 
@@ -209,6 +196,7 @@ class AuthWrapper extends StatelessWidget {
 
     if (firebaseUser != null) {
       dev.log('Found user in Firebase: $firebaseUser');
+      // Navigator.pushNamed(context, '/playerName');
       return Text('User Found');
     }
     dev.log('No user found in Firebase');

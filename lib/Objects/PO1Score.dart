@@ -80,7 +80,6 @@ class PO1Score extends ChangeNotifier {
   clear() {
     // FIXME: crashes on clearing data.
     if (history.isNotEmpty) {
-      history.clear();
       init();
       dev.log(_pointsMap.toString());
     } else {
@@ -96,6 +95,7 @@ class PO1Score extends ChangeNotifier {
     kLabels["hustle_points"].forEach((element) {
       _hustlePointsMap[element] = new Play(element);
     });
+    history = new Queue();
     debugPrint('IPoints created!');
   }
 
