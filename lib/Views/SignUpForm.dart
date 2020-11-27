@@ -104,6 +104,10 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   }
 
   Widget _buildButtonGroup() {
+    final User firebaseUser = Provider.of<User>(context);
+    bool hasUser = firebaseUser != null;
+    final _authService =
+        Provider.of<AuthenticationService>(context, listen: false);
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -130,6 +134,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               // TODO: Forgot password trigger [maybe just an Alert
               debugPrint('User forgot password and is trying to reset.');
               debugPrint("new current user, ${_currentUser.email}");
+              _authService.signOut(email: _email, password: _password);
             },
           ),
           IconButton(
@@ -142,10 +147,11 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 return;
               }
               _formKey.currentState.save();
-              final _authService =
-                  Provider.of<AuthenticationService>(context, listen: false);
+
               _authService.signIn(email: _email, password: _password);
-              // Navigator.pushNamed(context, '/playerName');
+              if (hasUser) {
+                Navigator.pushNamed(context, '/playerName');
+              }
             },
           ),
         ],
