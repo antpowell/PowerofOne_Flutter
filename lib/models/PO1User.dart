@@ -37,9 +37,18 @@ class PO1User {
   }
 
   clearData() {
-    _email = null;
+    // TODO: clear email when user signs out
+    // _email = null;
     _playerName = null;
     _score.clear();
     dev.log('Local user data cleared');
+  }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'email': _email,
+      'playerName': _playerName,
+      // 'score': _score,
+    };
   }
 }
