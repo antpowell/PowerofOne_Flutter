@@ -188,7 +188,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
 }
 
 class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({Key key}) : super(key: key);
+  final PO1User _user = PO1User();
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +196,7 @@ class AuthWrapper extends StatelessWidget {
 
     if (firebaseUser != null) {
       dev.log('Found user in Firebase: $firebaseUser');
+      _user.setId(firebaseUser.uid);
       // Navigator.pushNamed(context, '/playerName');
       return Text('User Found');
     }

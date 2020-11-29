@@ -11,6 +11,7 @@ class FBDBService {
   }
 
   createNewUser(PO1User user) {
+    final userData = user.toJSON();
     final userId = dbRef.child('user/byEmail/');
     dev.log(user.email.split(".")[0]);
     userId.child('${user.email.split(".")[0]}/').set(user.toJSON());

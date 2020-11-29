@@ -19,6 +19,11 @@ class PO1User {
     _playerName = name;
   }
 
+  String _id;
+  setId(String id) {
+    _id = id;
+  }
+
   PO1Score _score;
   PO1Score get score => _score;
   setPlayerScore(PO1Score score) {
@@ -48,6 +53,7 @@ class PO1User {
     return {
       'email': _email,
       'playerName': _playerName,
+      'id': _id,
       // 'score': _score,
     };
   }
