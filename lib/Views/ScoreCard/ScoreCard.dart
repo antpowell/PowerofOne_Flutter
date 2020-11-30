@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
+import 'package:power_one/models/PO1Game.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer' as dev;
@@ -26,6 +28,7 @@ class ScoreCardScreen extends StatelessWidget {
 
 class ScoreCardScreenWidget extends StatelessWidget {
   static final PO1User _user = PO1User();
+  static final fbdbService = FBDBService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,7 +93,8 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: PO1Button('Report Card', onPress: () {
                     _user.setPlayerScore(
                         Provider.of<PO1Score>(context, listen: false));
-                    Navigator.pushNamed(context, '/reportCard');
+                    fbdbService.createNewGame();
+                    // Navigator.pushNamed(context, '/reportCard');
                   },
                       icon: Icon(Icons.arrow_forward_ios_sharp,
                           color: Colors.white)),

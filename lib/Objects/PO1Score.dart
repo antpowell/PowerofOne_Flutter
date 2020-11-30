@@ -165,7 +165,6 @@ class PO1Score extends ChangeNotifier {
   }
 
   Map<String, dynamic> toJSON() {
-    const data = {};
     final reportCard = {
       "Feedback": "",
       "Grade": powerOfOneGrade(),
@@ -182,10 +181,24 @@ class PO1Score extends ChangeNotifier {
       'turnOvers': '',
       'twoPointers': ''
     };
+    final data = {
+      ...reportCard,
+      ...scoreCard,
+    };
     data.addAll({
       "ReportCard": reportCard,
-      "ScoreCard": _hustlePointsMap.addAll(_pointsMap),
+      "ScoreCard": {
+        ..._hustlePointsMap,
+        ..._pointsMap,
+      },
     });
+    return {
+      "ReportCard": reportCard,
+      "ScoreCard": {
+        ..._hustlePointsMap,
+        ..._pointsMap,
+      },
+    };
     // data.addAll({});
   }
 }

@@ -12,6 +12,8 @@ class PO1User {
     _email = email;
   }
 
+  String emailSignature() => _email.split('.')[0];
+
   String _playerName;
   String get playerName => _playerName;
   setPlayerName(String name) {

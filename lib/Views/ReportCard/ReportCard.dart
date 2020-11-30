@@ -136,7 +136,7 @@ class ReportCard extends StatelessWidget {
       onWillPop: () async {
         dev.log('back button disabled');
         // TODO: show dialog message
-        return false;
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
