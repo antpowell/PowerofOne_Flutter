@@ -163,4 +163,29 @@ class PO1Score extends ChangeNotifier {
 
     return false;
   }
+
+  Map<String, dynamic> toJSON() {
+    const data = {};
+    final reportCard = {
+      "Feedback": "",
+      "Grade": powerOfOneGrade(),
+      "Score": _getPowerOfOneScore(),
+      "PointsScored": getTotalPointsScored()
+    };
+    final scoreCard = {
+      'assist': '',
+      'blocks': '',
+      'freeThrows': '',
+      'offRebounds': '',
+      'steasl': '',
+      'threePointers': '',
+      'turnOvers': '',
+      'twoPointers': ''
+    };
+    data.addAll({
+      "ReportCard": reportCard,
+      "ScoreCard": _hustlePointsMap.addAll(_pointsMap),
+    });
+    // data.addAll({});
+  }
 }
