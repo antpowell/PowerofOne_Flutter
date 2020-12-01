@@ -176,7 +176,7 @@ class PO1Score extends ChangeNotifier {
       'blocks': '',
       'freeThrows': '',
       'offRebounds': '',
-      'steasl': '',
+      'steals': '',
       'threePointers': '',
       'turnOvers': '',
       'twoPointers': ''

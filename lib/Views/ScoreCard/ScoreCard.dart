@@ -93,8 +93,8 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: PO1Button('Report Card', onPress: () {
                     _user.setPlayerScore(
                         Provider.of<PO1Score>(context, listen: false));
-                    fbdbService.createNewGame();
-                    // Navigator.pushNamed(context, '/reportCard');
+                    //fbdbService.createNewGame();
+                    Navigator.pushNamed(context, '/reportCard');
                   },
                       icon: Icon(Icons.arrow_forward_ios_sharp,
                           color: Colors.white)),
