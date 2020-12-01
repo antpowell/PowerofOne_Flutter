@@ -1,9 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:power_one/Views/Buttons/PO1Button.dart';
 
 void main() => runApp(FeedBack());
-
 
 class FeedBack extends StatelessWidget {
   const FeedBack({Key key, this.title}) : super(key: key);
@@ -15,50 +14,79 @@ class FeedBack extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.black12 ,
-        title: Text('Power of 1 Score Feed Back',
+        backgroundColor: Colors.black12,
+        title: Text(
+          'Power of 1 Score Feed Back',
           style: TextStyle(
             fontSize: 30,
           ),
-
         ),
         centerTitle: true,
       ),
-      body:
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
 
-      SafeArea(
-        child: Stack(
-          children:[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                new Expanded(
-                  flex: 1,
-                  child: new SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: new Text(
-                        "Shooting Percentage\n",
-                        style: new TextStyle(
-                          fontSize: 16.0, color: Colors.white,
-                        )
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("\nShooting Percentage\n",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      )),
+                  Text("3 Point Percentage: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  Text("2 Point Percentage: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  Text("    Free Throw Percentage: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                ],
+              ),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Hustle Points\n",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      )),
+                  Text("Offensive Rebounds: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  Text("Blocks: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  Text("Steals: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  Text("Assists: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  Text("Turnovers: \n",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar:new BottomNavigationBar(
-        backgroundColor: Colors.black12,
-        fixedColor: Colors.white,items:[
-        new BottomNavigationBarItem(
-            icon:new Icon(Icons.arrow_back),
-            title: new Text("Back")
-        ),
-      ],
       ),
     );
-
   }
 }
