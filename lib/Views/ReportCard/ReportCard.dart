@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+
+import 'dart:developer' as dev;
 
 Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
@@ -44,7 +46,7 @@ Column columnTitleTotalPointsScored(int points, String label) {
 
 class ReportCard extends StatelessWidget {
   const ReportCard({Key key}) : super(key: key);
-  static final User _user = User();
+  static final PO1User _user = PO1User();
 
   @override
   Widget build(BuildContext context) {
@@ -130,113 +132,126 @@ class ReportCard extends StatelessWidget {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black12,
-        title: Text(
-          'Power of 1 Score',
-          style: TextStyle(
-            fontSize: 30,
+    return WillPopScope(
+      onWillPop: () async {
+        dev.log('back button disabled');
+        // TODO: show dialog message
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black12,
+          title: Text(
+            'Power of 1 Score',
+            style: TextStyle(
+              fontSize: 30,
+            ),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: PO1Button("New Game"),
-            ),
-            Positioned(
-              bottom: 10,
-              right: 150,
-              child: PO1Button(
-                "Save Game",
-                onPress: () {
-                  Navigator.pushNamed(context, '/FeedBack');
-                },
-              ),
-            ),
-            Positioned(
-              top: 40,
-              left: 40,
-              child: Container(
-                height: 50,
-                width: 200,
-                child: Text(
-                  _user.playerName.toString(),
-                  style: TextStyle(
-                    // decoration: TextDecoration.underline,
-                    fontSize: 30,
-                    color: Colors.white,
-                  ),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 10,
+                right: 10,
+                child: PO1Button(
+                  "New Game",
+                  onPress: () {
+                    _user.clearData();
+                    Navigator.pushNamed(context, '/playerName');
+                  },
                 ),
               ),
-            ),
-            Positioned(
-              top: 175,
-              right: 50,
-              child: IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  tooltip: 'Click here for more info',
-                  color: Colors.white,
-                  iconSize: 15,
-                  onPressed: () {
+              Positioned(
+                bottom: 10,
+                right: 150,
+                child: PO1Button(
+                  "Save Game",
+                  onPress: () {
                     Navigator.pushNamed(context, '/FeedBack');
-                  }),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                //ColumnOne
-                //const SizedBox(width:50),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    /* Text('Player Name',
+                  },
+                ),
+              ),
+              Positioned(
+                top: 40,
+                left: 40,
+                child: Container(
+                  height: 50,
+                  width: 200,
+                  child: Text(
+                    _user.playerName.toString(),
                     style: TextStyle(
-                      fontSize: 24,
+                      // decoration: TextDecoration.underline,
+                      fontSize: 30,
                       color: Colors.white,
-                    )
-                ),*/
-                    totalpointstextSection,
-                  ],
-                ),
-                // const SizedBox(width:50),
-                Container(
-                  height: 210,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
                     ),
                   ),
                 ),
-                //ColumnTwo
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    powerof1gradetextSection,
-                  ],
-                ),
-                Container(
-                  height: 210,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
+              ),
+              Positioned(
+                top: 175,
+                right: 50,
+                child: IconButton(
+                    icon: Icon(Icons.arrow_forward),
+                    tooltip: 'Click here for more info',
+                    color: Colors.white,
+                    iconSize: 15,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/FeedBack');
+                    }),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //ColumnOne
+                  //const SizedBox(width:50),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      /* Text('Player Name',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      )
+                  ),*/
+                      totalpointstextSection,
+                    ],
+                  ),
+                  // const SizedBox(width:50),
+                  Container(
+                    height: 210,
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
+                      ),
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    feedbacktextSection,
-                  ],
-                ),
-              ],
-            ),
-          ],
+                  //ColumnTwo
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      powerof1gradetextSection,
+                    ],
+                  ),
+                  Container(
+                    height: 210,
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      feedbacktextSection,
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

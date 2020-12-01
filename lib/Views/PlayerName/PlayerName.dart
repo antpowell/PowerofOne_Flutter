@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:power_one/InputArea.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 
 class PlayerNameScene extends StatelessWidget {
-  User _user;
+  PO1User _user;
   String _palyerName;
 
   static const _formStyle =

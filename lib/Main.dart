@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
@@ -7,26 +10,41 @@ import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/SignUpForm.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
 import 'package:provider/provider.dart';
+
+import 'dart:developer' as dev;
 
 import 'Views/PlayerName/PlayerName.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   runApp(Power1());
 }
 
 class Power1 extends StatelessWidget {
-  User _user = User();
+  PO1User _user = PO1User();
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PO1Score>(
-      create: (BuildContext context) => PO1Score(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PO1Score>(
+          create: (BuildContext context) => PO1Score(),
+        ),
+        Provider<AuthenticationService>(
+          create: (BuildContext context) =>
+              AuthenticationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) =>
+              context.read<AuthenticationService>().authStateChange,
+        ),
+      ],
       child: MaterialApp(
         title: 'Power of 1 Basketball',
         theme: ThemeData(
@@ -39,7 +57,6 @@ class Power1 extends StatelessWidget {
           '/': (context) => SignInUpFormScreen(),
           '/reportCard': (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
-          // '/playerName': (context) => PlayerNameScene(),
           '/playerName': (context) => PlayerNameForm(),
           '/scoreCard': (context) => ScoreCard(),
           '/power1ScoreCard': (context) => ReportCard(),
@@ -47,6 +64,7 @@ class Power1 extends StatelessWidget {
           '/FeedBack': (context) => FeedBack(),
           '/Help': (context) => HelpPage(),
         },
+        // home: AuthWrapper(),
       ),
     );
   }
@@ -144,19 +162,18 @@ class _PointKeeperState extends State<PointKeeper> {
   }
 }
 
-class Reset extends StatelessWidget {
-  Reset({this.action});
-  final Function action;
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FlatButton(
-          onPressed: () {
-            action();
-            print('someone Pressed reset');
-          },
-          child: Text('Reset')),
-    );
+    final User firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      dev.log('Found user in Firebase: $firebaseUser');
+      return Text('User Found');
+    }
+    dev.log('No user found in Firebase');
+    return Text('No user found');
   }
 }

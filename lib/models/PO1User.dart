@@ -2,8 +2,8 @@ import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'dart:developer' as dev;
 
-class User {
-  static final User _instance = User._init();
+class PO1User {
+  static final PO1User _instance = PO1User._init();
 
   String _email;
   String get email => _email;
@@ -12,11 +12,18 @@ class User {
     _email = email;
   }
 
+  String emailSignature() => _email.split('.')[0];
+
   String _playerName;
   String get playerName => _playerName;
   setPlayerName(String name) {
     dev.log('recieved player name as $name');
     _playerName = name;
+  }
+
+  String _id;
+  setId(String id) {
+    _id = id;
   }
 
   PO1Score _score;
@@ -26,20 +33,30 @@ class User {
     _score = score;
   }
 
-  bool _tAndD;
-  bool get tAndC => _tAndD;
-  setTandC(bool accepted) {
-    dev.log('Terms and Conditions signed? $accepted');
-    _tAndD = accepted;
-  }
-
   kPlayerCategory _level;
 
-  factory User() {
+  factory PO1User() {
     return _instance;
   }
 
-  User._init() {
+  PO1User._init() {
     dev.log('user created as: ${this._email}');
+  }
+
+  clearData() {
+    // TODO: clear email when user signs out
+    // _email = null;
+    _playerName = null;
+    _score.clear();
+    dev.log('Local user data cleared');
+  }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'email': _email,
+      'playerName': _playerName,
+      'id': _id,
+      // 'score': _score,
+    };
   }
 }

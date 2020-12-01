@@ -5,7 +5,7 @@ import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
 import 'package:power_one/models/PO1Grade.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
@@ -15,7 +15,7 @@ enum _playerLevel { elementry, middle, college, pro }
 
 class PO1Score extends ChangeNotifier {
   static final int minimumThreshold = 5;
-  static User _user;
+  static PO1User _user;
 
   Queue<Map<String, IScore>> history = new Queue();
 
@@ -28,16 +28,10 @@ class PO1Score extends ChangeNotifier {
   List<IScore> improvementAreas = [];
 
   PO1Score() {
-    kLabels["points"].forEach((element) {
-      _pointsMap[element] = new Point(element);
-    });
-    kLabels["hustle_points"].forEach((element) {
-      _hustlePointsMap[element] = new Play(element);
-    });
-    debugPrint('IPoints created!');
+    init();
   }
 
-  assignUser(User user) {
+  assignUser(PO1User user) {
     _user = user;
   }
 
@@ -83,6 +77,28 @@ class PO1Score extends ChangeNotifier {
     notifyListeners();
   }
 
+  clear() {
+    // FIXME: crashes on clearing data.
+    if (history.isNotEmpty) {
+      init();
+      dev.log(_pointsMap.toString());
+    } else {
+      dev.log('history is already clear.');
+    }
+    // notifyListeners();
+  }
+
+  init() {
+    kLabels["points"].forEach((element) {
+      _pointsMap[element] = new Point(element);
+    });
+    kLabels["hustle_points"].forEach((element) {
+      _hustlePointsMap[element] = new Play(element);
+    });
+    history = new Queue();
+    debugPrint('IPoints created!');
+  }
+
   IScore getActivity(String activityName) {
     return (_pointsMap.containsKey(activityName))
         ? _pointsMap[activityName]
@@ -120,7 +136,17 @@ class PO1Score extends ChangeNotifier {
         improvementAreas.add(value);
       }
     });
-
+    _hustlePointsMap.forEach((key, value) {
+      if (key == 'TO') {
+        powerOfOneScore -= value.total();
+      } else {
+        powerOfOneScore += value.total();
+      }
+      if (value.total() < 0) {
+        improvementAreas.add(value);
+      }
+    });
+    dev.log('PO1 Score: --> $powerOfOneScore');
     return powerOfOneScore;
   }
 
@@ -136,5 +162,43 @@ class PO1Score extends ChangeNotifier {
     }
 
     return false;
+  }
+
+  Map<String, dynamic> toJSON() {
+    final reportCard = {
+      "Feedback": "",
+      "Grade": powerOfOneGrade(),
+      "Score": _getPowerOfOneScore(),
+      "PointsScored": getTotalPointsScored()
+    };
+    final scoreCard = {
+      'assist': '',
+      'blocks': '',
+      'freeThrows': '',
+      'offRebounds': '',
+      'steasl': '',
+      'threePointers': '',
+      'turnOvers': '',
+      'twoPointers': ''
+    };
+    final data = {
+      ...reportCard,
+      ...scoreCard,
+    };
+    data.addAll({
+      "ReportCard": reportCard,
+      "ScoreCard": {
+        ..._hustlePointsMap,
+        ..._pointsMap,
+      },
+    });
+    return {
+      "ReportCard": reportCard,
+      "ScoreCard": {
+        ..._hustlePointsMap,
+        ..._pointsMap,
+      },
+    };
+    // data.addAll({});
   }
 }

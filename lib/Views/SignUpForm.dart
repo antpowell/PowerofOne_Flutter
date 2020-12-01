@@ -1,9 +1,12 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Services/authentication_service.dart';
 import 'dart:developer' as dev;
 
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
+import 'package:provider/provider.dart';
 
 class SignInUpFormScreen extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class SignInUpFormScreen extends StatefulWidget {
 class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   String _email;
   String _password;
-  User _currentUser = User();
+  PO1User _currentUser = PO1User();
   RegExp emailExp = RegExp(r"^$|^.*@.*\..*$");
   RegExp passwordExp = RegExp(r'^.*(?=.{8,}).*$');
 
@@ -101,6 +104,10 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   }
 
   Widget _buildButtonGroup() {
+    final User firebaseUser = Provider.of<User>(context);
+    bool hasUser = firebaseUser != null;
+    final _authService =
+        Provider.of<AuthenticationService>(context, listen: false);
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -113,7 +120,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
             ),
             onPressed: () => {
               // TODO: Register and create new user [maybe just an Alert]
-              Navigator.pushNamed(context, '/register'),
+              Navigator.pushNamed(context, '/termsAndConditions'),
               debugPrint('New user, needs to register.'),
             },
           ),
@@ -127,6 +134,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               // TODO: Forgot password trigger [maybe just an Alert
               debugPrint('User forgot password and is trying to reset.');
               debugPrint("new current user, ${_currentUser.email}");
+              _authService.signOut(email: _email, password: _password);
             },
           ),
           IconButton(
@@ -139,7 +147,8 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 return;
               }
               _formKey.currentState.save();
-              print('email $_email || pass $_password');
+
+              _authService.signIn(email: _email, password: _password);
               Navigator.pushNamed(context, '/playerName');
             },
           ),
@@ -150,6 +159,8 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final User firebaseUser = Provider.of<User>(context);
+    bool hasUser = firebaseUser != null;
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -163,11 +174,33 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
                 _buildLogo(),
                 _buildForm(),
                 _buildButtonGroup(),
+                AuthWrapper(),
+                if (hasUser) ...[
+                  // Text('Do we have a user $hasUser'),
+                ]
               ],
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  final PO1User _user = PO1User();
+
+  @override
+  Widget build(BuildContext context) {
+    final User firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      dev.log('Found user in Firebase: $firebaseUser');
+      _user.setId(firebaseUser.uid);
+      // Navigator.pushNamed(context, '/playerName');
+      return Text('User Found');
+    }
+    dev.log('No user found in Firebase');
+    return Text('No user found');
   }
 }

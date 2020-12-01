@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/models/User.dart';
+import 'package:power_one/models/PO1User.dart';
 
 class InputArea extends StatefulWidget {
   InputArea({Key key}) : super(key: key);
