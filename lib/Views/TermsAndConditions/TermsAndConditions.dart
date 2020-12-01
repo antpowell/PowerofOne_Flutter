@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
 
 void main() => runApp(TermsAndConditions());
 
@@ -32,11 +32,12 @@ class TermsAndConditions extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                new Expanded(
+
+                 Expanded(
                     flex: 1,
-                    child: new SingleChildScrollView(
+                    child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: new Text(
+                      child:  Text(
                         "END USER LICENSE AGREEMENT\n"
                             "Last updated April 22, 2020\n"
                             "Power of 1 is licensed to You (End-User) by Power of 1 Sport LLC, located at 5380 W. 34th Street, # 302, Houston, Texas 77092, United States (hereinafter: Licensor), for use only under the terms of this License Agreement.\n"
@@ -120,26 +121,27 @@ class TermsAndConditions extends StatelessWidget {
                             "16. MISCELLANEOUS\n"
                             "16.1  If any of the terms of this agreement should be or become invalid, the validity of the remaining provisions shall not be affected. Invalid terms will be replaced by valid ones formulated in a way that will achieve the primary purpose.\n"
                             "16.2  Collateral agreements, changes and amendments are only valid if laid down in writing. The preceding clause can only be waived in writing.\n",
-                            style: new TextStyle(
+                            style:TextStyle(
                             fontSize: 16.0, color: Colors.white,
                       )
                       ),
                     ),
+                ),
+                Container(
+                  height: 30,
+                  width: 80,
+                  child: Positioned (
+                    bottom: 10,
+                    child: PO1Button("Home",onPress: (){
+                      Navigator.pushNamed(context, '/playerName');
+                    }),
+                  ),
                 ),
               ],
             ),
           ],
         ),
       ),
-      bottomNavigationBar:new BottomNavigationBar(
-        backgroundColor: Colors.black12,
-        fixedColor: Colors.white,items:[
-        new BottomNavigationBarItem(
-          icon:new Icon(Icons.arrow_back),
-          title: new Text("Back")
-          ),
-        ],
-    ),
     );
 
   }
