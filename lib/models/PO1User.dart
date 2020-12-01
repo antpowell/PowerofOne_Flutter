@@ -53,8 +53,8 @@ class PO1User {
 
   Map<String, dynamic> toJSON() {
     return {
-      'email': _email,
-      'playerName': _playerName,
+      'email': _email.trim(),
+      'playerName': _playerName.trim(),
       'id': _id,
       // 'score': _score,
     };
