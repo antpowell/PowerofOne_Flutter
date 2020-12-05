@@ -18,4 +18,8 @@ class Point extends IScore {
   //   debugPrint('${this.title}: -${this.neg}');
   //   return this;
   // }
+  @override
+  String toString() {
+    return 'made $pos, missed $neg';
+  }
 }

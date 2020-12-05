@@ -16,28 +16,33 @@ class TrackerButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildTrackerButton(
-                Icon(Icons.check),
-                Colors.green,
-                Provider.of<PO1Score>(context).made,
-                _activity,
+                label: Icon(Icons.check),
+                color: Colors.green,
+                onPress: Provider.of<PO1Score>(context).made,
+                pointInstance: _activity,
               ),
               buildTrackerButton(
-                Icon(Icons.clear),
-                Colors.red,
-                Provider.of<PO1Score>(context).missed,
-                _activity,
+                label: Icon(Icons.clear),
+                color: Colors.red,
+                onPress: Provider.of<PO1Score>(context).missed,
+                pointInstance: _activity,
               ),
             ],
           )
         : buildTrackerButton(
-            Text(_activity.title),
-            Colors.green,
-            Provider.of<PO1Score>(context).made,
-            _activity,
+            label: Text(_activity.title),
+            color: Colors.white,
+            onPress: Provider.of<PO1Score>(context).made,
+            pointInstance: _activity,
           );
   }
 
-  Widget buildTrackerButton(Widget w, Color c, Function f, IScore activity) {
+  Widget buildTrackerButton({
+    Widget label,
+    Color color,
+    Function onPress,
+    IScore pointInstance,
+  }) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -46,11 +51,11 @@ class TrackerButton extends StatelessWidget {
           height: _boxSize,
           child: OutlineButton(
             shape: CircleBorder(),
-            child: w,
-            textColor: c,
-            highlightedBorderColor: c,
-            borderSide: BorderSide(width: 2, color: c),
-            onPressed: () => f(activity),
+            child: label,
+            textColor: color,
+            highlightedBorderColor: color,
+            borderSide: BorderSide(width: 2, color: color),
+            onPressed: () => onPress(pointInstance),
           ),
         ),
       ),

@@ -111,10 +111,12 @@ class PO1Score extends ChangeNotifier {
 
   int getTotalPointsScored() {
     int totalPointsScored = 0;
+    double avg = 0;
     _pointsMap.forEach((key, value) {
       switch (key) {
         case '1PT':
           totalPointsScored += value.total();
+          avg = value.pos / value.pos + value.neg;
           break;
         case '2PTs':
           totalPointsScored += (value.total() * 2);
@@ -125,6 +127,22 @@ class PO1Score extends ChangeNotifier {
       }
     });
     return totalPointsScored;
+  }
+
+  Map getAverage() {
+    Map _averages = {};
+    _pointsMap.forEach((key, value) {
+      switch (key) {
+        case '1PT':
+          _averages[key] = value.pos / value.pos + value.neg;
+          break;
+        case '2PTs':
+          break;
+        case '3PTs':
+          break;
+      }
+    });
+    return _averages;
   }
 
   int _getPowerOfOneScore() {
@@ -194,11 +212,19 @@ class PO1Score extends ChangeNotifier {
     });
     return {
       "ReportCard": reportCard,
-      "ScoreCard": {
-        ..._hustlePointsMap,
-        ..._pointsMap,
-      },
+      "ScoreCard": _mapToJSON(),
     };
-    // data.addAll({});
+  }
+
+  Map _mapToJSON() {
+    Map<String, Map<String, int>> jsonMap = Map();
+    _hustlePointsMap.forEach((key, value) {
+      jsonMap[key] = {'made': value.pos};
+    });
+    _pointsMap.forEach((key, value) {
+      jsonMap[key] = {'made': value.pos, 'missed': value.neg};
+    });
+
+    return jsonMap;
   }
 }
