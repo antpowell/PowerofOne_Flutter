@@ -2,9 +2,11 @@ import 'dart:ui';
 import 'dart:developer' as dev;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/models/PO1User.dart';
+import 'package:provider/provider.dart';
 
 class PlayerNameForm extends StatefulWidget {
   PlayerNameForm({Key key}) : super(key: key);
@@ -70,10 +72,15 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
             onPress: () => {},
           ),
           MaterialButton(
-            onPressed: () => {
+            onPressed: () {
               debugPrint(
-                  'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.'),
-              Navigator.pushNamed(context, '/reportCard'),
+                  'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.');
+              // FIXME: Testing ONLY
+              // Navigator.pushNamed(context, '/reportCard'),
+              Provider.of<AuthenticationService>(
+                context,
+                listen: false,
+              ).signOut();
             },
             child: Text(
               'Recent Games',

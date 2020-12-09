@@ -116,7 +116,7 @@ class PO1Score extends ChangeNotifier {
       switch (key) {
         case '1PT':
           totalPointsScored += value.total();
-          avg = value.pos / value.pos + value.neg;
+          value.avg();
           break;
         case '2PTs':
           totalPointsScored += (value.total() * 2);
@@ -126,19 +126,22 @@ class PO1Score extends ChangeNotifier {
           break;
       }
     });
+    getAverages();
     return totalPointsScored;
   }
 
-  Map getAverage() {
+  Map getAverages() {
     Map _averages = {};
     _pointsMap.forEach((key, value) {
       switch (key) {
         case '1PT':
-          _averages[key] = value.pos / value.pos + value.neg;
+          _averages[key] = value.avg();
           break;
         case '2PTs':
+          _averages[key] = value.avg();
           break;
         case '3PTs':
+          _averages[key] = value.avg();
           break;
       }
     });

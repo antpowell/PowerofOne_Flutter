@@ -43,6 +43,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
       },
       onSaved: (String newValue) {
         _email = newValue;
+
         _currentUser.setEmail(_email);
       },
     );
@@ -63,6 +64,9 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
   }
 
   Widget _buildPassword() {
+    final _authService =
+        Provider.of<AuthenticationService>(context, listen: false);
+
     return TextFormField(
       style: _formStyle,
       keyboardType: TextInputType.visiblePassword,
@@ -83,6 +87,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
       },
       onSaved: (String newValue) {
         _password = newValue;
+        _authService.signIn(email: _email, password: _password);
       },
     );
   }
@@ -105,7 +110,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
 
   Widget _buildButtonGroup() {
     final User firebaseUser = Provider.of<User>(context);
-    bool hasUser = firebaseUser != null;
+
     final _authService =
         Provider.of<AuthenticationService>(context, listen: false);
     return Center(
@@ -134,7 +139,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               // TODO: Forgot password trigger [maybe just an Alert
               debugPrint('User forgot password and is trying to reset.');
               debugPrint("new current user, ${_currentUser.email}");
-              _authService.signOut(email: _email, password: _password);
+              _authService.signOut();
             },
           ),
           IconButton(
@@ -148,8 +153,8 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
               }
               _formKey.currentState.save();
 
-              _authService.signIn(email: _email, password: _password);
-              Navigator.pushNamed(context, '/playerName');
+              // _authService.signIn(email: _email, password: _password);
+              // Navigator.pushNamed(context, '/playerName');
             },
           ),
         ],
