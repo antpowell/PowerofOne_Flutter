@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer' as dev;
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -13,6 +14,7 @@ class AuthenticationService {
           email: email, password: password);
       return '$email signed in';
     } on FirebaseAuthException catch (e) {
+      dev.log('SignIn error message ${e.message}');
       return e.message;
     }
   }
@@ -25,6 +27,11 @@ class AuthenticationService {
       );
       return '$email account created';
     } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak.password') {
+        dev.log('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        dev.log('The account already exist for that eamil.');
+      }
       return e.message;
     }
   }
