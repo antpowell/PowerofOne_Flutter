@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
@@ -48,6 +49,7 @@ Column columnTitleTotalPointsScored(int points, String label) {
 class ReportCard extends StatelessWidget {
   const ReportCard({Key key}) : super(key: key);
   static final PO1User _user = PO1User();
+  static final String id = 'report_card_screen';
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +162,7 @@ class ReportCard extends StatelessWidget {
                   "New Game",
                   onPress: () {
                     _user.clearData();
-                    Navigator.pushNamed(context, '/playerName');
+                    Navigator.pushNamed(context, PlayerNameForm.id);
                   },
                 ),
               ),

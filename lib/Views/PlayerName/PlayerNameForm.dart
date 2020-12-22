@@ -5,11 +5,13 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class PlayerNameForm extends StatefulWidget {
   PlayerNameForm({Key key}) : super(key: key);
+  static final String id = 'player_name_screen';
 
   @override
   _PlayerNameFormState createState() => _PlayerNameFormState();
@@ -99,7 +101,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
               _formKey.currentState.save();
               dev.log('current user ${_user.email}');
               fbdbService.createNewUser(_user);
-              Navigator.pushNamed(context, '/scoreCard');
+              Navigator.pushNamed(context, ScoreCard.id);
             },
           ),
         ],

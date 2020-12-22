@@ -114,15 +114,16 @@ class PO1Score extends ChangeNotifier {
     double avg = 0;
     _pointsMap.forEach((key, value) {
       switch (key) {
+        // !! Talk this through with Josh
         case '1PT':
-          totalPointsScored += value.total();
+          totalPointsScored += value.pos;
           value.avg();
           break;
         case '2PTs':
-          totalPointsScored += (value.total() * 2);
+          totalPointsScored += (value.pos * 2);
           break;
         case '3PTs':
-          totalPointsScored += (value.total() * 3);
+          totalPointsScored += (value.pos * 3);
           break;
       }
     });
