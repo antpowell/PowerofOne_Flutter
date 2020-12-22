@@ -8,7 +8,7 @@ class PO1User {
   String _email;
   String get email => _email;
   setEmail(String email) {
-    dev.log('recieved email as $email');
+    // dev.log('recieved email as $email');
     _email = email;
   }
 

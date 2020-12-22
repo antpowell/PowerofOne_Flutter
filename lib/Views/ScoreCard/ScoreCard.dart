@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'dart:developer' as dev;
 
 class ScoreCard extends StatelessWidget {
+  static final String id = 'score_card_screen';
   @override
   Widget build(BuildContext context) {
     return ScoreCardScreen();
@@ -94,7 +96,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
                     _user.setPlayerScore(
                         Provider.of<PO1Score>(context, listen: false));
                     fbdbService.createNewGame();
-                    Navigator.pushNamed(context, '/reportCard');
+                    Navigator.pushNamed(context, ReportCard.id);
                   },
                       icon: Icon(Icons.arrow_forward_ios_sharp,
                           color: Colors.white)),

@@ -9,6 +9,7 @@ import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class SignInUpFormScreen extends StatefulWidget {
+  static final String id = 'sign_in_screen';
   @override
   _SignInUpFormScreenState createState() => _SignInUpFormScreenState();
 }
@@ -87,7 +88,10 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
       },
       onSaved: (String newValue) {
         _password = newValue;
-        _authService.signIn(email: _email, password: _password);
+        context
+            .read<AuthenticationService>()
+            .signIn(email: _email.trim(), password: _password.trim());
+        // _authService.signIn(email: _email, password: _password);
       },
     );
   }
@@ -147,7 +151,6 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
             color: Colors.white,
             iconSize: 25,
             onPressed: () {
-              dev.log('SignInUp Form Submit button pressed');
               if (!_formKey.currentState.validate()) {
                 return;
               }
