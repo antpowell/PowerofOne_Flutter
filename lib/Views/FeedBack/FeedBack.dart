@@ -37,11 +37,7 @@ class FeedBack extends StatelessWidget {
                         color: Colors.white,
                         decoration: TextDecoration.underline,
                       )),
-                  Text("3 Point Percentage: \n",
-                      style: TextStyle(
-                        color: Colors.white,
-                      )),
-                  Text("2 Point Percentage: \n",
+                  Text("Field Goal Percentage: \n",
                       style: TextStyle(
                         color: Colors.white,
                       )),
