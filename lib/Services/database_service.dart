@@ -5,6 +5,7 @@ import 'package:power_one/models/PO1User.dart';
 import 'dart:developer' as dev;
 
 final DatabaseReference dbRef = FirebaseDatabase.instance.reference();
+final PO1User _user = PO1User();
 
 class FBDBService {
   createNewUser(PO1User user) {
@@ -17,9 +18,15 @@ class FBDBService {
     final gameRef = dbRef.child('games/byUser/');
     final gameId = dbRef.child('games/byUser/').push();
 
-    PO1Game game = PO1Game();
+    dev.log(_user.score.toJSON().toString());
 
-    gameRef.set(game.toJSON());
+    gameRef
+        .child(_user.emailSignature())
+        .child(_user.playerName)
+        .push()
+        .set(_user.score.toJSON());
+
+    // gameRef.set(game.toJSON());
   }
 
   read() {

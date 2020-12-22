@@ -46,4 +46,8 @@ abstract class IScore {
   int total() {
     return pos - neg;
   }
+
+  double avg() {
+    return (pos / (pos + neg)) * 100;
+  }
 }

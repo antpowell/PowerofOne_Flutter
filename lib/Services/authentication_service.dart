@@ -29,7 +29,8 @@ class AuthenticationService {
     }
   }
 
-  Future<String> signOut({String email, String password}) async {
+  Future<String> signOut() async {
+    String email = _firebaseAuth.currentUser.email;
     try {
       await _firebaseAuth.signOut();
       return '$email signed out';

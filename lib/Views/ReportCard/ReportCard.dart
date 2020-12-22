@@ -194,13 +194,14 @@ class ReportCard extends StatelessWidget {
                 top: 175,
                 right: 50,
                 child: IconButton(
-                    icon: Icon(Icons.arrow_forward),
-                    tooltip: 'Click here for more info',
-                    color: Colors.white,
-                    iconSize: 15,
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/FeedBack');
-                    }),
+                  icon: Icon(Icons.arrow_forward),
+                  tooltip: 'Click here for more info',
+                  color: Colors.white,
+                  iconSize: 15,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/FeedBack');
+                  },
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
