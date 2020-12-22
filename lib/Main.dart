@@ -58,7 +58,7 @@ class Power1 extends StatelessWidget {
           ReportCard.id: (context) => ReportCard(),
           '/register': (context) => SigninSignup(),
           PlayerNameForm.id: (context) => PlayerNameForm(),
-          ScoreCard().id: (context) => ScoreCard(),
+          ScoreCard.id: (context) => ScoreCard(),
           '/termsAndConditions': (context) => TermsAndConditions(),
           '/FeedBack': (context) => FeedBack(),
           '/Help': (context) => HelpPage(),
