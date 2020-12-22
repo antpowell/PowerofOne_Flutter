@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 
-void main() => runApp(FeedBack());
-
 class FeedBack extends StatelessWidget {
+  static final String id = 'feedback_screen';
   const FeedBack({Key key, this.title}) : super(key: key);
   final title;
 
