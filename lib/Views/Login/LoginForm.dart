@@ -10,13 +10,13 @@ import 'dart:developer' as dev;
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
-class SignInUpFormScreen extends StatefulWidget {
+class LoginFormScreen extends StatefulWidget {
   static final String id = 'sign_in_screen';
   @override
-  _SignInUpFormScreenState createState() => _SignInUpFormScreenState();
+  _LoginFormScreenState createState() => _LoginFormScreenState();
 }
 
-class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
+class _LoginFormScreenState extends State<LoginFormScreen> {
   String _email;
   String _password;
   PO1User _currentUser = PO1User();

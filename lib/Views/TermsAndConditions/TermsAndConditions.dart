@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 
 void main() => runApp(TermsAndConditions());
