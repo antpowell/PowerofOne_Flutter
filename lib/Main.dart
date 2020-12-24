@@ -5,15 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Views/LoginSignUp/SigninSignup.dart';
+import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/Register/register.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-import 'package:power_one/Views/SignIn/SignUpForm.dart';
-import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:developer' as dev;
@@ -53,13 +52,11 @@ class Power1 extends StatelessWidget {
         ),
         // initialRoute: '/',
         routes: {
-          SignInUpFormScreen.id: (context) => SignInUpFormScreen(),
+          LoginFormScreen.id: (context) => LoginFormScreen(),
           Register.id: (context) => Register(),
           ReportCard.id: (context) => ReportCard(),
-          '/register': (context) => SigninSignup(),
           PlayerNameForm.id: (context) => PlayerNameForm(),
           ScoreCard.id: (context) => ScoreCard(),
-          '/termsAndConditions': (context) => TermsAndConditions(),
           TermsAndConditions.id: (context) => TermsAndConditions(),
           FeedBack.id: (context) => FeedBack(),
           '/Help': (context) => HelpPage(),
@@ -81,6 +78,6 @@ class AuthWrapper extends StatelessWidget {
       return PlayerNameForm();
     }
     dev.log('No user found in Firebase');
-    return SignInUpFormScreen();
+    return LoginFormScreen();
   }
 }
