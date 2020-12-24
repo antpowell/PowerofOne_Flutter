@@ -92,7 +92,7 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
         _password = newValue;
         context
             .read<AuthenticationService>()
-            .signIn(email: _email.trim(), password: _password.trim());
+            .login(email: _email.trim(), password: _password.trim());
         // _authService.signIn(email: _email, password: _password);
       },
     );

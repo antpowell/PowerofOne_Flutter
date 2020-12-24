@@ -69,7 +69,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Widget _buildTND() {
+  Widget _buildTNDText() {
     return Container(
       child: Flex(
         direction: Axis.horizontal,
@@ -119,7 +119,7 @@ class _RegisterState extends State<Register> {
         _password = newValue;
         context
             .read<AuthenticationService>()
-            .signIn(email: _email.trim(), password: _password.trim());
+            .register(email: _email.trim(), password: _password.trim());
         // _authService.signIn(email: _email, password: _password);
       },
     );
@@ -180,21 +180,19 @@ class _RegisterState extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Center(
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildLogo(),
-                      _buildForm(),
-                    ],
-                  ),
+            SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildLogo(),
+                    _buildForm(),
+                  ],
                 ),
               ),
             ),
-            _buildTND(),
+            _buildTNDText(),
           ],
         ),
       ),

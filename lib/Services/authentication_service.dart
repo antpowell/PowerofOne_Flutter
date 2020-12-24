@@ -20,7 +20,7 @@ class AuthenticationService {
 
   Stream<User> get authStateChange => _firebaseAuth.authStateChanges();
 
-  Future<String> signIn({String email, String password}) async {
+  Future<String> login({String email, String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -63,12 +63,12 @@ class AuthenticationService {
             print('Case ${e.message} is not yet implemented');
         }
       }
-
       print('The error is $errorType');
+      return 'Something went wrong: $errorType';
     }
   }
 
-  Future<String> signUp({String email, String password}) async {
+  Future<String> register({String email, String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -114,6 +114,7 @@ class AuthenticationService {
         }
       }
       print('The error is $errorType');
+      return 'Something went wrong: $errorType';
     }
   }
 
