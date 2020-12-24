@@ -6,6 +6,7 @@ import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
+import 'package:power_one/Views/dialogs.dart';
 import 'package:power_one/models/PO1Game.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,10 @@ class ScoreCardScreenWidget extends StatelessWidget {
                 Container(
                   child: PO1Button(
                     'Back',
-                    onPress: () {},
+                    onPress: () {
+                      Dialogs.yesAbortDialogAction(context, "Erase User",
+                          "You are about to go back. This Player will be earsed and the data for this game along with it. Are you sure you want to go back?");
+                    },
                     onLongPress: () {
                       Navigator.pop(context);
                     },

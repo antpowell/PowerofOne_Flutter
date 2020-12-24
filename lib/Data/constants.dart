@@ -52,6 +52,8 @@ TextStyle fScoreBoardPointsTextStyle(Color fontColor) {
   );
 }
 
+const formInputStyle = TextStyle(fontSize: 16, color: Colors.white);
+
 enum kPlayerLevel { elementry, middle, high, college, pro }
 enum kPlayerCategory { amature, pro }
 enum GRADE { A, B, C, D, F, NA }

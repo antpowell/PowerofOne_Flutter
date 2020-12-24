@@ -131,21 +131,24 @@ class PO1Score extends ChangeNotifier {
     return totalPointsScored;
   }
 
-  Map getAverages() {
-    Map _averages = {};
-    _pointsMap.forEach((key, value) {
-      switch (key) {
-        case '1PT':
-          _averages[key] = value.avg();
-          break;
-        case '2PTs':
-          _averages[key] = value.avg();
-          break;
-        case '3PTs':
-          _averages[key] = value.avg();
-          break;
-      }
-    });
+  Map<String, double> getAverages() {
+    Map<String, double> _averages = {};
+    _pointsMap.forEach(
+      (key, value) {
+        switch (key) {
+          case '1PT':
+            _averages[key] = value.avg();
+            break;
+          case '2PTs':
+            _averages[key] = value.avg();
+            break;
+          case '3PTs':
+            _averages[key] = value.avg();
+            break;
+        }
+      },
+    );
+    _averages['FG'] = (_averages['2PTs'] + _averages['3PTs']) / 2;
     return _averages;
   }
 

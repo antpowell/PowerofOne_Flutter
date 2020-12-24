@@ -3,18 +3,21 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Services/authentication_service.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
+import 'package:power_one/Views/dialogs.dart';
 import 'dart:developer' as dev;
 
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
-class SignInUpFormScreen extends StatefulWidget {
-  static final String id = 'sign_in_screen';
+class Register extends StatefulWidget {
+  static final String id = 'register_screen';
   @override
-  _SignInUpFormScreenState createState() => _SignInUpFormScreenState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
+class _RegisterState extends State<Register> {
   String _email;
   String _password;
   PO1User _currentUser = PO1User();
@@ -58,8 +61,34 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
           children: [
             _buildEmail(),
             _buildPassword(),
+            SizedBox(height: 24),
+            _buildButtonGroup(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildTND() {
+    return Container(
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'By clicking Sign Up, you agree to our ',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+          ),
+          GestureDetector(
+            child: Text(
+              'Terms ',
+              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w200),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, TermsAndConditions.id);
+            },
+          ),
+        ],
       ),
     );
   }
@@ -119,47 +148,22 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
         Provider.of<AuthenticationService>(context, listen: false);
     return Center(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          FlatButton(
+          GestureDetector(
             child: Text(
-              'New User? Sign Up!',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+              'Sign in instead ',
+              style: TextStyle(
+                color: Colors.blue,
+              ),
             ),
-            onPressed: () => {
-              // TODO: Register and create new user [maybe just an Alert]
-              Navigator.pushNamed(context, '/termsAndConditions'),
-              debugPrint('New user, needs to register.'),
+            onTap: () {
+              Navigator.pop(context);
             },
           ),
-          FlatButton(
-            child: Text(
-              'Forgot Password?',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
-            ),
-            onPressed: () {
-              // TODO: Forgot password trigger [maybe just an Alert
-              debugPrint('User forgot password and is trying to reset.');
-              debugPrint("new current user, ${_currentUser.email}");
-              _authService.signOut();
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.keyboard_arrow_right),
-            color: Colors.white,
-            iconSize: 25,
-            onPressed: () {
-              if (!_formKey.currentState.validate()) {
-                return;
-              }
-              _formKey.currentState.save();
-
-              // _authService.signIn(email: _email, password: _password);
-              // Navigator.pushNamed(context, '/playerName');
-            },
-          ),
+          PO1Button('Sign Up', onPress: () {
+            _formKey.currentState.save();
+          }),
         ],
       ),
     );
@@ -173,22 +177,25 @@ class _SignInUpFormScreenState extends State<SignInUpFormScreen> {
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.all(24),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildLogo(),
-                _buildForm(),
-                _buildButtonGroup(),
-                AuthWrapper(),
-                if (hasUser) ...[
-                  // Text('Do we have a user $hasUser'),
-                ]
-              ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Center(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildLogo(),
+                      _buildForm(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
+            _buildTND(),
+          ],
         ),
       ),
     );

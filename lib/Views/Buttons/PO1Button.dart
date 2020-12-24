@@ -23,7 +23,7 @@ class PO1Button extends StatelessWidget {
     this.onLeft = false,
   });
   Widget displayIcon() {
-    return icon != null ? icon : Container();
+    return icon != null ? icon : SizedBox.shrink();
   }
 
   Widget BaseButton() {
@@ -78,6 +78,7 @@ class PO1Button extends StatelessWidget {
             Text(
               label,
               style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
             ),
             displayIcon(),
           ],
