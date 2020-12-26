@@ -57,6 +57,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         return null;
       },
       onFieldSubmitted: (term) {
+        if (!_formKey.currentState.validate()) {
+          return;
+        }
         _fieldFocusChanger(context, _emailFocus, _passwordFocus);
       },
       onSaved: (String newValue) {
@@ -101,6 +104,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         return null;
       },
       onFieldSubmitted: (term) {
+        if (!_formKey.currentState.validate()) {
+          return;
+        }
         _formKey.currentState.save();
       },
       onSaved: (String newValue) async {
