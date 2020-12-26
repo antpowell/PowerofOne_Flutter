@@ -83,6 +83,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                 context,
                 listen: false,
               ).signOut();
+              Navigator.of(context).pop();
             },
             child: Text(
               'Recent Games',

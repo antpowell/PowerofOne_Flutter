@@ -50,4 +50,39 @@ class Dialogs {
     );
     return action ?? DialogAction.abort;
   }
+
+  static Future<DialogAction> okDialogAction(
+    BuildContext context,
+    String title,
+    String body,
+  ) async {
+    final action = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Text(
+            title,
+            style: textStyle,
+          ),
+          content: Text(
+            body,
+            style: textStyle,
+          ),
+          actions: <Widget>[
+            PO1Button(
+              "OK",
+              onPress: () => {
+                Navigator.of(context).pop(DialogAction.yes),
+              },
+            ),
+          ],
+        );
+      },
+    );
+    return action ?? DialogAction.abort;
+  }
 }

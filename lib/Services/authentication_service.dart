@@ -10,7 +10,7 @@ enum authProblems {
   PasswordNotValid,
   NetworkError,
   WeakPasswordError,
-  EmailInUseError
+  EmailInUseError,
 }
 
 class AuthenticationService {
@@ -64,7 +64,7 @@ class AuthenticationService {
         }
       }
       print('The error is $errorType');
-      return 'Something went wrong: $errorType';
+      return e.message;
     }
   }
 
@@ -79,20 +79,14 @@ class AuthenticationService {
       authProblems errorType;
       if (Platform.isAndroid) {
         switch (e.message) {
-          case 'There is no user record corresponding to this identifier. The user may have been deleted.':
-            errorType = authProblems.UserNotFound;
-            break;
-          case 'The password is invalid or the user does not have a password.':
-            errorType = authProblems.PasswordNotValid;
+          case ' The email address is already in use by another account.':
+            errorType = authProblems.EmailInUseError;
             break;
           case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
             errorType = authProblems.NetworkError;
             break;
-          case 'weak.password':
+          case 'Password should be at least 6 characters':
             errorType = authProblems.WeakPasswordError;
-            break;
-          case 'email-already-in-use':
-            errorType = authProblems.EmailInUseError;
             break;
 
           default:
@@ -113,8 +107,8 @@ class AuthenticationService {
             print('Case ${e.message} is not yet implemented');
         }
       }
-      print('The error is $errorType');
-      return 'Something went wrong: $errorType';
+      print('The error is ${e.message}');
+      return e.message;
     }
   }
 
@@ -123,6 +117,14 @@ class AuthenticationService {
     try {
       await _firebaseAuth.signOut();
       return '$email signed out';
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
+
+  Future<String> loginWithEmailLink({String email}) async {
+    try {
+      await _firebaseAuth.signInWithEmailLink(email: email, emailLink: email);
     } on FirebaseAuthException catch (e) {
       return e.message;
     }

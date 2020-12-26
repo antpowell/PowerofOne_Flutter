@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Services/authentication_service.dart';
+import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/Register/register.dart';
 import 'package:power_one/Views/dialogs.dart';
 import 'dart:developer' as dev;
@@ -16,12 +17,21 @@ class LoginFormScreen extends StatefulWidget {
   _LoginFormScreenState createState() => _LoginFormScreenState();
 }
 
+_fieldFocusChanger(BuildContext context, FocusNode current, FocusNode next) {
+  current.unfocus();
+  FocusScope.of(context).requestFocus(next);
+}
+
 class _LoginFormScreenState extends State<LoginFormScreen> {
-  String _email;
-  String _password;
+  TextEditingController _emailController = TextEditingController();
+  final FocusNode _emailFocus = FocusNode();
+
+  TextEditingController _passwordController = TextEditingController();
+  final FocusNode _passwordFocus = FocusNode();
+
   PO1User _currentUser = PO1User();
   RegExp emailExp = RegExp(r"^$|^.*@.*\..*$");
-  RegExp passwordExp = RegExp(r'^.*(?=.{8,}).*$');
+  RegExp passwordExp = RegExp(r'^.*(?=.{6,}).*$');
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static const _formStyle = TextStyle(fontSize: 16, color: Colors.white);
@@ -30,6 +40,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     return TextFormField(
       style: _formStyle,
       keyboardType: TextInputType.emailAddress,
+      controller: _emailController,
+      focusNode: _emailFocus,
       decoration: InputDecoration(
         labelText: 'email',
         labelStyle: TextStyle(
@@ -44,10 +56,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         }
         return null;
       },
+      onFieldSubmitted: (term) {
+        _fieldFocusChanger(context, _emailFocus, _passwordFocus);
+      },
       onSaved: (String newValue) {
-        _email = newValue;
-
-        _currentUser.setEmail(_email);
+        _currentUser.setEmail(_emailController.text.trim());
       },
     );
   }
@@ -67,12 +80,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   }
 
   Widget _buildPassword() {
-    final _authService =
-        Provider.of<AuthenticationService>(context, listen: false);
-
     return TextFormField(
       style: _formStyle,
       keyboardType: TextInputType.visiblePassword,
+      controller: _passwordController,
+      focusNode: _passwordFocus,
       decoration: InputDecoration(
         labelText: 'password',
         labelStyle: TextStyle(
@@ -84,16 +96,30 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         if (value.isEmpty) {
           return 'Password is required';
         } else if (!passwordExp.hasMatch(value)) {
-          return 'Password is not formated correctly, must have at lease 8 characters.';
+          return 'Password is not formated correctly, must have at lease 6 characters.';
         }
         return null;
       },
-      onSaved: (String newValue) {
-        _password = newValue;
-        context
-            .read<AuthenticationService>()
-            .login(email: _email.trim(), password: _password.trim());
-        // _authService.signIn(email: _email, password: _password);
+      onFieldSubmitted: (term) {
+        _formKey.currentState.save();
+      },
+      onSaved: (String newValue) async {
+        String message = await context.read<AuthenticationService>().login(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            );
+        !(message == '${_emailController.text.trim()} signed in')
+            ? {
+                Dialogs.okDialogAction(
+                  context,
+                  'ERROR: Something went wrong!',
+                  message,
+                ),
+              }
+            : {
+                dev.log(message),
+                Navigator.pushNamed(context, PlayerNameForm.id),
+              };
       },
     );
   }
@@ -184,7 +210,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 _buildLogo(),
                 _buildForm(),
                 _buildButtonGroup(),
-                AuthWrapper(),
               ],
             ),
           ),

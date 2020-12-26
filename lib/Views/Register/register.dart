@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:power_one/Views/dialogs.dart';
 import 'dart:developer' as dev;
@@ -17,9 +18,18 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
+_fieldFocusChanger(BuildContext context, FocusNode current, FocusNode next) {
+  current.unfocus();
+  FocusScope.of(context).requestFocus(next);
+}
+
 class _RegisterState extends State<Register> {
-  String _email;
-  String _password;
+  TextEditingController _emailController = TextEditingController();
+  final FocusNode _emailFocus = FocusNode();
+
+  TextEditingController _passwordController = TextEditingController();
+  final FocusNode _passwordFocus = FocusNode();
+
   PO1User _currentUser = PO1User();
   RegExp emailExp = RegExp(r"^$|^.*@.*\..*$");
   RegExp passwordExp = RegExp(r'^.*(?=.{8,}).*$');
@@ -31,6 +41,8 @@ class _RegisterState extends State<Register> {
     return TextFormField(
       style: _formStyle,
       keyboardType: TextInputType.emailAddress,
+      controller: _emailController,
+      focusNode: _emailFocus,
       decoration: InputDecoration(
         labelText: 'email',
         labelStyle: TextStyle(
@@ -45,10 +57,11 @@ class _RegisterState extends State<Register> {
         }
         return null;
       },
+      onFieldSubmitted: (term) {
+        _fieldFocusChanger(context, _emailFocus, _passwordFocus);
+      },
       onSaved: (String newValue) {
-        _email = newValue;
-
-        _currentUser.setEmail(_email);
+        _currentUser.setEmail(_emailController.text.trim());
       },
     );
   }
@@ -100,6 +113,8 @@ class _RegisterState extends State<Register> {
     return TextFormField(
       style: _formStyle,
       keyboardType: TextInputType.visiblePassword,
+      controller: _passwordController,
+      focusNode: _passwordFocus,
       decoration: InputDecoration(
         labelText: 'password',
         labelStyle: TextStyle(
@@ -115,12 +130,27 @@ class _RegisterState extends State<Register> {
         }
         return null;
       },
-      onSaved: (String newValue) {
-        _password = newValue;
-        context
-            .read<AuthenticationService>()
-            .register(email: _email.trim(), password: _password.trim());
-        // _authService.signIn(email: _email, password: _password);
+      onChanged: (value) {},
+      onFieldSubmitted: (term) {
+        _formKey.currentState.save();
+      },
+      onSaved: (String newValue) async {
+        String message = await context.read<AuthenticationService>().register(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            );
+        !(message == '${_emailController.text.trim()} account created')
+            ? {
+                Dialogs.okDialogAction(
+                  context,
+                  'ERROR: Something went wrong!',
+                  message,
+                ),
+              }
+            : {
+                dev.log(message),
+                Navigator.pushNamed(context, PlayerNameForm.id),
+              };
       },
     );
   }
@@ -171,49 +201,22 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    final User firebaseUser = Provider.of<User>(context);
-    bool hasUser = firebaseUser != null;
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _buildLogo(),
-                    _buildForm(),
-                  ],
-                ),
-              ),
-            ),
-            _buildTNDText(),
-          ],
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildLogo(),
+              _buildForm(),
+              _buildTNDText(),
+            ],
+          ),
         ),
       ),
     );
-  }
-}
-
-class AuthWrapper extends StatelessWidget {
-  final PO1User _user = PO1User();
-
-  @override
-  Widget build(BuildContext context) {
-    final User firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      dev.log('Found user in Firebase: $firebaseUser');
-      _user.setId(firebaseUser.uid);
-      // Navigator.pushNamed(context, '/playerName');
-      return Text('User Found');
-    }
-    dev.log('No user found in Firebase');
-    return Text('No user found');
   }
 }
