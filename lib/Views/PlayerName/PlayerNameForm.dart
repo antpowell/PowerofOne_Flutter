@@ -5,6 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
@@ -66,30 +67,29 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
 
   Widget _buildButtonGroup() {
     return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Flex(
+        direction: Axis.horizontal,
+        // mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          PO1Button(
-            "Recent Games",
-            onPress: () => {},
-          ),
-          MaterialButton(
-            onPressed: () {
-              debugPrint(
-                  'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.');
-              // FIXME: Testing ONLY
-              // Navigator.pushNamed(context, '/reportCard'),
-              Provider.of<AuthenticationService>(
-                context,
-                listen: false,
-              ).signOut();
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              'Recent Games',
-              style: TextStyle(color: Colors.white),
+          // !! DEV only
+          Expanded(
+            child: MaterialButton(
+              onPressed: () async {
+                debugPrint(
+                    'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.');
+                Provider.of<AuthenticationService>(
+                  context,
+                  listen: false,
+                ).signOut();
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Recent Games',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
+          // !! DEV only
           PO1Button(
             "Start Game",
             onPress: () {

@@ -162,7 +162,11 @@ class ReportCard extends StatelessWidget {
                   "New Game",
                   onPress: () {
                     _user.clearData();
-                    Navigator.pushNamed(context, PlayerNameForm.id);
+                    // Navigator.popUntil(context, (route) => false);
+                    Navigator.popUntil(
+                      context,
+                      ModalRoute.withName(PlayerNameForm.id),
+                    );
                   },
                 ),
               ),
