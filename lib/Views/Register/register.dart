@@ -38,7 +38,10 @@ class _RegisterState extends State<Register> {
   static const _formStyle = TextStyle(fontSize: 16, color: Colors.white);
 
   Widget _buildEmail() {
+    final _formFieldKeyEmail = GlobalKey<FormFieldState>();
+
     return TextFormField(
+      key: _formFieldKeyEmail,
       style: _formStyle,
       keyboardType: TextInputType.emailAddress,
       controller: _emailController,
@@ -58,7 +61,11 @@ class _RegisterState extends State<Register> {
         return null;
       },
       onFieldSubmitted: (term) {
-        _fieldFocusChanger(context, _emailFocus, _passwordFocus);
+        if (!_formFieldKeyEmail.currentState.validate()) {
+          _fieldFocusChanger(context, _emailFocus, _emailFocus);
+        } else {
+          _fieldFocusChanger(context, _emailFocus, _passwordFocus);
+        }
       },
       onSaved: (String newValue) {
         _currentUser.setEmail(_emailController.text.trim());
@@ -107,10 +114,10 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _buildPassword() {
-    final _authService =
-        Provider.of<AuthenticationService>(context, listen: false);
+    final _formFieldKeyPassword = GlobalKey<FormFieldState>();
 
     return TextFormField(
+      key: _formFieldKeyPassword,
       style: _formStyle,
       keyboardType: TextInputType.visiblePassword,
       controller: _passwordController,

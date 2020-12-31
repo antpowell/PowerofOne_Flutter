@@ -36,8 +36,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static const _formStyle = TextStyle(fontSize: 16, color: Colors.white);
 
-  Widget _buildEmail() {
+  TextFormField _buildEmail() {
+    final _formFieldKeyEmail = GlobalKey<FormFieldState>();
+
     return TextFormField(
+      key: _formFieldKeyEmail,
       style: _formStyle,
       keyboardType: TextInputType.emailAddress,
       controller: _emailController,
@@ -57,14 +60,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         return null;
       },
       onFieldSubmitted: (term) {
-        if (!_formKey.currentState.validate()) {
+        if (!_formFieldKeyEmail.currentState.validate()) {
           _fieldFocusChanger(context, _emailFocus, _emailFocus);
         } else {
           _fieldFocusChanger(context, _emailFocus, _passwordFocus);
         }
-        // _formKey.currentState.validate()
-        //     ?
-        //     : dev.log('Form not valid');
       },
       onSaved: (String newValue) {
         _currentUser.setEmail(_emailController.text.trim());
@@ -87,7 +87,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   }
 
   Widget _buildPassword() {
+    final _formFieldKeyPassword = GlobalKey<FormFieldState>();
+
     return TextFormField(
+      key: _formFieldKeyPassword,
       style: _formStyle,
       keyboardType: TextInputType.visiblePassword,
       controller: _passwordController,

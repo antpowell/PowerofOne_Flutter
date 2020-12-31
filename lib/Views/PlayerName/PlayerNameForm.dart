@@ -81,10 +81,11 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   context,
                   listen: false,
                 ).signOut();
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, LoginFormScreen.id);
+                // Navigator.pop(context);
               },
               child: Text(
-                'Recent Games',
+                'Sign Out',
                 style: TextStyle(color: Colors.white),
               ),
             ),
