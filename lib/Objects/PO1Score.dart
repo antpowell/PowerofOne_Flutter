@@ -113,7 +113,6 @@ class PO1Score extends ChangeNotifier {
     int totalPointsScored = 0;
     _pointsMap.forEach((key, value) {
       switch (key) {
-        // !! Talk this through with Josh
         case '1PT':
           totalPointsScored += value.pos;
           break;
@@ -145,7 +144,13 @@ class PO1Score extends ChangeNotifier {
         }
       },
     );
-    _averages['FG'] = (_averages['2PTs'] + _averages['3PTs']) / 2;
+
+    // TODO: Check to see if this solution works for FG average
+    _averages['FG'] = (((_pointsMap['2PTs'].pos + _pointsMap['3PTs'].pos) /
+                ((_pointsMap['2PTs'].pos + _pointsMap['2PTs'].neg) +
+                    (_pointsMap['3PTs'].pos + _pointsMap['3PTs'].neg))) *
+            100)
+        .roundToDouble();
     return _averages;
   }
 
