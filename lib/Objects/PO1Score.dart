@@ -234,7 +234,7 @@ Map<String,String> hustlepointsfeedback(Map<String, Play> totalhustlepoints){
             }else if (value.pos == 2){
               _hustlepointsfeedback[key] = "Average; Hit the Boards Harder";
               break;
-            }else if (value.pos == 1){
+            }else if (value.pos <= 1){
               _hustlepointsfeedback[key] = "Improvement Needed;Work Harder";
             }
             break;
