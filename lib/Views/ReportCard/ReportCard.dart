@@ -165,7 +165,7 @@ class ReportCard extends StatelessWidget {
                     // Navigator.popUntil(context, (route) => false);
                     Navigator.popUntil(
                       context,
-                      ModalRoute.withName(PlayerNameForm.id),
+                      ModalRoute.withName('/'),
                     );
                   },
                 ),

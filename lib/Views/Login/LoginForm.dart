@@ -58,9 +58,13 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       },
       onFieldSubmitted: (term) {
         if (!_formKey.currentState.validate()) {
-          return;
+          _fieldFocusChanger(context, _emailFocus, _emailFocus);
+        } else {
+          _fieldFocusChanger(context, _emailFocus, _passwordFocus);
         }
-        _fieldFocusChanger(context, _emailFocus, _passwordFocus);
+        // _formKey.currentState.validate()
+        //     ?
+        //     : dev.log('Form not valid');
       },
       onSaved: (String newValue) {
         _currentUser.setEmail(_emailController.text.trim());
