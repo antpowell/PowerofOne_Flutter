@@ -176,7 +176,7 @@ class ReportCard extends StatelessWidget {
                 child: PO1Button(
                   "Save Game",
                   onPress: () {
-                    Navigator.pushNamed(context, '/FeedBack');
+                    Navigator.pushNamed(context, FeedBack.id);
                   },
                 ),
               ),
@@ -194,19 +194,6 @@ class ReportCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                ),
-              ),
-              Positioned(
-                top: 175,
-                right: 50,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  tooltip: 'Click here for more info',
-                  color: Colors.white,
-                  iconSize: 15,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/FeedBack');
-                  },
                 ),
               ),
               Row(
@@ -240,20 +227,6 @@ class ReportCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       powerof1gradetextSection,
-                    ],
-                  ),
-                  Container(
-                    height: 210,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        left: BorderSide(width: 1.5, color: Color(0xFFFFFFFF)),
-                      ),
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      feedbacktextSection,
                     ],
                   ),
                 ],

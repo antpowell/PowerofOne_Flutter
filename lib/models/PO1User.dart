@@ -4,7 +4,6 @@ import 'dart:developer' as dev;
 
 class PO1User {
   static final PO1User _instance = PO1User._init();
-
   String _email;
   String get email => _email;
   setEmail(String email) {

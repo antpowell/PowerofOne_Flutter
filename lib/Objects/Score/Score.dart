@@ -48,6 +48,6 @@ abstract class IScore {
   }
 
   double avg() {
-    return (pos / (pos + neg)) * 100;
+    return ((pos / (pos + neg)) * 100).roundToDouble();
   }
 }

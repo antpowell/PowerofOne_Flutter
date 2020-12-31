@@ -13,4 +13,8 @@ class Play extends IScore {
   // void undoMiss() {
   //   print('undo a miss not valid on Play object');
   // }
+  @override
+  String toString() {
+    return 'hustlepoint $pos';
+  }
 }
