@@ -3,17 +3,20 @@ import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/models/PO1Grade.dart';
 
 class PO1Feedback {
-  PO1Grade grade;
-  PO1Score score;
-  PO1Feedback({this.score, this.grade});
+  static Map<String, String> _hustlepointsfeedback = {};
+  static Map<String, String> get hustlepointsfeedback => _hustlepointsfeedback;
 
-  Map<String, String> _hustlepointsfeedback = {};
-  Map<String, String> _scoredpointsfeedback = {};
+  static Map<String, String> _scoredpointsfeedback = {};
+  static Map<String, String> get scoredpointsfeedback => _scoredpointsfeedback;
 
-  Map<String, String> hustlePointsfeedback(
+  static calculateFeedback(PO1Score score) {
+    _hustlePointsfeedback(score.hustlePointsMap);
+    _scoredPointsFeedback(score.getAverages());
+  }
+
+  static Map<String, String> _hustlePointsfeedback(
     Map<String, Play> totalhustlepoints,
   ) {
-    // Map<String, String> _hustlepointsfeedback = {};
     totalhustlepoints.forEach((key, value) {
       switch (key) {
         case 'STLS':
@@ -86,7 +89,7 @@ class PO1Feedback {
     return _hustlepointsfeedback;
   }
 
-  Map<String, String> scoredPointsFeedback(
+  static Map<String, String> _scoredPointsFeedback(
     Map<String, double> averages,
   ) {
     averages.forEach(
@@ -142,7 +145,7 @@ Feedback: {
  BLK: 'feedback',
 }
  */
-  Map toJSON() {
+  static Map toJSON() {
     Map<String, String> jsonMap = Map();
     jsonMap.addAll(_hustlepointsfeedback);
     jsonMap.addAll(_scoredpointsfeedback);

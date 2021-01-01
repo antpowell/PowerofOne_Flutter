@@ -7,6 +7,7 @@ import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
 import 'package:power_one/Views/dialogs.dart';
+import 'package:power_one/models/PO1Feedback.dart';
 import 'package:power_one/models/PO1Game.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
@@ -99,6 +100,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: PO1Button('Report Card', onPress: () {
                     _user.setPlayerScore(
                         Provider.of<PO1Score>(context, listen: false));
+                    PO1Feedback.calculateFeedback(_user.score);
                     fbdbService.createNewGame();
                     Navigator.pushNamed(context, ReportCard.id);
                   },

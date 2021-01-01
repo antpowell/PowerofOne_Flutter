@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
+import 'package:power_one/models/PO1Feedback.dart';
 import 'package:power_one/models/PO1Grade.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'dart:developer' as dev;
@@ -308,7 +309,7 @@ class PO1Score extends ChangeNotifier {
 
   Map<String, dynamic> toJSON() {
     final reportCard = {
-      "Feedback": "",
+      "Feedback": PO1Feedback.toJSON(),
       "Grade": powerOfOneGrade(),
       "Score": _getPowerOfOneScore(),
       "PointsScored": getTotalPointsScored()
