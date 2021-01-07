@@ -100,13 +100,11 @@ class PO1Feedback {
               if (value >= 40) {
                 _scoredpointsfeedback[key] = "Keep up the good work";
                 break;
-              } else if (value < 40) {
-                _scoredpointsfeedback[key] =
-                    'Currently Average; Increase your skill level';
+              } else if (value >= 30) {
+                _scoredpointsfeedback[key] ='Currently Average; Increase your skill level';
                 break;
-              } else if (value <= 30) {
-                _scoredpointsfeedback[key] =
-                    "Improvement Needed; Focus on shooting more field goals in practice";
+              } else if (value <= 29) {
+                _scoredpointsfeedback[key] ="Improvement Needed; Focus on shooting more field goals in practice";
               }
             }
             break;
@@ -115,7 +113,7 @@ class PO1Feedback {
               if (value >= 70) {
                 _scoredpointsfeedback[key] = "Keep up the good work";
                 break;
-              } else if (value < 70) {
+              } else if (value >= 50) {
                 _scoredpointsfeedback[key] =
                     'Currently Average; Increase your skill level';
                 break;
@@ -125,8 +123,7 @@ class PO1Feedback {
               }
             }
             break;
-        }
-        ;
+        };
       },
     );
     return _scoredpointsfeedback;

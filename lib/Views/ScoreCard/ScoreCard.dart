@@ -79,7 +79,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
                     'Back',
                     onPress: () {
                       Dialogs.yesAbortDialogAction(context, "Erase User",
-                          "You are about to go back. This Player will be earsed and the data for this game along with it. Are you sure you want to go back?");
+                          "You are about to go back. This Player will be erased and the data for this game along with it. Are you sure you want to go back?");
                     },
                     onLongPress: () {
                       Navigator.pop(context);
