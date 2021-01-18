@@ -11,10 +11,10 @@ const kLabels = {
     '3PTs',
   ],
   'hustle_points': [
-    'STLS',
+    'STL',
     'ORB',
-    'ASST',
-    'BLKS',
+    'AST',
+    'BLK',
     'TO',
   ],
 };
@@ -29,7 +29,7 @@ const TextStyle kScoreBoardLabelsTextStyle = TextStyle(
   color: Colors.white,
 );
 const TextStyle kScoreBoardPointsTextStyle = TextStyle(
-  fontSize: 42,
+  fontSize: 36,
   color: Colors.white,
 );
 

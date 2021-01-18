@@ -6,7 +6,7 @@ import 'Objects/Score/Score.dart';
 
 class TrackerButton extends StatelessWidget {
   final IScore _activity;
-  final double _boxSize = 70;
+  final double _boxSize = 65;
   TrackerButton(this._activity);
 
   @override

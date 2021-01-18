@@ -15,7 +15,9 @@ class PointsSection extends StatelessWidget {
 
     Widget pointsButtonsGroup() {
       List<Widget> _pointButtons = [];
-      pointsList.forEach((element) => _pointButtons.add(Column(
+      pointsList.forEach(
+        (element) => _pointButtons.add(
+          Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
@@ -24,7 +26,9 @@ class PointsSection extends StatelessWidget {
               ),
               TrackerButton(element),
             ],
-          )));
+          ),
+        ),
+      );
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: _pointButtons,
