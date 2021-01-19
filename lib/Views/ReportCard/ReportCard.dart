@@ -163,10 +163,11 @@ class ReportCard extends StatelessWidget {
                   onPress: () {
                     _user.clearData();
                     // Navigator.popUntil(context, (route) => false);
-                    Navigator.popUntil(
-                      context,
-                      ModalRoute.withName('/'),
-                    );
+                    // Navigator.popUntil(
+                    //   context,
+                    //   ModalRoute.withName('/'),
+                    // );
+                    Navigator.pushReplacementNamed(context, PlayerNameForm.id);
                   },
                 ),
               ),

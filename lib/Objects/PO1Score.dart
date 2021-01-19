@@ -147,7 +147,10 @@ class PO1Score extends ChangeNotifier {
     );
 
     // TODO: Check to see if this solution works for FG average
-    _averages['FG'] = (((_pointsMap['2PTs'].pos + _pointsMap['3PTs'].pos) / ((_pointsMap['2PTs'].pos + _pointsMap['2PTs'].neg) + (_pointsMap['3PTs'].pos + _pointsMap['3PTs'].neg))) * 100)
+    _averages['FG'] = (((_pointsMap['2PTs'].pos + _pointsMap['3PTs'].pos) /
+                ((_pointsMap['2PTs'].pos + _pointsMap['2PTs'].neg) +
+                    (_pointsMap['3PTs'].pos + _pointsMap['3PTs'].neg))) *
+            100)
         .roundToDouble();
     return _averages;
   }
@@ -189,9 +192,11 @@ class PO1Score extends ChangeNotifier {
                 _feedback[key] = 'Currently Average; Increase your skill level';
                 break;
               } else if (value <= 30) {
-                _feedback[key] = "Improvement Needed; Focus on shooting more field goals in practice";
-              }else if (value == 0){
-                _feedback[key] = "Improvement Needed; Focus on shooting more field goals in practice";
+                _feedback[key] =
+                    "Improvement Needed; Focus on shooting more field goals in practice";
+              } else if (value == 0) {
+                _feedback[key] =
+                    "Improvement Needed; Focus on shooting more field goals in practice";
               }
             }
             break;
@@ -293,7 +298,7 @@ class PO1Score extends ChangeNotifier {
 
   String powerOfOneGrade() {
     return metPlaytimeThreshold()
-        ? PO1Grade().CalculateGrade(_getPowerOfOneScore())
+        ? PO1Grade.CalculateGrade(_getPowerOfOneScore())
         : 'NA';
   }
 
