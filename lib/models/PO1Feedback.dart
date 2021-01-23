@@ -19,7 +19,7 @@ class PO1Feedback {
   ) {
     totalhustlepoints.forEach((key, value) {
       switch (key) {
-        case 'STLS':
+        case 'STL':
           {
             if (value.pos >= 2) {
               _hustlepointsfeedback[key] = "Keep up the Good Work";
@@ -45,7 +45,7 @@ class PO1Feedback {
             }
             break;
           }
-        case 'BLKS':
+        case 'BLK':
           {
             if (value.pos >= 1) {
               _hustlepointsfeedback[key] = "Keep up the Good Work";
@@ -70,7 +70,7 @@ class PO1Feedback {
             }
             break;
           }
-        case 'ASST':
+        case 'AST':
           {
             if (value.pos >= 4) {
               _hustlepointsfeedback[key] = "Keep being a Team Player";

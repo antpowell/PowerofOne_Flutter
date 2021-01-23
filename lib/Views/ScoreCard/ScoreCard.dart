@@ -8,10 +8,8 @@ import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
 import 'package:power_one/Views/dialogs.dart';
 import 'package:power_one/models/PO1Feedback.dart';
-import 'package:power_one/models/PO1Game.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
-import 'dart:developer' as dev;
 
 class ScoreCard extends StatelessWidget {
   static final String id = 'score_card_screen';
