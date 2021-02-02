@@ -44,6 +44,7 @@ class Power1 extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Power of 1 Basketball',
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff33333D),
