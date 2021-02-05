@@ -15,7 +15,7 @@ enum _powerOfOneGrades { A, B, C, D, F }
 enum _playerLevel { elementry, middle, college, pro }
 
 class PO1Score extends ChangeNotifier {
-  static final int minimumThreshold = 5;
+  static final int minimumThreshold = 10;
   static PO1User _user;
 
   Queue<Map<String, IScore>> history = new Queue();
