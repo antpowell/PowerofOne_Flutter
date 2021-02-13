@@ -15,20 +15,26 @@ class FeedBack extends StatelessWidget {
     Color color = Theme.of(context).primaryColor;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black12,
-        title: Text(
-          'Power of 1 Score FeedBack',
-          style: TextStyle(
-            fontSize: 30,
-          ),
-        ),
-        centerTitle: true,
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
+          child:Column(
             children: [
+              Row(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child:
+                    Text(
+                      'Power of 1 Feedback',
+                      style: TextStyle(
+                        fontSize: 45,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
               Column(
                 children: [
                   Text("\n"),
