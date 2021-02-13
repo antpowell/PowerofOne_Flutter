@@ -163,18 +163,9 @@ class ReportCard extends StatelessWidget {
                   "New Game",
                   onPress: () {
                     _user.clearData();
-                    // TODO: Remove Scorecard screen from navigation stack
-                    // Navigator.popUntil(context, (route) => false);
-                    // Navigator.popUntil(
-                    //   context,
-                    //   ModalRoute.withName('/'),
-                    // );
-
-                    // Navigator.removeRouteBelow(
-                    //   context,
-                    // );
-
-                    Navigator.pushReplacementNamed(context, PlayerNameForm.id);
+                    // FIXME: PlayerNameForm's route stacks ontop of each other here. Need to fix with either only allowing a single instance of a route onto the stack or find a more advanced solution.
+                    Navigator.popUntil(
+                        context, ModalRoute.withName(PlayerNameForm.id));
                   },
                 ),
               ),
