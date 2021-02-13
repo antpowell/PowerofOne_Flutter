@@ -49,6 +49,9 @@ dependencies:
   introduction_screen: ^1.0.7
   dots_indicator: ^1.2.0
 
+  #In app purchases
+  in_app_purchase: ^0.3.5+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

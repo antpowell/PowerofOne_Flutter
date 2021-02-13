@@ -27,7 +27,7 @@ class ScoreBoard extends StatelessWidget {
     final PO1Score activities = Provider.of<PO1Score>(context, listen: false);
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      // mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
           child: Column(

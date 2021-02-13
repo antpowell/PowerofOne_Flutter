@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
+import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
@@ -139,7 +140,7 @@ class ReportCard extends StatelessWidget {
       onWillPop: () async {
         dev.log('back button disabled');
         // TODO: show dialog message
-        return true;
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -162,11 +163,18 @@ class ReportCard extends StatelessWidget {
                   "New Game",
                   onPress: () {
                     _user.clearData();
+                    // TODO: Remove Scorecard screen from navigation stack
                     // Navigator.popUntil(context, (route) => false);
-                    Navigator.popUntil(
-                      context,
-                      ModalRoute.withName('/'),
-                    );
+                    // Navigator.popUntil(
+                    //   context,
+                    //   ModalRoute.withName('/'),
+                    // );
+
+                    // Navigator.removeRouteBelow(
+                    //   context,
+                    // );
+
+                    Navigator.pushReplacementNamed(context, PlayerNameForm.id);
                   },
                 ),
               ),
@@ -174,7 +182,7 @@ class ReportCard extends StatelessWidget {
                 bottom: 10,
                 right: 150,
                 child: PO1Button(
-                  "Save Game",
+                  "Feedback",
                   onPress: () {
                     Navigator.pushNamed(context, FeedBack.id);
                   },

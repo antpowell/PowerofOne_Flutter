@@ -11,12 +11,28 @@ const kLabels = {
     '3PTs',
   ],
   'hustle_points': [
-    'STLS',
+    'STL',
     'ORB',
-    'ASST',
-    'BLKS',
+    'AST',
+    'BLK',
     'TO',
   ],
+};
+
+const kStandards = {
+  'hustle_points': {
+    'STL': {'great': 2, 'poor': 0},
+    'ORB': {'great': 3, 'poor': 1},
+    'AST': {'great': 2, 'poor': 0},
+    'BLK': {'great': 2, 'poor': 0},
+    'TO': {'great': 2, 'poor': 0},
+  },
+  'points': {
+    '1PT': {'adverage': 70, 'poor': 50},
+    '2PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+    '3PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+    'FG': {'adverage': 40, 'poor': 30}
+  }
 };
 
 const TextStyle kLabelTextStyle = TextStyle(
@@ -29,7 +45,7 @@ const TextStyle kScoreBoardLabelsTextStyle = TextStyle(
   color: Colors.white,
 );
 const TextStyle kScoreBoardPointsTextStyle = TextStyle(
-  fontSize: 42,
+  fontSize: 36,
   color: Colors.white,
 );
 

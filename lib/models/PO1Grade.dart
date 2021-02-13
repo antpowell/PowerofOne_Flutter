@@ -16,7 +16,7 @@ class PO1Grade {
                     : GRADE.F;
   }
 
-  String CalculateGrade(int pO1Score) {
+  static String CalculateGrade(int pO1Score) {
     return (pO1Score > 8)
         ? 'A'
         : (pO1Score > 6)

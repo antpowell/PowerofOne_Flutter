@@ -37,6 +37,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:856529158202:android:bf8d89e4cfd5d835047503",
+        "android_client_info": {
+          "package_name": "com.power_of_one.basketball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-IvG4dUbeoe21la4C9ZFdGs21pjFEt6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:856529158202:android:88da97ae43998cc3047503",
         "android_client_info": {
           "package_name": "com.powerof1.powerof1"
