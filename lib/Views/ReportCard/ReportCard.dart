@@ -143,19 +143,22 @@ class ReportCard extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black12,
-          title: Text(
-            'Power of 1 Score',
-            style: TextStyle(
-              fontSize: 30,
-            ),
-          ),
-          centerTitle: true,
-        ),
         body: SafeArea(
           child: Stack(
             children: [
+              Positioned(
+                bottom:0,
+                right:0,
+                left: 300,
+                top:0,
+              child: Text(
+                  'Power of 1 Score',
+                  style: TextStyle(
+                  fontSize: 45,
+                    color: Colors.white,
+              ),
+              ),
+              ),
               Positioned(
                 bottom: 10,
                 right: 10,
