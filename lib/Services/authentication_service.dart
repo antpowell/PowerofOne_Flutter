@@ -129,4 +129,6 @@ class AuthenticationService {
       return e.message;
     }
   }
+
+// TODO1: create a forgot password function that follows this functionality (https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email)
 }
