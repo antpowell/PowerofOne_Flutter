@@ -181,10 +181,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
             ),
             onPressed: () {
-              // TODO2: call reset password function here.
+              // TODO 2: call reset password function here.
+              _authService.resetPassword(email: _emailController.text.trim());
               debugPrint('User forgot password and is trying to reset.');
               debugPrint("new current user, ${_currentUser.email}");
-              _authService.signOut();
+              // _authService.signOut();
             },
           ),
           IconButton(

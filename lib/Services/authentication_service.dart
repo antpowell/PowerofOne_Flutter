@@ -124,11 +124,19 @@ class AuthenticationService {
 
   Future<String> loginWithEmailLink({String email}) async {
     try {
+      // TODO: create return message for success
       await _firebaseAuth.signInWithEmailLink(email: email, emailLink: email);
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
   }
 
-// TODO1: create a forgot password function that follows this functionality (https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email)
+  Future<String> resetPassword({String email}) async {
+    try {
+      // TODO: create return message for success
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
 }
