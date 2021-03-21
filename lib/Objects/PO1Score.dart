@@ -147,8 +147,11 @@ class PO1Score extends ChangeNotifier {
     );
 
     // TODO: Check to see if this solution works for FG average
-    _averages['FG'] =
-        ((_averages['2PTs'] + _averages['3PTs']) / 2).roundToDouble();
+    _averages['FG'] = (_averages['2PTs'] == 0.0)
+        ? _averages['3PTs'].roundToDouble()
+        : (_averages['3PTs'] == 0)
+            ? _averages['2PTs'].roundToDouble()
+            : ((_averages['2PTs'] + _averages['3PTs']) / 2).roundToDouble();
     return _averages;
   }
 
