@@ -30,3 +30,13 @@ When running this application on a different system from the one it was created 
 
 - And finally you should be able to run the flutter application with
   - `flutter run`
+
+## iOS
+
+- id: com.powerofone.basketball
+
+### Downloads
+
+- Flutter
+- Android Studio
+- xCode
