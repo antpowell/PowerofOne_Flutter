@@ -1,10 +1,7 @@
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/PO1Score.dart';
-
-import 'PO1User.dart';
 
 class PO1Grade {
-  CalculateGradeEnum(int pO1Score) {
+  calculateGradeEnum(int pO1Score) {
     return (pO1Score > 8)
         ? GRADE.A
         : (pO1Score > 6)
@@ -16,7 +13,7 @@ class PO1Grade {
                     : GRADE.F;
   }
 
-  static String CalculateGrade(int pO1Score) {
+  static String calculateGrade(int pO1Score) {
     return (pO1Score > 8)
         ? 'A'
         : (pO1Score > 6)

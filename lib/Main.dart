@@ -26,7 +26,7 @@ Future main() async {
 }
 
 class Power1 extends StatelessWidget {
-  PO1User _user = PO1User();
+  // PO1User _user = PO1User();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

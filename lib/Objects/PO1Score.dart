@@ -11,8 +11,9 @@ import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
 
-enum _powerOfOneGrades { A, B, C, D, F }
-enum _playerLevel { elementry, middle, college, pro }
+/* Skeleton for differnt player levels */
+// enum _powerOfOneGrades { A, B, C, D, F }
+// enum _playerLevel { elementry, middle, college, pro }
 
 class PO1Score extends ChangeNotifier {
   static final int minimumThreshold = 10;
@@ -180,7 +181,7 @@ class PO1Score extends ChangeNotifier {
 
   String powerOfOneGrade() {
     return metPlaytimeThreshold()
-        ? PO1Grade.CalculateGrade(_getPowerOfOneScore())
+        ? PO1Grade.calculateGrade(_getPowerOfOneScore())
         : 'NA';
   }
 

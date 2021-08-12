@@ -1,9 +1,6 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:developer' as dev;
-
-import 'package:power_one/Views/dialogs.dart';
 
 enum authProblems {
   UserNotFound,
