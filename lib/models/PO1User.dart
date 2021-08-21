@@ -1,4 +1,3 @@
-import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'dart:developer' as dev;
 
@@ -36,7 +35,7 @@ split('.'): [0]: e@g, [1].com
     _score = score;
   }
 
-  kPlayerCategory _level;
+  // kPlayerCategory _level;
 
   factory PO1User() {
     return _instance;

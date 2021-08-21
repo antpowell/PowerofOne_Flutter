@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 import 'Score/Score.dart';
 
 class Point extends IScore {

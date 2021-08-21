@@ -1,6 +1,5 @@
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Objects/Play.dart';
-import 'package:power_one/models/PO1Grade.dart';
 
 class PO1Feedback {
   static Map<String, String> _hustlepointsfeedback = {};
@@ -126,7 +125,6 @@ class PO1Feedback {
             }
             break;
         }
-        ;
       },
     );
     return _scoredpointsfeedback;
