@@ -12,12 +12,17 @@ class PointWidgets extends StatelessWidget {
           child: SizedBox(
             width: 80,
             height: 80,
-            child: OutlineButton(
-              shape: CircleBorder(),
+            // New outlined button formate
+            child: OutlinedButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(CircleBorder()),
+                textStyle:
+                    MaterialStateProperty.all(TextStyle(color: Colors.green)),
+                overlayColor: MaterialStateProperty.all(Colors.green),
+                side: MaterialStateProperty.all(
+                    BorderSide(width: 2, color: Colors.green)),
+              ),
               child: Text(activity.title),
-              textColor: Colors.green,
-              highlightedBorderColor: Colors.green,
-              borderSide: BorderSide(width: 2, color: Colors.green),
               onPressed: () {
                 // activity.miss();
               },

@@ -49,12 +49,14 @@ class TrackerButton extends StatelessWidget {
         child: SizedBox(
           width: _boxSize,
           height: _boxSize,
-          child: OutlineButton(
-            shape: CircleBorder(),
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              primary: color,
+              shape: CircleBorder(),
+              side: BorderSide(width: 2, color: color),
+              textStyle: TextStyle(color: color),
+            ),
             child: label,
-            textColor: color,
-            highlightedBorderColor: color,
-            borderSide: BorderSide(width: 2, color: color),
             onPressed: () => onPress(pointInstance),
           ),
         ),
