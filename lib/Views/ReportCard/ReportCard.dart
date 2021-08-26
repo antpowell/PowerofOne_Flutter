@@ -147,17 +147,17 @@ class ReportCard extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(
-                bottom:0,
-                right:0,
+                bottom: 0,
+                right: 0,
                 left: 300,
-                top:0,
-              child: Text(
+                top: 0,
+                child: Text(
                   'Power of 1 Score',
                   style: TextStyle(
-                  fontSize: 45,
+                    fontSize: 45,
                     color: Colors.white,
-              ),
-              ),
+                  ),
+                ),
               ),
               Positioned(
                 bottom: 10,
@@ -172,16 +172,16 @@ class ReportCard extends StatelessWidget {
                   },
                 ),
               ),
-              Positioned(
-                bottom: 10,
-                right: 150,
-                child: PO1Button(
-                  "Feedback",
-                  onPress: () {
-                    Navigator.pushNamed(context, FeedBack.id);
-                  },
-                ),
-              ),
+              // Positioned(
+              //   bottom: 10,
+              //   right: 150,
+              //   child: PO1Button(
+              //     "Feedback",
+              //     onPress: () {
+              //       Navigator.pushNamed(context, FeedBack.id);
+              //     },
+              //   ),
+              // ),
               Positioned(
                 top: 40,
                 left: 40,
