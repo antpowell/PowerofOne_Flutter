@@ -81,7 +81,11 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   context,
                   listen: false,
                 ).signOut();
-                Navigator.pushReplacementNamed(context, LoginFormScreen.id);
+                Navigator.pushNamedAndRemoveUntil(
+                    // user AuthWrapper in stead of LoginForm
+                    context,
+                    LoginFormScreen.id,
+                    (route) => false);
               },
               child: Text(
                 'Sign Out',
