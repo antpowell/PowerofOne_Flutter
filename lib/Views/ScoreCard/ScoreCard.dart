@@ -11,6 +11,8 @@ import 'package:power_one/models/PO1Feedback.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
+import 'dart:developer' as dev;
+
 class ScoreCard extends StatelessWidget {
   static final String id = 'score_card_screen';
   @override
@@ -33,27 +35,39 @@ class ScoreCardScreenWidget extends StatelessWidget {
   static final fbdbService = FBDBService();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-      height: double.infinity,
-      width: double.infinity,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            _user.playerName.toString(),
-            style: TextStyle(fontSize: 36, color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
-          Flexible(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
+    void backButtonHandler() {
+      dev.log('ScoreCard back button engaged');
+
+      Dialogs.yesAbortDialogAction(context, "Erase User",
+          "You are about to go back. This Player will be erased and the data for this game along with it. Are you sure you want to go back?",
+          approveFunction: () {
+        _user.score.clear();
+        Navigator.pop(context);
+      });
+    }
+
+    return WillPopScope(
+      onWillPop: () async {
+        backButtonHandler();
+        return false;
+      },
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
+        height: double.infinity,
+        width: double.infinity,
+        child: Flex(
+          direction: Axis.vertical,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              _user.playerName.toString(),
+              style: TextStyle(fontSize: 30, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
                 Expanded(
                   child: HustlePointsSection(),
                 ),
@@ -66,21 +80,15 @@ class ScoreCardScreenWidget extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          Flexible(
-            flex: 0,
-            child: Row(
+            Flex(
+              direction: Axis.horizontal,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   child: PO1Button(
                     'Back',
                     onPress: () {
-                      Dialogs.yesAbortDialogAction(context, "Erase User",
-                          "You are about to go back. This Player will be erased and the data for this game along with it. Are you sure you want to go back?");
-                    },
-                    onLongPress: () {
-                      Navigator.pop(context);
+                      backButtonHandler();
                     },
                     onLeft: true,
                     icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
@@ -90,7 +98,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: PO1Button(
                     "Undo",
                     onPress: Provider.of<PO1Score>(context).undo,
-                    onLongPress: Provider.of<PO1Score>(context).clear,
+                    // onLongPress: Provider.of<PO1Score>(context).clear,
                     icon: Icon(Icons.restore_outlined, color: Colors.white),
                   ),
                 ),
@@ -107,8 +115,8 @@ class ScoreCardScreenWidget extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

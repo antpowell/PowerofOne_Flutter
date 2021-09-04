@@ -1,11 +1,12 @@
-import 'dart:ui';
 import 'dart:developer' as dev;
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Main.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
@@ -66,51 +67,69 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   }
 
   Widget _buildButtonGroup() {
-    return Center(
-      child: Flex(
-        direction: Axis.horizontal,
-        // mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          // !! DEV only
-          Expanded(
-            child: MaterialButton(
-              onPressed: () async {
-                debugPrint(
-                    'User pressed Recent Games button, show them the summary of the last 3 games they have soaved.');
-                Provider.of<AuthenticationService>(
-                  context,
-                  listen: false,
-                ).signOut();
-                Navigator.pushNamedAndRemoveUntil(
-                    // user AuthWrapper in stead of LoginForm
-                    context,
-                    LoginFormScreen.id,
-                    (route) => false);
-              },
-              child: Text(
-                'Sign Out',
-                style: TextStyle(color: Colors.white),
+    return Flex(
+      direction: Axis.vertical,
+      children: <Widget>[
+        Flexible(
+          flex: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              /**
+               * !!Dev only - hide until previouse game history work is done
+               */
+              // PO1Button(
+              //   "Recent Game",
+              //   onPress: () {
+              //     Dialogs.okDialogAction(
+              //       context,
+              //       '⚠',
+              //       'Feature Under Construction',
+              //     );
+              //   },
+              // ),
+              // !! DEV only
+
+              Container(
+                child: MaterialButton(
+                  onPressed: () async {
+                    Provider.of<AuthenticationService>(
+                      context,
+                      listen: false,
+                    ).signOut();
+                    Navigator.pushAndRemoveUntil(
+                        // user AuthWrapper in stead of LoginForm
+                        context,
+                        MaterialPageRoute(builder: (builder) => AuthWrapper()),
+                        (route) => false);
+                  },
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
-            ),
+
+              PO1Button(
+                "Start Game",
+                onPress: () {
+                  debugPrint(
+                    'User pressed Start Game button, save the player name to the user and take them to the score card view.',
+                  );
+                  if (!_formKey.currentState.validate()) {
+                    return;
+                  }
+                  _formKey.currentState.save();
+                  dev.log('current user ${_user.email}');
+                  fbdbService.createNewUser(_user);
+                  Navigator.pushNamed(context, ScoreCard.id);
+                },
+              ),
+            ],
           ),
-          // !! DEV only
-          PO1Button(
-            "Start Game",
-            onPress: () {
-              debugPrint(
-                'User pressed Start Game button, save the player name to the user and take them to the score card view.',
-              );
-              if (!_formKey.currentState.validate()) {
-                return;
-              }
-              _formKey.currentState.save();
-              dev.log('current user ${_user.email}');
-              fbdbService.createNewUser(_user);
-              Navigator.pushNamed(context, ScoreCard.id);
-            },
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

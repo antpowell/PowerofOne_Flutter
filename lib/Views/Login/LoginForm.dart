@@ -121,18 +121,18 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
               email: _emailController.text.trim(),
               password: _passwordController.text.trim(),
             );
-        !(message == '${_emailController.text.trim()} signed in')
-            ? {
-                Dialogs.okDialogAction(
-                  context,
-                  'ERROR: Something went wrong!',
-                  message,
-                ),
-              }
-            : {
-                dev.log(message),
-                Navigator.pushNamed(context, PlayerNameForm.id),
-              };
+        if (message != '${_emailController.text.trim()} signed in') {
+          Dialogs.okDialogAction(
+            context,
+            'ERROR: Something went wrong!',
+            message,
+          );
+        } else {
+          dev.log(message);
+          Navigator.pushNamedAndRemoveUntil(
+              context, PlayerNameForm.id, (route) => false);
+        }
+        ;
       },
     );
   }
@@ -162,7 +162,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FlatButton(
+          TextButton(
             child: Text(
               'New User? Sign Up!',
               style:
@@ -174,7 +174,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
               debugPrint('New user, needs to register.'),
             },
           ),
-          FlatButton(
+          TextButton(
             child: Text(
               'Forgot Password?',
               style:
@@ -196,9 +196,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 return;
               }
               _formKey.currentState.save();
-
-              // _authService.signIn(email: _email, password: _password);
-              // Navigator.pushNamed(context, '/playerName');
             },
           ),
         ],
@@ -229,23 +226,5 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         ),
       ),
     );
-  }
-}
-
-class AuthWrapper extends StatelessWidget {
-  final PO1User _user = PO1User();
-
-  @override
-  Widget build(BuildContext context) {
-    final User firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      dev.log('Found user in Firebase: $firebaseUser');
-      _user.setId(firebaseUser.uid);
-      // Navigator.pushNamed(context, '/playerName');
-      return Text('User Found');
-    }
-    dev.log('No user found in Firebase');
-    return Text('No user found');
   }
 }

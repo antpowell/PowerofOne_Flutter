@@ -146,18 +146,16 @@ class _RegisterState extends State<Register> {
               email: _emailController.text.trim(),
               password: _passwordController.text.trim(),
             );
-        !(message == '${_emailController.text.trim()} account created')
-            ? {
-                Dialogs.okDialogAction(
-                  context,
-                  'ERROR: Something went wrong!',
-                  message,
-                ),
-              }
-            : {
-                dev.log(message),
-                Navigator.pushNamed(context, PlayerNameForm.id),
-              };
+        if (message != '${_emailController.text.trim()} account created') {
+          Dialogs.okDialogAction(
+            context,
+            'ERROR: Something went wrong!',
+            message,
+          );
+        } else {
+          dev.log(message);
+          Navigator.pushNamed(context, PlayerNameForm.id);
+        }
       },
     );
   }

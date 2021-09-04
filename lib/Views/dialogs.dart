@@ -13,8 +13,10 @@ class Dialogs {
   static Future<DialogAction> yesAbortDialogAction(
     BuildContext context,
     String title,
-    String body,
-  ) async {
+    String body, {
+    Function approveFunction,
+    Function disapproveFunction,
+  }) async {
     final action = await showDialog(
       context: context,
       barrierDismissible: false,
@@ -32,17 +34,22 @@ class Dialogs {
             style: textStyle,
           ),
           actions: <Widget>[
-            PO1Button(
-              "OK",
-              onPress: () => {
-                Navigator.of(context).pop(DialogAction.yes),
-              },
-            ),
-            PO1Button(
-              "Cancel",
-              onPress: () => {
-                Navigator.of(context).pop(DialogAction.abort),
-              },
+            Flex(
+              direction: Axis.horizontal,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                PO1Button(
+                  "OK",
+                  onPress: () => {
+                    Navigator.pop(context),
+                    approveFunction(),
+                  },
+                ),
+                PO1Button(
+                  "Cancel",
+                  onPress: () => {Navigator.pop(context), disapproveFunction()},
+                ),
+              ],
             ),
           ],
         );
@@ -52,10 +59,8 @@ class Dialogs {
   }
 
   static Future<DialogAction> okDialogAction(
-    BuildContext context,
-    String title,
-    String body,
-  ) async {
+      BuildContext context, String title, String body,
+      {Function approveFunction}) async {
     final action = await showDialog(
       context: context,
       barrierDismissible: false,
@@ -73,11 +78,15 @@ class Dialogs {
             style: textStyle,
           ),
           actions: <Widget>[
-            PO1Button(
-              "OK",
-              onPress: () => {
-                Navigator.of(context).pop(DialogAction.yes),
-              },
+            Flex(
+              direction: Axis.horizontal,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                PO1Button(
+                  "OK",
+                  onPress: () => {Navigator.pop(context), approveFunction()},
+                ),
+              ],
             ),
           ],
         );

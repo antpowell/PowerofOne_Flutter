@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/ReportCard/ReportCard.dart';
+import 'package:power_one/Views/dialogs.dart';
 import 'package:power_one/models/PO1Feedback.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
@@ -286,20 +288,36 @@ class FeedBack extends StatelessWidget {
       return Flexible(
         flex: 0,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Container(
+              child: PO1Button(
+                'Back',
+                onPress: () {
+                  Navigator.pop(context);
+                },
+                onLeft: true,
+                icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
+              ),
+            ),
             Container(
               child: PO1Button(
                 "Report Card",
                 onPress: () {
-                  _user.setPlayerScore(
-                      Provider.of<PO1Score>(context, listen: false));
-                  PO1Feedback.calculateFeedback(_user.score);
-                  _fbdbService.createNewGame();
-                  Navigator.pushNamed(context, FeedBack.id);
+                  Dialogs.yesAbortDialogAction(
+                      context,
+                      '⚠ Is the game really over? ⚠',
+                      'Press \'OK\' to save this game BUT you will not be able to make any addtional changes to this game.\n\nPress \'Cancel\' to close this dialog and continue reviewing current game details.',
+                      approveFunction: () {
+                    _user.setPlayerScore(
+                        Provider.of<PO1Score>(context, listen: false));
+                    PO1Feedback.calculateFeedback(_user.score);
+                    _fbdbService.createNewGame();
+                    Navigator.pushNamed(context, ReportCard.id);
+                  });
                 },
                 onLongPress: () => {},
-                icon: Icon(Icons.arrow_right, color: Colors.white),
+                icon: Icon(Icons.arrow_forward_ios_sharp, color: Colors.white),
               ),
             ),
           ],

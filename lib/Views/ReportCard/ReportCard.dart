@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
+import 'package:power_one/Views/dialogs.dart';
 import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/FeedBack/FeedBack.dart';
 
 import 'dart:developer' as dev;
+
+import '../../Main.dart';
 
 Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
@@ -54,8 +56,6 @@ class ReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Theme.of(context).primaryColor;
-
     Widget feedbacktextSection = Container(
       width: 150,
       height: 150,
@@ -139,7 +139,9 @@ class ReportCard extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         dev.log('back button disabled');
-        // TODO: show dialog message
+        Dialogs.okDialogAction(context, 'Game Complete',
+            'Great game but you can\'t go back \nJust start a new game with the \'New Game\' button',
+            approveFunction: () {});
         return false;
       },
       child: Scaffold(
@@ -167,8 +169,11 @@ class ReportCard extends StatelessWidget {
                   onPress: () {
                     _user.clearData();
                     // FIXME: PlayerNameForm's route stacks ontop of each other here. Need to fix with either only allowing a single instance of a route onto the stack or find a more advanced solution.
-                    Navigator.popUntil(
-                        context, ModalRoute.withName(PlayerNameForm.id));
+                    Navigator.pushAndRemoveUntil(
+                        // user AuthWrapper in stead of LoginForm
+                        context,
+                        MaterialPageRoute(builder: (builder) => AuthWrapper()),
+                        (route) => false);
                   },
                 ),
               ),
