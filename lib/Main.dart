@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
@@ -19,6 +20,9 @@ import 'dart:developer' as dev;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+
   await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
@@ -31,6 +35,12 @@ class Power1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // ChangeNotifierProvider<SubscriptionPurchase>(
+        //   create: (context) => SubscriptionPurchase(
+        //     context.read<SubscriptionPurchase>(),
+        //   ),
+        //   lazy: false,
+        // ),
         ChangeNotifierProvider<PO1Score>(
           create: (BuildContext context) => PO1Score(),
         ),

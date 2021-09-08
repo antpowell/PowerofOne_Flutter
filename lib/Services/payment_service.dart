@@ -1,14 +1,24 @@
 import 'dart:async';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 import 'package:flutter/foundation.dart';
 
-class PaymentService {
+class IAPConnection  {
   /// We want singelton object of ``PaymentService`` so create private constructor
   ///
   /// Use PaymentService as ``PaymentService.instance``
-  PaymentService._internal();
+  static InAppPurchase? _instance;
+  static set instance(InAppPurchase value) {
+    _instance = value;
+  }
 
-  static final PaymentService instance = PaymentService._internal();
+  static InAppPurchase get instance {
+    _instance ??= InAppPurchase.instance;
+    return _instance!;
+  }
+
+  static final PaymentService? instance;
 
   /// Listener of the connection status between the app and the billing server
   StreamSubscription<ConnectionResult> _connectionSubscription;
