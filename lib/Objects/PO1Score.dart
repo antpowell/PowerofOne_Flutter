@@ -17,7 +17,7 @@ import 'Score/Score.dart';
 
 class PO1Score extends ChangeNotifier {
   static final int minimumThreshold = 10;
-  static PO1User _user;
+  // static PO1User _user;
 
   Queue<Map<String, IScore>> history = new Queue();
 
@@ -33,9 +33,9 @@ class PO1Score extends ChangeNotifier {
     init();
   }
 
-  assignUser(PO1User user) {
-    _user = user;
-  }
+  // assignUser(PO1User user) {
+  //   _user = user;
+  // }
 
   made(IScore activity) {
     Map<String, IScore> madeHistoryEvent;
@@ -91,10 +91,10 @@ class PO1Score extends ChangeNotifier {
   }
 
   init() {
-    kLabels["points"].forEach((element) {
+    kLabels["points"]?.forEach((element) {
       _pointsMap[element] = new Point(element);
     });
-    kLabels["hustle_points"].forEach((element) {
+    kLabels["hustle_points"]?.forEach((element) {
       _hustlePointsMap[element] = new Play(element);
     });
     history = new Queue();
@@ -148,6 +148,12 @@ class PO1Score extends ChangeNotifier {
     );
 
     // TODO: Check to see if this solution works for FG average
+    if (_averages['2PTs'] == 0.0 && _averages['3PTs'] == 0.0) {
+      _averages['FG'] = 0.0;
+    } else if (_averages['3PTs'] == 0.0) {
+      _averages['FG'] = _averages['2PTs'].roundToDouble();
+    }
+
     _averages['FG'] = (_averages['2PTs'] == 0.0)
         ? _averages['3PTs'].roundToDouble()
         : (_averages['3PTs'] == 0)
