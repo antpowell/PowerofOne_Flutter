@@ -148,17 +148,20 @@ class PO1Score extends ChangeNotifier {
     );
 
     // TODO: Check to see if this solution works for FG average
-    if (_averages['2PTs'] == 0.0 && _averages['3PTs'] == 0.0) {
-      _averages['FG'] = 0.0;
-    } else if (_averages['3PTs'] == 0.0) {
-      _averages['FG'] = _averages['2PTs'].roundToDouble();
-    }
+    _averages['FG'] = ((_pointsMap['2PTs'].pos +
+                _pointsMap['3PTs'].pos +
+                _pointsMap['2PTs'].neg +
+                _pointsMap['3PTs'].neg) ==
+            0)
+        ? 0.0
+        : ((_pointsMap['2PTs'].pos + _pointsMap['3PTs'].pos) /
+                (_pointsMap['2PTs'].pos +
+                    _pointsMap['3PTs'].pos +
+                    _pointsMap['2PTs'].neg +
+                    _pointsMap['3PTs'].neg) *
+                100)
+            .roundToDouble();
 
-    _averages['FG'] = (_averages['2PTs'] == 0.0)
-        ? _averages['3PTs'].roundToDouble()
-        : (_averages['3PTs'] == 0)
-            ? _averages['2PTs'].roundToDouble()
-            : ((_averages['2PTs'] + _averages['3PTs']) / 2).roundToDouble();
     return _averages;
   }
 
