@@ -33,18 +33,7 @@ When running this application on a different system from the one it was created 
 
 ## iOS
 
-id: com.powerofone.basketball
-
-### ***How run project on M1 macs***
-
-#### Install Pods
-
-`arch -x86_64 sudo pod install`
-
-#### Build
-
-- flutter clean
-- flutter build ios
+- id: com.powerofone.basketball
 
 ### Downloads
 

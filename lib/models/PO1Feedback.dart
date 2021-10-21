@@ -31,7 +31,7 @@ class PO1Feedback {
             }
             break;
           }
-        case 'RB':
+        case 'ORB':
           {
             if (value.pos >= 3) {
               _hustlepointsfeedback[key] = "Keep up the Good Work";

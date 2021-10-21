@@ -121,7 +121,7 @@ class FeedBack extends StatelessWidget {
                     Text("\n"),
                     Row(
                       children: [
-                        Text("Rebounds:",
+                        Text("Offensive Rebounds:",
                             style: TextStyle(
                               color: Colors.white,
                               decoration: TextDecoration.underline,
@@ -135,7 +135,7 @@ class FeedBack extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                              _user.score.hustlePointsMap['RB'].pos.toString(),
+                              _user.score.hustlePointsMap['ORB'].pos.toString(),
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -143,7 +143,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlepointsfeedback['RB'],
+                          child: Text(PO1Feedback.hustlepointsfeedback['ORB'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
