@@ -331,17 +331,14 @@ class FeedBack extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
         height: double.infinity,
         width: double.infinity,
-        child: Flexible(
-          flex: 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildFeedbackContent(),
-              _buildNavigationFooter(),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            _buildFeedbackContent(),
+            _buildNavigationFooter(),
+          ],
         ),
       ),
     );
