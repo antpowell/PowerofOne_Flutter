@@ -12,7 +12,7 @@ const kLabels = {
   ],
   'hustle_points': [
     'STL',
-    'ORB',
+    'RB',
     'AST',
     'BLK',
     'TO',
