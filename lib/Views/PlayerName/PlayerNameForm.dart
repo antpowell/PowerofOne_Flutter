@@ -2,7 +2,9 @@ import 'dart:developer' as dev;
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Main.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
@@ -56,6 +58,60 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
         _user.setPlayerName(newValue);
       },
     );
+  }
+
+  List<bool> _selections =
+      List.generate(kPlayerLevel.values.length, (_) => false);
+
+  Widget _buildToggleSection() {
+    List<Widget> _toggleList = [];
+    kPlayerLevel.values.forEach((e) => {
+          _toggleList.add(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                describeEnum(e).toUpperCase(),
+                textAlign: TextAlign.center,
+                textWidthBasis: TextWidthBasis.parent,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
+        });
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Center(
+            child: Text("Select your player's level",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ))),
+      ),
+      Center(
+        child: ToggleButtons(
+          children: _toggleList,
+          isSelected: _selections,
+          onPressed: (int index) {
+            setState(() {
+              _selections =
+                  List.generate(kPlayerLevel.values.length, (_) => false);
+              _selections[index] = !_selections[index];
+              _user.setLevel(kPlayerLevel.values.elementAt(index));
+            });
+          },
+          color: Colors.blueAccent,
+          selectedColor: Colors.orangeAccent,
+          fillColor: Colors.deepPurpleAccent,
+          selectedBorderColor: Colors.white,
+          borderColor: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+    ]);
   }
 
   Widget _buildHeader() {
@@ -117,7 +173,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   debugPrint(
                     'User pressed Start Game button, save the player name to the user and take them to the score card view.',
                   );
-                  if (!_formKey.currentState.validate()) {
+                  if (!_formKey.currentState.validate() ||
+                      _user.level == null) {
                     return;
                   }
                   _formKey.currentState.save();
@@ -167,6 +224,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                     children: [
                       _buildHeader(),
                       _buildForm(),
+                      _buildToggleSection(),
                       _buildButtonGroup(),
                     ],
                   ),
