@@ -1,3 +1,4 @@
+import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'dart:developer' as dev;
 
@@ -35,7 +36,11 @@ split('.'): [0]: e@g, [1].com
     _score = score;
   }
 
-  // kPlayerCategory _level;
+  kPlayerLevel _level;
+  kPlayerLevel get level => _level;
+  setLevel(kPlayerLevel level) {
+    _level = level;
+  }
 
   factory PO1User() {
     return _instance;
@@ -49,6 +54,7 @@ split('.'): [0]: e@g, [1].com
     // TODO: clear email when user signs out
     // _email = null;
     _playerName = null;
+    _level = null;
     _score.clear();
     dev.log('Local user data cleared');
   }

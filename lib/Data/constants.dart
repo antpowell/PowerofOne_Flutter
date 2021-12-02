@@ -21,17 +21,50 @@ const kLabels = {
 
 const kStandards = {
   'hustle_points': {
-    'STL': {'great': 2, 'poor': 0},
-    'ORB': {'great': 3, 'poor': 1},
-    'AST': {'great': 2, 'poor': 0},
-    'BLK': {'great': 2, 'poor': 0},
-    'TO': {'great': 2, 'poor': 0},
+    kPlayerCategory.PRO: {
+      'STL': {'great': 2, 'poor': 0},
+      'OR': {'great': 9, 'good': 7, 'average': 5},
+      'AST': {'great': 2, 'poor': 0},
+      'BLK': {'great': 2, 'poor': 0},
+      'TO': {'great': 2, 'poor': 0},
+      'PF': 0,
+    },
+    kPlayerCategory.HIGHANDCOLLEGE: {
+      'STL': {'great': 2, 'poor': 0},
+      'OR': {'great': 8, 'good': 6, 'average': 4},
+      'AST': {'great': 2, 'poor': 0},
+      'BLK': {'great': 2, 'poor': 0},
+      'TO': {'great': 2, 'poor': 0},
+      'PF': 0,
+    },
+    kPlayerCategory.GRADESCHOOL: {
+      'STL': {'great': 2, 'poor': 0},
+      'OR': {'great': 7, 'good': 5, 'average': 3},
+      'AST': {'great': 2, 'poor': 0},
+      'BLK': {'great': 2, 'poor': 0},
+      'TO': {'great': 2, 'poor': 0},
+      'PF': 0,
+    },
   },
   'points': {
-    '1PT': {'adverage': 70, 'poor': 50},
-    '2PTs': {'adverage': 1, 'great': 2, 'poor': 0},
-    '3PTs': {'adverage': 1, 'great': 2, 'poor': 0},
-    'FG': {'adverage': 40, 'poor': 30}
+    kPlayerCategory.PRO: {
+      '1PT': {'great': 70, 'average': 50},
+      // '2PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+      // '3PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+      'FG': {'great': 40, 'average': 30}
+    },
+    kPlayerCategory.HIGHANDCOLLEGE: {
+      '1PT': {'great': 70, 'average': 50},
+      // '2PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+      // '3PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+      'FG': {'great': 40, 'average': 30}
+    },
+    kPlayerCategory.GRADESCHOOL: {
+      '1PT': {'great': 70, 'average': 50},
+      // '2PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+      // '3PTs': {'adverage': 1, 'great': 2, 'poor': 0},
+      'FG': {'great': 40, 'average': 30}
+    }
   }
 };
 
@@ -71,5 +104,12 @@ TextStyle fScoreBoardPointsTextStyle(Color fontColor) {
 const formInputStyle = TextStyle(fontSize: 16, color: Colors.white);
 
 enum kPlayerLevel { elementry, middle, high, college, pro }
-enum kPlayerCategory { amature, pro }
+
+extension ParseToString on kPlayerLevel {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
+
+enum kPlayerCategory { GRADESCHOOL, HIGHANDCOLLEGE, PRO }
 enum GRADE { A, B, C, D, F, NA }

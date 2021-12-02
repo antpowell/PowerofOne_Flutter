@@ -38,6 +38,8 @@ class ScoreCardScreenWidget extends StatelessWidget {
     void backButtonHandler() {
       dev.log('ScoreCard back button engaged');
 
+      _user.setPlayerScore(Provider.of<PO1Score>(context, listen: false));
+
       Dialogs.yesAbortDialogAction(context, "Erase User",
           "You are about to go back. This Player will be erased and the data for this game along with it. Are you sure you want to go back?",
           approveFunction: () {
