@@ -104,5 +104,12 @@ TextStyle fScoreBoardPointsTextStyle(Color fontColor) {
 const formInputStyle = TextStyle(fontSize: 16, color: Colors.white);
 
 enum kPlayerLevel { elementry, middle, high, college, pro }
+
+extension ParseToString on kPlayerLevel {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
+
 enum kPlayerCategory { GRADESCHOOL, HIGHANDCOLLEGE, PRO }
 enum GRADE { A, B, C, D, F, NA }

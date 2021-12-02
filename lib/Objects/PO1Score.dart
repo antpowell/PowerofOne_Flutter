@@ -233,6 +233,7 @@ class PO1Score extends ChangeNotifier {
     return {
       "ReportCard": reportCard,
       "ScoreCard": _mapToJSON(),
+      "PlayerLevel": PO1User().level.toShortString(),
     };
   }
 

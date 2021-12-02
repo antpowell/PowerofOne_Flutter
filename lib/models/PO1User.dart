@@ -54,6 +54,7 @@ split('.'): [0]: e@g, [1].com
     // TODO: clear email when user signs out
     // _email = null;
     _playerName = null;
+    _level = null;
     _score.clear();
     dev.log('Local user data cleared');
   }
