@@ -2,11 +2,12 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
+import 'package:power_one/Models/PO1PlayerSkill.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
-import 'package:power_one/models/PO1Feedback.dart';
-import 'package:power_one/models/PO1Grade.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1Feedback.dart';
+import 'package:power_one/Models/PO1Grade.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
@@ -233,7 +234,7 @@ class PO1Score extends ChangeNotifier {
     return {
       "ReportCard": reportCard,
       "ScoreCard": _mapToJSON(),
-      "PlayerLevel": PO1User().level.toShortString(),
+      "PlayerLevel": PO1User().playerSkill.toShortString(),
     };
   }
 

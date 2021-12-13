@@ -6,11 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Main.dart';
+import 'package:power_one/Models/PO1Level.dart';
+import 'package:power_one/Models/PO1PlayerSkill.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class PlayerNameForm extends StatefulWidget {
@@ -61,11 +63,11 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   }
 
   List<bool> _selections =
-      List.generate(kPlayerLevel.values.length, (_) => false);
+      List.generate(PO1PlayerSkill.values.length, (_) => false);
 
   Widget _buildToggleSection() {
     List<Widget> _toggleList = [];
-    kPlayerLevel.values.forEach((e) => {
+    PO1PlayerSkill.values.forEach((e) => {
           _toggleList.add(
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -98,9 +100,9 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
           onPressed: (int index) {
             setState(() {
               _selections =
-                  List.generate(kPlayerLevel.values.length, (_) => false);
+                  List.generate(PO1PlayerSkill.values.length, (_) => false);
               _selections[index] = !_selections[index];
-              _user.setLevel(kPlayerLevel.values.elementAt(index));
+              _user.playerSkill = PO1PlayerSkill.values.elementAt(index);
             });
           },
           color: Colors.blueAccent,
@@ -174,7 +176,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                     'User pressed Start Game button, save the player name to the user and take them to the score card view.',
                   );
                   if (!_formKey.currentState.validate() ||
-                      _user.level == null) {
+                      _user.playerSkill == null) {
                     return;
                   }
                   _formKey.currentState.save();

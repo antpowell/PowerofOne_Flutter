@@ -16,10 +16,11 @@ const kLabels = {
     'AST',
     'BLK',
     'TO',
+    'PF',
   ],
 };
 
-const kStandards = {
+const Map<String, dynamic> kStandards = {
   'hustle_points': {
     kPlayerCategory.PRO: {
       'STL': {'great': 2, 'poor': 0},

@@ -7,8 +7,8 @@ import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
 import 'package:power_one/Views/ScoreCard/points_section.dart';
 import 'package:power_one/Views/dialogs.dart';
-import 'package:power_one/models/PO1Feedback.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1Feedback.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:developer' as dev;

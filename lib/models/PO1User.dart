@@ -1,6 +1,8 @@
-import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'dart:developer' as dev;
+
+import 'PO1Level.dart';
+import 'PO1PlayerSkill.dart';
 
 class PO1User {
   static final PO1User _instance = PO1User._init();
@@ -36,11 +38,20 @@ split('.'): [0]: e@g, [1].com
     _score = score;
   }
 
-  kPlayerLevel _level;
-  kPlayerLevel get level => _level;
-  setLevel(kPlayerLevel level) {
-    _level = level;
+  PO1PlayerSkill _playerSkill;
+  PO1PlayerSkill get playerSkill => _playerSkill;
+  set playerSkill(PO1PlayerSkill playerSkill) {
+    _playerSkill = playerSkill;
   }
+
+  PO1Levels _playerLevel;
+  PO1Levels get playerLevel => (_playerSkill == PO1PlayerSkill.elementry ||
+          _playerSkill == PO1PlayerSkill.middle)
+      ? PO1Levels.GRADE
+      : (_playerSkill == PO1PlayerSkill.high ||
+              _playerSkill == PO1PlayerSkill.college)
+          ? PO1Levels.COLHIGH
+          : PO1Levels.PRO;
 
   factory PO1User() {
     return _instance;
@@ -54,7 +65,7 @@ split('.'): [0]: e@g, [1].com
     // TODO: clear email when user signs out
     // _email = null;
     _playerName = null;
-    _level = null;
+    _playerLevel = null;
     _score.clear();
     dev.log('Local user data cleared');
   }
