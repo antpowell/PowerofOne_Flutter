@@ -232,7 +232,6 @@ class PO1Score extends ChangeNotifier {
       },
     });
 
-    print(ServerValue.timestamp['.sv']);
     return {
       "ServerTime": ServerValue.timestamp,
       "ReportCard": reportCard,
