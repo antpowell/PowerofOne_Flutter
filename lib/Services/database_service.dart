@@ -22,6 +22,7 @@ class FBDBService {
     gameRef
         .child(_user.emailSignature())
         .child(_user.playerName)
+        .child(new DateTime.now().toString().replaceAll('.', ':'))
         .push()
         .set(_user.score.toJSON());
 
