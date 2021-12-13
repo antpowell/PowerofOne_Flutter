@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
@@ -230,7 +231,10 @@ class PO1Score extends ChangeNotifier {
         ..._pointsMap,
       },
     });
+
+    print(ServerValue.timestamp['.sv']);
     return {
+      "ServerTime": ServerValue.timestamp,
       "ReportCard": reportCard,
       "ScoreCard": _mapToJSON(),
       "PlayerLevel": PO1User().level.toShortString(),
