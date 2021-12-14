@@ -5,8 +5,8 @@ import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/dialogs.dart';
-import 'package:power_one/models/PO1Feedback.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1Feedback.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class FeedBack extends StatelessWidget {

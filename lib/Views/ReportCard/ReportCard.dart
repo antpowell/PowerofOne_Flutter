@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/dialogs.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 
 import 'dart:developer' as dev;

@@ -3,7 +3,7 @@ import 'package:power_one/InputArea.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 
@@ -125,7 +125,10 @@ class PlayerNameScene extends StatelessWidget {
                       debugPrint(
                           'User pressed Start Game button, save the player name to the user and take them to the score card view.');
                       // PO1Score().assignUser();
-                      Navigator.pushNamed(context, ScoreCard.id,);
+                      Navigator.pushNamed(
+                        context,
+                        ScoreCard.id,
+                      );
                     }),
                   ],
                 ),

@@ -1,4 +1,4 @@
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_one/Models/PO1User.dart';
 
 const scoreing = {
   'amature': {'A': 9, 'B': 7, 'C': 5, 'D': 3},
