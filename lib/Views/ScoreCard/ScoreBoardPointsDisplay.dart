@@ -24,42 +24,46 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _scoreBoardLabelText(activityName),
-        Consumer<PO1Score>(
-          builder: (context, activitiesProvider, child) => Container(
-            child: (activitiesProvider.getActivity(activityName) is Point)
-                ? Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4, right: 4),
-                        child: _scoreBoardPointText(
-                            activitiesProvider
-                                .getActivity(activityName)
-                                .pos
-                                .toString(),
-                            Colors.green),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4, right: 4),
-                        child: _scoreBoardPointText(
-                            activitiesProvider
-                                .getActivity(activityName)
-                                .neg
-                                .toString(),
-                            Colors.red),
-                      ),
-                    ],
-                  )
-                : _scoreBoardPointText(
-                    activitiesProvider.getActivity(activityName).pos.toString(),
-                    Colors.white),
-          ),
-        ),
-      ],
+    return Consumer<PO1Score>(
+      builder: (context, activitiesProvider, child) => Container(
+        child: (activitiesProvider.getActivity(activityName) is Point)
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 1),
+                    child: _scoreBoardPointText(
+                        activitiesProvider
+                            .getActivity(activityName)
+                            .pos
+                            .toString(),
+                        Colors.green),
+                  ),
+                  _scoreBoardLabelText(activityName),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 1),
+                    child: _scoreBoardPointText(
+                        activitiesProvider
+                            .getActivity(activityName)
+                            .neg
+                            .toString(),
+                        Colors.red),
+                  ),
+                ],
+              )
+            : Column(
+                children: [
+                  _scoreBoardLabelText(activityName),
+                  _scoreBoardPointText(
+                      activitiesProvider
+                          .getActivity(activityName)
+                          .pos
+                          .toString(),
+                      Colors.white),
+                ],
+              ),
+      ),
     );
   }
 }
