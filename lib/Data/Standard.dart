@@ -226,4 +226,64 @@ class Standard {
             .where((element) => element.containsKey(_user.playerLevel))
             .first[_user.playerLevel],
       };
+
+  generateBaseStandardsForUserLevel() {
+    return {
+      'stl': {
+        'great': stl.great
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'good': stl.good
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'average': stl.average
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+      },
+      'rb': {
+        'great': rb.great
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'good': rb.good
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'average': rb.average
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+      },
+      'ast': {
+        'great': ast.great
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'good': ast.good
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'average': ast.average
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+      },
+      'blk': {
+        'great': blk.great
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'good': blk.good
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'average': blk.average
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+      },
+      'to': {
+        'great': to.great
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'good': to.good
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+        'average': to.average
+            .where((element) => element.containsKey(PO1User().playerLevel))
+            .first[PO1User().playerLevel],
+      },
+    };
+  }
 }

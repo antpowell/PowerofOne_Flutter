@@ -35,6 +35,22 @@ When running this application on a different system from the one it was created 
 
 - id: com.powerofone.basketball
 
+## Android
+
+### Build
+
+- [Flutter docs](https://docs.flutter.dev/deployment/android)
+
+#### for development
+
+- on physical device
+  - connect device that has developer mode unlocked and usb debugging enabled
+  - run `flutter install`
+
+#### for production
+
+- run `flutter build appbundle`
+
 ### Downloads
 
 - Flutter

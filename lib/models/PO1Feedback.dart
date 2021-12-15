@@ -1,5 +1,4 @@
 import 'package:power_one/Data/Standard.dart';
-import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Models/PO1User.dart';
@@ -27,7 +26,6 @@ class PO1Feedback {
       switch (key) {
         case 'STL':
           {
-            print(_standards.getSteals['great']);
             if (value.pos >= _standards.getSteals['great']) {
               _hustlepointsfeedback[key] = "Keep up the Good Work";
               break;
@@ -54,10 +52,10 @@ class PO1Feedback {
           }
         case 'BLK':
           {
-            if (value.pos >= _standards.getBlocks['great']) {
+            if (value.pos >= _standards.getBlocks['good']) {
               _hustlepointsfeedback[key] = "Keep up the Good Work";
               break;
-            } else if (value.pos == _standards.getBlocks['good']) {
+            } else if (value.pos < _standards.getBlocks['good']) {
               _hustlepointsfeedback[key] = "Be Aggressive";
               break;
             }
