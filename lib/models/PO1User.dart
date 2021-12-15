@@ -13,10 +13,11 @@ class PO1User {
     _email = email;
   }
 
-/* 
-e@g.com
-split('.'): [0]: e@g, [1].com
+/**
+ * e@g.com
+ * split('.'): [0]: e@g, [1].com
  */
+
   String emailSignature() => _email.split('.')[0];
 
   String _playerName;
