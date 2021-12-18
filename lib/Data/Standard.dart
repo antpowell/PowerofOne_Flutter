@@ -2,7 +2,6 @@ import 'package:power_one/Models/PO1HustlePoint.dart';
 import 'package:power_one/Models/PO1Level.dart';
 import 'package:power_one/Models/PO1Point.dart';
 import 'package:power_one/Models/PO1User.dart';
-import 'package:power_one/Objects/Point.dart';
 
 class Standard {
   HustlePoint stl;
@@ -285,5 +284,13 @@ class Standard {
             .first[PO1User().playerLevel],
       },
     };
+  }
+
+  static miniThresholdByPlayerLevel() {
+    return PO1User().playerLevel == PO1Levels.GRADE
+        ? 5
+        : PO1User().playerLevel == PO1Levels.COLHIGH
+            ? 9
+            : 13;
   }
 }

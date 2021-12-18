@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Data/Standard.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Models/PO1PlayerSkill.dart';
 import 'package:power_one/Objects/Play.dart';
@@ -197,7 +198,8 @@ class PO1Score extends ChangeNotifier {
   }
 
   bool metPlaytimeThreshold() {
-    if (history.length >= minimumThreshold) {
+    if ((history.length - _hustlePointsMap['PF'].pos) >=
+        Standard.miniThresholdByPlayerLevel()) {
       return true;
     }
 
