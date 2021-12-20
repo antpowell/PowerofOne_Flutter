@@ -56,3 +56,31 @@ When running this application on a different system from the one it was created 
 - Flutter
 - Android Studio
 - xCode
+
+## Secure config files
+
+### Using Codemagic (Loading Firebase configuration)
+
+- [article](https://docs.codemagic.io/variables/environment-variable-groups/#storing-sensitive-valuesfiles)
+
+Commands
+
+General
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("your_file_name_.extension")) | Set-Clipboard
+```
+
+Mine
+
+- ios
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("D:\Engineering\PowerofOne_Flutter\ios\Runner\Info.plist")) | Set-Clipboard
+```
+
+- android
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("D:\Engineering\PowerofOne_Flutter\android\app\google-services.json")) | Set-Clipboard
+```
