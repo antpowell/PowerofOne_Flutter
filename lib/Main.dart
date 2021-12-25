@@ -18,12 +18,16 @@ import 'package:provider/provider.dart';
 
 import 'dart:developer' as dev;
 
+import 'firebase_options.dart';
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   runApp(Power1());
