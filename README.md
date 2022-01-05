@@ -37,6 +37,8 @@ When running this application on a different system from the one it was created 
 
 ## Android
 
+id: com.power_of_one.basketball
+
 ### Build
 
 - [Flutter docs](https://docs.flutter.dev/deployment/android)
