@@ -52,6 +52,7 @@ dependencies:
 
   #In app purchases
   in_app_purchase: ^1.0.6
+  purchases_flutter: ^3.9.1
 
 dev_dependencies:
   flutter_test:
