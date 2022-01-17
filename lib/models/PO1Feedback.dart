@@ -27,65 +27,84 @@ class PO1Feedback {
         case 'STL':
           {
             if (value.pos >= _standards.getSteals['great']) {
-              _hustlepointsfeedback[key] = "Keep up the Good Work";
+              _hustlepointsfeedback[key] = 'Excellent Job!';
               break;
             } else if (value.pos >= _standards.getSteals['good']) {
+              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              break;
+            } else if (value.pos >= _standards.getSteals['average']) {
               _hustlepointsfeedback[key] = 'Average; Keep Hands Up';
               break;
             } else {
               _hustlepointsfeedback[key] = 'Improvement Needed; Work Harder';
+              break;
             }
             break;
           }
         case 'RB':
           {
             if (value.pos >= _standards.getRebounds['great']) {
-              _hustlepointsfeedback[key] = "Keep up the Good Work";
+              _hustlepointsfeedback[key] = 'Excellent Job!';
               break;
             } else if (value.pos >= _standards.getRebounds['good']) {
-              _hustlepointsfeedback[key] = "Average; Hit the Boards Harder";
+              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              break;
+            } else if (value.pos >= _standards.getRebounds['average']) {
+              _hustlepointsfeedback[key] = 'Average; Hit the Boards Harder';
               break;
             } else {
-              _hustlepointsfeedback[key] = "Improvement Needed;Work Harder";
+              _hustlepointsfeedback[key] = 'Improvement Needed; Work Harder';
+              break;
             }
             break;
           }
         case 'BLK':
           {
-            if (value.pos >= _standards.getBlocks['good']) {
-              _hustlepointsfeedback[key] = "Keep up the Good Work";
+            if (value.pos >= _standards.getBlocks['great']) {
+              _hustlepointsfeedback[key] = 'Excellent Job!';
               break;
-            } else if (value.pos < _standards.getBlocks['good']) {
-              _hustlepointsfeedback[key] = "Be Aggressive";
+            } else if (value.pos >= _standards.getBlocks['good']) {
+              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              break;
+            } else if (value.pos >= _standards.getBlocks['average']) {
+              break;
+            } else {
+              _hustlepointsfeedback[key] = 'Be Aggressive';
               break;
             }
             break;
           }
         case 'TO':
           {
-            if (value.pos >= _standards.getTurnOvers['great']) {
-              _hustlepointsfeedback[key] = "Keep up the Good Work";
+            if (value.pos == _standards.getTurnOvers['great']) {
+              _hustlepointsfeedback[key] = 'Excellent Job!';
               break;
-            } else if (value.pos >= _standards.getTurnOvers['good']) {
-              _hustlepointsfeedback[key] = "Average; Protect the Ball";
+            } else if (value.pos <= _standards.getTurnOvers['good']) {
+              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              break;
+            } else if (value.pos <= _standards.getTurnOvers['average']) {
+              _hustlepointsfeedback[key] = 'Average; Protect the Ball';
               break;
             } else {
               _hustlepointsfeedback[key] =
-                  "Improvement Needed; Work on Protecting Ball";
+                  'Improvement Needed; Work on Protecting Ball';
             }
             break;
           }
         case 'AST':
           {
             if (value.pos >= _standards.getAssists['great']) {
-              _hustlepointsfeedback[key] = "Keep being a Team Player";
+              _hustlepointsfeedback[key] = 'Excellent Job!';
               break;
             } else if (value.pos >= _standards.getAssists['good']) {
-              _hustlepointsfeedback[key] = "Average;Get Assists Up!";
+              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              break;
+            } else if (value.pos >= _standards.getAssists['average']) {
+              _hustlepointsfeedback[key] = 'Average;Get Assists Up!';
               break;
             } else {
               _hustlepointsfeedback[key] =
-                  "Improvement Needed; Focus on Passing";
+                  'Improvement Needed; Focus on Passing';
             }
             break;
           }
@@ -103,24 +122,30 @@ class PO1Feedback {
           case 'FG':
             {
               if (value >= _standards.feildGoal['great']) {
-                _scoredpointsfeedback[key] = "Keep up the good work";
+                _scoredpointsfeedback[key] = 'Excellent Job!';
                 break;
               } else if (value >= _standards.feildGoal['good']) {
+                _scoredpointsfeedback[key] = 'Keep up the good work';
+                break;
+              } else if (value >= _standards.feildGoal['average']) {
                 _scoredpointsfeedback[key] =
                     'Currently Average; Increase your skill level';
                 break;
               } else {
                 _scoredpointsfeedback[key] =
-                    "Improvement Needed; Focus on shooting more field goals in practice";
+                    'Improvement Needed; Focus on shooting more field goals in practice';
               }
             }
             break;
           case '1PT':
             {
               if (value >= _standards.freeThrow['great']) {
-                _scoredpointsfeedback[key] = "Keep up the good work";
+                _scoredpointsfeedback[key] = 'Excellent Job!';
                 break;
               } else if (value >= _standards.freeThrow['good']) {
+                _scoredpointsfeedback[key] = 'Keep up the good work';
+                break;
+              } else if (value >= _standards.freeThrow['average']) {
                 _scoredpointsfeedback[key] =
                     'Currently Average; Increase your skill level';
                 break;

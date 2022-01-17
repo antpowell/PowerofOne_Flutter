@@ -72,7 +72,7 @@ class PO1Grade {
             ? 'B'
             : (pO1Score >= gradeConverterByPlayerLevel()['C'])
                 ? 'C'
-                : (pO1Score > gradeConverterByPlayerLevel()['D'])
+                : (pO1Score >= gradeConverterByPlayerLevel()['D'])
                     ? 'D'
                     : 'F';
   }
