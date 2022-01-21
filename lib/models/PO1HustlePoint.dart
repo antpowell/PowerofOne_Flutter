@@ -7,6 +7,7 @@ class HustlePoint {
     Set<Map<PO1Levels, num>> great,
     Set<Map<PO1Levels, num>> good,
     Set<Map<PO1Levels, num>> average,
+    Set<Map<PO1FeedbackLevel, String>> feedback,
   }) {
     _great = great;
     _good = good;

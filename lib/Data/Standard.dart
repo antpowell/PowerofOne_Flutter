@@ -4,12 +4,7 @@ import 'package:power_one/Models/PO1Point.dart';
 import 'package:power_one/Models/PO1User.dart';
 
 class Standard {
-  HustlePoint stl;
-  HustlePoint rb;
-  HustlePoint ast;
-  HustlePoint blk;
-  HustlePoint to;
-  HustlePoint pf;
+  HustlePoint stl, rb, ast, blk, to, pf;
   PO1Point fg, ft;
 
   PO1User _user = new PO1User();
@@ -26,91 +21,96 @@ class Standard {
     this._user = _user;
   }
 
-  final HustlePoint _stl = new HustlePoint(
-    great: {
-      {PO1Levels.PRO: 4},
-      {PO1Levels.COLHIGH: 4},
-      {PO1Levels.GRADE: 4},
-    },
-    good: {
-      {PO1Levels.PRO: 3},
-      {PO1Levels.COLHIGH: 3},
-      {PO1Levels.GRADE: 3},
-    },
-    average: {
-      {PO1Levels.PRO: 2},
-      {PO1Levels.COLHIGH: 2},
-      {PO1Levels.GRADE: 2},
-    },
-  );
-  final HustlePoint _rb = new HustlePoint(
-    great: {
-      {PO1Levels.PRO: 10},
-      {PO1Levels.COLHIGH: 8},
-      {PO1Levels.GRADE: 7},
-    },
-    good: {
-      {PO1Levels.PRO: 8},
-      {PO1Levels.COLHIGH: 6},
-      {PO1Levels.GRADE: 5},
-    },
-    average: {
-      {PO1Levels.PRO: 6},
-      {PO1Levels.COLHIGH: 4},
-      {PO1Levels.GRADE: 3},
-    },
-  );
-  final HustlePoint _ast = new HustlePoint(
-    great: {
-      {PO1Levels.PRO: 9},
-      {PO1Levels.COLHIGH: 8},
-      {PO1Levels.GRADE: 7},
-    },
-    good: {
-      {PO1Levels.PRO: 7},
-      {PO1Levels.COLHIGH: 6},
-      {PO1Levels.GRADE: 5},
-    },
-    average: {
-      {PO1Levels.PRO: 5},
-      {PO1Levels.COLHIGH: 4},
-      {PO1Levels.GRADE: 3},
-    },
-  );
-  final HustlePoint _blk = new HustlePoint(
-    great: {
-      {PO1Levels.PRO: 3},
-      {PO1Levels.COLHIGH: 3},
-      {PO1Levels.GRADE: 3},
-    },
-    good: {
-      {PO1Levels.PRO: 2},
-      {PO1Levels.COLHIGH: 2},
-      {PO1Levels.GRADE: 2},
-    },
-    average: {
-      {PO1Levels.PRO: 1},
-      {PO1Levels.COLHIGH: 1},
-      {PO1Levels.GRADE: 1},
-    },
-  );
-  final HustlePoint _to = new HustlePoint(
-    great: {
-      {PO1Levels.PRO: 0},
-      {PO1Levels.COLHIGH: 0},
-      {PO1Levels.GRADE: 0},
-    },
-    good: {
-      {PO1Levels.PRO: 1},
-      {PO1Levels.COLHIGH: 1},
-      {PO1Levels.GRADE: 1},
-    },
-    average: {
-      {PO1Levels.PRO: 2},
-      {PO1Levels.COLHIGH: 2},
-      {PO1Levels.GRADE: 2},
-    },
-  );
+  final HustlePoint _stl = new HustlePoint(great: {
+    {PO1Levels.PRO: 4},
+    {PO1Levels.COLHIGH: 4},
+    {PO1Levels.GRADE: 4},
+  }, good: {
+    {PO1Levels.PRO: 3},
+    {PO1Levels.COLHIGH: 3},
+    {PO1Levels.GRADE: 3},
+  }, average: {
+    {PO1Levels.PRO: 2},
+    {PO1Levels.COLHIGH: 2},
+    {PO1Levels.GRADE: 2},
+  }, feedback: {
+    {PO1FeedbackLevel.GREAT: 'Excellent job!'},
+    {PO1FeedbackLevel.GOOD: 'Good job; active hands'},
+    {PO1FeedbackLevel.AVERAGE: 'Need to be more active'},
+    {PO1FeedbackLevel.BELOW_AVERAGE: 'Work harder and be more active'},
+  });
+  final HustlePoint _rb = new HustlePoint(great: {
+    {PO1Levels.PRO: 10},
+    {PO1Levels.COLHIGH: 8},
+    {PO1Levels.GRADE: 7},
+  }, good: {
+    {PO1Levels.PRO: 8},
+    {PO1Levels.COLHIGH: 6},
+    {PO1Levels.GRADE: 5},
+  }, average: {
+    {PO1Levels.PRO: 6},
+    {PO1Levels.COLHIGH: 4},
+    {PO1Levels.GRADE: 3},
+  }, feedback: {
+    {PO1FeedbackLevel.GREAT: 'Excellent job!'},
+    {PO1FeedbackLevel.GOOD: 'Good job keep working'},
+    {PO1FeedbackLevel.AVERAGE: 'Need to hit the boards harder'},
+    {PO1FeedbackLevel.BELOW_AVERAGE: 'Need to work harder'},
+  });
+  final HustlePoint _ast = new HustlePoint(great: {
+    {PO1Levels.PRO: 9},
+    {PO1Levels.COLHIGH: 8},
+    {PO1Levels.GRADE: 7},
+  }, good: {
+    {PO1Levels.PRO: 7},
+    {PO1Levels.COLHIGH: 6},
+    {PO1Levels.GRADE: 5},
+  }, average: {
+    {PO1Levels.PRO: 5},
+    {PO1Levels.COLHIGH: 4},
+    {PO1Levels.GRADE: 3},
+  }, feedback: {
+    {PO1FeedbackLevel.GREAT: 'Excellent ball movement!'},
+    {PO1FeedbackLevel.GOOD: 'Good Job; Way to move the ball'},
+    {PO1FeedbackLevel.AVERAGE: 'Better ball movement'},
+    {PO1FeedbackLevel.BELOW_AVERAGE: 'Imrpovement needed; focus on passing'},
+  });
+  final HustlePoint _blk = new HustlePoint(great: {
+    {PO1Levels.PRO: 3},
+    {PO1Levels.COLHIGH: 3},
+    {PO1Levels.GRADE: 3},
+  }, good: {
+    {PO1Levels.PRO: 2},
+    {PO1Levels.COLHIGH: 2},
+    {PO1Levels.GRADE: 2},
+  }, average: {
+    {PO1Levels.PRO: 1},
+    {PO1Levels.COLHIGH: 1},
+    {PO1Levels.GRADE: 1},
+  }, feedback: {
+    {PO1FeedbackLevel.GREAT: 'Excellent job!'},
+    {PO1FeedbackLevel.GOOD: 'Good job stay active'},
+    {PO1FeedbackLevel.AVERAGE: 'Keep your hands up'},
+    {PO1FeedbackLevel.BELOW_AVERAGE: 'Need to work harder'},
+  });
+  final HustlePoint _to = new HustlePoint(great: {
+    {PO1Levels.PRO: 0},
+    {PO1Levels.COLHIGH: 0},
+    {PO1Levels.GRADE: 0},
+  }, good: {
+    {PO1Levels.PRO: 1},
+    {PO1Levels.COLHIGH: 1},
+    {PO1Levels.GRADE: 1},
+  }, average: {
+    {PO1Levels.PRO: 2},
+    {PO1Levels.COLHIGH: 2},
+    {PO1Levels.GRADE: 2},
+  }, feedback: {
+    {PO1FeedbackLevel.GREAT: 'Your doing a great job!'},
+    {PO1FeedbackLevel.GOOD: 'Good ball handling; keep up the good work'},
+    {PO1FeedbackLevel.AVERAGE: 'Watch your passes protect the ball'},
+    {PO1FeedbackLevel.BELOW_AVERAGE: 'Take better care of the ball'},
+  });
 
   Map<String, num> get getSteals => {
         'great': stl.great
