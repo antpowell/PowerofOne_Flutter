@@ -1,4 +1,6 @@
 import 'package:power_one/Data/Standard.dart';
+import 'package:power_one/Models/PO1HustlePoint.dart';
+import 'package:power_one/Models/PO1Level.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Models/PO1User.dart';
@@ -20,94 +22,120 @@ class PO1Feedback {
   }
 
   static Map<String, String> _hustlePointsfeedback(
-    Map<String, Play> totalhustlepoints,
+    Map<EHustlePoint, Play> totalhustlepoints,
   ) {
     totalhustlepoints.forEach((key, value) {
       switch (key) {
-        case 'STL':
+        case EHustlePoint.STL:
           {
             if (value.pos >= _standards.getSteals['great']) {
-              _hustlepointsfeedback[key] = 'Excellent Job!';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GREAT);
               break;
             } else if (value.pos >= _standards.getSteals['good']) {
-              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GOOD);
               break;
             } else if (value.pos >= _standards.getSteals['average']) {
-              _hustlepointsfeedback[key] = 'Average; Keep Hands Up';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.AVERAGE);
               break;
             } else {
-              _hustlepointsfeedback[key] = 'Improvement Needed; Work Harder';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.BELOW_AVERAGE);
               break;
             }
             break;
           }
-        case 'RB':
+        case EHustlePoint.RB:
           {
             if (value.pos >= _standards.getRebounds['great']) {
-              _hustlepointsfeedback[key] = 'Excellent Job!';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GREAT);
               break;
             } else if (value.pos >= _standards.getRebounds['good']) {
-              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GOOD);
               break;
             } else if (value.pos >= _standards.getRebounds['average']) {
-              _hustlepointsfeedback[key] = 'Average; Hit the Boards Harder';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.AVERAGE);
               break;
             } else {
-              _hustlepointsfeedback[key] = 'Improvement Needed; Work Harder';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.BELOW_AVERAGE);
               break;
             }
             break;
           }
-        case 'BLK':
+        case EHustlePoint.BLK:
           {
             if (value.pos >= _standards.getBlocks['great']) {
-              _hustlepointsfeedback[key] = 'Excellent Job!';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GREAT);
+              ;
               break;
             } else if (value.pos >= _standards.getBlocks['good']) {
-              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GOOD);
+              ;
               break;
             } else if (value.pos >= _standards.getBlocks['average']) {
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.AVERAGE);
+              ;
               break;
             } else {
-              _hustlepointsfeedback[key] = 'Be Aggressive';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.BELOW_AVERAGE);
+              ;
               break;
             }
             break;
           }
-        case 'TO':
+        case EHustlePoint.TO:
           {
             if (value.pos == _standards.getTurnOvers['great']) {
-              _hustlepointsfeedback[key] = 'Excellent Job!';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GREAT);
               break;
             } else if (value.pos <= _standards.getTurnOvers['good']) {
-              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GOOD);
               break;
             } else if (value.pos <= _standards.getTurnOvers['average']) {
-              _hustlepointsfeedback[key] = 'Average; Protect the Ball';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.AVERAGE);
               break;
             } else {
-              _hustlepointsfeedback[key] =
-                  'Improvement Needed; Work on Protecting Ball';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.BELOW_AVERAGE);
             }
             break;
           }
-        case 'AST':
+        case EHustlePoint.AST:
           {
             if (value.pos >= _standards.getAssists['great']) {
-              _hustlepointsfeedback[key] = 'Excellent Job!';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GREAT);
               break;
             } else if (value.pos >= _standards.getAssists['good']) {
-              _hustlepointsfeedback[key] = 'Keep up the Good Work';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.GOOD);
               break;
             } else if (value.pos >= _standards.getAssists['average']) {
-              _hustlepointsfeedback[key] = 'Average;Get Assists Up!';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.AVERAGE);
               break;
             } else {
-              _hustlepointsfeedback[key] =
-                  'Improvement Needed; Focus on Passing';
+              _hustlepointsfeedback[key.name] =
+                  _standards.getFeedback(key, PO1FeedbackLevel.BELOW_AVERAGE);
             }
             break;
           }
+        case EHustlePoint.PF:
+          // do nothing; no points to calculate atm
+          break;
       }
     });
     return _hustlepointsfeedback;
