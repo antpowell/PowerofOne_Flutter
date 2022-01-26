@@ -52,7 +52,7 @@ class PO1Score extends ChangeNotifier {
 
   missed(IScore activity) {
     _pointsMap[EPoint.values.find(activity.title)] = activity.miss();
-    history.addLast({"miss": _pointsMap[activity.title]});
+    history.addLast({"miss": _pointsMap[EPoint.values.find(activity.title)]});
     debugPrint('Action: $activity : neg-> ${activity.neg}');
     notifyListeners();
   }

@@ -185,7 +185,7 @@ class Standard {
     {PO1FeedbackLevel.GOOD: 'Good job; Keep up the good work'},
     {
       PO1FeedbackLevel.AVERAGE:
-          'Improve your fee throws and follow through on your release'
+          'Improve your free throws and follow through on your release'
     },
     {
       PO1FeedbackLevel.BELOW_AVERAGE: 'Focus more on your free throws and relax'
@@ -206,7 +206,7 @@ class Standard {
   }, feedback: {
     {PO1FeedbackLevel.GREAT: 'Excellent shooting!'},
     {PO1FeedbackLevel.GOOD: 'You are taking good shots'},
-    {PO1FeedbackLevel.AVERAGE: 'Followw through on your shot'},
+    {PO1FeedbackLevel.AVERAGE: 'Follow through on your shot'},
     {PO1FeedbackLevel.BELOW_AVERAGE: 'Make better shot selections'},
   });
 
@@ -233,7 +233,8 @@ class Standard {
             .first[_user.playerLevel],
       };
 
-  String getFeedback(EHustlePoint forPoint, PO1FeedbackLevel atLevel) {
+  String getFeedbackForHustlePoints(
+      EHustlePoint forPoint, PO1FeedbackLevel atLevel) {
     Map<PO1FeedbackLevel, String> results;
     switch (forPoint) {
       case EHustlePoint.STL:
@@ -258,6 +259,21 @@ class Standard {
       case EHustlePoint.AST:
         results =
             _ast.feedback.where((element) => element.containsKey(atLevel)).last;
+        break;
+    }
+    return results.values.last;
+  }
+
+  String getFeedbackForPoints(String forPoint, PO1FeedbackLevel atLevel) {
+    Map<PO1FeedbackLevel, String> results;
+    switch (forPoint) {
+      case 'FG':
+        results =
+            _fg.feedback.where((element) => element.containsKey(atLevel)).last;
+        break;
+      case 'FT':
+        results =
+            _ft.feedback.where((element) => element.containsKey(atLevel)).last;
         break;
     }
     return results.values.last;
