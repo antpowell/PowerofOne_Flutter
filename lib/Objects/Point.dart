@@ -1,7 +1,10 @@
+import 'package:power_one/Models/PO1Point.dart';
+
 import 'Score/Score.dart';
 
 class Point extends IScore {
-  Point(String title, [int pos = 0, int neg = 0]) : super(title, pos, neg);
+  Point(EPoint title, [int pos = 0, int neg = 0])
+      : super(title.translatedName, pos, neg);
 
   // @override
   // Point miss() {

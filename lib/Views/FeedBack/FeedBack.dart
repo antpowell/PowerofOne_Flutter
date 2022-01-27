@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Models/PO1HustlePoint.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
@@ -135,7 +135,8 @@ class FeedBack extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                              _user.score.hustlePointsMap['RB'].pos.toString(),
+                              _user.score.hustlePointsMap[EHustlePoint.RB].pos
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -167,7 +168,8 @@ class FeedBack extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                              _user.score.hustlePointsMap['BLK'].pos.toString(),
+                              _user.score.hustlePointsMap[EHustlePoint.BLK].pos
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -198,7 +200,8 @@ class FeedBack extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                              _user.score.hustlePointsMap['STL'].pos.toString(),
+                              _user.score.hustlePointsMap[EHustlePoint.STL].pos
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -229,7 +232,8 @@ class FeedBack extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                              _user.score.hustlePointsMap['AST'].pos.toString(),
+                              _user.score.hustlePointsMap[EHustlePoint.AST].pos
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -260,7 +264,8 @@ class FeedBack extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                              _user.score.hustlePointsMap['TO'].pos.toString(),
+                              _user.score.hustlePointsMap[EHustlePoint.TO].pos
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
