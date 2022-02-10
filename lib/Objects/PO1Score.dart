@@ -3,8 +3,9 @@ import 'dart:collection';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Data/Standard.dart';
-import 'package:power_one/Data/constants.dart';
+import 'package:power_one/Models/PO1HustlePoint.dart';
 import 'package:power_one/Models/PO1PlayerSkill.dart';
+import 'package:power_one/Models/PO1Point.dart';
 import 'package:power_one/Objects/Play.dart';
 import 'package:power_one/Objects/Point.dart';
 import 'package:power_one/Models/PO1Feedback.dart';
@@ -14,21 +15,14 @@ import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
 
-/* Skeleton for differnt player levels */
-// enum _powerOfOneGrades { A, B, C, D, F }
-// enum _playerLevel { elementry, middle, college, pro }
-
 class PO1Score extends ChangeNotifier {
-  static final int minimumThreshold = 10;
-  // static PO1User _user;
-
   Queue<Map<String, IScore>> history = new Queue();
 
-  LinkedHashMap<String, Point> _pointsMap = new LinkedHashMap();
-  LinkedHashMap<String, Point> get pointsMap => _pointsMap;
+  LinkedHashMap<EPoint, Point> _pointsMap = new LinkedHashMap();
+  LinkedHashMap<EPoint, Point> get pointsMap => _pointsMap;
 
-  LinkedHashMap<String, Play> _hustlePointsMap = new LinkedHashMap();
-  LinkedHashMap<String, Play> get hustlePointsMap => _hustlePointsMap;
+  LinkedHashMap<EHustlePoint, Play> _hustlePointsMap = new LinkedHashMap();
+  LinkedHashMap<EHustlePoint, Play> get hustlePointsMap => _hustlePointsMap;
 
   List<IScore> improvementAreas = [];
 
@@ -36,18 +30,19 @@ class PO1Score extends ChangeNotifier {
     init();
   }
 
-  // assignUser(PO1User user) {
-  //   _user = user;
-  // }
-
   made(IScore activity) {
     Map<String, IScore> madeHistoryEvent;
     if (_hustlePointsMap.containsValue(activity)) {
-      _hustlePointsMap[activity.title] = activity.make();
-      madeHistoryEvent = {"made": _hustlePointsMap[activity.title]};
+      _hustlePointsMap[EHustlePoint.values.find(activity.title)] =
+          activity.make();
+      madeHistoryEvent = {
+        "made": _hustlePointsMap[EHustlePoint.values.find(activity.title)]
+      };
     } else {
-      _pointsMap[activity.title] = activity.make();
-      madeHistoryEvent = {"made": _pointsMap[activity.title]};
+      _pointsMap[EPoint.values.find(activity.title)] = activity.make();
+      madeHistoryEvent = {
+        "made": _pointsMap[EPoint.values.find(activity.title)]
+      };
     }
 
     debugPrint('Action: $activity : pos-> ${activity.pos}');
@@ -56,8 +51,8 @@ class PO1Score extends ChangeNotifier {
   }
 
   missed(IScore activity) {
-    _pointsMap[activity.title] = activity.miss();
-    history.addLast({"miss": _pointsMap[activity.title]});
+    _pointsMap[EPoint.values.find(activity.title)] = activity.miss();
+    history.addLast({"miss": _pointsMap[EPoint.values.find(activity.title)]});
     debugPrint('Action: $activity : neg-> ${activity.neg}');
     notifyListeners();
   }
@@ -68,11 +63,12 @@ class PO1Score extends ChangeNotifier {
       Map<String, IScore> undoEvent = history.removeLast();
       (undoEvent.keys.first == "made")
           ? (_hustlePointsMap.containsValue(undoEvent.values.first))
-              ? _hustlePointsMap[undoEvent.values.first.title] =
+              ? _hustlePointsMap[
+                      EHustlePoint.values.find(undoEvent.values.first.title)] =
                   undoEvent.values.first.undoMake()
-              : _pointsMap[undoEvent.values.first.title] =
+              : _pointsMap[EPoint.values.find(undoEvent.values.first.title)] =
                   undoEvent.values.first.undoMake()
-          : _pointsMap[undoEvent.values.first.title] =
+          : _pointsMap[EPoint.values.find(undoEvent.values.first.title)] =
               undoEvent.values.first.undoMiss();
     } else {
       dev.log("Empty history list",
@@ -94,30 +90,31 @@ class PO1Score extends ChangeNotifier {
   }
 
   init() {
-    kLabels["points"]?.forEach((element) {
-      _pointsMap[element] = new Point(element);
-    });
-    kLabels["hustle_points"]?.forEach((element) {
-      _hustlePointsMap[element] = new Play(element);
-    });
+    for (var value in EHustlePoint.values) {
+      _hustlePointsMap[value] = new Play(value);
+    }
+    for (var value in EPoint.values) {
+      _pointsMap[value] = new Point(value);
+    }
+
     history = new Queue();
     debugPrint('IPoints created!');
   }
 
   IScore getActivity(String activityName) {
-    return (_pointsMap.containsKey(activityName))
-        ? _pointsMap[activityName]
-        : _hustlePointsMap[activityName];
+    return (_pointsMap.containsKey(EPoint.values.find(activityName)))
+        ? _pointsMap[EPoint.values.find(activityName)]
+        : _hustlePointsMap[EHustlePoint.values.find(activityName)];
   }
 
-  Set<LinkedHashMap<String, IScore>> returnPowerOfOneCollectionSet() {
+  Set<LinkedHashMap<Enum, IScore>> returnPowerOfOneCollectionSet() {
     return {_hustlePointsMap, _pointsMap};
   }
 
   int getTotalPointsScored() {
     int totalPointsScored = 0;
     _pointsMap.forEach((key, value) {
-      switch (key) {
+      switch (key.translatedName) {
         case '1PT':
           totalPointsScored += value.pos;
           break;
@@ -136,32 +133,32 @@ class PO1Score extends ChangeNotifier {
     Map<String, double> _averages = {};
     _pointsMap.forEach(
       (key, value) {
-        switch (key) {
+        switch (key.translatedName) {
           case '1PT':
-            _averages[key] = value.avg();
+            _averages[key.translatedName] = value.avg();
             break;
           case '2PTs':
-            _averages[key] = value.avg();
+            _averages[key.translatedName] = value.avg();
             break;
           case '3PTs':
-            _averages[key] = value.avg();
+            _averages[key.translatedName] = value.avg();
             break;
         }
       },
     );
 
     // TODO: Check to see if this solution works for FG average
-    _averages['FG'] = ((_pointsMap['2PTs'].pos +
-                _pointsMap['3PTs'].pos +
-                _pointsMap['2PTs'].neg +
-                _pointsMap['3PTs'].neg) ==
+    _averages['FG'] = ((_pointsMap[EPoint.TWO].pos +
+                _pointsMap[EPoint.THREE].pos +
+                _pointsMap[EPoint.TWO].neg +
+                _pointsMap[EPoint.THREE].neg) ==
             0)
         ? 0.0
-        : ((_pointsMap['2PTs'].pos + _pointsMap['3PTs'].pos) /
-                (_pointsMap['2PTs'].pos +
-                    _pointsMap['3PTs'].pos +
-                    _pointsMap['2PTs'].neg +
-                    _pointsMap['3PTs'].neg) *
+        : ((_pointsMap[EPoint.TWO].pos + _pointsMap[EPoint.THREE].pos) /
+                (_pointsMap[EPoint.TWO].pos +
+                    _pointsMap[EPoint.THREE].pos +
+                    _pointsMap[EPoint.TWO].neg +
+                    _pointsMap[EPoint.THREE].neg) *
                 100)
             .roundToDouble();
 
@@ -178,7 +175,7 @@ class PO1Score extends ChangeNotifier {
       }
     });
     _hustlePointsMap.forEach((key, value) {
-      if (key == 'TO') {
+      if (key == EHustlePoint.TO) {
         powerOfOneScore -= value.total();
       } else {
         powerOfOneScore += value.total();
@@ -198,7 +195,7 @@ class PO1Score extends ChangeNotifier {
   }
 
   bool metPlaytimeThreshold() {
-    if ((history.length - _hustlePointsMap['PF'].pos) >=
+    if ((history.length - _hustlePointsMap[EHustlePoint.PF].pos) >=
         Standard.miniThresholdByPlayerLevel()) {
       return true;
     }
@@ -246,10 +243,10 @@ class PO1Score extends ChangeNotifier {
   Map _mapToJSON() {
     Map<String, Map<String, int>> jsonMap = Map();
     _hustlePointsMap.forEach((key, value) {
-      jsonMap[key] = {'made': value.pos};
+      jsonMap[key.name] = {'made': value.pos};
     });
     _pointsMap.forEach((key, value) {
-      jsonMap[key] = {'made': value.pos, 'missed': value.neg};
+      jsonMap[key.name] = {'made': value.pos, 'missed': value.neg};
     });
 
     return jsonMap;

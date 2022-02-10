@@ -1,1 +1,2 @@
 enum PO1Levels { PRO, COLHIGH, GRADE }
+enum PO1FeedbackLevel { GREAT, GOOD, AVERAGE, BELOW_AVERAGE }

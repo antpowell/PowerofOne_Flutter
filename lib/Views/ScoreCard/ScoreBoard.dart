@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_one/Models/PO1Point.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoardPointsDisplay.dart';
@@ -9,15 +10,15 @@ class ScoreBoard extends StatelessWidget {
   List<Widget> _singleScoreSection = [];
 
   _createSignleScoreSectionLists(PO1Score a) {
-    a.hustlePointsMap.keys.forEach(
-        (element) => _singleScoreSection.add(ScoreBoardPointsDisplay(element)));
+    a.hustlePointsMap.keys.forEach((element) =>
+        _singleScoreSection.add(ScoreBoardPointsDisplay(element.name)));
 
     return _singleScoreSection;
   }
 
   List<Widget> _createDualScoreSectionLists(PO1Score a) {
-    a.pointsMap.keys.forEach(
-        (element) => _dualScoreSection.add(ScoreBoardPointsDisplay(element)));
+    a.pointsMap.keys.forEach((element) =>
+        _dualScoreSection.add(ScoreBoardPointsDisplay(element.translatedName)));
 
     return _dualScoreSection;
   }

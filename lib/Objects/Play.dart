@@ -1,8 +1,11 @@
+import 'package:power_one/Data/constants.dart';
+import 'package:power_one/Models/PO1HustlePoint.dart';
+
 import 'Score/Score.dart';
 
 class Play extends IScore {
   //Play type doesn't have a negative value
-  Play(String title, [int pos = 0]) : super(title, pos, 0);
+  Play(EHustlePoint title, [int pos = 0]) : super(title.name, pos, 0);
 
   // @override
   // void miss() {

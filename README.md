@@ -43,6 +43,12 @@ id: com.power_of_one.basketball
 
 - [Flutter docs](https://docs.flutter.dev/deployment/android)
 
+#### iOS
+
+From inside the ios folder
+- run `pod install`
+
+
 #### for development
 
 - on physical device
@@ -51,8 +57,13 @@ id: com.power_of_one.basketball
 
 #### for production
 
+##### Android
+
 - run `flutter build appbundle`
 
+##### iOS
+
+- run `flutter build ipa`
 ### Downloads
 
 - Flutter
