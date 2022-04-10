@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:power_one/models/PO1Subscription.dart';
+import 'package:power_one/models/PO1User.dart';
 
 enum authProblems {
   UserNotFound,
@@ -21,6 +23,7 @@ class AuthenticationService {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+
       return '$email signed in';
     } on FirebaseAuthException catch (e) {
       authProblems errorType;
@@ -122,7 +125,7 @@ class AuthenticationService {
   Future<String> loginWithEmailLink({String email}) async {
     try {
       await _firebaseAuth.signInWithEmailLink(email: email, emailLink: email);
-      return 'login succesful';
+      return 'login successful';
     } on FirebaseAuthException catch (e) {
       return e.message;
     }

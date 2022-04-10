@@ -1,4 +1,5 @@
 import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_one/models/PO1Subscription.dart';
 import 'dart:developer' as dev;
 
 import 'PO1Level.dart';
@@ -8,6 +9,8 @@ class PO1User {
   static final PO1User _instance = PO1User._init();
   String _email;
   String get email => _email;
+  Subscription _subscription;
+  Subscription get subscription => _subscription;
   setEmail(String email) {
     // dev.log('recieved email as $email');
     _email = email;

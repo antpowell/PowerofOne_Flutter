@@ -10,7 +10,23 @@ class FBDBService {
   createNewUser(PO1User user) {
     final userId = dbRef.child('user/byEmail/');
     dev.log(user.email.split(".")[0]);
-    userId.child('${user.email.split(".")[0]}/').set(user.toJSON());
+    Map<String, dynamic> userObj = {}
+      ..addAll(user.subscription.toJSON())
+      ..addAll(user.toJSON());
+    userId.child('${user.email.split(".")[0]}/').set(userObj);
+  }
+
+  getUsersSubscription() async {
+    final userSnapshot =
+        await dbRef.child('users/${_user.email.split(".")[0]}').get();
+    if (userSnapshot.exists) {
+      print('User found byUserName: ${userSnapshot.value}');
+      _user.subscription.setSubscription(
+          isActive: userSnapshot.value.isActive,
+          timeLeft: userSnapshot.value.timeLeft;
+    } else {
+      print('No data available.');
+    }
   }
 
   createNewGame() {

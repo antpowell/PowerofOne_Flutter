@@ -13,7 +13,7 @@ import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:developer' as dev;
@@ -90,6 +90,7 @@ class AuthWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       dev.log('Found user in Firebase: $firebaseUser');
       PO1User().setEmail(firebaseUser.email);
+      PO1User().setId(firebaseUser.uid);
       return PlayerNameForm();
     }
     dev.log('No user found in Firebase');
