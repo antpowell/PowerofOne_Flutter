@@ -2,7 +2,7 @@
 id: 6bt1ln4plvgrrvkvct8nplf
 title: Subscriptions
 desc: ''
-updated: 1649657504436
+updated: 1649659058988
 created: 1649657357211
 ---
 
@@ -38,3 +38,4 @@ User account will need a hasTrial flag stored in the database with user data.
 - 30 days in milliseconds = 2592000000
 - 182 days in milliseconds = 15724800000
 - 365 days in milliseconds = 31536000000
+[DateTime Example](https://www.technicalfeeder.com/2021/11/dart-datetime-handling/#:~:text=Dart%20offers%20DateTime%20class%20to%20handle%20date%20and,10%2C%209%2C%208%2C%207%2C%206%29%29%3B%20%2F%2F%202020-12-11%2010%3A09%3A08.007006)
