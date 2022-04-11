@@ -211,6 +211,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         alignment: Alignment.center,
         margin: EdgeInsets.all(24),
         child: SingleChildScrollView(
+          reverse: true,
           child: Form(
             key: _formKey,
             child: Column(

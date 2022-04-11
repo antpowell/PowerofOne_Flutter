@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:power_one/Services/authentication_service.dart';
+import 'package:power_one/Services/purchase.services.dart';
+import 'package:power_one/Services/revenue_cat_service.dart';
 import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/Login/LoginForm.dart';
@@ -23,7 +25,7 @@ import 'firebase_options.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+  InnAppPurchaseService.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

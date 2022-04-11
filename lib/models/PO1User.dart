@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/models/PO1Subscription.dart';
 import 'dart:developer' as dev;
@@ -12,7 +15,6 @@ class PO1User {
   Subscription _subscription;
   Subscription get subscription => _subscription;
   setEmail(String email) {
-    // dev.log('recieved email as $email');
     _email = email;
   }
 
@@ -26,19 +28,20 @@ class PO1User {
   String _playerName;
   String get playerName => _playerName;
   setPlayerName(String name) {
-    dev.log('recieved player name as $name');
+    dev.log('received player name as $name');
     _playerName = name;
   }
 
   String _id;
-  setId(String id) {
-    _id = id;
+  setId(String email) {
+    // TODO: consider using HMAC-SHA256 ref: https://pub.dev/packages/crypto
+    _id = sha1.convert(utf8.encode(email)).toString();
   }
 
   PO1Score _score;
   PO1Score get score => _score;
   setPlayerScore(PO1Score score) {
-    dev.log('recieved PO1 Score $score');
+    dev.log('received PO1 Score $score');
     _score = score;
   }
 
@@ -49,7 +52,7 @@ class PO1User {
   }
 
   PO1Levels _playerLevel;
-  PO1Levels get playerLevel => (_playerSkill == PO1PlayerSkill.elementry ||
+  PO1Levels get playerLevel => (_playerSkill == PO1PlayerSkill.elementary ||
           _playerSkill == PO1PlayerSkill.middle)
       ? PO1Levels.GRADE
       : (_playerSkill == PO1PlayerSkill.high ||
