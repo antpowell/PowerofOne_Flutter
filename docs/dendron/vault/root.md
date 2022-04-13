@@ -2,7 +2,7 @@
 id: vxu3d1k953zn08741fnp3v1
 title: Root
 desc: ''
-updated: 1649657302708
+updated: 1649819253185
 created: 1649656894587
 ---
 # Welcome to Dendron
@@ -20,3 +20,4 @@ This section contains useful links to related resources.
 - [Developer Docs](https://docs.dendron.so/)
 
 [[Subscriptions]]
+[[Route]]

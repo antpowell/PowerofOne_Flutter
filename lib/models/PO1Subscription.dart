@@ -25,7 +25,7 @@ class Subscription {
     return DateTime(_trailEndTime - DateTime.now().millisecondsSinceEpoch);
   }
 
-  getSubscription() {
+  hasSubscription() {
     return {
       this._isActive,
     };
