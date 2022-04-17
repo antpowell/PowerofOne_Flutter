@@ -53,6 +53,7 @@ Map<String, dynamic> packageTitleConverter(String packageName) {
 }
 
 class PurchaseScreen extends HookWidget {
+  static final String id = 'purchase_screen';
   const PurchaseScreen({Key key}) : super(key: key);
 
   static int activeCard = 1;

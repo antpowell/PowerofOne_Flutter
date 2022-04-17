@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Services/purchase.services.dart';
-import 'package:power_one/Services/revenue_cat_service.dart';
-import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_one/Services/revenue_cat_service.dart';
 import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/Register/register.dart';
@@ -20,6 +18,7 @@ import 'package:provider/provider.dart';
 
 import 'dart:developer' as dev;
 
+import 'Views/Purchase_Screen/purchase.screen.dart';
 import 'firebase_options.dart';
 
 Future main() async {
@@ -74,9 +73,10 @@ class Power1 extends StatelessWidget {
           ReportCard.id: (context) => ReportCard(),
           PlayerNameForm.id: (context) => PlayerNameForm(),
           ScoreCard.id: (context) => ScoreCard(),
+          PurchaseScreen.id: ((context) => PurchaseScreen()),
           TermsAndConditions.id: (context) => TermsAndConditions(),
           FeedBack.id: (context) => FeedBack(),
-          '/Help': (context) => HelpPage(),
+          // '/Help': (context) => HelpPage(),
         },
         home: AuthWrapper(),
       ),

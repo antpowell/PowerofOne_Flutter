@@ -4,6 +4,7 @@ import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/Views/Purchase_Screen/purchase.screen.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 
@@ -128,7 +129,7 @@ class PlayerNameScene extends StatelessWidget {
                       if (_user.subscription.hasSubscription()) {
                         Navigator.pushNamed(context, ScoreCard.id);
                       } else {
-                        Navigator.pushNamed(context, Subscription.id);
+                        Navigator.pushNamed(context, PurchaseScreen.id);
                       }
                       Navigator.pushNamed(
                         context,
