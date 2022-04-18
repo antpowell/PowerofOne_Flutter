@@ -7,6 +7,7 @@ import 'package:power_one/Models/PO1PlayerSkill.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/Purchase_Screen/purchase.screen.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
@@ -171,6 +172,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   debugPrint(
                     'User pressed Start Game button, save the player name to the user and take them to the score card view.',
                   );
+                  debugPrint('still using PlayerNameForm.dart');
                   if (!_formKey.currentState.validate() ||
                       _user.playerSkill == null) {
                     return;
@@ -178,11 +180,15 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   _formKey.currentState.save();
                   dev.log('current user ${_user.email}');
                   fbdbService.createNewUser(_user);
-                  /* if(_user.hasSubscription){
-                    Navigator.pushNamed(context, SubscriptionScreen.id);
-                  }else{ */
-                  Navigator.pushNamed(context, ScoreCard.id);
-                  /* } */
+                  if (_user.subscription.hasSubscription()) {
+                    Navigator.pushNamed(context, ScoreCard.id);
+                  } else {
+                    Navigator.pushNamed(context, PurchaseScreen.id);
+                  }
+                  Navigator.pushNamed(
+                    context,
+                    ScoreCard.id,
+                  );
                 },
               ),
             ],

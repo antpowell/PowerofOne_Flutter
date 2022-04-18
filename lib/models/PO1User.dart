@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/models/PO1Subscription.dart';
 import 'dart:developer' as dev;
@@ -10,8 +11,16 @@ import 'PO1PlayerSkill.dart';
 
 class PO1User {
   static final PO1User _instance = PO1User._init();
+
   String _email;
   String get email => _email;
+
+  String _RCAppUserID;
+  String get rcAppUserId => _RCAppUserID;
+  setRCAppUserId(String appUserId) {
+    _RCAppUserID = appUserId;
+  }
+
   Subscription _subscription;
   Subscription get subscription => _subscription;
   setEmail(String email) {
@@ -65,6 +74,7 @@ class PO1User {
   }
 
   PO1User._init() {
+    // _subscription = new Subscription.;
     dev.log('user created as: ${this._email}');
   }
 
@@ -75,6 +85,10 @@ class PO1User {
     _playerLevel = null;
     _score.clear();
     dev.log('Local user data cleared');
+  }
+
+  static fetchSubscription() {
+    // return InAppPurchaseException.f
   }
 
   Map<String, dynamic> toJSON() {

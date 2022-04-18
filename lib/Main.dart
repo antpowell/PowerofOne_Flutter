@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Services/revenue_cat_service.dart';
+import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart'rvice.dart';
 import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/Register/register.dart';

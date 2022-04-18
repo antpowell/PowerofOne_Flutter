@@ -8,6 +8,8 @@ import 'package:power_one/Views/Purchase_Screen/purchase.screen.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 
+/// Deprecated in favor of PlayerNameForm.dart
+@Deprecated('migration')
 class PlayerNameScene extends StatelessWidget {
   PO1User _user;
   String _palyerName;
@@ -125,6 +127,7 @@ class PlayerNameScene extends StatelessWidget {
                     PO1Button("Start Game", onPress: () {
                       debugPrint(
                           'User pressed Start Game button, save the player name to the user and take them to the score card view.');
+                      debugPrint('still using PlayerName.dart');
                       // PO1Score().assignUser();
                       if (_user.subscription.hasSubscription()) {
                         Navigator.pushNamed(context, ScoreCard.id);

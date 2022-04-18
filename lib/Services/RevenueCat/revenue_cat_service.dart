@@ -1,3 +1,5 @@
+import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1Subscription.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'dart:io' show Platform;
 import 'dart:developer' as dev;
@@ -25,6 +27,12 @@ class InnAppPurchaseService {
       dev.log('Purchase fetchOffers call failed with $e');
       return [];
     }
+  }
+
+  static Future<Subscription> fetchSubscription(PO1User user) async {
+    try {
+      final LogInResult logInResult = await Purchases.logIn('user.rcAppUserId');
+    } catch (e) {}
   }
 }
 
