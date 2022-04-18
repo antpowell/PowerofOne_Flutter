@@ -1,8 +1,8 @@
 ---
 id: 6bt1ln4plvgrrvkvct8nplf
-title: Subscriptions
+title: subscriptions
 desc: ''
-updated: 1649659058988
+updated: 1650171083617
 created: 1649657357211
 ---
 
