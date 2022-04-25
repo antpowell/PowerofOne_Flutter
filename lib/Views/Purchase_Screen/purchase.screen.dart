@@ -59,7 +59,7 @@ class PurchaseScreen extends HookWidget {
   static int activeCard = 1;
 
   Future<List<Package>> fetchOffers() async {
-    final List<Offering> _offerings = await InnAppPurchaseService.fetchOffers();
+    final List<Offering> _offerings = await RevenueCatService.fetchOffers();
     List<Package> subscriptions;
 
     if (_offerings.isEmpty || _offerings[0].availablePackages.isEmpty) {

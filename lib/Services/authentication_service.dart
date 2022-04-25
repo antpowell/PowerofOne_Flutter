@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/models/PO1Subscription.dart';
 import 'package:power_one/models/PO1User.dart';
+import 'package:purchases_flutter/errors.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 enum authProblems {
   UserNotFound,
@@ -23,7 +26,7 @@ class AuthenticationService {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-
+      // await revenueCatLogin();
       return '$email signed in';
     } on FirebaseAuthException catch (e) {
       authProblems errorType;
@@ -74,6 +77,7 @@ class AuthenticationService {
         email: email,
         password: password,
       );
+      // await revenueCatLogin();
       return '$email account created';
     } on FirebaseAuthException catch (e) {
       authProblems errorType;
@@ -107,7 +111,7 @@ class AuthenticationService {
             print('Case ${e.message} is not yet implemented');
         }
       }
-      print('The error is ${e.message}');
+      print('Unable to register user.\nmessage: ${e.message}');
       return e.message;
     }
   }
@@ -125,6 +129,7 @@ class AuthenticationService {
   Future<String> loginWithEmailLink({String email}) async {
     try {
       await _firebaseAuth.signInWithEmailLink(email: email, emailLink: email);
+      // await revenueCatLogin();
       return 'login successful';
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -138,6 +143,23 @@ class AuthenticationService {
       return 'email link sent';
     } on FirebaseAuthException catch (e) {
       return e.message;
+    }
+  }
+
+  Future<LogInResult> revenueCatLogin() async {
+    try {
+      LogInResult results =
+          await RevenueCatService().logIn(_firebaseAuth.currentUser.uid);
+      if (results.created) {
+        /// true if the logged in user has been created in the
+        /// RevenueCat backend for the first time
+        /// (i.e. they have not yet purchased a subscription)
+
+      }
+      return results;
+    } catch (e) {
+      print('Error logging in to RevenueCat: $e');
+      return e;
     }
   }
 }

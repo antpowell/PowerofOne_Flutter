@@ -1,19 +1,25 @@
 import 'dart:convert';
 
-import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:power_one/Models/PO1Subscription.dart';
 import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/models/PO1Subscription.dart';
+import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'dart:developer' as dev;
 
 import 'PO1Level.dart';
 import 'PO1PlayerSkill.dart';
 
 class PO1User {
-  static final PO1User _instance = PO1User._init();
+  static final PO1User _instance = PO1User._();
+  static PO1User get instance => _instance;
 
   String _email;
   String get email => _email;
+  setEmail(String email) {
+    _email = email;
+  }
 
   String _RCAppUserID;
   String get rcAppUserId => _RCAppUserID;
@@ -23,15 +29,9 @@ class PO1User {
 
   Subscription _subscription;
   Subscription get subscription => _subscription;
-  setEmail(String email) {
-    _email = email;
-  }
 
-/**
- * e@g.com
- * split('.'): [0]: e@g, [1].com
- */
-
+  ///e@g.com
+  ///split('.'): [0]: e@g, [1].com
   String emailSignature() => _email.split('.')[0];
 
   String _playerName;
@@ -42,9 +42,11 @@ class PO1User {
   }
 
   String _id;
-  setId(String email) {
+  String get id => _id;
+  setId(String fbUid) {
     // TODO: consider using HMAC-SHA256 ref: https://pub.dev/packages/crypto
-    _id = sha1.convert(utf8.encode(email)).toString();
+    // _subscription = new Subscription()
+    _id = fbUid;
   }
 
   PO1Score _score;
@@ -73,9 +75,26 @@ class PO1User {
     return _instance;
   }
 
-  PO1User._init() {
+  // PO1User.firebaseInit(String email, String fbUid) {
+  //   _email = email;
+  //   _id = fbUid;
+  //   _subscription = Subscription(newAccount: false);
+  // }
+
+  PO1User._() {
+    // final InnAppPurchaseService _purchaseService =
+    //     context.read<InnAppPurchaseService>();
     // _subscription = new Subscription.;
     dev.log('user created as: ${this._email}');
+  }
+
+  firebaseInit(String email, String firebaseUid) async {
+    setEmail(email);
+    setId(firebaseUid);
+    LogInResult results = await RevenueCatService().logIn(firebaseUid);
+
+    _subscription = Subscription(newAccount: results.created);
+    _subscription.setPurchaseInfo(results.purchaserInfo);
   }
 
   clearData() {
@@ -92,10 +111,12 @@ class PO1User {
   }
 
   Map<String, dynamic> toJSON() {
+    debugPrint('id: $_id');
     return {
       'email': _email.trim(),
-      'playerName': _playerName.trim(),
       'id': _id,
+      'playerName': _playerName.trim(),
+      'subscription': _subscription.toJSON(),
       // 'score': _score,
     };
   }

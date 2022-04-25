@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
@@ -11,6 +12,7 @@ import 'dart:developer' as dev;
 
 import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Register extends StatefulWidget {
   static final String id = 'register_screen';
@@ -154,6 +156,10 @@ class _RegisterState extends State<Register> {
           );
         } else {
           dev.log(message);
+          // LogInResult loginResults = await context
+          //     .read<InnAppPurchaseService>()
+          //     .logIn(context.read<User>().uid);
+          // print('loginResults: $loginResults.purchaseDetails');
           Navigator.pushNamed(context, PlayerNameForm.id);
         }
       },

@@ -180,15 +180,16 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   _formKey.currentState.save();
                   dev.log('current user ${_user.email}');
                   fbdbService.createNewUser(_user);
-                  if (_user.subscription.hasSubscription()) {
+                  if (_user.subscription.hasSubscription() ||
+                      _user.subscription.hasTrial()) {
                     Navigator.pushNamed(context, ScoreCard.id);
                   } else {
                     Navigator.pushNamed(context, PurchaseScreen.id);
                   }
-                  Navigator.pushNamed(
-                    context,
-                    ScoreCard.id,
-                  );
+                  // Navigator.pushNamed(
+                  //   context,
+                  //   ScoreCard.id,
+                  // );
                 },
               ),
             ],

@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 
 import 'package:purchases_flutter/models/package_wrapper.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:purchases_flutter/models/purchaser_info_wrapper.dart';
 
 class Subscription {
   static final Subscription _instance = Subscription._init();
@@ -12,23 +13,33 @@ class Subscription {
   static bool _newAccount = false;
   // final formatter = DateFormat;
 
-  bool _isActive = false, _hasTrial = true;
-  Package _activeSubscription;
   static int _trailEndTime;
+  bool _isActive = false, _hasTrial = /*true*/ false;
 
-  setSubscription({subscriptionPackage: Package}) {
+  List<String> _activeSubscription;
+  setSubscription({List<String> subscriptionPackage}) {
     _activeSubscription = subscriptionPackage;
+    // check skus
     _isActive = true;
+  }
+
+  PurchaserInfo _purchaserInfo;
+  PurchaserInfo get purchaserInfo => _purchaserInfo;
+  setPurchaseInfo(PurchaserInfo purchaserInfo) {
+    _purchaserInfo = purchaserInfo;
+    // TODO: Identify what needs to be used to determine if the user has a trial/subscrption
   }
 
   getTrialTimeLeft() {
     return DateTime(_trailEndTime - DateTime.now().millisecondsSinceEpoch);
   }
 
-  hasSubscription() {
-    return {
-      this._isActive,
-    };
+  bool hasSubscription() {
+    return _isActive;
+  }
+
+  bool hasTrial() {
+    return _hasTrial;
   }
 
   Map<String, dynamic> toJSON() {
@@ -48,7 +59,7 @@ class Subscription {
   Subscription._init() {
     // dbRefgetUsersSubscription();
 
-    dev.log('User subscription data: ${_instance.toJSON()}');
+    dev.log('User subscription data: ${toJSON()}');
     // _trailEndTime = DateTime.now().millisecondsSinceEpoch + _weekInMilli;
     if (_newAccount) {
       _trailEndTime =
