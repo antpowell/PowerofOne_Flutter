@@ -35,6 +35,14 @@ When running this application on a different system from the one it was created 
 
 - id: com.powerofone.basketball
 
+### M1 Mac
+
+```bash
+sudo arch -x86_64 gem install ffi
+arch -x86_64 pod repo update
+arch -x86_64 pod install
+```
+
 ## Android
 
 id: com.power_of_one.basketball
@@ -46,8 +54,20 @@ id: com.power_of_one.basketball
 #### iOS
 
 From inside the ios folder
-- run `pod install`
 
+- run `pod install`
+- `flutter build ipa --release`
+- navigate to the ios build folder `/Users/anthonypowell/Engineering/PowerofOne_Flutter/build/ios/archive/`
+- click the archive file `Runner.xcarchive`
+
+#### Build Errors
+
+```bash
+/bin/sh: /packages/flutter_tools/bin/xcode_backend.sh: No such file or directory
+Command PhaseScriptExecution failed with a nonzero exit code
+```
+
+This error appears when trying to Archive the app from within xCode. **This is not the correct way to build for ios.**
 
 #### for development
 
@@ -64,6 +84,8 @@ From inside the ios folder
 ##### iOS
 
 - run `flutter build ipa`
+
+
 ### Downloads
 
 - Flutter
