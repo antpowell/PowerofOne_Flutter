@@ -52,7 +52,7 @@ dependencies:
   crypto: ^3.0.1
 
   #In app purchases
-  in_app_purchase: ^1.0.6
+  in_app_purchase: ^3.0.4
   purchases_flutter: ^3.9.1
   flutter_hooks: ^0.18.2+1
 

@@ -1,7 +1,5 @@
 import 'dart:developer' as dev;
 
-import 'package:purchases_flutter/models/package_wrapper.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:purchases_flutter/models/purchaser_info_wrapper.dart';
 
 class Subscription {
@@ -14,7 +12,7 @@ class Subscription {
   // final formatter = DateFormat;
 
   static int _trailEndTime;
-  bool _isActive = false, _hasTrial = /*true*/ false;
+  bool _isActive = false, _inTrial = /*true*/ false;
 
   List<String> _activeSubscription;
   setSubscription({List<String> subscriptionPackage}) {
@@ -38,13 +36,13 @@ class Subscription {
     return _isActive;
   }
 
-  bool hasTrial() {
-    return _hasTrial;
+  bool inTrial() {
+    return _inTrial;
   }
 
   Map<String, dynamic> toJSON() {
     return {
-      "inTrial": _hasTrial,
+      "inTrial": _inTrial,
       "isActive": _isActive,
       "trialEndTime": _trailEndTime
     };

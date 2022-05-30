@@ -3,19 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'dart:developer' as dev;
 
 // video: https://www.youtube.com/watch?v=h-jOMh2KXTA
-
-class SubscriptionData {
-  String name;
-  String details;
-  String price;
-  List<String> benefitBullets;
-}
 
 int active = 1;
 
@@ -52,6 +48,10 @@ Map<String, dynamic> packageTitleConverter(String packageName) {
   }
 }
 
+PO1User _user = PO1User();
+
+Package _selectedPackage;
+
 class PurchaseScreen extends HookWidget {
   static final String id = 'purchase_screen';
   const PurchaseScreen({Key key}) : super(key: key);
@@ -59,7 +59,8 @@ class PurchaseScreen extends HookWidget {
   static int activeCard = 1;
 
   Future<List<Package>> fetchOffers() async {
-    final List<Offering> _offerings = await RevenueCatService.fetchOffers();
+    final List<Offering> _offerings =
+        await RevenueCatService.fetchOffers() /* [] */;
     List<Package> subscriptions;
 
     if (_offerings.isEmpty || _offerings[0].availablePackages.isEmpty) {
@@ -82,47 +83,80 @@ class PurchaseScreen extends HookWidget {
     final ValueNotifier<int> activeCardVN = useValueNotifier(1);
 
     return Scaffold(
-      body: FutureBuilder(
-        future: fetchOffers(),
-        builder: (context, snapshot) {
-          return snapshot.hasError
-              ? Center(
-                  child: Text('There was an error, check the logs',
-                      style: TextStyle(color: Colors.red[900], fontSize: 48)),
-                )
-              : snapshot.hasData
-                  ? Center(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () => {
-                              activeCardVN.value = index,
-                              dev.log('checking for offerings from $index'),
-                            },
-                            child: HookBuilder(
-                              builder: (_) {
-                                final activeCard =
-                                    useValueListenable(activeCardVN);
-                                return SubscriptionCard(
-                                  activeCard: activeCard == index,
-                                  data: snapshot.data[index],
+      body: SafeArea(
+        child: FutureBuilder(
+          future: fetchOffers(),
+          builder: (context, snapshot) {
+            return snapshot.hasError
+                ? Center(
+                    child: Text('There was an error, check the logs',
+                        style: TextStyle(color: Colors.red[900], fontSize: 48)),
+                  )
+                : snapshot.hasData
+                    ? Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    activeCardVN.value = index;
+                                    dev.log(
+                                        'checking for offerings from $index ');
+                                    _selectedPackage = snapshot.data[index];
+                                    dev.log(
+                                        'offering is tied to package:::> $_selectedPackage');
+                                  },
+                                  child: HookBuilder(
+                                    builder: (_) {
+                                      final activeCard =
+                                          useValueListenable(activeCardVN);
+                                      return SubscriptionCard(
+                                        activeCard: activeCard == index,
+                                        data: snapshot.data[index],
+                                      );
+                                    },
+                                  ),
                                 );
                               },
                             ),
-                          );
-                        },
-                      ),
-                    )
-                  : Center(
-                      child: Text(
-                        'Grabbing your offers',
-                        style: TextStyle(fontSize: 38, color: Colors.grey),
-                      ),
-                    );
-        },
+                          ),
+                          _buttonGroup(context),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          Center(
+                            child: Text(
+                              'Grabbing your offers',
+                              style:
+                                  TextStyle(fontSize: 38, color: Colors.grey),
+                            ),
+                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //   children: [
+                          //     Container(
+                          //       child: MaterialButton(
+                          //         onPressed: () async {},
+                          //         child: Text(
+                          //           'Sign Out',
+                          //           style: TextStyle(color: Colors.white),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     PO1Button(
+                          //       "Subscribe",
+                          //     ),
+                          //   ],
+                          // ),
+                        ],
+                      );
+          },
+        ),
       ),
     );
   }
@@ -172,11 +206,15 @@ Widget _detailArea({String details, List<String> bullets}) {
         shrinkWrap: true,
         itemCount: bullets.length,
         itemBuilder: (context, index) {
-          return Flexible(
-            flex: 1,
-            child: _detailBullets(
-              listItemText: bullets[index],
-            ),
+          return Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: _detailBullets(
+                  listItemText: bullets[index],
+                ),
+              ),
+            ],
           );
         },
       ),
@@ -212,7 +250,7 @@ Widget _detailBullets({String listItemText}) {
         child: Icon(
           Icons.check_circle,
           size: 20,
-          color: Colors.green[900],
+          color: Colors.green[700],
         ),
       ),
       Text(
@@ -220,6 +258,48 @@ Widget _detailBullets({String listItemText}) {
         style: TextStyle(color: Colors.grey),
       ),
     ],
+  );
+}
+
+Widget _buttonGroup(BuildContext context) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 36),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        (_user.subscription.inTrial()
+            ? TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.grey,
+                ),
+                onPressed: () {
+                  if (_user.subscription.inTrial() == true) {
+                    Navigator.popAndPushNamed(context, ScoreCard.id);
+                  }
+                },
+                child: Text(
+                  'Continue FREE Trial',
+                  style: TextStyle(fontSize: 10),
+                ),
+              )
+            : Spacer()),
+        PO1Button(
+          'Subscribe',
+          onPress: () async {
+            try {
+              // TODO: setPurchaseInfo state
+              // _user.subscription.setPurchaseInfo(
+              //     await Purchases.purchasePackage(_selectedPackage));
+              // Navigator.popAndPushNamed(context, ScoreCard.id);
+              // // _user.subscription.purchaserInfo.entitlementIsActive =
+              // //     purchaserInfo.entitlements.all[entitlementID].isActive;
+            } catch (e) {
+              dev.log(e);
+            }
+          },
+        ),
+      ],
+    ),
   );
 }
 
@@ -280,7 +360,7 @@ class SubscriptionCard extends HookWidget {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w700,
-                      color: Colors.orange,
+                      color: Colors.orangeAccent,
                     ),
                     children: [
                       TextSpan(
