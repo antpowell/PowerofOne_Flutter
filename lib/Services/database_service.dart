@@ -10,9 +10,13 @@ class FBDBService {
   createNewUser(PO1User user) {
     final userId = dbRef.child('user/byEmail/');
     dev.log(user.email.split(".")[0]);
-    Map<String, dynamic> userObj = {}
-      ..addAll(user.subscription.toJSON())
-      ..addAll(user.toJSON());
+    if (user.subscription != null) {
+      Map<String, dynamic> userObj = {}
+        ..addAll(user.subscription.toJSON())
+        ..addAll(user.toJSON());
+    } else {
+      Map<String, dynamic> userObj = user.toJSON();
+    }
     // TODO: add 7 day trial period
     userId.child('${user.email.split(".")[0]}/').set({...user.toJSON()});
   }

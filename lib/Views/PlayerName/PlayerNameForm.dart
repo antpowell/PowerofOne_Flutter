@@ -186,10 +186,6 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   } else {
                     Navigator.pushNamed(context, PurchaseScreen.id);
                   }
-                  // Navigator.pushNamed(
-                  //   context,
-                  //   ScoreCard.id,
-                  // );
                 },
               ),
             ],
