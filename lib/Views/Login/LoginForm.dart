@@ -169,7 +169,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
             ),
             onPressed: () => {
-              // TODO: Register and create new user [maybe just an Alert]
               Navigator.pushNamed(context, Register.id),
               debugPrint('New user, needs to register.'),
             },
@@ -212,6 +211,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         alignment: Alignment.center,
         margin: EdgeInsets.all(24),
         child: SingleChildScrollView(
+          reverse: true,
           child: Form(
             key: _formKey,
             child: Column(

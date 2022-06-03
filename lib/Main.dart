@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
@@ -13,17 +13,18 @@ import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
-import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:developer' as dev;
 
+import 'Models/PO1User.dart';
+import 'Views/Purchase_Screen/purchase.screen.dart';
 import 'firebase_options.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+  // RevenueCatService.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -52,6 +53,9 @@ class Power1 extends StatelessWidget {
           create: (BuildContext context) =>
               AuthenticationService(FirebaseAuth.instance),
         ),
+        Provider<RevenueCatService>(
+          create: (BuildContext context) => RevenueCatService(),
+        ),
         StreamProvider(
           create: (context) =>
               context.read<AuthenticationService>().authStateChange,
@@ -72,9 +76,10 @@ class Power1 extends StatelessWidget {
           ReportCard.id: (context) => ReportCard(),
           PlayerNameForm.id: (context) => PlayerNameForm(),
           ScoreCard.id: (context) => ScoreCard(),
+          PurchaseScreen.id: ((context) => PurchaseScreen()),
           TermsAndConditions.id: (context) => TermsAndConditions(),
           FeedBack.id: (context) => FeedBack(),
-          '/Help': (context) => HelpPage(),
+          // '/Help': (context) => HelpPage(),
         },
         home: AuthWrapper(),
       ),
@@ -86,10 +91,14 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User firebaseUser = context.watch<User>();
+    // final RevenueCatService _purchaseService =
+    //     context.read<RevenueCatService>();
 
     if (firebaseUser != null) {
       dev.log('Found user in Firebase: $firebaseUser');
-      PO1User().setEmail(firebaseUser.email);
+      PO1User().firebaseInit(firebaseUser.email, firebaseUser.uid);
+      // PO1User().setEmail(firebaseUser.email);
+      // PO1User().setId(firebaseUser.uid);
       return PlayerNameForm();
     }
     dev.log('No user found in Firebase');
