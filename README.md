@@ -56,6 +56,8 @@ id: com.power_of_one.basketball
 From inside the ios folder
 
 - run `pod install`
+M1
+- run `arch -x86_64 pod install`
 - `flutter build ipa --release`
 - navigate to the ios build folder `/Users/anthonypowell/Engineering/PowerofOne_Flutter/build/ios/archive/`
 - click the archive file `Runner.xcarchive`
@@ -84,7 +86,6 @@ This error appears when trying to Archive the app from within xCode. **This is n
 ##### iOS
 
 - run `flutter build ipa`
-
 
 ### Downloads
 

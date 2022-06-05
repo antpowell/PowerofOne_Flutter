@@ -30,6 +30,13 @@
             {
               "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.powerofone.basketball"
+              }
             }
           ]
         }
@@ -59,6 +66,13 @@
             {
               "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.powerofone.basketball"
+              }
             }
           ]
         }
@@ -88,6 +102,13 @@
             {
               "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.powerofone.basketball"
+              }
             }
           ]
         }
