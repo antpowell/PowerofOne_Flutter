@@ -16,9 +16,9 @@ import 'dart:developer' as dev;
 
 int active = 1;
 
-Map<String, dynamic> packageTitleConverter(String packageName) {
-  switch (packageName) {
-    case 'Power of 1 Basketball 1 Month Premium Subscription (Power of 1 Basketball)':
+Map<String, dynamic> packageTitleConverter(String packageId) {
+  switch (packageId) {
+    case 'po1_599_1m_1w':
       return {
         'name': 'Monthly',
         'benefits': [
@@ -26,7 +26,7 @@ Map<String, dynamic> packageTitleConverter(String packageName) {
         ],
       };
       break;
-    case 'Power of 1 Basketball 6 Months Premium Subscription (Power of 1 Basketball)':
+    case 'po1_2999_6m_1w':
       return {
         'name': 'Semi-Annually',
         'benefits': [
@@ -35,7 +35,7 @@ Map<String, dynamic> packageTitleConverter(String packageName) {
         ],
       };
       break;
-    case 'Power of 1 Basketball 12 Months Premium Subscription (Power of 1 Basketball)':
+    case 'po1_5999_12m_1w':
       return {
         'name': 'Yearly',
         'benefits': [
@@ -355,7 +355,8 @@ class SubscriptionCard extends HookWidget {
               Flexible(
                 flex: 1,
                 child: _titleArea(
-                  titleText: packageTitleConverter(data.product.title)['name'],
+                  titleText:
+                      packageTitleConverter(data.product.identifier)['name'],
                 ),
               ),
               Flexible(
@@ -387,8 +388,8 @@ class SubscriptionCard extends HookWidget {
                 flex: 3,
                 child: _detailArea(
                   details: data.product.description,
-                  bullets:
-                      packageTitleConverter(data.product.title)['benefits'],
+                  bullets: packageTitleConverter(
+                      data.product.identifier)['benefits'],
                 ),
               ),
             ],
