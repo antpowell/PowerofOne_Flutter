@@ -129,7 +129,7 @@ class PlayerNameScene extends StatelessWidget {
                           'User pressed Start Game button, save the player name to the user and take them to the score card view.');
                       debugPrint('still using PlayerName.dart');
                       // PO1Score().assignUser();
-                      if (_user.subscription.hasSubscription()) {
+                      if (_user.subscription.isActive) {
                         Navigator.pushNamed(context, ScoreCard.id);
                       } else {
                         Navigator.pushNamed(context, PurchaseScreen.id);

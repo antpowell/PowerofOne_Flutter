@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:power_one/Models/PO1Subscription.dart';
@@ -88,13 +90,15 @@ class PO1User {
     dev.log('user created as: ${this._email}');
   }
 
-  firebaseInit(String email, String firebaseUid) async {
-    setEmail(email);
-    setId(firebaseUid);
-    LogInResult results = await RevenueCatService().logIn(firebaseUid);
+  firebaseInit({User fbUser}) async {
+    setEmail(fbUser.email);
+    setId(fbUser.uid);
+    LogInResult results = await RevenueCatService.logIn(fbUser.uid);
 
-    _subscription = Subscription(newAccount: results.created);
-    _subscription.setPurchaseInfo(results.purchaserInfo);
+    _subscription = Subscription(logInResults: results);
+    _subscription.setTrialEndTime(
+      creationTime: fbUser?.metadata?.creationTime ?? null,
+    );
   }
 
   clearData() {
@@ -111,7 +115,7 @@ class PO1User {
   }
 
   Map<String, dynamic> toJSON() {
-    debugPrint('id: $_id');
+    log('id: $_id');
     return {
       'email': _email.trim(),
       'id': _id,

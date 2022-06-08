@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -17,7 +18,7 @@ int active = 1;
 
 Map<String, dynamic> packageTitleConverter(String packageName) {
   switch (packageName) {
-    case '1_month (Power of 1 Basketball)':
+    case 'Power of 1 Basketball 1 Month Premium Subscription (Power of 1 Basketball)':
       return {
         'name': 'Monthly',
         'benefits': [
@@ -25,7 +26,7 @@ Map<String, dynamic> packageTitleConverter(String packageName) {
         ],
       };
       break;
-    case '6_month (Power of 1 Basketball)':
+    case 'Power of 1 Basketball 6 Months Premium Subscription (Power of 1 Basketball)':
       return {
         'name': 'Semi-Annually',
         'benefits': [
@@ -34,7 +35,7 @@ Map<String, dynamic> packageTitleConverter(String packageName) {
         ],
       };
       break;
-    case '1_year (Power of 1 Basketball)':
+    case 'Power of 1 Basketball 12 Months Premium Subscription (Power of 1 Basketball)':
       return {
         'name': 'Yearly',
         'benefits': [
@@ -262,12 +263,13 @@ Widget _detailBullets({String listItemText}) {
 }
 
 Widget _buttonGroup(BuildContext context) {
+  final fbdbService = FBDBService();
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 36),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        (_user.subscription.inTrial()
+        (_user.subscription.inTrial
             ? TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.grey,
@@ -288,13 +290,16 @@ Widget _buttonGroup(BuildContext context) {
           onPress: () async {
             try {
               // TODO: setPurchaseInfo state
-              // _user.subscription.setPurchaseInfo(
-              //     await Purchases.purchasePackage(_selectedPackage));
-              // Navigator.popAndPushNamed(context, ScoreCard.id);
-              // // _user.subscription.purchaserInfo.entitlementIsActive =
-              // //     purchaserInfo.entitlements.all[entitlementID].isActive;
-            } catch (e) {
-              dev.log(e);
+              final purchaseInfo =
+                  await Purchases.purchasePackage(_selectedPackage);
+              if (purchaseInfo.entitlements.all['premium_user'].isActive) {
+                _user.subscription.setPurchaseInfo(purchaseInfo);
+                fbdbService.createNewUser(_user);
+                Navigator.popAndPushNamed(context, ScoreCard.id);
+              }
+            } on PlatformException catch (e) {
+              dev.log(e.message);
+              Navigator.pop(context);
             }
           },
         ),
