@@ -149,7 +149,7 @@ class AuthenticationService {
   Future<LogInResult> revenueCatLogin() async {
     try {
       LogInResult results =
-          await RevenueCatService().logIn(_firebaseAuth.currentUser.uid);
+          await RevenueCatService.logIn(_firebaseAuth.currentUser.uid);
       if (results.created) {
         /// true if the logged in user has been created in the
         /// RevenueCat backend for the first time

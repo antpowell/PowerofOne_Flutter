@@ -53,7 +53,7 @@ dependencies:
 
   #In app purchases
   in_app_purchase: ^3.0.4
-  purchases_flutter: ^3.9.1
+  purchases_flutter: ^3.10.0
   flutter_hooks: ^0.18.2+1
 
 dev_dependencies:

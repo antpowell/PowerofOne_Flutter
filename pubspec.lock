@@ -463,7 +463,7 @@ packages:
       name: purchases_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.9.4"
+    version: "3.10.0"
   sky_engine:
     dependency: transitive
     description: flutter

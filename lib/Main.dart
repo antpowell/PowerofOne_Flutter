@@ -24,7 +24,7 @@ import 'firebase_options.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // RevenueCatService.init();
+  await RevenueCatService().init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -96,9 +96,7 @@ class AuthWrapper extends StatelessWidget {
 
     if (firebaseUser != null) {
       dev.log('Found user in Firebase: $firebaseUser');
-      PO1User().firebaseInit(firebaseUser.email, firebaseUser.uid);
-      // PO1User().setEmail(firebaseUser.email);
-      // PO1User().setId(firebaseUser.uid);
+      PO1User().firebaseInit(fbUser: firebaseUser);
       return PlayerNameForm();
     }
     dev.log('No user found in Firebase');

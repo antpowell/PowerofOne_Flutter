@@ -10,14 +10,6 @@ class FBDBService {
   createNewUser(PO1User user) {
     final userId = dbRef.child('user/byEmail/');
     dev.log(user.email.split(".")[0]);
-    if (user.subscription != null) {
-      Map<String, dynamic> userObj = {}
-        ..addAll(user.subscription.toJSON())
-        ..addAll(user.toJSON());
-    } else {
-      Map<String, dynamic> userObj = user.toJSON();
-    }
-    // TODO: add 7 day trial period
     userId.child('${user.email.split(".")[0]}/').set({...user.toJSON()});
   }
 
@@ -27,8 +19,8 @@ class FBDBService {
     if (userSnapshot.exists) {
       print('User found byUserName: ${userSnapshot.value}');
       // _user.subscription.setSubscription(
-      //     isActive: userSnapshot.value.isActive,
-      //     timeLeft: userSnapshot.value.timeLeft,
+      //   isActive: userSnapshot.value.isActive,
+      //   timeLeft: userSnapshot.value.timeLeft,
       // );
     } else {
       print('No data available.');

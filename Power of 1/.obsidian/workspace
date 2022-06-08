@@ -7,8 +7,12 @@
         "id": "39a55902b21fc755",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "Debuging Bundle issues.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -65,6 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Debuging Bundle issues.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -83,5 +88,9 @@
     "collapsed": true
   },
   "active": "39a55902b21fc755",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Debuging Bundle issues.md",
+    "0.2.7 HUB Update.md",
+    "Jerome Foster II Sustainability.md"
+  ]
 }

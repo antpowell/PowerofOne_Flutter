@@ -1,67 +1,60 @@
-import 'dart:developer' as dev;
-
-import 'package:purchases_flutter/models/purchaser_info_wrapper.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Subscription {
-  static final Subscription _instance = Subscription._init();
-  static int _weekInMilli = 604800000;
-  static int _monthInMilli = 2592000000;
-  static int _halfYearInMilli = 1577846000;
-  static int _yearInMilli = 31536000000;
   static bool _newAccount = false;
-  // final formatter = DateFormat;
-
-  static int _trailEndTime;
-  bool _isActive = false, _inTrial = /*true*/ false;
-
-  List<String> _activeSubscription;
-  setSubscription({List<String> subscriptionPackage}) {
-    _activeSubscription = subscriptionPackage;
-    // check skus
-    _isActive = true;
-  }
+  static DateTime _trailEndTime;
+  bool _isActive = false, _inTrial = true;
 
   PurchaserInfo _purchaserInfo;
   PurchaserInfo get purchaserInfo => _purchaserInfo;
   setPurchaseInfo(PurchaserInfo purchaserInfo) {
     _purchaserInfo = purchaserInfo;
+    if (_purchaserInfo?.entitlements?.all['premium_user']?.isActive ?? false) {
+      setActive();
+    }
     // TODO: Identify what needs to be used to determine if the user has a trial/subscrption
   }
 
+  setTrialEndTime({DateTime creationTime}) {
+    if (creationTime != null) {
+      _trailEndTime = creationTime.add(const Duration(days: 7));
+      _inTrial = _trailEndTime.difference(DateTime.now()).inDays > 0;
+    }
+  }
+
   getTrialTimeLeft() {
-    return DateTime(_trailEndTime - DateTime.now().millisecondsSinceEpoch);
+    return _trailEndTime.difference(DateTime.now()).inDays;
   }
 
-  bool hasSubscription() {
-    return _isActive;
+  setActive() {
+    _isActive = true;
   }
 
-  bool inTrial() {
-    return _inTrial;
-  }
+  get isActive => _isActive;
+
+  get inTrial => _inTrial;
 
   Map<String, dynamic> toJSON() {
     return {
       "inTrial": _inTrial,
       "isActive": _isActive,
-      "trialEndTime": _trailEndTime
+      "trialEndTime": _trailEndTime.toIso8601String(),
+      "purchaseInfo": _purchaserInfo.toJson(),
     };
   }
 
 // Singleton boilerplate
-  factory Subscription({newAccount: bool}) {
-    _newAccount = newAccount;
-    return _instance;
-  }
-
-  Subscription._init() {
-    // dbRefgetUsersSubscription();
-
-    dev.log('User subscription data: ${toJSON()}');
-    // _trailEndTime = DateTime.now().millisecondsSinceEpoch + _weekInMilli;
+  Subscription({logInResults: LogInResult}) {
+    _newAccount = logInResults.created;
     if (_newAccount) {
-      _trailEndTime =
-          DateTime.now().add(Duration(days: 7)).millisecondsSinceEpoch;
+      _trailEndTime = DateTime.now().add(Duration(days: 7));
+    } else {
+      // TODO: fetch trailendtime from firebase
+    }
+    setPurchaseInfo(logInResults.purchaserInfo);
+    if (purchaserInfo?.firstSeen?.isNotEmpty ?? false) {
+      _isActive =
+          purchaserInfo?.entitlements?.all['premium_user']?.isActive ?? false;
     }
   }
 }
