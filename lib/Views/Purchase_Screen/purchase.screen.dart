@@ -22,16 +22,16 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
       return {
         'name': 'Monthly',
         'benefits': [
-          '1 Month Full Access',
+          'Premium Access',
         ],
       };
       break;
     case 'po1_2999_6m_1w':
       return {
-        'name': 'Semi-Annually',
+        'name': 'Semiyearly',
         'benefits': [
+          'Premium Access',
           'More than 15% off',
-          '6 Months Full Access',
         ],
       };
       break;
@@ -39,8 +39,8 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
       return {
         'name': 'Yearly',
         'benefits': [
+          'Premium Access',
           'More than 20% off',
-          '1 Year Full Access',
         ],
       };
       break;
@@ -289,7 +289,7 @@ class SubscriptionCard extends HookWidget {
     final ValueNotifier<double> heightOfScreen =
         useState(MediaQuery.of(context).size.height);
     final double activeCardWidth = widthOfScreen.value * 0.33;
-    final double inActiveCardWidth = widthOfScreen.value * 0.28;
+    final double inActiveCardWidth = widthOfScreen.value * 0.30;
     final double activeCardHeight = heightOfScreen.value * 0.85;
     final double inActiveCardHeight = heightOfScreen.value * 0.65;
     // useEffect(() {}, [widthOfScreen, heightOfScreen]);
