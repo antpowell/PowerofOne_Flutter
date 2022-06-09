@@ -82,6 +82,7 @@ class Power1 extends StatelessWidget {
           // '/Help': (context) => HelpPage(),
         },
         home: AuthWrapper(),
+        // home: PurchaseScreen(),
       ),
     );
   }
