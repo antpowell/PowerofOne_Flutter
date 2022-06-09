@@ -137,23 +137,6 @@ class PurchaseScreen extends HookWidget {
                                   TextStyle(fontSize: 38, color: Colors.grey),
                             ),
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //   children: [
-                          //     Container(
-                          //       child: MaterialButton(
-                          //         onPressed: () async {},
-                          //         child: Text(
-                          //           'Sign Out',
-                          //           style: TextStyle(color: Colors.white),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     PO1Button(
-                          //       "Subscribe",
-                          //     ),
-                          //   ],
-                          // ),
                         ],
                       );
           },
@@ -167,20 +150,6 @@ Widget _titleArea({String titleText}) {
   return Flex(
     direction: Axis.horizontal,
     children: [
-      // Flexible(
-      //   flex: 1,
-      //   child: Padding(
-      //     padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
-      //     child: Transform.rotate(
-      //       angle: 90,
-      //       child: Icon(
-      //         Icons.sports_basketball,
-      //         color: Colors.orange[400],
-      //         size: 48,
-      //       ),
-      //     ),
-      //   ),
-      // ),
       Flexible(
         flex: 3,
         child: Center(
@@ -219,14 +188,6 @@ Widget _detailArea({String details, List<String> bullets}) {
           );
         },
       ),
-      // Flexible(
-      //   flex: 1,
-      //   child: _detailBullets(listItemText: 'Full Access for 1 month'),
-      // ),
-      // Flexible(
-      //   flex: 1,
-      //   child: _detailBullets(listItemText: 'Full Access for 1 month'),
-      // ),
       Flexible(
         flex: 1,
         child: Align(
@@ -275,7 +236,7 @@ Widget _buttonGroup(BuildContext context) {
                   primary: Colors.grey,
                 ),
                 onPressed: () {
-                  if (_user.subscription.inTrial() == true) {
+                  if (_user.subscription.inTrial == true) {
                     Navigator.popAndPushNamed(context, ScoreCard.id);
                   }
                 },
@@ -323,11 +284,20 @@ class SubscriptionCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<double> width = useState(225);
-    final ValueNotifier<double> height = useState(250);
+    final ValueNotifier<double> widthOfScreen =
+        useState(MediaQuery.of(context).size.width);
+    final ValueNotifier<double> heightOfScreen =
+        useState(MediaQuery.of(context).size.height);
+    final double activeCardWidth = widthOfScreen.value * 0.33;
+    final double inActiveCardWidth = widthOfScreen.value * 0.28;
+    final double activeCardHeight = heightOfScreen.value * 0.85;
+    final double inActiveCardHeight = heightOfScreen.value * 0.65;
+    // useEffect(() {}, [widthOfScreen, heightOfScreen]);
+    final ValueNotifier<double> width = useState(widthOfScreen.value / 3);
+    final ValueNotifier<double> height = useState(heightOfScreen.value - 20);
     useEffect(() {
-      width.value = activeCard ? 255 : 225;
-      height.value = activeCard ? 300 : 250;
+      width.value = activeCard ? activeCardWidth : inActiveCardWidth;
+      height.value = activeCard ? activeCardHeight : inActiveCardHeight;
       return () {};
     }, [activeCard]);
 
