@@ -58,6 +58,18 @@ class RevenueCatService {
       return null;
     }
   }
+
+// update subscriber attributes https://docs.revenuecat.com/docs/subscriber-attributes
+  static Future<void> updateAccount(Map<String, dynamic> args) async{
+    // Examples:
+    // Purchases.setEmail("test@example.com");
+    // Purchases.setPhoneNumber("+16505551234");
+    // Purchases.setDisplayName("John Appleseed");
+    // Purchases.setAttributes({"age": "24", "custom_group_id": "abc123"});
+    await Purchases.setAttributes(args);
+  }
+
+  static Future<void> delete(String: attributeName){}
 }
 
 

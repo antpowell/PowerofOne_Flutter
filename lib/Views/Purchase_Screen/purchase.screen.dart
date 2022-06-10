@@ -204,6 +204,7 @@ Widget _detailArea({String details, List<String> bullets}) {
 }
 
 Widget _detailBullets({String listItemText}) {
+  // TODO: fix this to not clip the text
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
