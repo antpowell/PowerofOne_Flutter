@@ -179,11 +179,25 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
             ),
-            onPressed: () {
+            onPressed: () async {
               // TODO2: call reset password function here.
               debugPrint('User forgot password and is trying to reset.');
-              debugPrint("new current user, ${_currentUser.email}");
-              _authService.signOut();
+
+              if (_emailController.text.trim().isNotEmpty) {
+                String message = await _authService.sendPasswordResetFor(
+                    email: _emailController.text.trim());
+                _authService.signOut();
+
+                if (message == 'email link sent') {
+                  Dialogs.okDialogAction(context, "Please check your email",
+                      "Password reset email has been sent to\n\n${_emailController.text.trim()}");
+                } else {
+                  Dialogs.okDialogAction(context, "Error", message);
+                }
+              } else {
+                Dialogs.okDialogAction(context, "Please enter your email",
+                    "Please enter your email into the email field to reset your password");
+              }
             },
           ),
           IconButton(
