@@ -179,9 +179,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   }
                   _formKey.currentState.save();
                   dev.log('current user ${_user.email}');
-                  // fbdbService.createNewUser(_user);
-                  if (_user.subscription.isActive ||
-                      _user.subscription.inTrial) {
+                  if (_user.subscription.isActive) {
                     Navigator.pushNamed(context, ScoreCard.id);
                     fbdbService.createNewUser(_user);
                   } else {
