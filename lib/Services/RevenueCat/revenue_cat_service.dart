@@ -60,7 +60,7 @@ class RevenueCatService {
   }
 
 // update subscriber attributes https://docs.revenuecat.com/docs/subscriber-attributes
-  static Future<void> updateAccount(Map<String, dynamic> args) async{
+  static Future<void> updateAccount(Map<String, dynamic> args) async {
     // Examples:
     // Purchases.setEmail("test@example.com");
     // Purchases.setPhoneNumber("+16505551234");
@@ -68,12 +68,4 @@ class RevenueCatService {
     // Purchases.setAttributes({"age": "24", "custom_group_id": "abc123"});
     await Purchases.setAttributes(args);
   }
-
-  static Future<void> delete(String: attributeName){}
 }
-
-
-
-// Future fetchOffers() async {
-//   final offers = await InnAppPurchaseService.
-// }
