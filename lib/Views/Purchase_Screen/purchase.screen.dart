@@ -238,6 +238,7 @@ Widget _buttonGroup(BuildContext context) {
                 ),
                 onPressed: () {
                   if (_user.subscription.inTrial == true) {
+                    fbdbService.createNewUser(_user);
                     Navigator.popAndPushNamed(context, ScoreCard.id);
                   }
                 },
