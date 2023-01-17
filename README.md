@@ -62,6 +62,13 @@ M1
 - navigate to the ios build folder `/Users/anthonypowell/Engineering/PowerofOne_Flutter/build/ios/archive/`
 - click the archive file `Runner.xcarchive`
 
+#### Android
+
+- run `flutter build appbundle`
+- navigate to [Google Play Console release tab](https://play.google.com/console/u/0/developers/6443463758289469480/app/4976145265421419016/tracks/production?tab=releases) in the browser
+- click "Create new release" button in the top right of the page
+- navigate to `build\app\outputs\bundle\release` and click and drag the `app-release.aab` file to the "App bundles" section of the Google Play Console release tab from above steps.
+
 #### Build Errors
 
 ```bash
