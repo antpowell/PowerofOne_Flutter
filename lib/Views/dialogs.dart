@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 
@@ -11,9 +9,9 @@ const TextStyle textStyle = TextStyle(
 
 class Dialogs {
   static Future<DialogAction> yesAbortDialogAction(
-    BuildContext context,
-    String title,
-    String body, {
+    BuildContext context, {
+    RichText title,
+    RichText body,
     Function approveFunction,
     Function disapproveFunction,
   }) async {
@@ -25,29 +23,23 @@ class Dialogs {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          title: Text(
-            title,
-            style: textStyle,
-          ),
-          content: Text(
-            body,
-            style: textStyle,
-          ),
+          title: title,
+          content: body,
           actions: <Widget>[
             Flex(
               direction: Axis.horizontal,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 PO1Button(
+                  "Cancel",
+                  onPress: () => {Navigator.pop(context), disapproveFunction()},
+                ),
+                PO1Button(
                   "OK",
                   onPress: () => {
                     Navigator.pop(context),
                     approveFunction(),
                   },
-                ),
-                PO1Button(
-                  "Cancel",
-                  onPress: () => {Navigator.pop(context), disapproveFunction()},
                 ),
               ],
             ),
