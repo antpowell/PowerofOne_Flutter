@@ -1,16 +1,14 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-
-import 'dart:developer' as dev;
 
 // video: https://www.youtube.com/watch?v=h-jOMh2KXTA
 
@@ -234,7 +232,7 @@ Widget _buttonGroup(BuildContext context) {
         (_user.subscription.inTrial
             ? TextButton(
                 style: TextButton.styleFrom(
-                  primary: Colors.grey,
+                  foregroundColor: Colors.grey,
                 ),
                 onPressed: () {
                   if (_user.subscription.inTrial == true) {

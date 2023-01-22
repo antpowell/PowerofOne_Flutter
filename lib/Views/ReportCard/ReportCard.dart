@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
-import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-import 'package:power_one/Views/dialogs.dart';
-import 'package:power_one/Models/PO1User.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
-
 import 'dart:developer' as dev;
 
-import '../../Main.dart';
+import 'package:flutter/material.dart';
+import 'package:power_one/Main.dart';
+import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_one/Views/FeedBack/FeedBack.dart';
+import 'package:power_one/Views/dialogs.dart';
 
 Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
@@ -163,7 +161,7 @@ class ReportCard extends StatelessWidget {
               ),
               Positioned(
                 bottom: 10,
-                right: 10,
+                right: 150,
                 child: PO1Button(
                   "New Game",
                   onPress: () {
@@ -175,6 +173,18 @@ class ReportCard extends StatelessWidget {
                         MaterialPageRoute(builder: (builder) => AuthWrapper()),
                         (route) => false);
                   },
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                right: 10,
+                child: PO1Button(
+                  "Feedback",
+                  onPress: () {
+                    Navigator.pushNamed(context, FeedBack.id);
+                  },
+                  icon:
+                      Icon(Icons.arrow_forward_ios_sharp, color: Colors.white),
                 ),
               ),
               // Positioned(

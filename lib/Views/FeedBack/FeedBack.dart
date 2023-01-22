@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:power_one/Main.dart';
+import 'package:power_one/Models/PO1Feedback.dart';
 import 'package:power_one/Models/PO1HustlePoint.dart';
-import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/ReportCard/ReportCard.dart';
-import 'package:power_one/Views/dialogs.dart';
-import 'package:power_one/Models/PO1Feedback.dart';
-import 'package:power_one/Models/PO1User.dart';
-import 'package:provider/provider.dart';
 
 class FeedBack extends StatelessWidget {
   static final String id = 'feedback_screen';
@@ -305,24 +302,42 @@ class FeedBack extends StatelessWidget {
                 icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
               ),
             ),
+            // Container(
+            //   child: PO1Button(
+            //     "Report Card",
+            //     onPress: () {
+            //       Dialogs.yesAbortDialogAction(
+            //           context,
+            //           '⚠ Is the game really over? ⚠',
+            //           'Press \'OK\' to save this game BUT you will not be able to make any addtional changes to this game.\n\nPress \'Cancel\' to close this dialog and continue reviewing current game details.',
+            //           approveFunction: () {
+            //         _user.setPlayerScore(
+            //             Provider.of<PO1Score>(context, listen: false));
+            //         PO1Feedback.calculateFeedback(_user.score);
+            //         _fbdbService.createNewGame();
+            //         Navigator.pushNamed(context, ReportCard.id);
+            //       });
+            //     },
+            //     onLongPress: () => {},
+            //     icon: Icon(Icons.arrow_forward_ios_sharp, color: Colors.white),
+            //   ),
+            // ),
             Container(
-              child: PO1Button(
-                "Report Card",
-                onPress: () {
-                  Dialogs.yesAbortDialogAction(
-                      context,
-                      '⚠ Is the game really over? ⚠',
-                      'Press \'OK\' to save this game BUT you will not be able to make any addtional changes to this game.\n\nPress \'Cancel\' to close this dialog and continue reviewing current game details.',
-                      approveFunction: () {
-                    _user.setPlayerScore(
-                        Provider.of<PO1Score>(context, listen: false));
-                    PO1Feedback.calculateFeedback(_user.score);
-                    _fbdbService.createNewGame();
-                    Navigator.pushNamed(context, ReportCard.id);
-                  });
-                },
-                onLongPress: () => {},
-                icon: Icon(Icons.arrow_forward_ios_sharp, color: Colors.white),
+              child: Positioned(
+                bottom: 10,
+                right: 10,
+                child: PO1Button(
+                  "New Game",
+                  onPress: () {
+                    _user.clearData();
+                    // FIXME: PlayerNameForm's route stacks ontop of each other here. Need to fix with either only allowing a single instance of a route onto the stack or find a more advanced solution.
+                    Navigator.pushAndRemoveUntil(
+                        // user AuthWrapper in stead of LoginForm
+                        context,
+                        MaterialPageRoute(builder: (builder) => AuthWrapper()),
+                        (route) => false);
+                  },
+                ),
               ),
             ),
           ],
