@@ -5,9 +5,9 @@ class Subscription {
   static DateTime _trailEndTime;
   bool _isActive = false, _inTrial = true;
 
-  PurchaserInfo _purchaserInfo;
-  PurchaserInfo get purchaserInfo => _purchaserInfo;
-  setPurchaseInfo(PurchaserInfo purchaserInfo) {
+  CustomerInfo _purchaserInfo;
+  CustomerInfo get purchaserInfo => _purchaserInfo;
+  setPurchaseInfo(CustomerInfo purchaserInfo) {
     _purchaserInfo = purchaserInfo;
     if (_purchaserInfo?.entitlements?.all['premium_user']?.isActive ?? false) {
       setActive();

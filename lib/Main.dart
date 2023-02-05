@@ -1,21 +1,20 @@
+import 'dart:developer' as dev;
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_one/Views/FeedBack/FeedBack.dart';
 import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/Register/register.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
-import 'package:power_one/Views/FeedBack/FeedBack.dart';
 import 'package:provider/provider.dart';
-
-import 'dart:developer' as dev;
 
 import 'Models/PO1User.dart';
 import 'Views/Purchase_Screen/purchase.screen.dart';
@@ -57,6 +56,7 @@ class Power1 extends StatelessWidget {
           create: (BuildContext context) => RevenueCatService(),
         ),
         StreamProvider(
+          initialData: /**TODO: fix this */,
           create: (context) =>
               context.read<AuthenticationService>().authStateChange,
         ),
@@ -67,7 +67,7 @@ class Power1 extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff33333D),
           dialogBackgroundColor: Color(0xff33333D),
-          backgroundColor: Color(0xff33333D),
+          colorScheme: ColorScheme(background: Color(0xff33333D)),
         ),
         // initialRoute: '/',
         routes: {

@@ -325,8 +325,8 @@ class SubscriptionCard extends HookWidget {
               Flexible(
                 flex: 1,
                 child: _titleArea(
-                  titleText:
-                      packageTitleConverter(data.product.identifier)['name'],
+                  titleText: packageTitleConverter(
+                      data.storeProduct.identifier)['name'],
                 ),
               ),
               Flexible(
@@ -340,7 +340,7 @@ class SubscriptionCard extends HookWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: data.product.priceString,
+                        text: data.storeProduct.priceString,
                       ),
                       TextSpan(
                         text: '/month',
@@ -357,9 +357,9 @@ class SubscriptionCard extends HookWidget {
               Expanded(
                 flex: 3,
                 child: _detailArea(
-                  details: data.product.description,
+                  details: data.storeProduct.description,
                   bullets: packageTitleConverter(
-                      data.product.identifier)['benefits'],
+                      data.storeProduct.identifier)['benefits'],
                 ),
               ),
             ],
