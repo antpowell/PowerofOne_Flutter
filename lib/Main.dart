@@ -56,7 +56,8 @@ class Power1 extends StatelessWidget {
           create: (BuildContext context) => RevenueCatService(),
         ),
         StreamProvider(
-          // initialData: /**TODO: fix this */,
+          initialData: /*TODO: verify this should be init state*/
+              context.read<AuthenticationService>().authStateChange,
           create: (context) =>
               context.read<AuthenticationService>().authStateChange,
         ),
