@@ -35,14 +35,14 @@ workflows:
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
-      - flutter build appbundle --release --build-name=$FLUTTER_BUILD_NAME --build-number=$FLUTTER_BUILD_NUMBER
+      - flutter build appbundle --release --build-name=1.1.1 --build-number=9
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
       - app-store-connect fetch-signing-files "com.powerofone.basketball" --type IOS_APP_DEVELOPMENT
         --create
       - keychain add-certificates
       - xcode-project use-profiles
-      - flutter build ipa --export-options-plist ~/export_options.plist --build-name=$FLUTTER_BUILD_NAME --build-number=$FLUTTER_BUILD_NUMBER
+      - flutter build ipa --export-options-plist ~/export_options.plist --build-name=1.1.1 --build-number=9
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
