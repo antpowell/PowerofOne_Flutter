@@ -35,14 +35,14 @@ workflows:
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
-      - flutter build appbundle --release
+      - flutter build appbundle --release --build-name=${FLUTTER_BUILD_NAME} --build-number=${FLUTTER_BUILD_NUMBER}
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
       - app-store-connect fetch-signing-files "com.powerofone.basketball" --type IOS_APP_DEVELOPMENT
         --create
       - keychain add-certificates
       - xcode-project use-profiles
-      - flutter build ipa --export-options-plist ~/export_options.plist
+      - flutter build ipa --export-options-plist ~/export_options.plist --build-name=${FLUTTER_BUILD_NAME} --build-number=${FLUTTER_BUILD_NUMBER}
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
@@ -66,3 +66,32 @@ workflows:
         issuer_id: ebe2a96a-48b9-45f1-82f9-2f2db329a449
         submit_to_testflight: false
         submit_to_app_store: true
+
+  my-workflow:
+    scripts:
+      - name: Add provisioning profiles
+        script: |
+          set -e # exit on first failed command
+
+          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_HOME"
+          echo ${PROVISIONING_PROFILE?} | base64 --decode > "$PROFILES_HOME/$(uuidgen).mobileprovision"
+      - name: Add signing certificate
+        script: |
+          set -e # exit on first failed command
+
+          echo ${CERTIFICATE?} | base64 --decode > /tmp/certificate.p12
+          keychain initialize
+          keychain add-certificates \
+              --certificate /tmp/certificate.p12 \
+              --certificate-password ${CERTIFICATE_PASSWORD?}
+      - name: Increment build number
+        script: agvtool new-version -all $BUILD_NUMBER
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
+      - name: Build ipa for distribution
+        script: xcode-project build-ipa \
+                    --workspace "${XCODE_WORKSPACE?}" \
+                    --scheme "${XCODE_SCHEME?}"
+    artifacts:
+      - build/ios/ipa/*.ipa
