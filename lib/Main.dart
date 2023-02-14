@@ -56,8 +56,6 @@ class Power1 extends StatelessWidget {
           create: (BuildContext context) => RevenueCatService(),
         ),
         StreamProvider(
-          initialData: /*TODO: verify this should be init state*/
-              context.read<AuthenticationService>().authStateChange,
           create: (context) =>
               context.read<AuthenticationService>().authStateChange,
         ),
@@ -68,7 +66,8 @@ class Power1 extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff33333D),
           dialogBackgroundColor: Color(0xff33333D),
-          colorScheme: ColorScheme(background: Color(0xff33333D)),
+          colorScheme:
+              ColorScheme.fromSwatch(backgroundColor: Color(0xff33333D)),
         ),
         // initialRoute: '/',
         routes: {
