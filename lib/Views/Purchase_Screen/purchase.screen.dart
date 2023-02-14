@@ -229,7 +229,7 @@ Widget _buttonGroup(BuildContext context) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        (_user.subscription.inTrial
+        ((_user.subscription != null) && _user.subscription.inTrial
             ? TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.grey,
@@ -251,10 +251,10 @@ Widget _buttonGroup(BuildContext context) {
           onPress: () async {
             try {
               // TODO: setPurchaseInfo state
-              final purchaseInfo =
+              final customerInfo =
                   await Purchases.purchasePackage(_selectedPackage);
-              if (purchaseInfo.entitlements.all['premium_user'].isActive) {
-                _user.subscription.setPurchaseInfo(purchaseInfo);
+              if (customerInfo.entitlements.all['premium_user'].isActive) {
+                _user.subscription.setCustomerInfo(customerInfo);
                 fbdbService.createNewUser(_user);
                 Navigator.popAndPushNamed(context, ScoreCard.id);
               }

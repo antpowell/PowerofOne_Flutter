@@ -58,6 +58,7 @@ class Power1 extends StatelessWidget {
         StreamProvider(
           create: (context) =>
               context.read<AuthenticationService>().authStateChange,
+          initialData: null,
         ),
       ],
       child: MaterialApp(

@@ -55,7 +55,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         if (value.isEmpty) {
           return 'Email is required';
         } else if (!emailExp.hasMatch(value)) {
-          return 'Email is not formated correctly';
+          return 'Email is not formatted correctly';
         }
         return null;
       },
@@ -106,7 +106,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         if (value.isEmpty) {
           return 'Password is required';
         } else if (!passwordExp.hasMatch(value)) {
-          return 'Password is not formated correctly, must have at lease 6 characters.';
+          return 'Password is not formatted correctly, must have at lease 6 characters.';
         }
         return null;
       },
@@ -132,7 +132,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           Navigator.pushNamedAndRemoveUntil(
               context, PlayerNameForm.id, (route) => false);
         }
-        ;
       },
     );
   }
