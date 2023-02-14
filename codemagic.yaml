@@ -28,6 +28,8 @@ workflows:
         EOF
       - name: Set up local properties
         script: echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - name: Flutter clean
+        script: flutter clean
       - name: Get Flutter packages
         script: flutter packages pub get
       - name: Build AAB with Flutter
