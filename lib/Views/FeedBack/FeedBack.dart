@@ -323,21 +323,17 @@ class FeedBack extends StatelessWidget {
             //   ),
             // ),
             Container(
-              child: Positioned(
-                bottom: 10,
-                right: 10,
-                child: PO1Button(
-                  "New Game",
-                  onPress: () {
-                    _user.clearData();
-                    // FIXME: PlayerNameForm's route stacks ontop of each other here. Need to fix with either only allowing a single instance of a route onto the stack or find a more advanced solution.
-                    Navigator.pushAndRemoveUntil(
-                        // user AuthWrapper in stead of LoginForm
-                        context,
-                        MaterialPageRoute(builder: (builder) => AuthWrapper()),
-                        (route) => false);
-                  },
-                ),
+              child: PO1Button(
+                "New Game",
+                onPress: () {
+                  _user.clearData();
+                  // FIXME: PlayerNameForm's route stacks ontop of each other here. Need to fix with either only allowing a single instance of a route onto the stack or find a more advanced solution.
+                  Navigator.pushAndRemoveUntil(
+                      // user AuthWrapper in stead of LoginForm
+                      context,
+                      MaterialPageRoute(builder: (builder) => AuthWrapper()),
+                      (route) => false);
+                },
               ),
             ),
           ],

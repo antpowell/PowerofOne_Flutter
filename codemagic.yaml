@@ -11,8 +11,8 @@ workflows:
       - app_store_credentials
       - firebase_credentials
       vars:
-        BUILD_VERSION: 1.1.4
-        BUILD_NUMBER: 12
+        BUILD_VERSION: 1.1.5
+        BUILD_NUMBER: 13
       flutter: stable
       xcode: latest
       cocoapods: default
