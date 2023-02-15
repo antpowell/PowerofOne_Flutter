@@ -15,7 +15,7 @@
 	<key>CFBundleName</key>
 	<string>Power of One Basketball</string>
 	<key>CFBundleDisplayName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>Power of One Basketball</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
