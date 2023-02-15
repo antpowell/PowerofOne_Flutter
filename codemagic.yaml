@@ -13,14 +13,14 @@ workflows:
       - google_credentials
       - app_store_credentials
       - firebase_credentials
-    integrations:
-      app_store_connect: IOS_Developer_Certificate
       vars:
         BUILD_VERSION: 1.1.5
         BUILD_NUMBER: 13
       flutter: stable
       xcode: latest
       cocoapods: default
+    integrations:
+      app_store_connect: IOS_Developer_Certificate
     scripts:
       - |
         # set up key.properties
