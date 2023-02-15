@@ -6,10 +6,15 @@ workflows:
     name: Build + Deploy
     max_build_duration: 60
     environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.powerofone.basketball
       groups: 
       - google_credentials
       - app_store_credentials
       - firebase_credentials
+    integrations:
+      app_store_connect: IOS_Developer_Certificate
       vars:
         BUILD_VERSION: 1.1.5
         BUILD_NUMBER: 13
@@ -65,8 +70,10 @@ workflows:
         track: internal
         in_app_update_priority: 0
       app_store_connect:
+        auth: integration
         api_key: Encrypted(Z0FBQUFBQmo2Qkp1cW9vbjdiNEcxZmVlX1o2YWVDWkVUSXRoTlZyZmE4eFgyVTJiZmV2cXJaMURGeF8zX0ZPYXlwMW9MSzZMZXBLX1V5bEhYYlVVZlBuR2ZycFV4YzQ2bXpING1DeHNRY21VV2NKMW1DRjhXU0lhRkZwMkpoZmd4VVNlVkRGdVJzMVN3bFJJNGlOeFNhMkQtVzZ4UHJ1d2s2bExMRkFwRHl1dTEzTjA0NDIxWGtYbHZKTUFhM1JEbmFES0ttdk9WaFAwcHdVUEpfV3g0VVFHbUcwUGo1eU9oQzlhbF93aFE1Xy1ZdVUtbXVrczVzVk0yQ2ZWVUE2WDJmWDJ1TUgwQUFCZU1zai1lcXRINm5vQUtZUHVvd1l6TS1zbXdYci1POGtMZjZlZ2tZZ0x5WlMxWHRVY2VOS3dNVjFxZEs4Sl9iQmo2djN1Zk9nZ0F0dFdWaWRXUE9McldjV18wQ0xBc2hLc2lmaHoxWWlDRDhvRkVPeG96ZjlGSkpPSFFHNXhGeTFfeVpWU3UtbDNMUFc1c2xjRXVrNUo1LWE1Ym5XTzZnU29xMWRvbEtVdEFEZz0=)
         key_id: J2WYTL3Z9H
         issuer_id: ebe2a96a-48b9-45f1-82f9-2f2db329a449
         submit_to_testflight: false
         submit_to_app_store: true
+        release_type: AFTER_APPROVAL
