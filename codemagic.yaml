@@ -20,7 +20,7 @@ workflows:
       xcode: latest
       cocoapods: default
     integrations:
-      app_store_connect: IOS_Developer_Certificate
+      app_store_connect: Power of One
     scripts:
       - |
         # set up key.properties
