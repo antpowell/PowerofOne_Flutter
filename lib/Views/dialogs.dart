@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 
 enum DialogAction { yes, abort }
@@ -32,13 +33,16 @@ class Dialogs {
               children: <Widget>[
                 PO1Button(
                   "Cancel",
-                  onPress: () => {Navigator.pop(context), disapproveFunction()},
+                  onPress: () => {
+                    Navigator.pop(context),
+                    disapproveFunction?.call(),
+                  },
                 ),
                 PO1Button(
                   "OK",
                   onPress: () => {
                     Navigator.pop(context),
-                    approveFunction(),
+                    approveFunction?.call(),
                   },
                 ),
               ],
@@ -50,9 +54,8 @@ class Dialogs {
     return action ?? DialogAction.abort;
   }
 
-  static Future<DialogAction> okDialogAction(
-      BuildContext context, String title, String body,
-      {Function approveFunction}) async {
+  static Future<DialogAction> okDialogAction(BuildContext context,
+      {String title, String body, Function approveFunction}) async {
     final action = await showDialog(
       context: context,
       barrierDismissible: false,
@@ -61,14 +64,18 @@ class Dialogs {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          title: Text(
-            title,
-            style: textStyle,
-          ),
-          content: Text(
-            body,
-            style: textStyle,
-          ),
+          title: (title != null && title.isNotEmpty)
+              ? Text(
+                  title,
+                  style: textStyle,
+                )
+              : null,
+          content: (body != null && body.isNotEmpty)
+              ? Text(
+                  body,
+                  style: textStyle,
+                )
+              : null,
           actions: <Widget>[
             Flex(
               direction: Axis.horizontal,
@@ -76,7 +83,10 @@ class Dialogs {
               children: <Widget>[
                 PO1Button(
                   "OK",
-                  onPress: () => {Navigator.pop(context), approveFunction()},
+                  onPress: () => {
+                    Navigator.pop(context),
+                    approveFunction.call(),
+                  },
                 ),
               ],
             ),
@@ -85,5 +95,30 @@ class Dialogs {
       },
     );
     return action ?? DialogAction.abort;
+  }
+
+  static Future<AlertDialog> loadingDialog(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            title: RichText(
+              text: (TextSpan(
+                text: '',
+                style: textStyle,
+              )),
+            ),
+            content: SpinKitCircle(
+              color: Colors.white,
+              size: 100.0,
+            ),
+            actions: null);
+      },
+    );
   }
 }

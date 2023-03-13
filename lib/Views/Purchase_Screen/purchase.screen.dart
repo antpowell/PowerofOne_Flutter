@@ -8,6 +8,7 @@ import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
+import 'package:power_one/Views/dialogs.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 // video: https://www.youtube.com/watch?v=h-jOMh2KXTA
@@ -80,6 +81,7 @@ class PurchaseScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final ValueNotifier<int> activeCardVN = useValueNotifier(1);
+    final ValueNotifier<bool> isLoading = useState(false);
 
     return Scaffold(
       body: SafeArea(
@@ -123,7 +125,10 @@ class PurchaseScreen extends HookWidget {
                               },
                             ),
                           ),
-                          _buttonGroup(context),
+                          _buttonGroup(
+                            context: context,
+                            isLoading: isLoading,
+                          ),
                         ],
                       )
                     : Column(
@@ -222,7 +227,7 @@ Widget _detailBullets({String listItemText}) {
   );
 }
 
-Widget _buttonGroup(BuildContext context) {
+Widget _buttonGroup({BuildContext context, ValueNotifier<bool> isLoading}) {
   final fbdbService = FBDBService();
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 36),
@@ -246,23 +251,67 @@ Widget _buttonGroup(BuildContext context) {
                 ),
               )
             : Spacer()),
+        ((_user.subscription != null) && (_user.subscription.inTrial != null)
+            ? TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.grey,
+                ),
+                onPressed: isLoading.value
+                    ? null
+                    : () async {
+                        Dialogs.loadingDialog(context);
+                        isLoading.value = true;
+                        if (await _user.subscription.restoreCustomerInfo() ==
+                            false) {
+                          dev.log('No purchases to restore');
+                          isLoading.value = false;
+                          Navigator.pop(context);
+                        }
+                        fbdbService.createNewUser(_user);
+                        isLoading.value = false;
+                        Navigator.pop(context);
+                        if (!_user.subscription.isActive) {
+                          Dialogs.okDialogAction(
+                            context,
+                            body: 'No active subscription found',
+                          );
+                        } else {
+                          Dialogs.okDialogAction(
+                            context,
+                            title: 'Active account found on this device',
+                            approveFunction: () => {
+                              Navigator.pop(context),
+                              // Navigator.popAndPushNamed(context, ScoreCard.id),
+                            },
+                          );
+                        }
+                      },
+                child: Text(
+                  'Restore active subscription',
+                  style: TextStyle(fontSize: 10),
+                ),
+              )
+            : Spacer()),
         PO1Button(
           'Subscribe',
-          onPress: () async {
-            try {
-              // TODO: setPurchaseInfo state
-              final customerInfo =
-                  await Purchases.purchasePackage(_selectedPackage);
-              if (customerInfo.entitlements.all['premium_user'].isActive) {
-                _user.subscription.setCustomerInfo(customerInfo);
-                fbdbService.createNewUser(_user);
-                Navigator.popAndPushNamed(context, ScoreCard.id);
-              }
-            } on PlatformException catch (e) {
-              dev.log(e.message);
-              Navigator.pop(context);
-            }
-          },
+          onPress: isLoading.value
+              ? null
+              : () async {
+                  try {
+                    // TODO: setPurchaseInfo state
+                    final customerInfo =
+                        await Purchases.purchasePackage(_selectedPackage);
+                    if (customerInfo
+                        .entitlements.all['premium_user'].isActive) {
+                      _user.subscription.setCustomerInfo(customerInfo);
+                      fbdbService.createNewUser(_user);
+                      Navigator.popAndPushNamed(context, ScoreCard.id);
+                    }
+                  } on PlatformException catch (e) {
+                    dev.log(e.message);
+                    Navigator.pop(context);
+                  }
+                },
         ),
       ],
     ),

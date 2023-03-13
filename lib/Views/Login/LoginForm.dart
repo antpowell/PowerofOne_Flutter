@@ -1,14 +1,12 @@
-import 'dart:ui';
+import 'dart:developer' as dev;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
 import 'package:power_one/Views/Register/register.dart';
 import 'package:power_one/Views/dialogs.dart';
-import 'dart:developer' as dev;
-
-import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class LoginFormScreen extends StatefulWidget {
@@ -124,8 +122,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         if (message != '${_emailController.text.trim()} signed in') {
           Dialogs.okDialogAction(
             context,
-            'ERROR: Something went wrong!',
-            message,
+            title: 'ERROR: Something went wrong!',
+            body: message,
           );
         } else {
           dev.log(message);
@@ -188,14 +186,26 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 _authService.signOut();
 
                 if (message == 'email link sent') {
-                  Dialogs.okDialogAction(context, "Please check your email",
-                      "Password reset email has been sent to\n\n${_emailController.text.trim()}");
+                  Dialogs.okDialogAction(
+                    context,
+                    title: "Please check your email",
+                    body:
+                        "Password reset email has been sent to\n\n${_emailController.text.trim()}",
+                  );
                 } else {
-                  Dialogs.okDialogAction(context, "Error", message);
+                  Dialogs.okDialogAction(
+                    context,
+                    title: "Error",
+                    body: message,
+                  );
                 }
               } else {
-                Dialogs.okDialogAction(context, "Please enter your email",
-                    "Please enter your email into the email field to reset your password");
+                Dialogs.okDialogAction(
+                  context,
+                  title: "Please enter your email",
+                  body:
+                      "Please enter your email into the email field to reset your password",
+                );
               }
             },
           ),

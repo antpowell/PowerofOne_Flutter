@@ -2,9 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
-import 'package:power_one/models/PO1Subscription.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:purchases_flutter/errors.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 enum authProblems {
@@ -149,12 +146,11 @@ class AuthenticationService {
   Future<LogInResult> revenueCatLogin() async {
     try {
       LogInResult results =
-          await RevenueCatService.logIn(_firebaseAuth.currentUser.uid);
+          await RevenueCatService.logIn(_firebaseAuth.currentUser);
       if (results.created) {
         /// true if the logged in user has been created in the
         /// RevenueCat backend for the first time
         /// (i.e. they have not yet purchased a subscription)
-
       }
       return results;
     } catch (e) {

@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Subscription {
@@ -14,6 +16,20 @@ class Subscription {
     }
     // TODO: Identify what needs to be used to determine if the user has a trial/subscrption
   }
+
+  Future<bool> restoreCustomerInfo() async {
+    CustomerInfo restoredCustomerInfo;
+    try {
+      restoredCustomerInfo = await Purchases.restorePurchases();
+      setCustomerInfo(restoredCustomerInfo);
+      return true;
+    } catch (e) {
+      dev.log('failed to restore customer purchase with error $e');
+      return false;
+    }
+  }
+
+  updateCustomerSubscriptionPersonalInfo() {}
 
   setTrialEndTime({DateTime creationTime}) {
     if (creationTime != null) {
@@ -51,6 +67,7 @@ class Subscription {
     } else {
       // TODO: fetch trailendtime from firebase
     }
+
     setCustomerInfo(logInResults.customerInfo);
     if (customerInfo?.firstSeen?.isNotEmpty ?? false) {
       _isActive =
