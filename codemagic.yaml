@@ -7,7 +7,7 @@ workflows:
     max_build_duration: 60
     environment:
       ios_signing:
-        distribution_type: development
+        distribution_type: app_store
         bundle_identifier: com.powerofone.basketball
       groups: 
       - google_credentials
