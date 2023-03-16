@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyApQ_K4WKYddFuK7rv9liUqEdICYeXGdvY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>856529158202</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.powerofone.basketball</string>
+	<key>PROJECT_ID</key>
+	<string>powerof1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>powerof1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:856529158202:ios:82a5c45d6941514b047503</string>
+	<key>DATABASE_URL</key>
+	<string>https://powerof1.firebaseio.com</string>
+</dict>
+</plist>

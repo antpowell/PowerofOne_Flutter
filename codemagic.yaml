@@ -1,0 +1,79 @@
+# Automatically generated on 2023-02-11 UTC from https://codemagic.io/app/61baef844ee620d5407c0e75/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Build + Deploy
+    max_build_duration: 60
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.powerofone.basketball
+      groups: 
+      - google_credentials
+      - app_store_credentials
+      - firebase_credentials
+      vars:
+        BUILD_VERSION: 1.1.6
+        BUILD_NUMBER: 14
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    integrations:
+      app_store_connect: Power of One
+    scripts:
+      - |
+        # set up key.properties
+        echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
+        cat >> "$FCI_BUILD_DIR/android/key.properties" <<EOF
+        storePassword=$FCI_KEYSTORE_PASSWORD
+        keyPassword=$FCI_KEY_PASSWORD
+        keyAlias=$FCI_KEY_ALIAS
+        storeFile=/tmp/keystore.keystore
+        EOF
+      - name: Set up local properties
+        script: echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - name: Flutter clean
+        script: flutter clean
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build AAB with Flutter
+        script: |
+          flutter build appbundle --release
+      - name: Install pods
+        script: find . -name "Podfile" -execdir pod install \;
+      - keychain initialize
+      - app-store-connect fetch-signing-files "com.powerofone.basketball" --type IOS_APP_DEVELOPMENT
+        --create
+      - keychain add-certificates
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
+      - name: Flutter build ipa
+        script: |
+           flutter build ipa --release \
+            --export-options-plist ~/export_options.plist
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - powell.anthony.e@gmail.com
+      google_play:
+        credentials: Encrypted(Z0FBQUFBQmo2Qkp1aUN6SjBmaWNXX0J2TkZxV2dTUU9wOFZka2g1d2NhbE9jU0U4bU1ULUpPY3E4S18tX0QtMkFvY2FnODF0alBxSUhFM3BvcmRlQTJHbElLV3g5UTRoZElRS0hmYmVnVnRyQTlsdTNGNGtTeGo4cGVNWEllN1NLbmVWbmRwOXpJLUtqSG1mVURmU2trbW5jX25ENjQ0NWtsYk54MEMxSDd1MzlTYlV1OU94YUpNY3czaS1XamdrSzl0emZWa01jaUNoTmdYMjUweUlUOFhtcHdTV3A3X1dvMHhGSUJEMnJVa1dmMEVLQS00a0JrU0p1ZTZsbEl0REJXRG5udlZXU2JqTFNlV3k0NE5pYzVZNndIZmU1MDZqdFZESVBjSmxZUGpyOXRTd0ZFOExBNlJuYVBEMFdNVEk2MGkxcl9oSnhXMTJ3S1VUUjRhSjJQbjdWb1g3MW9HODM0bGNNMWU1dGVlTXEwZWtMekVmYTFpeDc5M0R2NHI0dHVNQzJKdFhkNk5UNzc0bXpwQWJRNVF0TkZtdFNaYk5zWFBDVDNYa0NXaXMxQ1pvSHA3cHhqMFZUNUxlVEl5NGE2N1FlMnB0MXgxdjJLeHpIb2Ixa29LWVEwaUd1THIydG40R19rTXlNVTZzWnJPYmNFcHZzdU5TdWFTend6RGd6YUFDUHc1SHV0X0VGWlpSeWozVEZFNERvd0x6dUp6a2ZsWnF0NkdjdU1HYS1pcDZoNmFYMkJzdUwyaVNZUUNIOGdTeGU0R05UaHNNc1UzQzlwYnd3bTJuLXBibkhScXh3NTliS2FQbVN2YzVIMXRnUTdRUnJXd3BidnJfb05mTFRTWlZoZTF5UDdSQXZmMnd2UmVrUVp0T0REc2wwUWF3eURzMkRXUGpmVmpySGNPRnFXbmpDd1c2YzJYbVl4dmRNNjNZQ3d2bFhBSlAxNXVuV2VVazVKcFBEcmtQMlJMeWFGNFFNeEZ5Y09XTGVDZkJHTG52eUVDWk5mVjdTMnBUNkFaOVJGSXc1TUx1bHkwMklybjZlQ0Z6OGY4dFc5NTQ3THNLRXRPa2lHeng1eV9GRVpuYXJLM1A3amlkQXNJWFAtVGVFVWZJcGpwNTFhekhsN1FTRkZFT3NuODhzSWh2a2lhTVlnbG40dzRXb00xSU56VlpCYU9MaDRqWkZYVm85Q3ZjRWd3NUJBWjEydkRJVkRDU2Q1S0pOTDk3T2NIQlB5MnRPaU1IRElqbWg3S1Vkdnp5OXlwU1Q0UC1aQnJjV1FFQjNkMjJ4LUdwSWdSa1JsNW1NWE1rQW5CcTl3RWxnbFpSVkhQcFROMVJLNWc2MXlkcklVSmY2OHpmald2MVoxOXk2X0lxZGs5MExtZjVhV3YtdVY3Q3JrRkdPOXpQVC12dU9ESE94UXZwSmkyTDgtU3BCUEJMMW9URm9KVzV6RGFXWG1NVGxIdmRiRlptRHZpcEQzVlI4cHZVakdrdWJQeXk3VXdjSWtQT2d3RmFWS3lob2k4aTk5VTV1RTdVbzJzdWEtdlU4bTk5eTNIN0otRmJfWHZFSjZndkkyZzJQMmhzazVDZld1MzU0MzFud0VwaS1nNzd5NktzWkFtX2daQWJfb2dEbC1ZenlLRDAtSlJQNEdMUmpNQ1ZTOXBoMWNUTTVNRXdIaDZ1ZnN2RlNaZ1RscFR4WFItY2dlY1RtR0MtVWdHcVNiWTF3cjdsNURnTXVCMzJQWXhSazRpRXk1X2JzLU5uWWQ5dUI4aUpVX3d5Ym5EZTVuM2hpLWhycXppV0I5U1BnMXFKU2RFMzgxek9YTWl3VFV1UmZ3dTBnWWVQSzg3TzNGd0lsMlBVNlFyR3cwSV8xaVItU2tTc2NBdG9BYi11UU12aE1yMWpsN2xsTk03WWFzQTBHaXM0dTl5OENQd1UtaUpQOGZEbmFzaWI1bmJDX2JTVUZqOGhaN3dwRkt5Qnl0bWF4ejVQTWMyZzRpLWdYMVY0SFpyT210alFvOXctUjd5MG9kZEgtVUg5d2dScjdNWGp4d2Z4XzJIUmhUUVRfd1c1RnAtekoyNGxDV1dpdFAzaDFCZWdLX09PUHduelVLdUVDT3VtRmVWOWszNlBwd3lTR0NHSGRtam1CRVVvVVBzaHMxQ3lJZTI2UTlrQnFwLWhhZ09jV01mRzlXMzBBbmEyX3prdEZveHhRajJFczR2c0ljMnN4QUVJZUxBcGE4ZDF4NmFnbHFfaHNkamNlc2NocWlrQUJXYzZqRjZxd1I1NE90V0xLOEVuclZkWTdnZ1ZYbDBycG9oTnJLMVJ3WmtYR003eGFtTHNNd2tGSE1kcXlINFZJQl9xRTY2QzNjSHgtbU1HWGFaWTdoT3BmWW1mMEZoMlJpeV9VWWgtbGhGaWxxcm5yMzBUdXlMQzVrejJGS3RRcnhDeTNMazBjbXpOa2dOUWF4V2JRZXg2Y1lOU25tbFJjZ1cyelc3VEFJaXU5Skx4YUlud1YtMDZLUUdQcnhwQkg4dDNxZ3lRMGZCRTVULWdhaFJ6QThwYUVZaFk1UHp3YldhRVQ4RmM1RG03bktCUU5aUGJTOXdJNm56eDZxX094a2ppMHY3QWxxUHVZazJneVI0LTlGUzNrWllNLVZfc0hMNmZOdW1hcWFXLWpsRDhhNW9Ec1p0VUk4MEdrX3YwOEJ1Nm5UMWhBQWV4dTNKQXMzaHNLd2g1eEptWm1SU3J4NjJvRXFOZkFPamZEZzVaU3BZMVZWQmtsYUk1UURsbHRFLTlwQTRJcE1GUmlXTGU1M3FtanlNYVpnc1BDWHZJb25CU3dyUzlBNi04YzhuN1lvZy1hTzV5MTUxYWExNlhDU0U5cFF0Z01CcGhYNnF5ZF9jN3BjU3JGbTFYaHF4anBudEhpQmxsRkNxREVScnRaX0hWeUVuN3N2a1JYWkJDWkFsbmlmMkxtNWRLNTNYZVBXdDBNWGptYTFxX2habUN6NEdYZUU2YUZHMnZfaFhOY2NYQ3dWdXg0OENQUWxVbUJyYUcyOVZyUlYwb3NPS2ZIeE1Rd1A1dWxZTVlMVXAzXzdrZTN1dE5PMHl2UXpSYk9LeEZqUm1OMXJsb2FJbWc1ZnlJNnVmRjU5cWZLOEEtQmhMWEpmTC12bFoxRWRtbDNBWEdzQ1lwUzBDNXd2RHlNOFptZllwd0tTejJGbnE5cFlET0xmYUg3TU1ZSll4MnI5Z090d2cxdXVOOGhNZEgxcGJIZ3ZFcGlZMl9uVTdFTHp1UF9MS2w5YVd6dkdrTU56NEhCNm9aVE5uVU13bjRheF9xNHhsNXlYU3hUcDFrWW9QTkNMYkhVS1hacW1PcnZiQVFQdS1hM291VmF2S1g2T2RMUWxGX0wtQWVoSkZmWVdNV0tGRXp4Y3o4THNMRzNQNVp3b0RSOUVUOExpV0NmRWx4R01Ialp5aklFNzRFb1hRWWNTMzR2cG50amMzTW40SERRXzIxWXEzcURIenM4UV83ZWtpaU45ZjRZRFBpS0RCTWNkUVNiTXpvVXpwWTFQMno0OUV5Z3g4UHB4dU5xZFU0b0ViaEdUZ3JHVVZHYlk4azlXUmZHRzdaY1ZrMVBkWGc3MHlTVXJKOF9pdTZJSFBhR3pJOTNTYURHRHNCUUprRVpCd3VaV0I0dmVBSE40akM5NUwwMlRIX2tWWXE1RUZnTVh1eDhjZTR5akM0SE43MXFWaWs1VjBqaTBUekRPUUxLWFFRdUQxUWs1V0tZQVJOU1UteDhVWl9FR05rdnd4RlBqMXdRcnBsUlFUXzhKNVBSZmU4Q1ZiSGxMNnpkVlhFSmVHTUtPVzl3dHRKOEM2LTJtWk9rNk1aUFpFbmV4T2pSbmRvUXp5bmROVjZFX21CbzBjRVd1bkgwWDdpOGpMTFAweTV1Q1gzVTROZUlSRG15ZzNaWG9qdy1uZVpoYUdwMlZnYVdYa1BUT2RCTVVITjZwMTNIczhUNW85Vkp1ZGxxMFZnUEYwRThpZFhqSG9UdmdmRlpoVjQxRlJGR05JWk5Id3hHTDVTQTBsQU1nMHhyUEoxYjdqcGdOT1NtVWV5Sy1qcHJpOGFHc1pDQV9hMVloS2R1OXZUNmpYbG5lYWI1MFozZEZDS3hYRFNvVzhJcEFLVEFweExaeEUyNlQ3UzRSODd2ZGhzUFZQWElRblg0aHBLc1BuSUR3YXNTZ0Ytd25iMlEwWEhNbGlxQkp6MWZrX3l3OTJpaUZsWDlLdmI0emc9)
+        track: internal
+        in_app_update_priority: 0
+      app_store_connect:
+        auth: integration
+        # api_key: Encrypted(Z0FBQUFBQmo2Qkp1cW9vbjdiNEcxZmVlX1o2YWVDWkVUSXRoTlZyZmE4eFgyVTJiZmV2cXJaMURGeF8zX0ZPYXlwMW9MSzZMZXBLX1V5bEhYYlVVZlBuR2ZycFV4YzQ2bXpING1DeHNRY21VV2NKMW1DRjhXU0lhRkZwMkpoZmd4VVNlVkRGdVJzMVN3bFJJNGlOeFNhMkQtVzZ4UHJ1d2s2bExMRkFwRHl1dTEzTjA0NDIxWGtYbHZKTUFhM1JEbmFES0ttdk9WaFAwcHdVUEpfV3g0VVFHbUcwUGo1eU9oQzlhbF93aFE1Xy1ZdVUtbXVrczVzVk0yQ2ZWVUE2WDJmWDJ1TUgwQUFCZU1zai1lcXRINm5vQUtZUHVvd1l6TS1zbXdYci1POGtMZjZlZ2tZZ0x5WlMxWHRVY2VOS3dNVjFxZEs4Sl9iQmo2djN1Zk9nZ0F0dFdWaWRXUE9McldjV18wQ0xBc2hLc2lmaHoxWWlDRDhvRkVPeG96ZjlGSkpPSFFHNXhGeTFfeVpWU3UtbDNMUFc1c2xjRXVrNUo1LWE1Ym5XTzZnU29xMWRvbEtVdEFEZz0=)
+        # key_id: J2WYTL3Z9H
+        # issuer_id: ebe2a96a-48b9-45f1-82f9-2f2db329a449
+        submit_to_testflight: false
+        submit_to_app_store: true
+        release_type: AFTER_APPROVAL

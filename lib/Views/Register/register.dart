@@ -151,8 +151,8 @@ class _RegisterState extends State<Register> {
         if (message != '${_emailController.text.trim()} account created') {
           Dialogs.okDialogAction(
             context,
-            'ERROR: Something went wrong!',
-            message,
+            title: 'ERROR: Something went wrong!',
+            body: message,
           );
         } else {
           dev.log(message);

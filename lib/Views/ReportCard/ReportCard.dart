@@ -137,9 +137,12 @@ class ReportCard extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         dev.log('back button disabled');
-        Dialogs.okDialogAction(context, 'Game Complete',
-            'Great game but you can\'t go back \nJust start a new game with the \'New Game\' button',
-            approveFunction: () {});
+        Dialogs.okDialogAction(
+          context,
+          title: 'Game Complete',
+          body:
+              'Great game but you can\'t go back \nJust start a new game with the \'New Game\' button',
+        );
         return false;
       },
       child: Scaffold(

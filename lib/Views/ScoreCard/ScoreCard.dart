@@ -136,46 +136,48 @@ class ScoreCardScreenWidget extends StatelessWidget {
                   child: PO1Button(
                     "End Game",
                     onPress: () {
-                      Dialogs.yesAbortDialogAction(context,
-                          title: RichText(
-                            text: TextSpan(
-                              children: [
-                                WidgetSpan(
-                                  child:
-                                      Icon(Icons.warning, color: Colors.yellow),
-                                ),
-                                TextSpan(
-                                    // text: 'Is the game really over?',
-                                    text: 'Warning',
-                                    style: TextStyle(
-                                        fontSize: 24, color: Colors.red)),
-                                WidgetSpan(
-                                  child:
-                                      Icon(Icons.warning, color: Colors.yellow),
-                                ),
-                              ],
-                            ),
+                      Dialogs.yesAbortDialogAction(
+                        context,
+                        title: RichText(
+                          text: TextSpan(
+                            children: [
+                              WidgetSpan(
+                                child:
+                                    Icon(Icons.warning, color: Colors.yellow),
+                              ),
+                              TextSpan(
+                                  // text: 'Is the game really over?',
+                                  text: 'Warning',
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.red)),
+                              WidgetSpan(
+                                child:
+                                    Icon(Icons.warning, color: Colors.yellow),
+                              ),
+                            ],
                           ),
-                          body: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text:
-                                      'This is a permanent action, you will not be able to return.\n',
-                                ),
-                                TextSpan(
-                                  text:
-                                      'Press OK to finish the current game.\n',
-                                ),
-                              ],
-                            ),
-                          ), approveFunction: () {
-                        _user.setPlayerScore(
-                            Provider.of<PO1Score>(context, listen: false));
-                        PO1Feedback.calculateFeedback(_user.score);
-                        _fbdbService.createNewGame();
-                        Navigator.pushNamed(context, ReportCard.id);
-                      });
+                        ),
+                        body: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text:
+                                    'This is a permanent action, you will not be able to return.\n',
+                              ),
+                              TextSpan(
+                                text: 'Press OK to finish the current game.\n',
+                              ),
+                            ],
+                          ),
+                        ),
+                        approveFunction: () {
+                          _user.setPlayerScore(
+                              Provider.of<PO1Score>(context, listen: false));
+                          PO1Feedback.calculateFeedback(_user.score);
+                          _fbdbService.createNewGame();
+                          Navigator.pushNamed(context, ReportCard.id);
+                        },
+                      );
                     },
                     onLongPress: () => {},
                   ),

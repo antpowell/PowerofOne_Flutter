@@ -1,14 +1,11 @@
-import 'dart:convert';
 import 'dart:developer';
+import 'dart:developer' as dev;
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:power_one/Models/PO1Subscription.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'dart:developer' as dev;
 
 import 'PO1Level.dart';
 import 'PO1PlayerSkill.dart';
@@ -93,7 +90,7 @@ class PO1User {
   firebaseInit({User fbUser}) async {
     setEmail(fbUser.email);
     setId(fbUser.uid);
-    LogInResult results = await RevenueCatService.logIn(fbUser.uid);
+    LogInResult results = await RevenueCatService.logIn(fbUser);
 
     _subscription = Subscription(logInResults: results);
     _subscription.setTrialEndTime(

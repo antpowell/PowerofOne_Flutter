@@ -1,15 +1,15 @@
 import 'dart:developer';
-
-import 'package:power_one/Models/PO1User.dart';
-import 'package:power_one/models/PO1Subscription.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
-import 'dart:io' show Platform;
 import 'dart:developer' as dev;
+import 'dart:io' show Platform;
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class RevenueCatService {
   // TestAccount
   // static const _google_public_api_key = 'goog_TnZHYBscmYDjIySJUGXHhMzkYpR';
   // static const _ios_public_api_key = 'appl_zRTNbkRllszZkurUlFKezAmVuyX';
+
   // PO1Account
   static const _google_public_api_key = 'goog_AloFDTYYeUKNcZpVQtfojuKkHqy';
   static const _ios_public_api_key = 'appl_yGdGIHEHeZTRhgzVhGpWfgnMloQ';
@@ -18,12 +18,17 @@ class RevenueCatService {
   static LogInResult get logInResult => _logInResult;
 
   Future init(/*TODO: String userId */) async {
-    await Purchases.setDebugLogsEnabled(true);
+    await Purchases.setLogLevel(LogLevel.verbose);
     if (Platform.isAndroid) {
-      await Purchases.setup(
-          _google_public_api_key /*TODO: , appUserId: userId */);
+      await Purchases.configure(
+        new PurchasesConfiguration(
+            _google_public_api_key /*TODO: , appUserId: userId */),
+      );
     } else if (Platform.isIOS) {
-      await Purchases.setup(_ios_public_api_key /*TODO: , appUserId: userId */);
+      await Purchases.configure(
+        new PurchasesConfiguration(
+            _ios_public_api_key /*TODO: , appUserId: userId */),
+      );
     }
   }
 
@@ -46,15 +51,41 @@ class RevenueCatService {
     }
   }
 
-  static Future<LogInResult> logIn(String userId) async {
+  static Future<LogInResult> logIn(User user) async {
     try {
-      // TODO: fix login here
-      // await init(userId);
-      // _logInResult = await Purchases.restoreTransactions();
-      _logInResult = await Purchases.logIn(userId);
+      _logInResult = await Purchases.logIn(user.uid);
+      setEmail(user.email);
+
       return _logInResult;
     } catch (e) {
       dev.log('RC login failed with $e');
+      return null;
+    }
+  }
+
+  static Future<void> restorePurchases() async {
+    try {
+      await Purchases.restorePurchases();
+    } catch (e) {
+      dev.log('Could not restore purchase: $e');
+    }
+  }
+
+  static Future<void> setEmail(String email) async {
+    try {
+      await Purchases.setEmail(email);
+    } catch (e) {
+      dev.log('Failed to set email: $e');
+      return null;
+    }
+  }
+
+  static Future<void> setFirebaseAppInstanceId(
+      String firebaseAppInstance) async {
+    try {
+      await Purchases.setFirebaseAppInstanceId(firebaseAppInstance);
+    } catch (e) {
+      dev.log('Failed to set firebase app instance id: $e');
       return null;
     }
   }

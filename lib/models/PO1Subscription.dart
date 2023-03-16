@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Subscription {
@@ -5,15 +7,29 @@ class Subscription {
   static DateTime _trailEndTime;
   bool _isActive = false, _inTrial = true;
 
-  PurchaserInfo _purchaserInfo;
-  PurchaserInfo get purchaserInfo => _purchaserInfo;
-  setPurchaseInfo(PurchaserInfo purchaserInfo) {
-    _purchaserInfo = purchaserInfo;
-    if (_purchaserInfo?.entitlements?.all['premium_user']?.isActive ?? false) {
+  CustomerInfo _customerInfo;
+  CustomerInfo get customerInfo => _customerInfo;
+  setCustomerInfo(CustomerInfo customerInfo) {
+    _customerInfo = customerInfo;
+    if (_customerInfo?.entitlements?.all['premium_user']?.isActive ?? false) {
       setActive();
     }
     // TODO: Identify what needs to be used to determine if the user has a trial/subscrption
   }
+
+  Future<bool> restoreCustomerInfo() async {
+    CustomerInfo restoredCustomerInfo;
+    try {
+      restoredCustomerInfo = await Purchases.restorePurchases();
+      setCustomerInfo(restoredCustomerInfo);
+      return true;
+    } catch (e) {
+      dev.log('failed to restore customer purchase with error $e');
+      return false;
+    }
+  }
+
+  updateCustomerSubscriptionPersonalInfo() {}
 
   setTrialEndTime({DateTime creationTime}) {
     if (creationTime != null) {
@@ -39,22 +55,23 @@ class Subscription {
       "inTrial": _inTrial,
       "isActive": _isActive,
       "trialEndTime": _trailEndTime.toIso8601String(),
-      "purchaseInfo": _purchaserInfo.toJson(),
+      "purchaseInfo": _customerInfo.toJson(),
     };
   }
 
 // Singleton boilerplate
-  Subscription({logInResults: LogInResult}) {
+  Subscription({logInResults = LogInResult}) {
     _newAccount = logInResults.created;
     if (_newAccount) {
       _trailEndTime = DateTime.now().add(Duration(days: 7));
     } else {
       // TODO: fetch trailendtime from firebase
     }
-    setPurchaseInfo(logInResults.purchaserInfo);
-    if (purchaserInfo?.firstSeen?.isNotEmpty ?? false) {
+
+    setCustomerInfo(logInResults.customerInfo);
+    if (customerInfo?.firstSeen?.isNotEmpty ?? false) {
       _isActive =
-          purchaserInfo?.entitlements?.all['premium_user']?.isActive ?? false;
+          customerInfo?.entitlements?.all['premium_user']?.isActive ?? false;
     }
   }
 }

@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Main.dart';
 import 'package:power_one/Models/PO1PlayerSkill.dart';
+import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/Purchase_Screen/purchase.screen.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-import 'package:power_one/Models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class PlayerNameForm extends StatefulWidget {
@@ -179,7 +179,9 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   }
                   _formKey.currentState.save();
                   dev.log('current user ${_user.email}');
-                  if (_user.subscription.isActive) {
+                  if (_user.subscription == null) {
+                    Navigator.pushNamed(context, PurchaseScreen.id);
+                  } else if (_user.subscription.isActive) {
                     Navigator.pushNamed(context, ScoreCard.id);
                     fbdbService.createNewUser(_user);
                   } else {
