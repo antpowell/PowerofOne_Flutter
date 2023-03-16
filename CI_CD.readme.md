@@ -10,8 +10,11 @@ The config yaml can be found @ `./codemagic.yaml`, documentation for how to conf
 
 #### Google
 
+<!-- TODO: fill out steps to enable Google Play publishing -->
 [Google Play Console](https://play.google.com/console/u/0/developers/6443463758289469480/app/4976145265421419016/app-dashboard?timespan=thirtyDays)
 
 #### iOS
-
-[App Store Connect](https://appstoreconnect.apple.com/apps/1579608365/appstore/ios/version/inflight)
+<!-- TODO: fill out steps to enable iOS publishing -->
+- [App Store Connect](https://appstoreconnect.apple.com/apps/1579608365/appstore/ios/version/inflight)
+- Add App Store provisioning profile using these instructions: [Create an App Store provisioning profile](https://developer.apple.com/help/account/manage-profiles/create-an-app-store-provisioning-profile)
+- Added iOS distribution cert
