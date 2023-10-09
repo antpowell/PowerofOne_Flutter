@@ -3,6 +3,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:power_one/Main.dart';
 import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
 import 'package:power_one/Views/dialogs.dart';
@@ -207,7 +208,9 @@ class ReportCard extends StatelessWidget {
                   height: 50,
                   width: 200,
                   child: Text(
-                    _user.playerName.toString(),
+                    PlayerOrTeamService.isPlayer
+                        ? _user.playerName.toString()
+                        : _user.teamName.toString(),
                     style: TextStyle(
                       // decoration: TextDecoration.underline,
                       fontSize: 30,

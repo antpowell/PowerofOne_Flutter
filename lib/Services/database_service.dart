@@ -3,10 +3,14 @@ import 'package:power_one/Models/PO1User.dart';
 
 import 'dart:developer' as dev;
 
-final DatabaseReference dbRef = FirebaseDatabase.instance.reference();
+import 'package:power_one/Services/core_services.dart';
+
+final DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 final PO1User _user = PO1User();
 
 class FBDBService {
+  /// Stores and associates the currently logged in user with their player by add/updating their details
+  /// in the realtime database.
   createNewUser(PO1User user) {
     final userId = dbRef.child('user/byEmail/');
     dev.log(user.email.split(".")[0]);
@@ -40,7 +44,11 @@ class FBDBService {
 
     gameRef
         .child(_user.emailSignature())
-        .child(_user.playerName)
+        .child(
+          PlayerOrTeamService.isPlayer
+              ? _user.playerName.toString()
+              : _user.teamName.toString(),
+        )
         .child(new DateTime.now().toString().replaceAll('.', ':'))
         .push()
         .set(_user.score.toJSON());

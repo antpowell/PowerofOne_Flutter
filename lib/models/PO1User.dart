@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:power_one/Models/PO1Subscription.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_one/Services/core_services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'PO1Level.dart';
@@ -38,6 +39,13 @@ class PO1User {
   setPlayerName(String name) {
     dev.log('received player name as $name');
     _playerName = name;
+  }
+
+  String _teamName;
+  String get teamName => _teamName;
+  setTeamName(String name) {
+    dev.log('received team name as $name');
+    _teamName = name;
   }
 
   String _id;
@@ -74,12 +82,6 @@ class PO1User {
     return _instance;
   }
 
-  // PO1User.firebaseInit(String email, String fbUid) {
-  //   _email = email;
-  //   _id = fbUid;
-  //   _subscription = Subscription(newAccount: false);
-  // }
-
   PO1User._() {
     // final InnAppPurchaseService _purchaseService =
     //     context.read<InnAppPurchaseService>();
@@ -113,12 +115,17 @@ class PO1User {
 
   Map<String, dynamic> toJSON() {
     log('id: $_id');
-    return {
+    Map<String, String> name = PlayerOrTeamService.isPlayer
+        ? {'playerName': _playerName.trim()}
+        : {'teamName': _teamName.trim()};
+
+    Map<String, dynamic> userData = {
       'email': _email.trim(),
       'id': _id,
-      'playerName': _playerName.trim(),
+      ...name,
       'subscription': _subscription.toJSON(),
       // 'score': _score,
     };
+    return userData;
   }
 }

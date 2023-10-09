@@ -11,6 +11,14 @@ class Subscription {
   CustomerInfo get customerInfo => _customerInfo;
   setCustomerInfo(CustomerInfo customerInfo) {
     _customerInfo = customerInfo;
+    // if (_customerInfo != null ||
+    //     _customerInfo.entitlements != null ||
+    //     _customerInfo.entitlements.all != null ||
+    //     _customerInfo.entitlements.all.isEmpty) {
+    //   dev.log("ALL: ----> ${_customerInfo?.entitlements?.all.toString()}");
+    //   dev.log(
+    //       "ALL: ----> ${_customerInfo?.entitlements?.all['premium_user'].toString()}");
+    // }
     if (_customerInfo?.entitlements?.all['premium_user']?.isActive ?? false) {
       setActive();
     }

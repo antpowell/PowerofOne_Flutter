@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:power_one/Models/PO1Feedback.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ReportCard/ReportCard.dart';
@@ -80,7 +81,9 @@ class ScoreCardScreenWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              _user.playerName.toString(),
+              PlayerOrTeamService.isPlayer
+                  ? _user.playerName.toString()
+                  : _user.teamName.toString(),
               style: TextStyle(fontSize: 30, color: Colors.white),
               textAlign: TextAlign.center,
             ),

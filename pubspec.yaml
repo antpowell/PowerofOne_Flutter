@@ -55,6 +55,7 @@ dependencies:
   in_app_purchase: ^3.0.4
   purchases_flutter: ^4.9.0
   flutter_hooks: ^0.18.2+1
+  flutter_animate: ^4.2.0+1
 
 dev_dependencies:
   flutter_test:

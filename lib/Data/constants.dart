@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 const kTheme = {};
@@ -21,6 +19,7 @@ const kLabels = {
 };
 
 enum SummerizedPoint { FG, FT }
+
 List<String> IndividualPoint = ['1PT', '2PTs', '3PTs'];
 
 const TextStyle kLabelTextStyle = TextStyle(
@@ -58,7 +57,7 @@ TextStyle fScoreBoardPointsTextStyle(Color fontColor) {
 
 const formInputStyle = TextStyle(fontSize: 16, color: Colors.white);
 
-enum kPlayerLevel { elementry, middle, high, college, pro }
+enum kPlayerLevel { elementary, middle, high, college, pro }
 
 extension ParseToString on kPlayerLevel {
   String toShortString() {

@@ -6,11 +6,13 @@ import 'package:power_one/Main.dart';
 import 'package:power_one/Models/PO1PlayerSkill.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/authentication_service.dart';
+import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/Purchase_Screen/purchase.screen.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class PlayerNameForm extends StatefulWidget {
   PlayerNameForm({Key key}) : super(key: key);
@@ -25,14 +27,15 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   final double pageMargin = 24;
   static final PO1User _user = PO1User();
   static final fbdbService = FBDBService();
+  bool showTeamTracker = false;
 
-  Widget _buildNameField() {
+  Widget _buildNameField(bool isPlayer) {
     return TextFormField(
       obscureText: false,
       decoration: InputDecoration(
         border: InputBorder.none,
-        // hintText: "What's your athlete's name?",
-        hintText: "What's the name of your athlete?",
+
+        hintText: 'Enter your ${isPlayer ? "athlete" : "team"}\'s name',
         hintStyle: TextStyle(
           color: Colors.grey[400],
         ),
@@ -48,13 +51,13 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
       ),
       validator: (value) {
         if (value.isEmpty) {
-          return 'Player Name is required';
+          return '${isPlayer ? "Player" : "Team"} Name is required';
         }
         return null;
       },
       onSaved: (String newValue) {
         dev.log(newValue);
-        _user.setPlayerName(newValue);
+        isPlayer ? _user.setPlayerName(newValue) : _user.setTeamName(newValue);
       },
     );
   }
@@ -62,8 +65,9 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   List<bool> _selections =
       List.generate(PO1PlayerSkill.values.length, (_) => false);
 
-  Widget _buildToggleSection() {
+  Widget _buildToggleSection(bool isPlayer) {
     List<Widget> _toggleList = [];
+    if (!isPlayer) return null;
     PO1PlayerSkill.values.forEach((e) => {
           _toggleList.add(
             Padding(
@@ -95,12 +99,14 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
           children: _toggleList,
           isSelected: _selections,
           onPressed: (int index) {
-            setState(() {
-              _selections =
-                  List.generate(PO1PlayerSkill.values.length, (_) => false);
-              _selections[index] = !_selections[index];
-              _user.playerSkill = PO1PlayerSkill.values.elementAt(index);
-            });
+            if (isPlayer) {
+              setState(() {
+                _selections =
+                    List.generate(PO1PlayerSkill.values.length, (_) => false);
+                _selections[index] = !_selections[index];
+                _user.playerSkill = PO1PlayerSkill.values.elementAt(index);
+              });
+            }
           },
           color: Colors.blueAccent,
           selectedColor: Colors.orangeAccent,
@@ -113,15 +119,15 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
     ]);
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(bool isPlayer) {
     return Text(
-      "Player Name",
+      "${isPlayer ? 'Player' : "Team"} Name",
       style: TextStyle(
           color: Colors.white, fontWeight: FontWeight.w300, fontSize: 58),
     );
   }
 
-  Widget _buildButtonGroup() {
+  Widget _buildButtonGroup({Function togglePlayerTeamState, bool isPlayer}) {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
@@ -167,16 +173,30 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
               ),
 
               PO1Button(
+                "Team Tracker",
+                onPress: () {
+                  // Dialogs.okDialogAction(context,
+                  //     title: '⚠',
+                  //     body: 'Feature Under Construction',
+                  //     approveFunction: () {});
+                  setState(() {
+                    togglePlayerTeamState();
+                  });
+                },
+              ),
+
+              PO1Button(
                 "Start Game",
                 onPress: () {
                   debugPrint(
                     'User pressed Start Game button, save the player name to the user and take them to the score card view.',
                   );
-                  debugPrint('still using PlayerNameForm.dart');
-                  if (!_formKey.currentState.validate() ||
-                      _user.playerSkill == null) {
+                  if (!_formKey.currentState.validate()) return;
+
+                  if (isPlayer && _user.playerSkill == null) {
                     return;
                   }
+
                   _formKey.currentState.save();
                   dev.log('current user ${_user.email}');
                   if (_user.subscription == null) {
@@ -196,13 +216,13 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
     );
   }
 
-  Widget _buildForm() {
+  Widget _buildForm(bool isPlayer) {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 600),
         child: Column(
           children: [
-            _buildNameField(),
+            _buildNameField(isPlayer),
           ],
         ),
       ),
@@ -211,34 +231,44 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.all(pageMargin),
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                    minHeight: constraints.maxHeight - (pageMargin * 2)),
-                child: Form(
-                  key: _formKey,
-                  child: Flex(
-                    direction: Axis.vertical,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildHeader(),
-                      _buildForm(),
-                      _buildToggleSection(),
-                      _buildButtonGroup(),
-                    ],
+    return Consumer<PlayerOrTeamService>(
+      builder: (context, playerOrTeamService, child) => Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            bool isPlayer = playerOrTeamService.isPlayerState;
+            return AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              alignment: Alignment.center,
+              margin: EdgeInsets.all(pageMargin),
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight - (pageMargin * 2)),
+                  child: Form(
+                    key: _formKey,
+                    child: Flex(
+                      direction: Axis.vertical,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _buildHeader(isPlayer),
+                        _buildForm(isPlayer).animate(),
+                        // .fade(duration: 150.ms),
+                        // if (isPlayer)
+                        if (isPlayer) _buildToggleSection(isPlayer),
+                        _buildButtonGroup(
+                          togglePlayerTeamState:
+                              playerOrTeamService.togglePlayerTeamState,
+                          isPlayer: isPlayer,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

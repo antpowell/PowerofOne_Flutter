@@ -11,6 +11,7 @@ import 'package:power_one/Objects/Point.dart';
 import 'package:power_one/Models/PO1Feedback.dart';
 import 'package:power_one/Models/PO1Grade.dart';
 import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/Services/core_services.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
@@ -189,7 +190,7 @@ class PO1Score extends ChangeNotifier {
   }
 
   String powerOfOneGrade() {
-    return metPlaytimeThreshold()
+    return metPlaytimeThreshold() && PlayerOrTeamService.isPlayer
         ? PO1Grade.calculateGrade(_getPowerOfOneScore())
         : 'NA';
   }
@@ -236,7 +237,9 @@ class PO1Score extends ChangeNotifier {
       "ServerTime": ServerValue.timestamp,
       "ReportCard": reportCard,
       "ScoreCard": _mapToJSON(),
-      "PlayerLevel": PO1User().playerSkill.toShortString(),
+      "Level": PlayerOrTeamService.isPlayer
+          ? PO1User().playerSkill.toShortString()
+          : 'team',
     };
   }
 

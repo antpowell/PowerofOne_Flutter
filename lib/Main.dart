@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/authentication_service.dart';
+import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';
 import 'package:power_one/Views/Login/LoginForm.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
@@ -45,6 +46,8 @@ class Power1 extends StatelessWidget {
         //   ),
         //   lazy: false,
         // ),
+        ChangeNotifierProvider<PlayerOrTeamService>(
+            create: (BuildContext create) => PlayerOrTeamService()),
         ChangeNotifierProvider<PO1Score>(
           create: (BuildContext context) => PO1Score(),
         ),

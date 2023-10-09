@@ -141,7 +141,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlepointsfeedback['RB'],
+                          child: Text(PO1Feedback.hustlePointsFeedback['RB'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -174,7 +174,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlepointsfeedback['BLK'],
+                          child: Text(PO1Feedback.hustlePointsFeedback['BLK'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -206,7 +206,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlepointsfeedback['STL'],
+                          child: Text(PO1Feedback.hustlePointsFeedback['STL'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -238,7 +238,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlepointsfeedback['AST'],
+                          child: Text(PO1Feedback.hustlePointsFeedback['AST'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -270,7 +270,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlepointsfeedback['TO'],
+                          child: Text(PO1Feedback.hustlePointsFeedback['TO'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
