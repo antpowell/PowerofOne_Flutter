@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InputArea extends StatefulWidget {
-  InputArea({Key key}) : super(key: key);
+  InputArea({required Key key}) : super(key: key);
   final TextEditingController emailTxtFieldController =
           new TextEditingController(),
       pwdTxtFieldController = new TextEditingController();

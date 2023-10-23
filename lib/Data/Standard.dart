@@ -2,14 +2,21 @@ import 'package:power_one/Models/PO1HustlePoint.dart';
 import 'package:power_one/Models/PO1Level.dart';
 import 'package:power_one/Models/PO1Point.dart';
 import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/Utils/getPointValue.dart';
 
 class Standard {
-  PO1HustlePoint stl, rb, ast, blk, to, pf;
-  PO1Point fg, ft;
+  late PO1HustlePoint stl;
+  late PO1HustlePoint rb;
+  late PO1HustlePoint ast;
+  late PO1HustlePoint blk;
+  late PO1HustlePoint to;
+  late PO1HustlePoint p;
+  late PO1Point fg = new PO1Point();
+  late PO1Point ft = new PO1Point();
 
   PO1User _user = new PO1User();
 
-  Standard({PO1User user}) {
+  Standard({required PO1User user}) {
     this.stl = _stl;
     this.rb = _rb;
     this.ast = _ast;
@@ -137,59 +144,44 @@ class Standard {
   );
 
   Map<String, num> get getSteals => {
-        'great': stl.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': stl.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': stl.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
+        'great': findThresholdByPlayerLevel(
+            pointLevelThreshold: stl.great, user: _user),
+        'good': findThresholdByPlayerLevel(
+            pointLevelThreshold: stl.good, user: _user),
+        'average': findThresholdByPlayerLevel(
+            pointLevelThreshold: stl.average, user: _user),
       };
-  Map<String, num> get getRebounds => {
-        'great': rb.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': rb.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': rb.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
+  Map<String, num?> get getRebounds => {
+        'great': findThresholdByPlayerLevel(
+            pointLevelThreshold: rb.great, user: _user),
+        'good': findThresholdByPlayerLevel(
+            pointLevelThreshold: rb.good, user: _user),
+        'average': findThresholdByPlayerLevel(
+            pointLevelThreshold: rb.average, user: _user),
       };
-  Map<String, num> get getAssists => {
-        'great': ast.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': ast.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': ast.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
+  Map<String, num?> get getAssists => {
+        'great': findThresholdByPlayerLevel(
+            pointLevelThreshold: ast.great, user: _user),
+        'good': findThresholdByPlayerLevel(
+            pointLevelThreshold: ast.good, user: _user),
+        'average': findThresholdByPlayerLevel(
+            pointLevelThreshold: ast.average, user: _user),
       };
-  Map<String, num> get getBlocks => {
-        'great': blk.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': blk.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': blk.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
+  Map<String, num?> get getBlocks => {
+        'great': findThresholdByPlayerLevel(
+            pointLevelThreshold: blk.great, user: _user),
+        'good': findThresholdByPlayerLevel(
+            pointLevelThreshold: blk.good, user: _user),
+        'average': findThresholdByPlayerLevel(
+            pointLevelThreshold: blk.average, user: _user),
       };
-  Map<String, num> get getTurnOvers => {
-        'great': to.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': to.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': to.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
+  Map<String, num?> get getTurnOvers => {
+        'great': findThresholdByPlayerLevel(
+            pointLevelThreshold: to.great, user: _user),
+        'good': findThresholdByPlayerLevel(
+            pointLevelThreshold: to.good, user: _user),
+        'average': findThresholdByPlayerLevel(
+            pointLevelThreshold: to.average, user: _user),
       };
 
   final PO1Point _ft = new PO1Point(great: {
@@ -240,7 +232,7 @@ class Standard {
     {PO1FeedbackLevel.BELOW_AVERAGE: 'Make better shot selections'},
   });
 
-  Map<String, num> get freeThrow => {
+  Map<String, num?> get freeThrow => {
         'great': ft.great
             .where((element) => element.containsKey(_user.playerLevel))
             .first[_user.playerLevel],
@@ -251,7 +243,7 @@ class Standard {
             .where((element) => element.containsKey(_user.playerLevel))
             .first[_user.playerLevel],
       };
-  Map<String, num> get fieldGoal => {
+  Map<String, num?> get fieldGoal => {
         'great': fg.great
             .where((element) => element.containsKey(_user.playerLevel))
             .first[_user.playerLevel],
@@ -295,7 +287,7 @@ class Standard {
   }
 
   String getFeedbackForPoints(String forPoint, PO1FeedbackLevel atLevel) {
-    Map<PO1FeedbackLevel, String> results;
+    late Map<PO1FeedbackLevel, String> results;
     switch (forPoint) {
       case 'FG':
         results =

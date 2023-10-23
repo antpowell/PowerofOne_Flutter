@@ -7,5 +7,17 @@
     "editor.snippetSuggestions": "inline",
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggest.showSnippets": true,
-    "editor.tabCompletion": "on"
+    "editor.tabCompletion": "on",
+    "yaml.schemas": {
+        "https://codemagic.io/codemagic-schema.json": [
+            "file:///d%3A/Engineering/PowerofOne_Flutter/deploy.yaml",
+            "file:///d%3A/Engineering/PowerofOne_Flutter/build.yaml",
+            "file:///d%3A/Engineering/PowerofOne_Flutter/yaml-templates/test-deployment.yaml",
+            "file:///d%3A/Engineering/PowerofOne_Flutter/yaml-templates/prod-deployment.yaml",
+            "file:///d%3A/Engineering/PowerofOne_Flutter/yaml-templates/build.yaml"
+        ]
+    },
+    "cSpell.words": [
+        "cocoapods"
+    ]
 }

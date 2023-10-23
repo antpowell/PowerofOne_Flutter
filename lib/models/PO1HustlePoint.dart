@@ -1,12 +1,10 @@
-import 'package:flutter/foundation.dart';
-
 import 'PO1Level.dart';
 
 enum EHustlePoint { STL, RB, AST, BLK, TO, PF }
 
 extension Search on Iterable<EHustlePoint> {
   EHustlePoint find(value) {
-    EHustlePoint found;
+    late EHustlePoint found;
     switch (value) {
       case 'STL':
         found = EHustlePoint.STL;
@@ -33,23 +31,14 @@ extension Search on Iterable<EHustlePoint> {
 }
 
 class PO1HustlePoint {
-  Set<Map<PO1Levels, num>> great, good, average;
-  Set<Map<PO1Levels, num>> _great, _good, _average;
-  Set<Map<PO1FeedbackLevel, String>> _feedback;
-  Set<Map<PO1FeedbackLevel, String>> feedback;
   PO1HustlePoint({
-    Set<Map<PO1Levels, num>> great,
-    Set<Map<PO1Levels, num>> good,
-    Set<Map<PO1Levels, num>> average,
-    Set<Map<PO1FeedbackLevel, String>> feedback,
-  }) {
-    _great = great;
-    _good = good;
-    _average = average;
-    _feedback = feedback;
-    this.great = _great;
-    this.good = _good;
-    this.average = _average;
-    this.feedback = _feedback;
-  }
+    required Set<Map<PO1Levels, num>> great,
+    required Set<Map<PO1Levels, num>> good,
+    required Set<Map<PO1Levels, num>> average,
+    required Set<Map<PO1FeedbackLevel, String>> feedback,
+  });
+  Set<Map<PO1Levels, num>> get great => great;
+  Set<Map<PO1Levels, num>> get good => good;
+  Set<Map<PO1Levels, num>> get average => average;
+  Set<Map<PO1FeedbackLevel, String>> get feedback => feedback;
 }
