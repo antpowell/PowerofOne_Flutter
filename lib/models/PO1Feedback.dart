@@ -7,116 +7,115 @@ import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 
 class PO1Feedback {
-  static Map<String, String> _hustlePointsFeedback = {};
-  static Map<String, String> get hustlePointsFeedback => _hustlePointsFeedback;
+  static Map<String, String> _hustlePointsFeedbackObj = {};
+  static Map<String, String> get hustlePointsFeedbackObj =>
+      _hustlePointsFeedbackObj;
 
-  static Map<String, String> _scoredpointsfeedback = {};
-  static Map<String, String> get scoredpointsfeedback => _scoredpointsfeedback;
+  static Map<String, String> _scoredPointsFeedbackObj = {};
+  static Map<String, String> get scoredPointsFeedbackObj =>
+      _scoredPointsFeedbackObj;
 
   static Standard _standards = new Standard(user: _user);
 
   static PO1User _user = PO1User();
 
   static calculateFeedback(PO1Score score) {
-    _hustlePointsfeedback(score.hustlePointsMap);
+    _hustlePointsFeedback(score.hustlePointsMap);
     _scoredPointsFeedback(score.getAverages());
   }
 
-  static Map<String, String> _hustlePointsfeedback(
+  static Map<String, String> _hustlePointsFeedback(
     Map<EHustlePoint, Play> totalHustlePoints,
   ) {
     totalHustlePoints.forEach(
       (key, value) {
         if (PlayerOrTeamService.isTeam) {
-          _hustlePointsFeedback[key.name] = 'NA';
+          _hustlePointsFeedbackObj[key.name] = 'NA';
         } else {
           switch (key) {
             case EHustlePoint.STL:
               {
-                if (value.pos >= _standards.getSteals['great']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                if (value.pos >= _standards.getSteals['great']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GREAT);
                   break;
-                } else if (value.pos >= _standards.getSteals['good']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                } else if (value.pos >= _standards.getSteals['good']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GOOD);
                   break;
-                } else if (value.pos >= _standards.getSteals['average']) {
-                  _hustlePointsFeedback[key.name] =
+                } else if (value.pos >= _standards.getSteals['average']!) {
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.AVERAGE);
                   break;
                 } else {
-                  _hustlePointsFeedback[key.name] =
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.BELOW_AVERAGE);
                   break;
                 }
-                break;
               }
             case EHustlePoint.RB:
               {
-                if (value.pos >= _standards.getRebounds['great']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                if ((value.pos >= _standards.getRebounds['great']!)) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GREAT);
                   break;
-                } else if (value.pos >= _standards.getRebounds['good']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                } else if (value.pos >= _standards.getRebounds['good']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GOOD);
                   break;
-                } else if (value.pos >= _standards.getRebounds['average']) {
-                  _hustlePointsFeedback[key.name] =
+                } else if (value.pos >= _standards.getRebounds['average']!) {
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.AVERAGE);
                   break;
                 } else {
-                  _hustlePointsFeedback[key.name] =
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.BELOW_AVERAGE);
                   break;
                 }
-                break;
               }
             case EHustlePoint.BLK:
               {
-                if (value.pos >= _standards.getBlocks['great']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                if (value.pos >= _standards.getBlocks['great']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GREAT);
                   break;
-                } else if (value.pos >= _standards.getBlocks['good']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                } else if (value.pos >= _standards.getBlocks['good']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GOOD);
                   break;
-                } else if (value.pos >= _standards.getBlocks['average']) {
-                  _hustlePointsFeedback[key.name] =
+                } else if (value.pos >= _standards.getBlocks['average']!) {
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.AVERAGE);
                   break;
                 } else {
-                  _hustlePointsFeedback[key.name] =
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.BELOW_AVERAGE);
                   break;
                 }
-                break;
               }
             case EHustlePoint.TO:
               {
-                if (value.pos == _standards.getTurnOvers['great']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                if (value.pos == _standards.getTurnOvers['great']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GREAT);
                   break;
-                } else if (value.pos <= _standards.getTurnOvers['good']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                } else if (value.pos <= _standards.getTurnOvers['good']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GOOD);
                   break;
-                } else if (value.pos <= _standards.getTurnOvers['average']) {
-                  _hustlePointsFeedback[key.name] =
+                } else if (value.pos <= _standards.getTurnOvers['average']!) {
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.AVERAGE);
                   break;
                 } else {
-                  _hustlePointsFeedback[key.name] =
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.BELOW_AVERAGE);
                 }
@@ -124,21 +123,21 @@ class PO1Feedback {
               }
             case EHustlePoint.AST:
               {
-                if (value.pos >= _standards.getAssists['great']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                if (value.pos >= _standards.getAssists['great']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GREAT);
                   break;
-                } else if (value.pos >= _standards.getAssists['good']) {
-                  _hustlePointsFeedback[key.name] = _standards
+                } else if (value.pos >= _standards.getAssists['good']!) {
+                  _hustlePointsFeedbackObj[key.name] = _standards
                       .getFeedbackForHustlePoints(key, PO1FeedbackLevel.GOOD);
                   break;
-                } else if (value.pos >= _standards.getAssists['average']) {
-                  _hustlePointsFeedback[key.name] =
+                } else if (value.pos >= _standards.getAssists['average']!) {
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.AVERAGE);
                   break;
                 } else {
-                  _hustlePointsFeedback[key.name] =
+                  _hustlePointsFeedbackObj[key.name] =
                       _standards.getFeedbackForHustlePoints(
                           key, PO1FeedbackLevel.BELOW_AVERAGE);
                 }
@@ -151,7 +150,7 @@ class PO1Feedback {
         }
       },
     );
-    return _hustlePointsFeedback;
+    return _hustlePointsFeedbackObj;
   }
 
   static Map<String, String> _scoredPointsFeedback(
@@ -162,41 +161,40 @@ class PO1Feedback {
         switch (key) {
           case 'FG':
             {
-              if (value >= _standards.fieldGoal['great']) {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+              if (value >= _standards.fieldGoal['great']!) {
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     key, PO1FeedbackLevel.GREAT);
                 break;
-              } else if (value >= _standards.fieldGoal['good']) {
-                _scoredpointsfeedback[key] =
+              } else if (value >= _standards.fieldGoal['good']!) {
+                _scoredPointsFeedbackObj[key] =
                     _standards.getFeedbackForPoints(key, PO1FeedbackLevel.GOOD);
                 break;
-              } else if (value >= _standards.fieldGoal['average']) {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+              } else if (value >= _standards.fieldGoal['average']!) {
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     key, PO1FeedbackLevel.AVERAGE);
                 break;
               } else {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     key, PO1FeedbackLevel.BELOW_AVERAGE);
                 break;
               }
             }
-            break;
           case '1PT':
             {
-              if (value >= _standards.freeThrow['great']) {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+              if (value >= _standards.freeThrow['great']!) {
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     'FT', PO1FeedbackLevel.GREAT);
                 break;
-              } else if (value >= _standards.freeThrow['good']) {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+              } else if (value >= _standards.freeThrow['good']!) {
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     'FT', PO1FeedbackLevel.GOOD);
                 break;
-              } else if (value >= _standards.freeThrow['average']) {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+              } else if (value >= _standards.freeThrow['average']!) {
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     'FT', PO1FeedbackLevel.AVERAGE);
                 break;
               } else {
-                _scoredpointsfeedback[key] = _standards.getFeedbackForPoints(
+                _scoredPointsFeedbackObj[key] = _standards.getFeedbackForPoints(
                     'FT', PO1FeedbackLevel.BELOW_AVERAGE);
               }
             }
@@ -204,7 +202,7 @@ class PO1Feedback {
         }
       },
     );
-    return _scoredpointsfeedback;
+    return _scoredPointsFeedbackObj;
   }
 
 /* 
@@ -222,8 +220,8 @@ Feedback: {
  */
   static Map toJSON() {
     Map<String, String> jsonMap = Map();
-    jsonMap.addAll(_hustlePointsFeedback);
-    jsonMap.addAll(_scoredpointsfeedback);
+    jsonMap.addAll(_hustlePointsFeedbackObj);
+    jsonMap.addAll(_scoredPointsFeedbackObj);
 
     return jsonMap;
   }

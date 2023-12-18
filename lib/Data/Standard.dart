@@ -11,8 +11,8 @@ class Standard {
   late PO1HustlePoint blk;
   late PO1HustlePoint to;
   late PO1HustlePoint p;
-  late PO1Point fg = new PO1Point();
-  late PO1Point ft = new PO1Point();
+  late PO1Point fg;
+  late PO1Point ft;
 
   PO1User _user = new PO1User();
 
@@ -151,7 +151,7 @@ class Standard {
         'average': findThresholdByPlayerLevel(
             pointLevelThreshold: stl.average, user: _user),
       };
-  Map<String, num?> get getRebounds => {
+  Map<String, num> get getRebounds => {
         'great': findThresholdByPlayerLevel(
             pointLevelThreshold: rb.great, user: _user),
         'good': findThresholdByPlayerLevel(
@@ -159,7 +159,7 @@ class Standard {
         'average': findThresholdByPlayerLevel(
             pointLevelThreshold: rb.average, user: _user),
       };
-  Map<String, num?> get getAssists => {
+  Map<String, num> get getAssists => {
         'great': findThresholdByPlayerLevel(
             pointLevelThreshold: ast.great, user: _user),
         'good': findThresholdByPlayerLevel(
@@ -167,7 +167,7 @@ class Standard {
         'average': findThresholdByPlayerLevel(
             pointLevelThreshold: ast.average, user: _user),
       };
-  Map<String, num?> get getBlocks => {
+  Map<String, num> get getBlocks => {
         'great': findThresholdByPlayerLevel(
             pointLevelThreshold: blk.great, user: _user),
         'good': findThresholdByPlayerLevel(
@@ -175,7 +175,7 @@ class Standard {
         'average': findThresholdByPlayerLevel(
             pointLevelThreshold: blk.average, user: _user),
       };
-  Map<String, num?> get getTurnOvers => {
+  Map<String, num> get getTurnOvers => {
         'great': findThresholdByPlayerLevel(
             pointLevelThreshold: to.great, user: _user),
         'good': findThresholdByPlayerLevel(
@@ -277,7 +277,6 @@ class Standard {
         break;
       case EHustlePoint.PF:
         throw Error();
-        break;
       case EHustlePoint.AST:
         results =
             _ast.feedback.where((element) => element.containsKey(atLevel)).last;

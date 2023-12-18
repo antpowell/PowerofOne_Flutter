@@ -34,19 +34,19 @@ class PO1Grade {
   static gradeConverterByPlayerLevel() {
     return {
       'A': grade['A']
-          .where((element) => element.containsKey(PO1User().playerLevel))
+          ?.where((element) => element.containsKey(PO1User().playerLevel))
           .first[PO1User().playerLevel],
       'B': grade['B']
-          .where((element) => element.containsKey(PO1User().playerLevel))
+          ?.where((element) => element.containsKey(PO1User().playerLevel))
           .first[PO1User().playerLevel],
       'C': grade['C']
-          .where((element) => element.containsKey(PO1User().playerLevel))
+          ?.where((element) => element.containsKey(PO1User().playerLevel))
           .first[PO1User().playerLevel],
       'D': grade['D']
-          .where((element) => element.containsKey(PO1User().playerLevel))
+          ?.where((element) => element.containsKey(PO1User().playerLevel))
           .first[PO1User().playerLevel],
       'F': grade['F']
-          .where((element) => element.containsKey(PO1User().playerLevel))
+          ?.where((element) => element.containsKey(PO1User().playerLevel))
           .first[PO1User().playerLevel],
     };
   }

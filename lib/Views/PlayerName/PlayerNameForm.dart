@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class PlayerNameForm extends StatefulWidget {
-  PlayerNameForm({Key key}) : super(key: key);
+  const PlayerNameForm({super.key});
   static final String id = 'player_name_screen';
 
   @override
@@ -50,14 +50,15 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
         color: Colors.white,
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value == null) {
           return '${isPlayer ? "Player" : "Team"} Name is required';
         }
         return null;
       },
-      onSaved: (String newValue) {
-        dev.log(newValue);
-        isPlayer ? _user.setPlayerName(newValue) : _user.setTeamName(newValue);
+      onSaved: (String? name) {
+        String _name = name ?? 'Player or team name is null';
+        dev.log(_name);
+        isPlayer ? _user.setPlayerName(_name) : _user.setTeamName(_name);
       },
     );
   }
@@ -65,25 +66,23 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   List<bool> _selections =
       List.generate(PO1PlayerSkill.values.length, (_) => false);
 
-  Widget _buildToggleSection(bool isPlayer) {
+  Widget? _buildToggleSection(bool isPlayer) {
     List<Widget> _toggleList = [];
     if (!isPlayer) return null;
-    PO1PlayerSkill.values.forEach((e) => {
-          _toggleList.add(
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                describeEnum(e).toUpperCase(),
-                textAlign: TextAlign.center,
-                textWidthBasis: TextWidthBasis.parent,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                ),
+    PO1PlayerSkill.values.forEach((e) => _toggleList.add(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Text(
+              describeEnum(e).toUpperCase(),
+              textAlign: TextAlign.center,
+              textWidthBasis: TextWidthBasis.parent,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
               ),
             ),
-          )
-        });
+          ),
+        ));
     return Column(children: [
       Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
@@ -127,7 +126,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
     );
   }
 
-  Widget _buildButtonGroup({Function togglePlayerTeamState, bool isPlayer}) {
+  Widget _buildButtonGroup(
+      {required Function togglePlayerTeamState, required bool isPlayer}) {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
@@ -191,13 +191,13 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   debugPrint(
                     'User pressed Start Game button, save the player name to the user and take them to the score card view.',
                   );
-                  if (!_formKey.currentState.validate()) return;
+                  if (!_formKey.currentState!.validate()) return;
 
                   if (isPlayer && _user.playerSkill == null) {
                     return;
                   }
 
-                  _formKey.currentState.save();
+                  _formKey.currentState!.save();
                   dev.log('current user ${_user.email}');
                   if (_user.subscription == null) {
                     Navigator.pushNamed(context, PurchaseScreen.id);

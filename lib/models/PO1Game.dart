@@ -7,8 +7,9 @@ class PO1Game {
   PO1User _user = PO1User();
 
   Map<String, dynamic> toJSON() {
+    String playerName = _user.playerName ?? '';
     String name = PlayerOrTeamService.isPlayer
-        ? _user.playerName.trim()
+        ? playerName.trim()
         : _user.teamName.trim();
     Map<String, dynamic> gameData = {
       _user.emailSignature(): {

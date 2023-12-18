@@ -67,7 +67,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.scoredpointsfeedback['FG'],
+                          child: Text(PO1Feedback.scoredPointsFeedbackObj['FG'],
                               // ._user
                               // .score
                               // .feedback(_user.score.getAverages())['FG']
@@ -103,7 +103,8 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.scoredpointsfeedback['1PT'],
+                          child: Text(
+                              PO1Feedback.scoredPointsFeedbackObj['1PT'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -141,7 +142,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlePointsFeedback['RB'],
+                          child: Text(PO1Feedback.hustlePointsFeedbackObj['RB'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -174,7 +175,8 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlePointsFeedback['BLK'],
+                          child: Text(
+                              PO1Feedback.hustlePointsFeedbackObj['BLK'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -206,7 +208,8 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlePointsFeedback['STL'],
+                          child: Text(
+                              PO1Feedback.hustlePointsFeedbackObj['STL'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -238,7 +241,8 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlePointsFeedback['AST'],
+                          child: Text(
+                              PO1Feedback.hustlePointsFeedbackObj['AST'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
@@ -270,7 +274,7 @@ class FeedBack extends StatelessWidget {
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.all(10.0),
-                          child: Text(PO1Feedback.hustlePointsFeedback['TO'],
+                          child: Text(PO1Feedback.hustlePointsFeedbackObj['TO'],
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),

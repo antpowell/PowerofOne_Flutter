@@ -20,7 +20,7 @@ const kLabels = {
 
 enum SummerizedPoint { FG, FT }
 
-List<String> IndividualPoint = ['1PT', '2PTs', '3PTs'];
+List<String> individualPoint = ['1PT', '2PTs', '3PTs'];
 
 const TextStyle kLabelTextStyle = TextStyle(
   fontSize: 14,

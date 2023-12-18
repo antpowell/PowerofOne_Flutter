@@ -34,15 +34,18 @@ class PO1Score extends ChangeNotifier {
   made(IScore activity) {
     Map<String, IScore> madeHistoryEvent;
     if (_hustlePointsMap.containsValue(activity)) {
-      _hustlePointsMap[EHustlePoint.values.find(activity.title)] =
-          activity.make();
+      // _hustlePointsMap[EHustlePoint.values.find(activity.title)] =
+      //     activity.make();
+      _hustlePointsMap
+          .addAll({EHustlePoint.values.find(activity.title): activity.make()});
       madeHistoryEvent = {
-        "made": _hustlePointsMap[EHustlePoint.values.find(activity.title)]
+        "made":
+            _hustlePointsMap[EHustlePoint.values.find(activity.title)] as Point
       };
     } else {
       _pointsMap[EPoint.values.find(activity.title)] = activity.make();
       madeHistoryEvent = {
-        "made": _pointsMap[EPoint.values.find(activity.title)]
+        "made": _pointsMap[EPoint.values.find(activity.title)] as Point
       };
     }
 
@@ -53,7 +56,8 @@ class PO1Score extends ChangeNotifier {
 
   missed(IScore activity) {
     _pointsMap[EPoint.values.find(activity.title)] = activity.miss();
-    history.addLast({"miss": _pointsMap[EPoint.values.find(activity.title)]});
+    history.addLast(
+        {"miss": _pointsMap[EPoint.values.find(activity.title)] as Point});
     debugPrint('Action: $activity : neg-> ${activity.neg}');
     notifyListeners();
   }
@@ -149,10 +153,10 @@ class PO1Score extends ChangeNotifier {
     );
 
     // TODO: Check to see if this solution works for FG average
-    _averages['FG'] = ((_pointsMap[EPoint.TWO].pos +
-                _pointsMap[EPoint.THREE].pos +
-                _pointsMap[EPoint.TWO].neg +
-                _pointsMap[EPoint.THREE].neg) ==
+    _averages['FG'] = ((_pointsMap[EPoint.TWO]?.pos +
+                _pointsMap[EPoint.THREE]?.pos +
+                _pointsMap[EPoint.TWO]?.neg +
+                _pointsMap[EPoint.THREE]?.neg) ==
             0)
         ? 0.0
         : ((_pointsMap[EPoint.TWO].pos + _pointsMap[EPoint.THREE].pos) /

@@ -1,4 +1,3 @@
-import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Models/PO1HustlePoint.dart';
 
 import 'Score/Score.dart';

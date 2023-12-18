@@ -22,7 +22,7 @@ extension EPointByName on EPoint {
 
 extension Search on Iterable<EPoint> {
   EPoint find(value) {
-    EPoint found;
+    late EPoint found;
     switch (value) {
       case '1PT':
         found = EPoint.ONE;
@@ -39,20 +39,19 @@ extension Search on Iterable<EPoint> {
 }
 
 class PO1Point {
-  Set<Map<PO1Levels, num>> great, good, average;
-  Set<Map<PO1Levels, num>> _great, _good, _average;
-  Set<Map<PO1FeedbackLevel, String>> _feedback;
-  Set<Map<PO1FeedbackLevel, String>> feedback;
+  late Set<Map<PO1Levels, num>> great, good, average;
+  late Set<Map<PO1Levels, num>> _great, _good, _average;
+  late Set<Map<PO1FeedbackLevel, String>> _feedback;
+  late Set<Map<PO1FeedbackLevel, String>> feedback;
   PO1Point({
-    Set<Map<PO1Levels, num>> great,
-    Set<Map<PO1Levels, num>> good,
-    Set<Map<PO1Levels, num>> average,
-    Set<Map<PO1FeedbackLevel, String>> feedback,
-  }) {
-    _great = great;
-    _good = good;
-    _average = average;
-    _feedback = feedback;
+    required Set<Map<PO1Levels, num>> great,
+    required Set<Map<PO1Levels, num>> good,
+    required Set<Map<PO1Levels, num>> average,
+    required Set<Map<PO1FeedbackLevel, String>> feedback,
+  })  : _great = great,
+        _good = good,
+        _average = average,
+        _feedback = feedback {
     this.great = _great;
     this.good = _good;
     this.average = _average;

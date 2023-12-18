@@ -4,10 +4,10 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Subscription {
   static bool _newAccount = false;
-  static DateTime _trailEndTime;
+  static late DateTime _trailEndTime;
   bool _isActive = false, _inTrial = true;
 
-  CustomerInfo _customerInfo;
+  late CustomerInfo _customerInfo;
   CustomerInfo get customerInfo => _customerInfo;
   setCustomerInfo(CustomerInfo customerInfo) {
     _customerInfo = customerInfo;
@@ -19,10 +19,10 @@ class Subscription {
     //   dev.log(
     //       "ALL: ----> ${_customerInfo?.entitlements?.all['premium_user'].toString()}");
     // }
-    if (_customerInfo?.entitlements?.all['premium_user']?.isActive ?? false) {
+    if (_customerInfo.entitlements.all['premium_user']?.isActive ?? false) {
       setActive();
     }
-    // TODO: Identify what needs to be used to determine if the user has a trial/subscrption
+    // TODO: Identify what needs to be used to determine if the user has a trial/subscription
   }
 
   Future<bool> restoreCustomerInfo() async {
@@ -39,7 +39,7 @@ class Subscription {
 
   updateCustomerSubscriptionPersonalInfo() {}
 
-  setTrialEndTime({DateTime creationTime}) {
+  setTrialEndTime({DateTime? creationTime}) {
     if (creationTime != null) {
       _trailEndTime = creationTime.add(const Duration(days: 7));
       _inTrial = _trailEndTime.difference(DateTime.now()).inDays > 0;
@@ -73,13 +73,13 @@ class Subscription {
     if (_newAccount) {
       _trailEndTime = DateTime.now().add(Duration(days: 7));
     } else {
-      // TODO: fetch trailendtime from firebase
+      // TODO: fetch trailEndTime from firebase
     }
 
     setCustomerInfo(logInResults.customerInfo);
-    if (customerInfo?.firstSeen?.isNotEmpty ?? false) {
+    if (customerInfo.firstSeen.isNotEmpty) {
       _isActive =
-          customerInfo?.entitlements?.all['premium_user']?.isActive ?? false;
+          customerInfo.entitlements.all['premium_user']?.isActive ?? false;
     }
   }
 }
