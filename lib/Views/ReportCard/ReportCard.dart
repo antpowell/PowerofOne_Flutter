@@ -49,7 +49,7 @@ Column columnTitleTotalPointsScored(int points, String label) {
 }
 
 class ReportCard extends StatelessWidget {
-  const ReportCard({Key key}) : super(key: key);
+  const ReportCard({Key? key}) : super(key: key);
   static final PO1User _user = PO1User();
   static final String id = 'report_card_screen';
 

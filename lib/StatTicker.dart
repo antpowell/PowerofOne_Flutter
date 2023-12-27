@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StatTicker extends StatefulWidget {
-  StatTicker({this.mainLabel});
+  StatTicker({required this.mainLabel});
 
-  final String mainLabel;
+  late final String mainLabel;
 
   int count = 0;
   @override

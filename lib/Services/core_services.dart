@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class PlayerOrTeamService extends ChangeNotifier {
-  static bool isPlayer, isTeam;
+  static late  bool isPlayer, isTeam;
 
   PlayerOrTeamService() {
     isPlayer = true;

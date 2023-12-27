@@ -50,18 +50,19 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
 
 PO1User _user = PO1User();
 
-Package _selectedPackage;
+late Package _selectedPackage;
 
 class PurchaseScreen extends HookWidget {
   static final String id = 'purchase_screen';
-  const PurchaseScreen({Key key}) : super(key: key);
+
+  const PurchaseScreen({Key? key}) : super(key: key);
 
   static int activeCard = 1;
 
-  Future<List<Package>> fetchOffers() async {
+  Future<List<Package>?> fetchOffers() async {
     final List<Offering> _offerings =
         await RevenueCatService.fetchOffers() /* [] */;
-    List<Package> subscriptions;
+    late List<Package>? subscriptions;
 
     if (_offerings.isEmpty || _offerings[0].availablePackages.isEmpty) {
       dev.log('offerings returned empty; no subscriptions found');
@@ -76,7 +77,7 @@ class PurchaseScreen extends HookWidget {
     return subscriptions;
   }
 
-  static String description;
+  static late String description;
 
   @override
   Widget build(BuildContext context) {
@@ -88,60 +89,62 @@ class PurchaseScreen extends HookWidget {
         child: FutureBuilder(
           future: fetchOffers(),
           builder: (context, snapshot) {
-            return snapshot.hasError
-                ? Center(
-                    child: Text('There was an error, check the logs',
-                        style: TextStyle(color: Colors.red[900], fontSize: 48)),
-                  )
-                : snapshot.hasData
-                    ? Column(
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    activeCardVN.value = index;
-                                    dev.log(
-                                        'checking for offerings from $index ');
-                                    _selectedPackage = snapshot.data[index];
-                                    dev.log(
-                                        'offering is tied to package:::> $_selectedPackage');
-                                  },
-                                  child: HookBuilder(
-                                    builder: (_) {
-                                      final activeCard =
-                                          useValueListenable(activeCardVN);
-                                      return SubscriptionCard(
-                                        activeCard: activeCard == index,
-                                        data: snapshot.data[index],
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
+            if (snapshot.hasError) {
+              return Center(
+                child: Text('There was an error, check the logs',
+                    style: TextStyle(color: Colors.red[900], fontSize: 48)),
+              );
+            } else if (snapshot.hasData) {
+              List<Package> packages =
+                  (snapshot.data as List<Package>).toList();
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: packages.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            activeCardVN.value = index;
+                            dev.log('checking for offerings from $index ');
+                            _selectedPackage = packages[index];
+                            dev.log(
+                                'offering is tied to package:::> $_selectedPackage');
+                          },
+                          child: HookBuilder(
+                            builder: (_) {
+                              final activeCard =
+                                  useValueListenable(activeCardVN);
+                              return SubscriptionCard(
+                                activeCard: activeCard == index,
+                                data: packages[index],
+                              );
+                            },
                           ),
-                          _buttonGroup(
-                            context: context,
-                            isLoading: isLoading,
-                          ),
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          Center(
-                            child: Text(
-                              'Grabbing your offers',
-                              style:
-                                  TextStyle(fontSize: 38, color: Colors.grey),
-                            ),
-                          ),
-                        ],
-                      );
+                        );
+                      },
+                    ),
+                  ),
+                  _buttonGroup(
+                    context: context,
+                    isLoading: isLoading,
+                  ),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  Center(
+                    child: Text(
+                      'Grabbing your offers',
+                      style: TextStyle(fontSize: 38, color: Colors.grey),
+                    ),
+                  ),
+                ],
+              );
+            }
           },
         ),
       ),
@@ -149,7 +152,7 @@ class PurchaseScreen extends HookWidget {
   }
 }
 
-Widget _titleArea({String titleText}) {
+Widget _titleArea({required String titleText}) {
   return Flex(
     direction: Axis.horizontal,
     children: [
@@ -169,7 +172,7 @@ Widget _titleArea({String titleText}) {
   );
 }
 
-Widget _detailArea({String details, List<String> bullets}) {
+Widget _detailArea({required String details, required List<String> bullets}) {
   return Flex(
     direction: Axis.vertical,
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -206,7 +209,7 @@ Widget _detailArea({String details, List<String> bullets}) {
   );
 }
 
-Widget _detailBullets({String listItemText}) {
+Widget _detailBullets({required String listItemText}) {
   // TODO: fix this to not clip the text
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -227,14 +230,15 @@ Widget _detailBullets({String listItemText}) {
   );
 }
 
-Widget _buttonGroup({BuildContext context, ValueNotifier<bool> isLoading}) {
+Widget _buttonGroup(
+    {required BuildContext context, required ValueNotifier<bool> isLoading}) {
   final fbdbService = FBDBService();
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 36),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ((_user.subscription != null) && _user.subscription.inTrial
+        (_user.subscription.inTrial
             ? TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.grey,
@@ -251,7 +255,7 @@ Widget _buttonGroup({BuildContext context, ValueNotifier<bool> isLoading}) {
                 ),
               )
             : Spacer()),
-        ((_user.subscription != null) && (_user.subscription.inTrial != null)
+        (_user.subscription.inTrial != null
             ? TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.grey,
@@ -301,14 +305,17 @@ Widget _buttonGroup({BuildContext context, ValueNotifier<bool> isLoading}) {
                     // TODO: setPurchaseInfo state
                     final customerInfo =
                         await Purchases.purchasePackage(_selectedPackage);
-                    if (customerInfo
-                        .entitlements.all['premium_user'].isActive) {
+                    EntitlementInfo? premiumUserEntitlementInfo =
+                        customerInfo.entitlements.all['premium_user'];
+                    if (premiumUserEntitlementInfo != null &&
+                        premiumUserEntitlementInfo.isActive) {
                       _user.subscription.setCustomerInfo(customerInfo);
                       fbdbService.createNewUser(_user);
                       Navigator.popAndPushNamed(context, ScoreCard.id);
                     }
                   } on PlatformException catch (e) {
-                    dev.log(e.message);
+                    dev.log(e.message ??
+                        'Exception at Subscribe button press on Purchase Screen');
                     Navigator.pop(context);
                   }
                 },
@@ -319,17 +326,18 @@ Widget _buttonGroup({BuildContext context, ValueNotifier<bool> isLoading}) {
 }
 
 class SubscriptionCard extends HookWidget {
-  const SubscriptionCard({
-    Key key,
-    this.title,
-    this.data,
-    this.activeCard,
-    this.child,
-  }) : super(key: key);
-  final String title;
+  // final String title;
   final bool activeCard;
   final Package data;
-  final Widget child;
+  // final Widget child;
+
+  const SubscriptionCard({
+    Key? key,
+    // required this.title,
+    required this.data,
+    required this.activeCard,
+    // required this.child,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

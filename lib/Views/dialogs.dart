@@ -11,10 +11,10 @@ const TextStyle textStyle = TextStyle(
 class Dialogs {
   static Future<DialogAction> yesAbortDialogAction(
     BuildContext context, {
-    RichText title,
-    RichText body,
-    Function approveFunction,
-    Function disapproveFunction,
+    required RichText title,
+    required RichText body,
+    Function? approveFunction,
+    Function? disapproveFunction,
   }) async {
     final action = await showDialog(
       context: context,
@@ -54,8 +54,12 @@ class Dialogs {
     return action ?? DialogAction.abort;
   }
 
-  static Future<DialogAction> okDialogAction(BuildContext context,
-      {String title, String body, Function approveFunction}) async {
+  static Future<DialogAction> okDialogAction(
+    BuildContext context, {
+    String? title,
+    String? body,
+    Function? approveFunction,
+  }) async {
     final action = await showDialog(
       context: context,
       barrierDismissible: false,
@@ -85,7 +89,7 @@ class Dialogs {
                   "OK",
                   onPress: () => {
                     Navigator.pop(context),
-                    approveFunction.call(),
+                    approveFunction != null && approveFunction.call(),
                   },
                 ),
               ],

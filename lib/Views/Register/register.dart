@@ -54,22 +54,22 @@ class _RegisterState extends State<Register> {
           color: Colors.white,
         ),
       ),
-      validator: (String value) {
-        if (value.isEmpty) {
+      validator: (String? value) {
+        if (value != null  && value.isEmpty) {
           return 'Email is required';
-        } else if (!emailExp.hasMatch(value)) {
-          return 'Email is not formated correctly';
+        } else if (value != null && !emailExp.hasMatch(value)) {
+          return 'Email is not formatted correctly';
         }
         return null;
       },
       onFieldSubmitted: (term) {
-        if (!_formFieldKeyEmail.currentState.validate()) {
+        if (!_formFieldKeyEmail.currentState!.validate()) {
           _fieldFocusChanger(context, _emailFocus, _emailFocus);
         } else {
           _fieldFocusChanger(context, _emailFocus, _passwordFocus);
         }
       },
-      onSaved: (String newValue) {
+      onSaved: (String? newValue) {
         _currentUser.setEmail(_emailController.text.trim());
       },
     );
@@ -131,20 +131,20 @@ class _RegisterState extends State<Register> {
         ),
       ),
       obscureText: true,
-      validator: (String value) {
-        if (value.isEmpty) {
+      validator: (String? value) {
+        if (value != null && value.isEmpty) {
           return 'Password is required';
-        } else if (!passwordExp.hasMatch(value)) {
+        } else if (value != null && !passwordExp.hasMatch(value)) {
           return 'Password is not formated correctly, must have at lease 8 characters.';
         }
         return null;
       },
       onChanged: (value) {},
       onFieldSubmitted: (term) {
-        _formKey.currentState.save();
+        _formKey.currentState!.save();
       },
-      onSaved: (String newValue) async {
-        String message = await context.read<AuthenticationService>().register(
+      onSaved: (String? newValue) async {
+        String? message = await context.read<AuthenticationService>().register(
               email: _emailController.text.trim(),
               password: _passwordController.text.trim(),
             );
@@ -152,10 +152,10 @@ class _RegisterState extends State<Register> {
           Dialogs.okDialogAction(
             context,
             title: 'ERROR: Something went wrong!',
-            body: message,
+            body: message ?? "message was not found when registering user from Register Screen.\nAccount should have been created.",
           );
         } else {
-          dev.log(message);
+          dev.log(message ?? "message was not found when registering user from Register Screen");
           // LogInResult loginResults = await context
           //     .read<InnAppPurchaseService>()
           //     .logIn(context.read<User>().uid);
@@ -203,7 +203,7 @@ class _RegisterState extends State<Register> {
             },
           ),
           PO1Button('Sign Up', onPress: () {
-            _formKey.currentState.save();
+            _formKey.currentState!.save();
           }),
         ],
       ),

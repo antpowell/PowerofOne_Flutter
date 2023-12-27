@@ -38,10 +38,10 @@ class TrackerButton extends StatelessWidget {
   }
 
   Widget buildTrackerButton({
-    Widget label,
-    Color color,
-    Function onPress,
-    IScore pointInstance,
+    required Widget label,
+    required Color color,
+    required Function onPress,
+    required IScore pointInstance,
   }) {
     return Container(
       child: Padding(

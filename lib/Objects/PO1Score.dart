@@ -20,10 +20,10 @@ class PO1Score extends ChangeNotifier {
   Queue<Map<String, IScore>> history = new Queue();
 
   LinkedHashMap<EPoint, Point> _pointsMap = new LinkedHashMap();
-  LinkedHashMap<EPoint, Point> get pointsMap => _pointsMap;
+  Map<EPoint, Point> get pointsMap => Map<EPoint, Point>.from(_pointsMap);
 
   LinkedHashMap<EHustlePoint, Play> _hustlePointsMap = new LinkedHashMap();
-  LinkedHashMap<EHustlePoint, Play> get hustlePointsMap => _hustlePointsMap;
+  Map<EHustlePoint, Play> get hustlePointsMap => Map<EHustlePoint, Play>.from(_hustlePointsMap);
 
   List<IScore> improvementAreas = [];
 
@@ -106,7 +106,7 @@ class PO1Score extends ChangeNotifier {
     debugPrint('IPoints created!');
   }
 
-  IScore getActivity(String activityName) {
+  IScore? getActivity(String activityName) {
     return (_pointsMap.containsKey(EPoint.values.find(activityName)))
         ? _pointsMap[EPoint.values.find(activityName)]
         : _hustlePointsMap[EHustlePoint.values.find(activityName)];
@@ -153,17 +153,17 @@ class PO1Score extends ChangeNotifier {
     );
 
     // TODO: Check to see if this solution works for FG average
-    _averages['FG'] = ((_pointsMap[EPoint.TWO]?.pos +
-                _pointsMap[EPoint.THREE]?.pos +
-                _pointsMap[EPoint.TWO]?.neg +
-                _pointsMap[EPoint.THREE]?.neg) ==
+    _averages['FG'] = ((pointsMap[EPoint.TWO]!.pos +
+                pointsMap[EPoint.THREE]!.pos +
+                pointsMap[EPoint.TWO]!.neg +
+                pointsMap[EPoint.THREE]!.neg) ==
             0)
         ? 0.0
-        : ((_pointsMap[EPoint.TWO].pos + _pointsMap[EPoint.THREE].pos) /
-                (_pointsMap[EPoint.TWO].pos +
-                    _pointsMap[EPoint.THREE].pos +
-                    _pointsMap[EPoint.TWO].neg +
-                    _pointsMap[EPoint.THREE].neg) *
+        : ((_pointsMap[EPoint.TWO]!.pos + _pointsMap[EPoint.THREE]!.pos) /
+                (_pointsMap[EPoint.TWO]!.pos +
+                    _pointsMap[EPoint.THREE]!.pos +
+                    _pointsMap[EPoint.TWO]!.neg +
+                    _pointsMap[EPoint.THREE]!.neg) *
                 100)
             .roundToDouble();
 
@@ -200,7 +200,7 @@ class PO1Score extends ChangeNotifier {
   }
 
   bool metPlaytimeThreshold() {
-    if ((history.length - _hustlePointsMap[EHustlePoint.PF].pos) >=
+    if ((history.length - _hustlePointsMap[EHustlePoint.PF]!.pos) >=
         Standard.miniThresholdByPlayerLevel()) {
       return true;
     }

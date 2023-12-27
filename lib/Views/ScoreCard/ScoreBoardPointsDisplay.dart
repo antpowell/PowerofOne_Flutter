@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_one/Objects/Score/Score.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/PO1Score.dart';
@@ -6,6 +7,7 @@ import 'package:power_one/Objects/Point.dart';
 
 class ScoreBoardPointsDisplay extends StatelessWidget {
   final String activityName;
+
   ScoreBoardPointsDisplay(this.activityName);
 
   Text _scoreBoardLabelText(label) {
@@ -34,20 +36,20 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 1),
                     child: _scoreBoardPointText(
-                        activitiesProvider
-                            .getActivity(activityName)
-                            .pos
-                            .toString(),
+                        getScoreBoardPointText(
+                            activity:
+                                activitiesProvider.getActivity(activityName),
+                            lookupValue: IScoreLookupValue.pos),
                         Colors.green),
                   ),
                   _scoreBoardLabelText(activityName),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 1),
                     child: _scoreBoardPointText(
-                        activitiesProvider
-                            .getActivity(activityName)
-                            .neg
-                            .toString(),
+                        getScoreBoardPointText(
+                            activity:
+                                activitiesProvider.getActivity(activityName),
+                            lookupValue: IScoreLookupValue.neg),
                         Colors.red),
                   ),
                 ],
@@ -56,14 +58,27 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
                 children: [
                   _scoreBoardLabelText(activityName),
                   _scoreBoardPointText(
-                      activitiesProvider
-                          .getActivity(activityName)
-                          .pos
-                          .toString(),
+                      getScoreBoardPointText(
+                          activity:
+                              activitiesProvider.getActivity(activityName),
+                          lookupValue: IScoreLookupValue.pos),
                       Colors.white),
                 ],
               ),
       ),
     );
   }
+}
+
+enum IScoreLookupValue { pos, neg }
+
+String getScoreBoardPointText(
+    {required IScore? activity, required IScoreLookupValue lookupValue}) {
+  String activityText = '';
+  if (activity != null) {
+    activityText = lookupValue == IScoreLookupValue.pos
+        ? activity.pos.toString()
+        : activity.neg.toString();
+  }
+  return activityText;
 }

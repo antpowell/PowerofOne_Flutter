@@ -255,7 +255,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                         _buildForm(isPlayer).animate(),
                         // .fade(duration: 150.ms),
                         // if (isPlayer)
-                        if (isPlayer) _buildToggleSection(isPlayer),
+                        if (isPlayer) _buildToggleSection(isPlayer) ?? SizedBox.shrink(),
                         _buildButtonGroup(
                           togglePlayerTeamState:
                               playerOrTeamService.togglePlayerTeamState,

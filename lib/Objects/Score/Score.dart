@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:power_one/Objects/Point.dart';
 
 abstract class IScore {
-  int _pos;
+  int _pos = 0;
   int get pos => _pos;
 
-  int _neg;
+  int _neg = 0;
   int get neg => _neg;
 
   final String _title;

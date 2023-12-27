@@ -8,7 +8,7 @@ class IAPConnection {
   /// We want singelton object of ``PaymentService`` so create private constructor
   ///
   /// Use PaymentService as ``PaymentService.instance``
-  static InAppPurchase _instance;
+  static late InAppPurchase _instance;
   static set instance(InAppPurchase value) {
     _instance = value;
   }
@@ -48,8 +48,8 @@ class IAPConnection {
       new ObserverList<Function>();
 
   /// view of the app will subscribe to this to get errors of the purchase
-  ObserverList<Function(String)> _errorListeners =
-      new ObserverList<Function(String)>();
+  ObserverList<Function> _errorListeners =
+      new ObserverList<Function>();
 
   /// logged in user's premium status
   bool _isProUser = false;

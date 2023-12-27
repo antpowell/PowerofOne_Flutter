@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class PO1Button extends StatelessWidget {
-  String label;
-  Function onPress, onLongPress;
-  Icon icon;
-  bool onLeft;
-  double height = 36;
-  double width = 145;
-  double outlineSize = 1;
+  final String label;
+  Function? onPress, onLongPress;
+  Icon? icon;
+  final bool onLeft;
+  final double height = 36;
+  final double width = 145;
+  final double outlineSize = 1;
 
   // final ButtonStyle buttonStyle = ButtonStyle(side:);
 
@@ -23,7 +23,9 @@ class PO1Button extends StatelessWidget {
     this.onLeft = false,
   });
   Widget displayIcon() {
-    return icon != null ? icon : SizedBox.shrink();
+    Widget localDisplayIcon = icon ?? SizedBox.shrink();
+
+    return localDisplayIcon;
   }
 
   Widget BaseButton() {
@@ -41,8 +43,8 @@ class PO1Button extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: onPress,
-        onLongPress: onLongPress,
+        onPressed: () => onPress,
+        onLongPress: () => onLongPress,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
             color: Colors.white,
@@ -83,8 +85,8 @@ class PO1Button extends StatelessWidget {
             displayIcon(),
           ],
         ),
-        onPressed: onPress,
-        onLongPress: onLongPress,
+        onPressed: () => onPress,
+        onLongPress: () => onLongPress,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
             color: Colors.white,

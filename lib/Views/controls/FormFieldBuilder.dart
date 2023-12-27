@@ -4,17 +4,16 @@ import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Models/PO1User.dart';
 
 class FormFieldBuilder extends StatelessWidget {
-  final String label;
-  final String type;
-  final TextInputType keyboard;
-  final bool hide;
+  final String? label;
+  final String? type;
+  final TextInputType? keyboard;
+  final bool? hide;
 
-  const FormFieldBuilder({
+  const FormFieldBuilder(Key key,{
     this.label,
     this.type,
     this.keyboard,
     this.hide,
-    Key key,
   }) : super(key: key);
 
   @override
@@ -32,16 +31,16 @@ class FormFieldBuilder extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        validator: (String value) {
-          if (value.isEmpty) {
+        validator: (String? value) {
+          if ( value != null  && value.isEmpty) {
             return '$label is required';
-          } else if (!emailExp.hasMatch(value)) {
+          } else if (value != null && !emailExp.hasMatch(value)) {
             return '$label is not formated correctly';
           }
           return null;
         },
-        onSaved: (String newValue) {
-          _currentUser.setEmail(newValue);
+        onSaved: (String? newValue) {
+          newValue != null && _currentUser.setEmail(newValue);
         },
       ),
     );

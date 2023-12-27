@@ -3,7 +3,7 @@ import 'package:power_one/Data/constants.dart';
 import 'package:power_one/Objects/Play.dart';
 
 class PointWidgets extends StatelessWidget {
-  const PointWidgets({Key key, this.activity}) : super(key: key);
+  const PointWidgets({Key? key, required this.activity}) : super(key: key);
   final Play activity;
 
   Widget tracker() => Container(

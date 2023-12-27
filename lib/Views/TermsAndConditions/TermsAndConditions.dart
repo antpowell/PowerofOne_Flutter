@@ -5,7 +5,7 @@ void main() => runApp(TermsAndConditions());
 
 class TermsAndConditions extends StatelessWidget {
   static final String id = 'terms_and_conditions';
-  const TermsAndConditions({Key key, this.title}) : super(key: key);
+  const TermsAndConditions({Key? key, this.title}) : super(key: key);
   final title;
 
   @override

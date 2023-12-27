@@ -35,8 +35,8 @@ class PO1User {
   ///split('.'): [0]: e@g, [1].com
   String emailSignature() => _email.split('.')[0];
 
-  String? _playerName;
-  String? get playerName => _playerName;
+  late String _playerName;
+  String get playerName => _playerName;
   setPlayerName(String name) {
     dev.log('received player name as $name');
     _playerName = name;
@@ -94,7 +94,7 @@ class PO1User {
 
     setEmail(email);
     setId(fbUser.uid);
-    LogInResult results = await RevenueCatService.logIn(fbUser);
+    LogInResult? results = await RevenueCatService.logIn(fbUser);
 
     _subscription = Subscription(logInResults: results);
     _subscription.setTrialEndTime(
@@ -105,7 +105,7 @@ class PO1User {
   clearData() {
     // TODO: clear email when user signs out
     // _email = null;
-    _playerName = null;
+    // _playerName = null;
     _score.clear();
     dev.log('Local user data cleared');
   }
@@ -117,7 +117,7 @@ class PO1User {
   Map<String, dynamic> toJSON() {
     log('id: $_id');
     Map<String, String> name = PlayerOrTeamService.isPlayer
-        ? {'playerName': playerName!.trim()}
+        ? {'playerName': playerName.trim()}
         : {'teamName': _teamName.trim()};
 
     Map<String, dynamic> userData = {

@@ -17,16 +17,17 @@ class AuthenticationService {
 
   AuthenticationService(this._firebaseAuth);
 
-  Stream<User> get authStateChange => _firebaseAuth.authStateChanges();
+  Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
 
-  Future<String> login({String email, String password}) async {
+  Future<String> login(
+      {required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       // await revenueCatLogin();
       return '$email signed in';
     } on FirebaseAuthException catch (e) {
-      authProblems errorType;
+      late authProblems errorType;
       if (Platform.isAndroid) {
         switch (e.message) {
           case 'There is no user record corresponding to this identifier. The user may have been deleted.':
@@ -64,11 +65,12 @@ class AuthenticationService {
         }
       }
       print('The error is $errorType');
-      return e.message;
+      return e.message ?? '';
     }
   }
 
-  Future<String> register({String email, String password}) async {
+  Future<String?> register(
+      {required String email, required String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -113,8 +115,8 @@ class AuthenticationService {
     }
   }
 
-  Future<String> signOut() async {
-    String email = _firebaseAuth.currentUser.email;
+  Future<String?> signOut() async {
+    String? email = _firebaseAuth.currentUser?.email;
     try {
       await _firebaseAuth.signOut();
       return '$email signed out';
@@ -123,7 +125,7 @@ class AuthenticationService {
     }
   }
 
-  Future<String> loginWithEmailLink({String email}) async {
+  Future<String?> loginWithEmailLink({required String email}) async {
     try {
       await _firebaseAuth.signInWithEmailLink(email: email, emailLink: email);
       // await revenueCatLogin();
@@ -134,7 +136,7 @@ class AuthenticationService {
   }
 
 // TODO1: create a forgot password function that follows this functionality (https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email)
-  Future<String> sendPasswordResetFor({String email}) async {
+  Future<String?> sendPasswordResetFor({required String email}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       return 'email link sent';
@@ -143,11 +145,14 @@ class AuthenticationService {
     }
   }
 
-  Future<LogInResult> revenueCatLogin() async {
+  Future<LogInResult?> revenueCatLogin() async {
     try {
-      LogInResult results =
-          await RevenueCatService.logIn(_firebaseAuth.currentUser);
-      if (results.created) {
+      User? fbUser = _firebaseAuth.currentUser;
+      late LogInResult? results;
+      if (fbUser != null) {
+        results = await RevenueCatService.logIn(fbUser);
+      }
+      if (results != null && results.created) {
         /// true if the logged in user has been created in the
         /// RevenueCat backend for the first time
         /// (i.e. they have not yet purchased a subscription)
@@ -155,7 +160,6 @@ class AuthenticationService {
       return results;
     } catch (e) {
       print('Error logging in to RevenueCat: $e');
-      return e;
     }
   }
 }
