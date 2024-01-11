@@ -1,13 +1,11 @@
 on:
-#for testing
-  push:
-    branches:
-      - 'antpowell/github-build-actions'
   push:
     branches:
       - 'main'
       - 'ios-release-candidate'
       - 'android-release-candidate'
+      # for testing only
+      - 'antpowell/github-build-actions'
   pull_request:
     branches:
       - 'main'
