@@ -39,9 +39,10 @@ jobs:
         with:
           flutter-version: '3.x'
           channel: 'stable'
+      - run: flutter clean
       - run: flutter pub get
       # comment out until vp test are added
       # - run: flutter test
-      - run: flutter build apk
+      # - run: flutter build apk
       - run: flutter build appbundle
 
