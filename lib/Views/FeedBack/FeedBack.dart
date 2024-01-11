@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Main.dart';
+import 'package:power_one/main.dart';
 import 'package:power_one/Models/PO1Feedback.dart';
 import 'package:power_one/Models/PO1HustlePoint.dart';
 import 'package:power_one/Models/PO1User.dart';
