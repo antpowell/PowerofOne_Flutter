@@ -1,36 +1,33 @@
-import 'dart:ui';
+import 'dart:developer' as dev;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class PO1Button extends StatelessWidget {
   final String label;
-  Function? onPress, onLongPress;
+  final Function? _onPress, _onLongPress;
   Icon? icon;
   final bool onLeft;
-  final double height = 36;
-  final double width = 145;
+  // final double height = 36;
+  // final double width = 145;
   final double outlineSize = 1;
-
-  // final ButtonStyle buttonStyle = ButtonStyle(side:);
 
   PO1Button(
     this.label, {
-    this.onPress,
-    this.onLongPress,
+    Function? onPress,
+    Function? onLongPress,
     this.icon,
     this.onLeft = false,
-  });
+  })  : _onLongPress = onLongPress,
+        _onPress = onPress;
   Widget displayIcon() {
     Widget localDisplayIcon = icon ?? SizedBox.shrink();
 
     return localDisplayIcon;
   }
 
-  Widget BaseButton() {
+  Widget baseButton() {
     return Container(
-      height: height,
+      // height: height,
       child: OutlinedButton(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,12 +36,12 @@ class PO1Button extends StatelessWidget {
             displayIcon(),
             Text(
               label,
-              style: TextStyle(fontSize: 14, color: Colors.white),
+              style: TextStyle(color: Colors.white),
             ),
           ],
         ),
-        onPressed: () => onPress,
-        onLongPress: () => onLongPress,
+        onPressed: () => _onPress!(),
+        onLongPress: () => _onLongPress,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
             color: Colors.white,
@@ -55,23 +52,9 @@ class PO1Button extends StatelessWidget {
     );
   }
 
-  Widget LeftIconButton() {
-    // return NeumorphicButton(
-    //   onPressed: onPress,
-    //   child: Text(
-    //     this.label,
-    //     style: TextStyle(fontSize: 16, color: Colors.white),
-    //   ),
-    //   style: NeumorphicStyle(
-    //     color: Color(0xff32333D),
-    //     shape: NeumorphicShape.flat,
-    //     surfaceIntensity: 0.05,
-    //     intensity: 0.25,
-    //     oppositeShadowLightSource: true,
-    //   ),
-    // );
+  Widget leftIconButton() {
     return Container(
-      height: height,
+      // height: height,
       child: OutlinedButton(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -85,8 +68,8 @@ class PO1Button extends StatelessWidget {
             displayIcon(),
           ],
         ),
-        onPressed: () => onPress,
-        onLongPress: () => onLongPress,
+        onPressed: () => _onPress,
+        onLongPress: () => _onLongPress,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
             color: Colors.white,
@@ -98,22 +81,7 @@ class PO1Button extends StatelessWidget {
   }
 
   Widget btn() {
-    // return NeumorphicButton(child: Text(this.label));
-    return onLeft ? BaseButton() : LeftIconButton();
-    // return NeumorphicButton(
-    //   onPressed: () {},
-    //   child: Text(
-    //     this.label,
-    //     style: TextStyle(fontSize: 16, color: Colors.white),
-    //   ),
-    //   style: NeumorphicStyle(
-    //     color: Color(0xff32333D),
-    //     shape: NeumorphicShape.flat,
-    //     surfaceIntensity: 0.05,
-    //     intensity: 0.25,
-    //     // oppositeShadowLightSource: true,
-    //   ),
-    // );
+    return onLeft ? leftIconButton() : baseButton();
   }
 
   @override

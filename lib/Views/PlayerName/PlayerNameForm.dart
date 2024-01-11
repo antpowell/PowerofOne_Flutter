@@ -1,6 +1,5 @@
 import 'dart:developer' as dev;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:power_one/Main.dart';
 import 'package:power_one/Models/PO1PlayerSkill.dart';
@@ -63,57 +62,59 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
     );
   }
 
-  List<bool> _selections =
-      List.generate(PO1PlayerSkill.values.length, (_) => false);
+  Widget? _playerSkillsSegmentedButton(bool isPlayer) {
+    List<ButtonSegment<PO1PlayerSkill>> segments = [];
+
+    if (_user.playerSkill == null) {
+      _user.playerSkill = PO1PlayerSkill.elementary;
+    }
+
+    PO1PlayerSkill.values
+        .forEach((e) => segments.add(ButtonSegment<PO1PlayerSkill>(
+              value: e,
+              label: Text(
+                e.name.toUpperCase(),
+                style: TextStyle(color: Colors.white),
+              ),
+            )));
+
+    return SegmentedButton<PO1PlayerSkill>(
+      segments: segments,
+      selected: <PO1PlayerSkill>{_user.playerSkill!},
+      onSelectionChanged: (Set<PO1PlayerSkill> newSelection) {
+        setState(() {
+          _user.playerSkill = newSelection.first;
+        });
+      },
+      showSelectedIcon: false,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateColor.resolveWith(
+          (state) => state.contains(MaterialState.selected)
+              ? Colors.deepPurpleAccent
+              : Colors.transparent,
+        ),
+      ),
+    );
+  }
 
   Widget? _buildToggleSection(bool isPlayer) {
-    List<Widget> _toggleList = [];
     if (!isPlayer) return null;
-    PO1PlayerSkill.values.forEach((e) => _toggleList.add(
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Text(
-              describeEnum(e).toUpperCase(),
-              textAlign: TextAlign.center,
-              textWidthBasis: TextWidthBasis.parent,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ));
+
     return Column(children: [
       Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Center(
-            child: Text("Select your player's level",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ))),
+          child: Text(
+            "Select your player's level",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
       Center(
-        child: ToggleButtons(
-          children: _toggleList,
-          isSelected: _selections,
-          onPressed: (int index) {
-            if (isPlayer) {
-              setState(() {
-                _selections =
-                    List.generate(PO1PlayerSkill.values.length, (_) => false);
-                _selections[index] = !_selections[index];
-                _user.playerSkill = PO1PlayerSkill.values.elementAt(index);
-              });
-            }
-          },
-          color: Colors.blueAccent,
-          selectedColor: Colors.orangeAccent,
-          fillColor: Colors.deepPurpleAccent,
-          selectedBorderColor: Colors.white,
-          borderColor: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-        ),
+        child: _playerSkillsSegmentedButton(isPlayer),
       ),
     ]);
   }
@@ -138,7 +139,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
             // mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               /**
-               * !!Dev only - hide until previouse game history work is done
+               * !!Dev only - hide until previous game history work is done
                */
               // PO1Button(
               //   "Recent Game",
@@ -171,7 +172,6 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                   ),
                 ),
               ),
-
               PO1Button(
                 "Team Tracker",
                 onPress: () {
@@ -199,9 +199,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
 
                   _formKey.currentState!.save();
                   dev.log('current user ${_user.email}');
-                  if (_user.subscription == null) {
-                    Navigator.pushNamed(context, PurchaseScreen.id);
-                  } else if (_user.subscription.isActive) {
+                  if (_user.subscription.isActive) {
                     Navigator.pushNamed(context, ScoreCard.id);
                     fbdbService.createNewUser(_user);
                   } else {
@@ -253,9 +251,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                       children: [
                         _buildHeader(isPlayer),
                         _buildForm(isPlayer).animate(),
-                        // .fade(duration: 150.ms),
-                        // if (isPlayer)
-                        if (isPlayer) _buildToggleSection(isPlayer) ?? SizedBox.shrink(),
+                        if (isPlayer)
+                          _buildToggleSection(isPlayer) ?? SizedBox.shrink(),
                         _buildButtonGroup(
                           togglePlayerTeamState:
                               playerOrTeamService.togglePlayerTeamState,

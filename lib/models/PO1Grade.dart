@@ -64,8 +64,6 @@ class PO1Grade {
   }
 
   static String calculateGrade(int pO1Score) {
-    PO1User _user = PO1User();
-
     return (pO1Score >= gradeConverterByPlayerLevel()['A'])
         ? 'A'
         : (pO1Score >= gradeConverterByPlayerLevel()['B'])

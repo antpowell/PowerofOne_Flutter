@@ -9,7 +9,7 @@ class ScoreBoard extends StatelessWidget {
   List<Widget> _dualScoreSection = [];
   List<Widget> _singleScoreSection = [];
 
-  _createSignleScoreSectionLists(PO1Score a) {
+  _createSingleScoreSectionLists(PO1Score a) {
     a.hustlePointsMap.keys.forEach((element) =>
         _singleScoreSection.add(ScoreBoardPointsDisplay(element.name)));
 
@@ -37,10 +37,8 @@ class ScoreBoard extends StatelessWidget {
         ),
         Container(
           child: Row(
-            // spacing: 8.0,
-            // runSpacing: 8,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _createSignleScoreSectionLists(activities),
+            children: _createSingleScoreSectionLists(activities),
           ),
         ),
       ],

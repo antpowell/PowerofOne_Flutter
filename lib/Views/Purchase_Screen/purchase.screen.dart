@@ -17,15 +17,14 @@ int active = 1;
 
 Map<String, dynamic> packageTitleConverter(String packageId) {
   switch (packageId) {
-    case 'po1_599_1m_1w':
+    case 'po1_599_1m_1w:po1-1m-1w':
       return {
         'name': 'Monthly',
         'benefits': [
           'Premium Access',
         ],
       };
-      break;
-    case 'po1_2999_6m_1w':
+    case 'po1_2999_6m_1w:po1-6m-1w':
       return {
         'name': 'Semiyearly',
         'benefits': [
@@ -33,8 +32,7 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
           'More than 15% off',
         ],
       };
-      break;
-    case 'po1_5999_12m_1w':
+    case 'po1_5999_12m_1w:po1-12m-1w':
       return {
         'name': 'Yearly',
         'benefits': [
@@ -42,7 +40,6 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
           'More than 20% off',
         ],
       };
-      break;
     default:
       return {};
   }
@@ -91,8 +88,18 @@ class PurchaseScreen extends HookWidget {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
-                child: Text('There was an error, check the logs',
-                    style: TextStyle(color: Colors.red[900], fontSize: 48)),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'There was an error, check the logs',
+                      style: TextStyle(color: Colors.red[900], fontSize: 48),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('Back'),
+                    ),
+                  ],
+                ),
               );
             } else if (snapshot.hasData) {
               List<Package> packages =
@@ -238,6 +245,13 @@ Widget _buttonGroup(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        TextButton(
+          child: Text(
+            'Back',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
         (_user.subscription.inTrial
             ? TextButton(
                 style: TextButton.styleFrom(

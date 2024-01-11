@@ -55,7 +55,7 @@ class _RegisterState extends State<Register> {
         ),
       ),
       validator: (String? value) {
-        if (value != null  && value.isEmpty) {
+        if (value != null && value.isEmpty) {
           return 'Email is required';
         } else if (value != null && !emailExp.hasMatch(value)) {
           return 'Email is not formatted correctly';
@@ -152,10 +152,12 @@ class _RegisterState extends State<Register> {
           Dialogs.okDialogAction(
             context,
             title: 'ERROR: Something went wrong!',
-            body: message ?? "message was not found when registering user from Register Screen.\nAccount should have been created.",
+            body: message ??
+                "message was not found when registering user from Register Screen.\nAccount should have been created.",
           );
         } else {
-          dev.log(message ?? "message was not found when registering user from Register Screen");
+          dev.log(message ??
+              "message was not found when registering user from Register Screen");
           // LogInResult loginResults = await context
           //     .read<InnAppPurchaseService>()
           //     .logIn(context.read<User>().uid);
@@ -183,8 +185,6 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _buildButtonGroup() {
-    final User firebaseUser = Provider.of<User>(context);
-
     final _authService =
         Provider.of<AuthenticationService>(context, listen: false);
     return Center(

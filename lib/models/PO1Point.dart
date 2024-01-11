@@ -21,8 +21,8 @@ extension EPointByName on EPoint {
 }
 
 extension Search on Iterable<EPoint> {
-  EPoint find(value) {
-    late EPoint found;
+  EPoint? find(value) {
+    EPoint? found;
     switch (value) {
       case '1PT':
         found = EPoint.ONE;

@@ -23,7 +23,8 @@ class PO1Score extends ChangeNotifier {
   Map<EPoint, Point> get pointsMap => Map<EPoint, Point>.from(_pointsMap);
 
   LinkedHashMap<EHustlePoint, Play> _hustlePointsMap = new LinkedHashMap();
-  Map<EHustlePoint, Play> get hustlePointsMap => Map<EHustlePoint, Play>.from(_hustlePointsMap);
+  Map<EHustlePoint, Play> get hustlePointsMap =>
+      Map<EHustlePoint, Play>.from(_hustlePointsMap);
 
   List<IScore> improvementAreas = [];
 
@@ -40,12 +41,12 @@ class PO1Score extends ChangeNotifier {
           .addAll({EHustlePoint.values.find(activity.title): activity.make()});
       madeHistoryEvent = {
         "made":
-            _hustlePointsMap[EHustlePoint.values.find(activity.title)] as Point
+            _hustlePointsMap[EHustlePoint.values.find(activity.title)] as IScore
       };
     } else {
-      _pointsMap[EPoint.values.find(activity.title)] = activity.make();
+      _pointsMap[EPoint.values.find(activity.title)!] = activity.make();
       madeHistoryEvent = {
-        "made": _pointsMap[EPoint.values.find(activity.title)] as Point
+        "made": _pointsMap[EPoint.values.find(activity.title)] as IScore
       };
     }
 
@@ -55,9 +56,9 @@ class PO1Score extends ChangeNotifier {
   }
 
   missed(IScore activity) {
-    _pointsMap[EPoint.values.find(activity.title)] = activity.miss();
+    _pointsMap[EPoint.values.find(activity.title)!] = activity.miss();
     history.addLast(
-        {"miss": _pointsMap[EPoint.values.find(activity.title)] as Point});
+        {"miss": _pointsMap[EPoint.values.find(activity.title)] as IScore});
     debugPrint('Action: $activity : neg-> ${activity.neg}');
     notifyListeners();
   }
@@ -71,9 +72,9 @@ class PO1Score extends ChangeNotifier {
               ? _hustlePointsMap[
                       EHustlePoint.values.find(undoEvent.values.first.title)] =
                   undoEvent.values.first.undoMake()
-              : _pointsMap[EPoint.values.find(undoEvent.values.first.title)] =
+              : _pointsMap[EPoint.values.find(undoEvent.values.first.title)!] =
                   undoEvent.values.first.undoMake()
-          : _pointsMap[EPoint.values.find(undoEvent.values.first.title)] =
+          : _pointsMap[EPoint.values.find(undoEvent.values.first.title)!] =
               undoEvent.values.first.undoMiss();
     } else {
       dev.log("Empty history list",
@@ -242,7 +243,7 @@ class PO1Score extends ChangeNotifier {
       "ReportCard": reportCard,
       "ScoreCard": _mapToJSON(),
       "Level": PlayerOrTeamService.isPlayer
-          ? PO1User().playerSkill.toShortString()
+          ? PO1User().playerSkill?.toShortString()
           : 'team',
     };
   }

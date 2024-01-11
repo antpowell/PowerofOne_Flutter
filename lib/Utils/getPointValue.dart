@@ -4,9 +4,10 @@ import 'package:power_one/Models/PO1Level.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 
-num findThresholdByPlayerLevel(
-    {required Set<Map<PO1Levels, num>> pointLevelThreshold,
-    required PO1User user}) {
+num findThresholdByPlayerLevel({
+  required Set<Map<PO1Levels, num>> pointLevelThreshold,
+  required PO1User user,
+}) {
   var results = pointLevelThreshold
       .where((element) => element.containsKey(user.playerLevel))
       .first[user.playerLevel];

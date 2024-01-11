@@ -95,7 +95,7 @@ class Power1 extends StatelessWidget {
 class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final User firebaseUser = context.watch<User>();
+    final User? firebaseUser = context.watch<User?>();
     // final RevenueCatService _purchaseService =
     //     context.read<RevenueCatService>();
 

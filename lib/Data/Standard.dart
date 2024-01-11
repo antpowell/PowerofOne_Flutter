@@ -14,7 +14,7 @@ class Standard {
   late PO1Point fg;
   late PO1Point ft;
 
-  PO1User _user = new PO1User();
+  late PO1User _user;
 
   Standard({required PO1User user}) {
     this.stl = _stl;
@@ -24,7 +24,7 @@ class Standard {
     this.to = _to;
     this.fg = _fg;
     this.ft = _ft;
-    this._user = _user;
+    this._user = user;
   }
 
   final PO1HustlePoint _stl = new PO1HustlePoint(

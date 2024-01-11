@@ -22,8 +22,8 @@ class PO1User {
   }
 
   // ignore: non_constant_identifier_names
-  late String _RCAppUserID;
-  String get rcAppUserId => _RCAppUserID;
+  String? _RCAppUserID;
+  String? get rcAppUserId => _RCAppUserID;
   setRCAppUserId(String appUserId) {
     _RCAppUserID = appUserId;
   }
@@ -33,7 +33,9 @@ class PO1User {
 
   ///e@g.com
   ///split('.'): [0]: e@g, [1].com
-  String emailSignature() => _email.split('.')[0];
+  String emailSignature() {
+    return _email.split('.')[0];
+  }
 
   late String _playerName;
   String get playerName => _playerName;
@@ -64,9 +66,9 @@ class PO1User {
     _score = score;
   }
 
-  late PO1PlayerSkill _playerSkill;
-  PO1PlayerSkill get playerSkill => _playerSkill;
-  set playerSkill(PO1PlayerSkill playerSkill) {
+  PO1PlayerSkill? _playerSkill;
+  PO1PlayerSkill? get playerSkill => _playerSkill;
+  set playerSkill(PO1PlayerSkill? playerSkill) {
     _playerSkill = playerSkill;
   }
 
@@ -86,7 +88,8 @@ class PO1User {
     // final InnAppPurchaseService _purchaseService =
     //     context.read<InnAppPurchaseService>();
     // _subscription = new Subscription.;
-    dev.log('user created as: ${this._email}');
+
+    // dev.log('user created as: ${this._email}');
   }
 
   firebaseInit({required User fbUser}) async {

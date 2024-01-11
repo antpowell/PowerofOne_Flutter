@@ -152,8 +152,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   }
 
   Widget _buildButtonGroup() {
-    final User firebaseUser = Provider.of<User>(context);
-
     final _authService =
         Provider.of<AuthenticationService>(context, listen: false);
     return Center(
@@ -228,7 +226,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final User firebaseUser = Provider.of<User>(context);
+    final User? firebaseUser = Provider.of<User?>(context);
     bool hasUser = firebaseUser != null;
     return Scaffold(
       body: Container(

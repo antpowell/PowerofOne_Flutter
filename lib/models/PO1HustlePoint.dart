@@ -31,14 +31,14 @@ extension Search on Iterable<EHustlePoint> {
 }
 
 class PO1HustlePoint {
+  final Set<Map<PO1Levels, num>> great;
+  final Set<Map<PO1Levels, num>> good;
+  final Set<Map<PO1Levels, num>> average;
+  final Set<Map<PO1FeedbackLevel, String>> feedback;
   PO1HustlePoint({
-    required Set<Map<PO1Levels, num>> great,
-    required Set<Map<PO1Levels, num>> good,
-    required Set<Map<PO1Levels, num>> average,
-    required Set<Map<PO1FeedbackLevel, String>> feedback,
+    required this.great,
+    required this.good,
+    required this.average,
+    required this.feedback,
   });
-  Set<Map<PO1Levels, num>> get great => great;
-  Set<Map<PO1Levels, num>> get good => good;
-  Set<Map<PO1Levels, num>> get average => average;
-  Set<Map<PO1FeedbackLevel, String>> get feedback => feedback;
 }

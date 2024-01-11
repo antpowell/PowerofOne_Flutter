@@ -87,20 +87,22 @@ class ScoreCardScreenWidget extends StatelessWidget {
               style: TextStyle(fontSize: 30, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            Flex(
-              direction: Axis.horizontal,
-              children: <Widget>[
-                Expanded(
-                  child: HustlePointsSection(),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: ScoreBoard(),
-                ),
-                Expanded(
-                  child: PointsSection(),
-                ),
-              ],
+            Expanded(
+              child: Flex(
+                direction: Axis.horizontal,
+                children: <Widget>[
+                  Expanded(
+                    child: HustlePointsSection(),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: ScoreBoard(),
+                  ),
+                  Expanded(
+                    child: PointsSection(),
+                  ),
+                ],
+              ),
             ),
             Flex(
               direction: Axis.horizontal,
