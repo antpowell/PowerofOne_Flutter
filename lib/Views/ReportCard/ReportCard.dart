@@ -1,7 +1,7 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:power_one/main2.dart';
+import 'package:power_one/main.dart';
 import 'package:power_one/Models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
