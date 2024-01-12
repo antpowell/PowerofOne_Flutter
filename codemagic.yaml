@@ -15,8 +15,8 @@ workflows:
       - app_store_credentials
       - firebase_credentials
       vars:
-        BUILD_VERSION: 1.1.7
-        BUILD_NUMBER: 15
+        # BUILD_VERSION: 1.1.7
+        # BUILD_NUMBER: 15
         PACKAGE_NAME: 'com.power_of_one.basketball'
       flutter: stable
       xcode: latest
@@ -43,7 +43,7 @@ workflows:
         script: |
           BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
           flutter build appbundle --release \
-          --build-name=1.1.$BUILD_NUMBER
+          --build-name=1.1.$BUILD_NUMBER \
           --build-number=$BUILD_NUMBER
       - name: Install pods
         script: find . -name "Podfile" -execdir pod install \;
