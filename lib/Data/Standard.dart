@@ -1,7 +1,7 @@
-import 'package:power_one/Models/PO1HustlePoint.dart';
-import 'package:power_one/Models/PO1Level.dart';
-import 'package:power_one/Models/PO1Point.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1HustlePoint.dart';
+import 'package:power_one/models/PO1Level.dart';
+import 'package:power_one/models/PO1Point.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Utils/getPointValue.dart';
 
 class Standard {

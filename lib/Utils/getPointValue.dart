@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:power_one/Models/PO1Level.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1Level.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 
 num findThresholdByPlayerLevel({

@@ -2,7 +2,7 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:power_one/main.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/FeedBack/FeedBack.dart';

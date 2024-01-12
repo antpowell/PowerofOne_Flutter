@@ -1,6 +1,6 @@
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Models/PO1Level.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1Level.dart';
+import 'package:power_one/models/PO1User.dart';
 
 class PO1Grade {
   static final Map<String, Set<Map<PO1Levels, num>>> grade = {

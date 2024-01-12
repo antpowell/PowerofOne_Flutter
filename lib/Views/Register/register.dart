@@ -10,7 +10,7 @@ import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:power_one/Views/dialogs.dart';
 import 'dart:developer' as dev;
 
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 

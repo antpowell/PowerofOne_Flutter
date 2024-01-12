@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Models/PO1Point.dart';
+import 'package:power_one/models/PO1Point.dart';
 import 'package:provider/provider.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Views/ScoreCard/ScoreBoardPointsDisplay.dart';

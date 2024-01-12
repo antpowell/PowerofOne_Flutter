@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/main.dart';
-import 'package:power_one/Models/PO1Feedback.dart';
-import 'package:power_one/Models/PO1HustlePoint.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1Feedback.dart';
+import 'package:power_one/models/PO1HustlePoint.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 

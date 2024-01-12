@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 
 class FormFieldBuilder extends StatelessWidget {
   final String? label;
@@ -9,7 +9,8 @@ class FormFieldBuilder extends StatelessWidget {
   final TextInputType? keyboard;
   final bool? hide;
 
-  const FormFieldBuilder(Key key,{
+  const FormFieldBuilder(
+    Key key, {
     this.label,
     this.type,
     this.keyboard,
@@ -32,7 +33,7 @@ class FormFieldBuilder extends StatelessWidget {
           ),
         ),
         validator: (String? value) {
-          if ( value != null  && value.isEmpty) {
+          if (value != null && value.isEmpty) {
             return '$label is required';
           } else if (value != null && !emailExp.hasMatch(value)) {
             return '$label is not formated correctly';

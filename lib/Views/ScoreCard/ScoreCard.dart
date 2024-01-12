@@ -1,8 +1,8 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:power_one/Models/PO1Feedback.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1Feedback.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Services/core_services.dart';
 import 'package:power_one/Services/database_service.dart';

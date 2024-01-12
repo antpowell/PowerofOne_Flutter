@@ -1,9 +1,9 @@
 import 'package:power_one/Data/Standard.dart';
-import 'package:power_one/Models/PO1HustlePoint.dart';
-import 'package:power_one/Models/PO1Level.dart';
+import 'package:power_one/models/PO1HustlePoint.dart';
+import 'package:power_one/models/PO1Level.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:power_one/Objects/Play.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 
 class PO1Feedback {

@@ -1,6 +1,6 @@
 import 'dart:developer' as dev;
 
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/core_services.dart';
 
 class PO1Game {

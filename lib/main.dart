@@ -17,7 +17,7 @@ import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:provider/provider.dart';
 
-import 'Models/PO1User.dart';
+import 'models/PO1User.dart';
 import 'Views/Purchase_Screen/purchase.screen.dart';
 import 'firebase_options.dart';
 

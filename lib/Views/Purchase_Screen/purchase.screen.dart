@@ -3,7 +3,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:power_one/Models/PO1User.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';

@@ -1,4 +1,4 @@
-import 'package:power_one/Models/PO1Point.dart';
+import 'package:power_one/models/PO1Point.dart';
 
 import 'Score/Score.dart';
 
