@@ -17,6 +17,7 @@ workflows:
       vars:
         BUILD_VERSION: 1.1.7
         BUILD_NUMBER: 15
+        PACKAGE_NAME: 'com.power_of_one.basketball'
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -40,7 +41,7 @@ workflows:
         script: flutter pub get
       - name: Build AAB with Flutter
         script: |
-          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$com.power_of_one.basketball") + 1))
+          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
           flutter build appbundle --release \
           --build-name=1.1.$BUILD_NUMBER
           --build-number=$BUILD_NUMBER
