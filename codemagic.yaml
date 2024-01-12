@@ -6,6 +6,7 @@ workflows:
     name: Build + Deploy
     max_build_duration: 60
     environment:
+      java: 17
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.powerofone.basketball
@@ -39,7 +40,10 @@ workflows:
         script: flutter pub get
       - name: Build AAB with Flutter
         script: |
-          flutter build appbundle --release
+          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$com.power_of_one.basketball" --tracks="$GOOGLE_PLAY_TRACK") + 1))
+          flutter build appbundle --release \
+          --build-name=1.1.$BUILD_NUMBER
+          --build-number=$BUILD_NUMBER
       - name: Install pods
         script: find . -name "Podfile" -execdir pod install \;
       - keychain initialize
