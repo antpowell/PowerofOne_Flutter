@@ -44,5 +44,5 @@ jobs:
       # comment out until vp test are added
       # - run: flutter test
       # - run: flutter build apk
-      - run: flutter build appbundle -v
+      - run: flutter build appbundle
 
