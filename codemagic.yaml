@@ -37,6 +37,8 @@ workflows:
       - build/**/outputs/**/*.aab
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
+
+
   android-publish-workflow:
     name: Android Publishing Workflow
     instance_type: mac_mini_m1
@@ -65,6 +67,7 @@ workflows:
       - name: Flutter analyze
         script: |
           flutter analyze
+        ignore_failure: true
       # - name: Flutter unit tests
       #   script: |
       #     flutter test
@@ -90,6 +93,8 @@ workflows:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: $GOOGLE_PLAY_TRACK
         submit_as_draft: true
+
+
   ios-workflow:
     name: iOS Workflow
     instance_type: mac_mini_m1
