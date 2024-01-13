@@ -13,6 +13,10 @@ workflows:
         PACKAGE_NAME: 'com.power_of_one.basketball'
         GOOGLE_PLAY_TRACK: 'internal'
       flutter: stable
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache          # Dart cache
+        - $HOME/.gradle/caches              # Gradle cache
     scripts:
       - name: Set up local.properties
         script: |
@@ -58,6 +62,10 @@ workflows:
         PACKAGE_NAME: 'com.power_of_one.basketball'
         GOOGLE_PLAY_TRACK: 'internal'
       flutter: stable
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache          # Dart cache
+        - $HOME/.gradle/caches              # Gradle cache
     scripts:
       - name: Set up local.properties
         script: |
