@@ -108,8 +108,6 @@ workflows:
     name: iOS Build Workflow
     instance_type: mac_mini_m1
     max_build_duration: 30
-    var:
-      BUILD_NUMBER: 
     integrations:
       app_store_connect: Power of One
     environment:
