@@ -47,7 +47,8 @@ class AuthenticationService {
             break;
 
           default:
-            print('Case ${e.message} is not yet implemented');
+            // log error in telemetry when added
+            print('AUTH ERROR CASE NOT IMPLEMENTED FOR ------> ${e.message}');
         }
       } else if (Platform.isIOS) {
         switch (e.code) {
@@ -61,9 +62,10 @@ class AuthenticationService {
             errorType = authProblems.NetworkError;
             break;
           default:
-            print('Case ${e.message} is not yet implemented');
+            print('AUTH ERROR CASE NOT IMPLEMENTED FOR ------> ${e.message}');
         }
       }
+      // log error in telemetry when added
       print('The error is $errorType');
       return e.message ?? '';
     }
@@ -161,5 +163,6 @@ class AuthenticationService {
     } catch (e) {
       print('Error logging in to RevenueCat: $e');
     }
+    return null;
   }
 }

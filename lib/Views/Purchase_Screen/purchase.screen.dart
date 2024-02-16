@@ -3,12 +3,12 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:power_one/models/PO1User.dart';
 import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/database_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
 import 'package:power_one/Views/dialogs.dart';
+import 'package:power_one/models/PO1User.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 // video: https://www.youtube.com/watch?v=h-jOMh2KXTA
@@ -18,6 +18,7 @@ int active = 1;
 Map<String, dynamic> packageTitleConverter(String packageId) {
   switch (packageId) {
     case 'po1_599_1m_1w:po1-1m-1w':
+    case 'po1_599_1m_1w':
       return {
         'name': 'Monthly',
         'benefits': [
@@ -25,6 +26,7 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
         ],
       };
     case 'po1_2999_6m_1w:po1-6m-1w':
+    case 'po1_2999_6m_1w':
       return {
         'name': 'Semiyearly',
         'benefits': [
@@ -33,6 +35,7 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
         ],
       };
     case 'po1_5999_12m_1w:po1-12m-1w':
+    case 'po1_5999_12m_1w':
       return {
         'name': 'Yearly',
         'benefits': [
