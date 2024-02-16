@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:power_one/Objects/PO1Score.dart';
 import 'package:provider/provider.dart';
+
 import './Objects/Point.dart';
 import 'Objects/Score/Score.dart';
 
@@ -51,7 +52,7 @@ class TrackerButton extends StatelessWidget {
           height: _boxSize,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
-              primary: color,
+              foregroundColor: color,
               shape: CircleBorder(),
               side: BorderSide(width: 2, color: color),
               textStyle: TextStyle(color: color),
