@@ -51,10 +51,10 @@ class AuthenticationService {
         }
       } else if (Platform.isIOS) {
         switch (e.code) {
-          case 'Error 17011':
+          case 'user-not-found':
             errorType = authProblems.UserNotFound;
             break;
-          case 'Error 17009':
+          case 'invalid-password':
             errorType = authProblems.PasswordNotValid;
             break;
           case 'Error 17020':
