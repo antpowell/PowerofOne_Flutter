@@ -36,12 +36,8 @@ class ScoreCardScreenWidget extends StatelessWidget {
   static final _fbdbService = FBDBService();
   @override
   Widget build(BuildContext context) {
-    void backButtonHandler() {
-      dev.log('ScoreCard back button engaged');
-
-      _user.setPlayerScore(Provider.of<PO1Score>(context, listen: false));
-
-      Dialogs.yesAbortDialogAction(context,
+    Future<DialogAction> showDialog() {
+      return Dialogs.yesAbortDialogAction(context,
           title: RichText(
             text: TextSpan(
               children: [
@@ -62,14 +58,29 @@ class ScoreCardScreenWidget extends StatelessWidget {
             ),
           ), approveFunction: () {
         _user.score.clear();
-        Navigator.pop(context);
       });
+    }
+
+    void backButtonHandler(bool didPop) async {
+      dev.log('ScoreCard back button engaged');
+      if (didPop) {
+        return;
+      }
+
+      _user.setPlayerScore(Provider.of<PO1Score>(context, listen: false));
+
+      final NavigatorState navigator = Navigator.of(context);
+
+      final DialogAction shouldPop = await showDialog();
+      if (shouldPop == DialogAction.abort) {
+        navigator.pop();
+      }
     }
 
     return PopScope(
       canPop: true,
-      onPopInvoked: (_) async {
-        backButtonHandler();
+      onPopInvoked: (didPop) async {
+        backButtonHandler(didPop);
       },
       child: Container(
         alignment: Alignment.center,

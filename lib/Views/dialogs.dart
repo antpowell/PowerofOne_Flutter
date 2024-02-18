@@ -20,6 +20,8 @@ class Dialogs {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
+        final NavigatorState navigator = Navigator.of(context);
+
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -34,14 +36,14 @@ class Dialogs {
                 PO1Button(
                   "Cancel",
                   onPress: () => {
-                    Navigator.pop(context),
+                    navigator.pop(),
                     disapproveFunction?.call(),
                   },
                 ),
                 PO1Button(
                   "OK",
                   onPress: () => {
-                    Navigator.pop(context),
+                    navigator.pop(),
                     approveFunction?.call(),
                   },
                 ),
