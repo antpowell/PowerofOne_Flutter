@@ -135,8 +135,9 @@ class ReportCard extends StatelessWidget {
       ),
     );
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) async {
         dev.log('back button disabled');
         Dialogs.okDialogAction(
           context,
@@ -144,7 +145,6 @@ class ReportCard extends StatelessWidget {
           body:
               'Great game but you can\'t go back \nJust start a new game with the \'New Game\' button',
         );
-        return false;
       },
       child: Scaffold(
         body: SafeArea(

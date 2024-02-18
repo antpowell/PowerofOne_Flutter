@@ -60,15 +60,15 @@ class PO1Button extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            displayIcon(),
             Text(
               label,
               style: TextStyle(fontSize: 14, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            displayIcon(),
           ],
         ),
-        onPressed: () => _onPress,
+        onPressed: () => _onPress!(),
         onLongPress: () => _onLongPress,
         style: OutlinedButton.styleFrom(
           side: BorderSide(

@@ -66,10 +66,10 @@ class ScoreCardScreenWidget extends StatelessWidget {
       });
     }
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (_) async {
         backButtonHandler();
-        return false;
       },
       child: Container(
         alignment: Alignment.center,
@@ -111,9 +111,7 @@ class ScoreCardScreenWidget extends StatelessWidget {
                 Container(
                   child: PO1Button(
                     'Back',
-                    onPress: () {
-                      backButtonHandler();
-                    },
+                    onPress: backButtonHandler,
                     onLeft: true,
                     icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
                   ),

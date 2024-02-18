@@ -3,6 +3,7 @@ import 'dart:developer' as dev;
 import 'dart:io' show Platform;
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class RevenueCatService {
@@ -46,6 +47,11 @@ class RevenueCatService {
       final Offering? current = offerings.current;
 
       return current == null ? [] : [current];
+    } on PlatformException catch (e) {
+      // TODO: implement
+      // logAndDisplayError(e)
+      dev.log('Purchase fetchOffers call failed with $e');
+      return [];
     } on Exception catch (e) {
       dev.log('Purchase fetchOffers call failed with $e');
       return [];
