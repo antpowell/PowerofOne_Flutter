@@ -184,11 +184,10 @@ class ReportCard extends StatelessWidget {
                 right: 10,
                 child: PO1Button(
                   "Feedback",
+                  // icon: Icon(Icons.note_alt_outlined, color: Colors.white),
                   onPress: () {
                     Navigator.pushNamed(context, FeedBack.id);
                   },
-                  icon:
-                      Icon(Icons.arrow_forward_ios_sharp, color: Colors.white),
                 ),
               ),
               // Positioned(

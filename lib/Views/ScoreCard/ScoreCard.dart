@@ -61,9 +61,9 @@ class ScoreCardScreenWidget extends StatelessWidget {
       });
     }
 
-    void backButtonHandler(bool didPop) async {
+    void backButtonHandler(bool? didPop) async {
       dev.log('ScoreCard back button engaged');
-      if (didPop) {
+      if (didPop != null && didPop) {
         return;
       }
 
@@ -72,13 +72,13 @@ class ScoreCardScreenWidget extends StatelessWidget {
       final NavigatorState navigator = Navigator.of(context);
 
       final DialogAction shouldPop = await showDialog();
-      if (shouldPop == DialogAction.abort) {
+      if (shouldPop == DialogAction.yes) {
         navigator.pop();
       }
     }
 
     return PopScope(
-      canPop: true,
+      canPop: false,
       onPopInvoked: (didPop) async {
         backButtonHandler(didPop);
       },
@@ -122,7 +122,9 @@ class ScoreCardScreenWidget extends StatelessWidget {
                 Container(
                   child: PO1Button(
                     'Back',
-                    onPress: backButtonHandler,
+                    onPress: () {
+                      backButtonHandler(null);
+                    },
                     onLeft: true,
                     icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
                   ),

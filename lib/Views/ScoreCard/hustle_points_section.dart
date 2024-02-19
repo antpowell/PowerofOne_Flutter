@@ -24,7 +24,7 @@ class HustlePointsSection extends StatelessWidget {
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
       crossAxisAlignment: WrapCrossAlignment.start,
-      spacing: 12,
+      spacing: 18,
       runSpacing: 10,
       direction: Axis.horizontal,
       children: _createSectionList(a),

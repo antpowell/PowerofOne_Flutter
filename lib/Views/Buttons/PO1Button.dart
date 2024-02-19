@@ -33,11 +33,11 @@ class PO1Button extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            displayIcon(),
             Text(
               label,
               style: TextStyle(color: Colors.white),
             ),
+            displayIcon(),
           ],
         ),
         onPressed: () => _onPress!(),

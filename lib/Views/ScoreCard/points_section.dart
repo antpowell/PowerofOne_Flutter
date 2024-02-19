@@ -28,7 +28,7 @@ class PointsSection extends StatelessWidget {
         ),
       );
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: _pointButtons,
       );
     }

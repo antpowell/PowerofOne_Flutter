@@ -23,16 +23,16 @@ enum SummerizedPoint { FG, FT }
 List<String> individualPoint = ['1PT', '2PTs', '3PTs'];
 
 const TextStyle kLabelTextStyle = TextStyle(
-  fontSize: 10,
+  fontSize: 14,
   color: Colors.white,
 );
 
 const TextStyle kScoreBoardLabelsTextStyle = TextStyle(
-  fontSize: 12,
+  fontSize: 16,
   color: Colors.white,
 );
 const TextStyle kScoreBoardPointsTextStyle = TextStyle(
-  fontSize: 32,
+  fontSize: 38,
   color: Colors.white,
 );
 

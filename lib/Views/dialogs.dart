@@ -16,7 +16,8 @@ class Dialogs {
     Function? approveFunction,
     Function? disapproveFunction,
   }) async {
-    final action = await showDialog(
+    DialogAction action = DialogAction.abort;
+    await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
@@ -38,6 +39,7 @@ class Dialogs {
                   onPress: () => {
                     navigator.pop(),
                     disapproveFunction?.call(),
+                    action = DialogAction.abort,
                   },
                 ),
                 PO1Button(
@@ -45,6 +47,7 @@ class Dialogs {
                   onPress: () => {
                     navigator.pop(),
                     approveFunction?.call(),
+                    action = DialogAction.yes,
                   },
                 ),
               ],
@@ -53,7 +56,7 @@ class Dialogs {
         );
       },
     );
-    return action ?? DialogAction.abort;
+    return action;
   }
 
   static Future<DialogAction> okDialogAction(
