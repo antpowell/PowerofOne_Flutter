@@ -1,16 +1,11 @@
-# power_one
+# Power of One Basketball
 
-A new Flutter project.
+![Power Of One Basketball app running on iOS](https://raw.githubusercontent.com/antpowell/PowerofOne_Flutter/master/assets/images/POWER_OF_1_SPORT_LO-FF.png)
 
-## Getting Started
+Cross platform 📱mobile application for tracking individual or team stats in partnership with the [Power of One Sports](https://www.powerof1basketball.com/) organization.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+#### Development Team
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Development by Anthony Powell, CEO and Founder of GFR (Ground Floor Revolution) Software Studio.

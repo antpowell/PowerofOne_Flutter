@@ -19,5 +19,8 @@
     },
     "cSpell.words": [
         "cocoapods"
-    ]
+    ],
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    }
 }

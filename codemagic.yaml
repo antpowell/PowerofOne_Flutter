@@ -1,9 +1,10 @@
 workflows:
-  android-build-workflow:
-    name: Android Build Workflow
+  flutter-android-build-workflow:
+    name: Flutter Android Build Workflow
     instance_type: mac_mini_m1
     max_build_duration: 30
-    environment:
+    
+environment:
       java: 17
       android_signing:
         - power_of_one_android_key
@@ -44,10 +45,12 @@ workflows:
       - flutter_drive.log
 
 
-  android-publish-workflow:
-    name: Android Publishing Workflow
+  flutter-deploy-to-android-play-console:
+    name: Deploy Flutter AAB to Google Play Console
     instance_type: mac_mini_m1
     max_build_duration: 30
+    triggering:
+      workflow_run:
     triggering:
       events:
         - tag
