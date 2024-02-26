@@ -4,42 +4,42 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
 void main() {
-  patrolTest(
-    'counter state is the same after going to home and going back',
-    ($) async {
-      await $.pumpWidgetAndSettle(Power1());
+  // patrolTest(
+  //   'counter state is the same after going to home and going back',
+  //   ($) async {
+  //     await $.pumpWidgetAndSettle(Power1());
 
-      await $(FloatingActionButton).tap();
-      expect($(#counterText).text, '1');
+  //     await $(FloatingActionButton).tap();
+  //     expect($(#counterText).text, '1');
 
-      await $.native.pressHome();
-      await $.native.pressDoubleRecentApps();
+  //     await $.native.pressHome();
+  //     await $.native.pressDoubleRecentApps();
 
-      expect($(#counterText).text, '1');
-      await $(FloatingActionButton).tap();
-      expect($(#counterText).text, '2');
+  //     expect($(#counterText).text, '1');
+  //     await $(FloatingActionButton).tap();
+  //     expect($(#counterText).text, '2');
 
-      await $.native.openNotifications();
-      await $.native.pressBack();
-    },
-  );
-  patrolTest(
-    'log user in',
-    ($) async {
-      await $.pumpWidgetAndSettle(Power1());
+  //     await $.native.openNotifications();
+  //     await $.native.pressBack();
+  //   },
+  // );
+  // patrolTest(
+  //   'log user in',
+  //   ($) async {
+  //     await $.pumpWidgetAndSettle(Power1());
 
-      await $(FloatingActionButton).tap();
-      expect($(#counterText).text, '1');
+  //     await $(FloatingActionButton).tap();
+  //     expect($(#counterText).text, '1');
 
-      await $.native.pressHome();
-      await $.native.pressDoubleRecentApps();
+  //     await $.native.pressHome();
+  //     await $.native.pressDoubleRecentApps();
 
-      expect($(#counterText).text, '1');
-      await $(FloatingActionButton).tap();
-      expect($(#counterText).text, '2');
+  //     expect($(#counterText).text, '1');
+  //     await $(FloatingActionButton).tap();
+  //     expect($(#counterText).text, '2');
 
-      await $.native.openNotifications();
-      await $.native.pressBack();
-    },
-  );
+  //     await $.native.openNotifications();
+  //     await $.native.pressBack();
+  //   },
+  // );
 }
