@@ -1,23 +1,42 @@
-workflows:
-  flutter-android-build-workflow:
-    name: Flutter Android Build Workflow
+definitions:
+  instance_setup:: &instance_setup
     instance_type: mac_mini_m1
     max_build_duration: 30
-    
-environment:
+    environment:
       java: 17
+      flutter: stable
       android_signing:
         - power_of_one_android_key
       groups:
         - google_credentials
       vars:
-        PACKAGE_NAME: 'com.power_of_one.basketball'
-        GOOGLE_PLAY_TRACK: 'internal'
-      flutter: stable
+        PACKAGE_NAME: "com.power_of_one.basketball"
+        GOOGLE_PLAY_TRACK: "internal"
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.powerofone.basketball
+      xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
+      cocoapods: default
     cache:
       cache_paths:
-        - $FLUTTER_ROOT/.pub-cache          # Dart cache
-        - $HOME/.gradle/caches              # Gradle cache
+        - $FLUTTER_ROOT/.pub-cache # Dart cache
+        - $HOME/.gradle/caches # Gradle cache
+  joint_publishing: &joint_publishing
+  test_all: &test_all
+    - name: Analyze App
+      script: flutter analyze
+      ignore_failure: true
+    - name: Unit Test
+      script: flutter test
+    - name: Visual Parity Test
+      script: #TODO add vp test
+    - name: Functional Test
+      script: #TODO add functional test
+
+workflows:
+  flutter-android-build-workflow:
+    name: Flutter Android Build Workflow
+    <<: *instance_setup
     scripts:
       - name: Set up local.properties
         script: |
@@ -25,14 +44,6 @@ environment:
       - name: Get Flutter packages
         script: |
           flutter packages pub get
-      - name: Flutter analyze
-        script: |
-          flutter analyze
-        ignore_failure: true
-      # - name: Flutter unit tests
-      #   script: |
-      #     flutter test
-      #   ignore_failure: true
       - name: Build AAB with Flutter
         script: |
           BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
@@ -44,31 +55,17 @@ environment:
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
 
-
   flutter-deploy-to-android-play-console:
     name: Deploy Flutter AAB to Google Play Console
-    instance_type: mac_mini_m1
-    max_build_duration: 30
-    triggering:
-      workflow_run:
+    # triggering:
+    #   events:
+
+    # when:
+
     triggering:
       events:
         - tag
       cancel_previous_builds: true
-    environment:
-      java: 17
-      android_signing:
-        - power_of_one_android_key
-      groups:
-        - google_credentials
-      vars:
-        PACKAGE_NAME: 'com.power_of_one.basketball'
-        GOOGLE_PLAY_TRACK: 'internal'
-      flutter: stable
-    cache:
-      cache_paths:
-        - $FLUTTER_ROOT/.pub-cache          # Dart cache
-        - $HOME/.gradle/caches              # Gradle cache
     scripts:
       - name: Set up local.properties
         script: |
@@ -76,14 +73,6 @@ environment:
       - name: Get Flutter packages
         script: |
           flutter packages pub get
-      - name: Flutter analyze
-        script: |
-          flutter analyze
-        ignore_failure: true
-      # - name: Flutter unit tests
-      #   script: |
-      #     flutter test
-      #   ignore_failure: true
       - name: Build AAB with Flutter
         script: |
           BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
@@ -106,20 +95,9 @@ environment:
         track: $GOOGLE_PLAY_TRACK
         submit_as_draft: true
 
-
   ios-build-workflow:
     name: iOS Build Workflow
-    instance_type: mac_mini_m1
-    max_build_duration: 30
-    integrations:
-      app_store_connect: Power of One
-    environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.powerofone.basketball
-      flutter: stable
-      xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
-      cocoapods: default
+    <<: *instance_setup
     scripts:
       - name: Set up code signing settings on Xcode project
         script: |
@@ -130,14 +108,6 @@ environment:
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
-      - name: Flutter analyze
-        script: |
-          flutter analyze
-        ignore_failure: true
-      # - name: Flutter unit tests
-      #   script: |
-      #     flutter test
-      #   ignore_failure: true
       - name: Flutter build ipa and automatic versioning
         script: |
           BUILD_NUMBER=$(($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1))
@@ -159,7 +129,7 @@ environment:
           failure: false # To not receive a notification when a build fails
       app_store_connect:
         auth: integration
-        
+
         # Configuration related to TestFlight (optional)
         # Note: This action is performed during post-processing.
         submit_to_testflight: false
@@ -223,7 +193,7 @@ environment:
           failure: false # To not receive a notification when a build fails
       app_store_connect:
         auth: integration
-        
+
         # Configuration related to TestFlight (optional)
         # Note: This action is performed during post-processing.
         submit_to_testflight: true
