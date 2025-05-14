@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Views/Help/helpPage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:power_one/Views/ReportCard/ReportCard.dart';
 
 class Loadingscreen extends StatelessWidget {
   Widget build(BuildContext context) {

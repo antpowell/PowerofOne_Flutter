@@ -69,9 +69,8 @@ class Power1 extends StatelessWidget {
         title: 'Power of 1 Basketball',
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff33333D),
-          dialogBackgroundColor: Color(0xff33333D),
           colorScheme:
-              ColorScheme.fromSwatch(backgroundColor: Color(0xff33333D)),
+              ColorScheme.fromSwatch(backgroundColor: Color(0xff33333D)), dialogTheme: DialogThemeData(backgroundColor: Color(0xff33333D)),
         ),
         // initialRoute: '/',
         routes: {

@@ -14,11 +14,11 @@ class PlayWidgets extends StatelessWidget {
             height: 80,
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: MaterialStateProperty.all(CircleBorder()),
+                shape: WidgetStateProperty.all(CircleBorder()),
                 textStyle:
-                    MaterialStateProperty.all(TextStyle(color: Colors.green)),
-                overlayColor: MaterialStateProperty.all(Colors.green),
-                side: MaterialStateProperty.all(
+                    WidgetStateProperty.all(TextStyle(color: Colors.green)),
+                overlayColor: WidgetStateProperty.all(Colors.green),
+                side: WidgetStateProperty.all(
                     BorderSide(width: 2, color: Colors.green)),
               ),
               child: Text(activity.title),

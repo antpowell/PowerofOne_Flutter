@@ -88,8 +88,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
       },
       showSelectedIcon: false,
       style: ButtonStyle(
-        backgroundColor: MaterialStateColor.resolveWith(
-          (state) => state.contains(MaterialState.selected)
+        backgroundColor: WidgetStateColor.resolveWith(
+          (state) => state.contains(WidgetState.selected)
               ? Colors.deepPurpleAccent
               : Colors.transparent,
         ),

@@ -1,8 +1,4 @@
-import 'dart:ui';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:power_one/Services/authentication_service.dart';
 import 'package:power_one/Views/Buttons/PO1Button.dart';
 import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
@@ -12,7 +8,6 @@ import 'dart:developer' as dev;
 
 import 'package:power_one/models/PO1User.dart';
 import 'package:provider/provider.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Register extends StatefulWidget {
   static final String id = 'register_screen';
@@ -33,7 +28,34 @@ class _RegisterState extends State<Register> {
   final FocusNode _passwordFocus = FocusNode();
 
   PO1User _currentUser = PO1User();
+  // Email Regex: RegExp(r"^$|^.*@.*\..*$")
+  // This pattern matches either:
+  // 1. An empty string (^$), OR
+  // 2. Any string that contains an @ symbol followed by at least one character,
+  //    then a dot, then at least one more character
+  //
+  // Valid examples:
+  //   - "" (empty string)
+  //   - "user@example.com"
+  //   - "name@domain.co.uk"
+  //
+  // Invalid examples:
+  //   - "userexample.com" (missing @)
+  //   - "user@domain" (missing dot)
+  //   - "user@.com" (nothing between @ and dot)
   RegExp emailExp = RegExp(r"^$|^.*@.*\..*$");
+  // Password Regex: RegExp(r'^.*(?=.{8,}).*$')
+  // This pattern uses a positive lookahead (?=...) to ensure:
+  // - The password is at least 8 characters long
+  //
+  // Valid examples:
+  //   - "password123"
+  //   - "securePass"
+  //   - "12345678"
+  //
+  // Invalid examples:
+  //   - "short" (less than 8 characters)
+  //   - "pwd" (less than 8 characters)
   RegExp passwordExp = RegExp(r'^.*(?=.{8,}).*$');
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

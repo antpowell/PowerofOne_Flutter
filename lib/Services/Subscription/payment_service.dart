@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -48,8 +46,7 @@ class IAPConnection {
       new ObserverList<Function>();
 
   /// view of the app will subscribe to this to get errors of the purchase
-  ObserverList<Function> _errorListeners =
-      new ObserverList<Function>();
+  ObserverList<Function> _errorListeners = new ObserverList<Function>();
 
   /// logged in user's premium status
   bool _isProUser = false;

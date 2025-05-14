@@ -1,0 +1,2 @@
+C:/Users/powel/PowerofOne_Flutter/android/app/.cxx/Debug/25m6324o/x86/CMakeFiles/edit_cache.dir
+C:/Users/powel/PowerofOne_Flutter/android/app/.cxx/Debug/25m6324o/x86/CMakeFiles/rebuild_cache.dir
