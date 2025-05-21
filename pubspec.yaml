@@ -51,13 +51,13 @@ dependencies:
   animations: ^2.0.1
   styled_widget: ^0.4.1
   introduction_screen: ^3.1.4
-  dots_indicator: ^2.0.0
+  dots_indicator: ^4.0.1
   crypto: ^3.0.1
 
   #In app purchases
   in_app_purchase: ^3.1.12
-  purchases_flutter: ^6.6.0
-  flutter_hooks: ^0.20.4
+  purchases_flutter: ^8.8.1
+  flutter_hooks: ^0.21.2
   flutter_animate: ^4.2.0+1
   flutter_keyboard_visibility: ^6.0.0
 

@@ -1,7 +1,9 @@
 import 'dart:developer' as dev;
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:power_one/Objects/PO1Score.dart';
@@ -19,7 +21,7 @@ import 'package:provider/provider.dart';
 
 import 'models/PO1User.dart';
 import 'Views/Purchase_Screen/purchase.screen.dart';
-import 'firebase_options.dart';
+// import 'firebase_options.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,7 +72,8 @@ class Power1 extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff33333D),
           colorScheme:
-              ColorScheme.fromSwatch(backgroundColor: Color(0xff33333D)), dialogTheme: DialogThemeData(backgroundColor: Color(0xff33333D)),
+              ColorScheme.fromSwatch(backgroundColor: Color(0xff33333D)),
+          dialogTheme: DialogThemeData(backgroundColor: Color(0xff33333D)),
         ),
         // initialRoute: '/',
         routes: {

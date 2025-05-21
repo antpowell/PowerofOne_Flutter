@@ -81,7 +81,13 @@ class AuthenticationService {
       // await revenueCatLogin();
       return '$email account created';
     } on FirebaseAuthException catch (e) {
-      authProblems errorType;
+      authProblems
+
+          /// The `errorType` variable in the `AuthenticationService` class is used to determine the specific type
+          /// of authentication problem that occurred during the login or registration process. It is an enum type
+          /// `authProblems` that defines different types of authentication issues such as UserNotFound,
+          /// PasswordNotValid, NetworkError, WeakPasswordError, and EmailInUseError.
+          errorType;
       if (Platform.isAndroid) {
         switch (e.message) {
           case ' The email address is already in use by another account.':
