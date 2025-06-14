@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:power_one/Objects/Point.dart';
+import 'package:power_of_one_basketball/Objects/Point.dart';
 
 abstract class IScore {
   int _pos = 0;

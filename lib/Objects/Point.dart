@@ -1,10 +1,10 @@
-import 'package:power_one/models/PO1Point.dart';
+import 'package:power_of_one_basketball/models/PO1Point.dart';
 
 import 'Score/Score.dart';
 
 class Point extends IScore {
   Point(EPoint title, [int pos = 0, int neg = 0])
-      : super(title.translatedName, pos, neg);
+    : super(title.translatedName, pos, neg);
 
   // @override
   // Point miss() {

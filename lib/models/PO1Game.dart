@@ -1,7 +1,7 @@
 import 'dart:developer' as dev;
 
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Services/core_services.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
 
 class PO1Game {
   PO1User _user = PO1User();
@@ -12,9 +12,7 @@ class PO1Game {
         ? playerName.trim()
         : _user.teamName.trim();
     Map<String, dynamic> gameData = {
-      _user.emailSignature(): {
-        name: _user.score.toJSON(),
-      }
+      _user.emailSignature(): {name: _user.score.toJSON()},
     };
     dev.log(gameData.toString());
     return gameData;

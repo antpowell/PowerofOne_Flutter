@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Data/constants.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_of_one_basketball/Data/constants.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
 
 class FormFieldBuilder extends StatelessWidget {
   final String? label;
@@ -27,9 +27,7 @@ class FormFieldBuilder extends StatelessWidget {
         keyboardType: keyboard,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(
-            color: Colors.white,
-          ),
+          labelStyle: TextStyle(color: Colors.white),
         ),
         validator: (String? value) {
           if (value != null && value.isEmpty) {

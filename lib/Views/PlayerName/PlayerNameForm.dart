@@ -1,15 +1,15 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:power_one/main.dart';
-import 'package:power_one/models/PO1PlayerSkill.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Services/core_services.dart';
-import 'package:power_one/Services/database_service.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/Purchase_Screen/purchase.screen.dart';
-import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
+import 'package:power_of_one_basketball/main.dart';
+import 'package:power_of_one_basketball/models/PO1PlayerSkill.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Services/authentication_service.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
+import 'package:power_of_one_basketball/Services/database_service.dart';
+import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/Purchase_Screen/purchase.screen.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/ScoreCard.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -35,19 +35,12 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
         border: InputBorder.none,
 
         hintText: 'Enter your ${isPlayer ? "athlete" : "team"}\'s name',
-        hintStyle: TextStyle(
-          color: Colors.grey[400],
-        ),
+        hintStyle: TextStyle(color: Colors.grey[400]),
         // labelText: "Player Name",
-        labelStyle: TextStyle(
-          color: Colors.white,
-        ),
+        labelStyle: TextStyle(color: Colors.white),
       ),
       textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 24,
-        color: Colors.white,
-      ),
+      style: TextStyle(fontSize: 24, color: Colors.white),
       validator: (value) {
         if (value == null) {
           return '${isPlayer ? "Player" : "Team"} Name is required';
@@ -69,14 +62,17 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
       _user.playerSkill = PO1PlayerSkill.elementary;
     }
 
-    PO1PlayerSkill.values
-        .forEach((e) => segments.add(ButtonSegment<PO1PlayerSkill>(
-              value: e,
-              label: Text(
-                e.name.toUpperCase(),
-                style: TextStyle(color: Colors.white),
-              ),
-            )));
+    PO1PlayerSkill.values.forEach(
+      (e) => segments.add(
+        ButtonSegment<PO1PlayerSkill>(
+          value: e,
+          label: Text(
+            e.name.toUpperCase(),
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
 
     return SegmentedButton<PO1PlayerSkill>(
       segments: segments,
@@ -100,35 +96,37 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   Widget? _buildToggleSection(bool isPlayer) {
     if (!isPlayer) return null;
 
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: Center(
-          child: Text(
-            "Select your player's level",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Center(
+            child: Text(
+              "Select your player's level",
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),
         ),
-      ),
-      Center(
-        child: _playerSkillsSegmentedButton(isPlayer),
-      ),
-    ]);
+        Center(child: _playerSkillsSegmentedButton(isPlayer)),
+      ],
+    );
   }
 
   Widget _buildHeader(bool isPlayer) {
     return Text(
       "${isPlayer ? 'Player' : "Team"} Name",
       style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.w300, fontSize: 58),
+        color: Colors.white,
+        fontWeight: FontWeight.w300,
+        fontSize: 58,
+      ),
     );
   }
 
-  Widget _buildButtonGroup(
-      {required Function togglePlayerTeamState, required bool isPlayer}) {
+  Widget _buildButtonGroup({
+    required Function togglePlayerTeamState,
+    required bool isPlayer,
+  }) {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
@@ -152,7 +150,6 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
               //   },
               // ),
               // !! DEV only
-
               Container(
                 child: MaterialButton(
                   onPressed: () async {
@@ -161,10 +158,11 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
                       listen: false,
                     ).signOut();
                     Navigator.pushAndRemoveUntil(
-                        // user AuthWrapper in stead of LoginForm
-                        context,
-                        MaterialPageRoute(builder: (builder) => AuthWrapper()),
-                        (route) => false);
+                      // user AuthWrapper in stead of LoginForm
+                      context,
+                      MaterialPageRoute(builder: (builder) => AuthWrapper()),
+                      (route) => false,
+                    );
                   },
                   child: Text(
                     'Sign Out',
@@ -218,11 +216,7 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 600),
-        child: Column(
-          children: [
-            _buildNameField(isPlayer),
-          ],
-        ),
+        child: Column(children: [_buildNameField(isPlayer)]),
       ),
     );
   }
@@ -241,7 +235,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
               child: SingleChildScrollView(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight - (pageMargin * 2)),
+                    minHeight: constraints.maxHeight - (pageMargin * 2),
+                  ),
                   child: Form(
                     key: _formKey,
                     child: Flex(

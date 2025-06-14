@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
 import 'package:provider/provider.dart';
 
 import './Objects/Point.dart';
@@ -31,10 +31,7 @@ class TrackerButton extends StatelessWidget {
             ],
           )
         : buildTrackerButton(
-            label: Text(
-              _activity.title,
-              style: TextStyle(fontSize: 18),
-            ),
+            label: Text(_activity.title, style: TextStyle(fontSize: 18)),
             color: Colors.white,
             onPress: Provider.of<PO1Score>(context).made,
             pointInstance: _activity,
@@ -72,10 +69,12 @@ class TrackerButton extends StatelessWidget {
       child: label,
       style: OutlinedButton.styleFrom(
         shape: CircleBorder(),
-        minimumSize:
-            color == Colors.white ? Size.fromRadius(38) : Size.fromRadius(30),
-        maximumSize:
-            color == Colors.white ? Size.fromRadius(48) : Size.fromRadius(40),
+        minimumSize: color == Colors.white
+            ? Size.fromRadius(38)
+            : Size.fromRadius(30),
+        maximumSize: color == Colors.white
+            ? Size.fromRadius(48)
+            : Size.fromRadius(40),
         foregroundColor: color,
         side: BorderSide(color: color),
       ),

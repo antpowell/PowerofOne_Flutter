@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Objects/Point.dart';
+import 'package:power_of_one_basketball/Data/constants.dart';
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Objects/Point.dart';
 import '../../TrackerButton.dart';
 import 'package:provider/provider.dart';
 
 class PointsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Iterable<Point> pointsList =
-        context.select((PO1Score a) => a.pointsMap.values);
+    final Iterable<Point> pointsList = context.select(
+      (PO1Score a) => a.pointsMap.values,
+    );
 
     Widget pointsButtonsGroup() {
       List<Widget> _pointButtons = [];
@@ -18,10 +19,7 @@ class PointsSection extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                element.title,
-                style: kLabelTextStyle,
-              ),
+              Text(element.title, style: kLabelTextStyle),
               TrackerButton(element),
             ],
           ),

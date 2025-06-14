@@ -1,6 +1,6 @@
-import 'package:power_one/Data/constants.dart';
-import 'package:power_one/models/PO1Level.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_of_one_basketball/Data/constants.dart';
+import 'package:power_of_one_basketball/models/PO1Level.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
 
 class PO1Grade {
   static final Map<String, Set<Map<PO1Levels, num>>> grade = {
@@ -55,23 +55,23 @@ class PO1Grade {
     return (pO1Score > 8)
         ? GRADE.A
         : (pO1Score > 6)
-            ? GRADE.B
-            : (pO1Score > 4)
-                ? GRADE.C
-                : (pO1Score > 2)
-                    ? GRADE.D
-                    : GRADE.F;
+        ? GRADE.B
+        : (pO1Score > 4)
+        ? GRADE.C
+        : (pO1Score > 2)
+        ? GRADE.D
+        : GRADE.F;
   }
 
   static String calculateGrade(int pO1Score) {
     return (pO1Score >= gradeConverterByPlayerLevel()['A'])
         ? 'A'
         : (pO1Score >= gradeConverterByPlayerLevel()['B'])
-            ? 'B'
-            : (pO1Score >= gradeConverterByPlayerLevel()['C'])
-                ? 'C'
-                : (pO1Score >= gradeConverterByPlayerLevel()['D'])
-                    ? 'D'
-                    : 'F';
+        ? 'B'
+        : (pO1Score >= gradeConverterByPlayerLevel()['C'])
+        ? 'C'
+        : (pO1Score >= gradeConverterByPlayerLevel()['D'])
+        ? 'D'
+        : 'F';
   }
 }

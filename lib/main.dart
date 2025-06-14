@@ -6,18 +6,19 @@ import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
-import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Services/core_services.dart';
-import 'package:power_one/Views/FeedBack/FeedBack.dart';
-import 'package:power_one/Views/Login/LoginForm.dart';
-import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
-import 'package:power_one/Views/Register/register.dart';
-import 'package:power_one/Views/ReportCard/ReportCard.dart';
-import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
 import 'package:provider/provider.dart';
+
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_of_one_basketball/Services/authentication_service.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
+import 'package:power_of_one_basketball/Views/FeedBack/FeedBack.dart';
+import 'package:power_of_one_basketball/Views/Login/LoginForm.dart';
+import 'package:power_of_one_basketball/Views/PlayerName/PlayerNameForm.dart';
+import 'package:power_of_one_basketball/Views/Register/register.dart';
+import 'package:power_of_one_basketball/Views/ReportCard/ReportCard.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/ScoreCard.dart';
+import 'package:power_of_one_basketball/Views/TermsAndConditions/TermsAndConditions.dart';
 
 import 'models/PO1User.dart';
 import 'Views/Purchase_Screen/purchase.screen.dart';
@@ -28,11 +29,11 @@ Future main() async {
 
   await RevenueCatService().init();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
   runApp(Power1());
 }
 
@@ -49,7 +50,8 @@ class Power1 extends StatelessWidget {
         //   lazy: false,
         // ),
         ChangeNotifierProvider<PlayerOrTeamService>(
-            create: (BuildContext create) => PlayerOrTeamService()),
+          create: (BuildContext create) => PlayerOrTeamService(),
+        ),
         ChangeNotifierProvider<PO1Score>(
           create: (BuildContext context) => PO1Score(),
         ),
@@ -71,8 +73,9 @@ class Power1 extends StatelessWidget {
         title: 'Power of 1 Basketball',
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff33333D),
-          colorScheme:
-              ColorScheme.fromSwatch(backgroundColor: Color(0xff33333D)),
+          colorScheme: ColorScheme.fromSwatch(
+            backgroundColor: Color(0xff33333D),
+          ),
           dialogTheme: DialogThemeData(backgroundColor: Color(0xff33333D)),
         ),
         // initialRoute: '/',

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_of_one_basketball/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 enum authProblems {
@@ -19,11 +19,15 @@ class AuthenticationService {
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
 
-  Future<String> login(
-      {required String email, required String password}) async {
+  Future<String> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       // await revenueCatLogin();
       return '$email signed in';
     } on FirebaseAuthException catch (e) {
@@ -71,8 +75,10 @@ class AuthenticationService {
     }
   }
 
-  Future<String?> register(
-      {required String email, required String password}) async {
+  Future<String?> register({
+    required String email,
+    required String password,
+  }) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -82,12 +88,11 @@ class AuthenticationService {
       return '$email account created';
     } on FirebaseAuthException catch (e) {
       authProblems
-
-          /// The `errorType` variable in the `AuthenticationService` class is used to determine the specific type
-          /// of authentication problem that occurred during the login or registration process. It is an enum type
-          /// `authProblems` that defines different types of authentication issues such as UserNotFound,
-          /// PasswordNotValid, NetworkError, WeakPasswordError, and EmailInUseError.
-          errorType;
+      /// The `errorType` variable in the `AuthenticationService` class is used to determine the specific type
+      /// of authentication problem that occurred during the login or registration process. It is an enum type
+      /// `authProblems` that defines different types of authentication issues such as UserNotFound,
+      /// PasswordNotValid, NetworkError, WeakPasswordError, and EmailInUseError.
+      errorType;
       if (Platform.isAndroid) {
         switch (e.message) {
           case ' The email address is already in use by another account.':
@@ -143,7 +148,7 @@ class AuthenticationService {
     }
   }
 
-// TODO1: create a forgot password function that follows this functionality (https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email)
+  // TODO1: create a forgot password function that follows this functionality (https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email)
   Future<String?> sendPasswordResetFor({required String email}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);

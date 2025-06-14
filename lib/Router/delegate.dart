@@ -1,13 +1,13 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:power_one/Views/FeedBack/FeedBack.dart';
-// import 'package:power_one/Views/Help/helpPage.dart';
-// import 'package:power_one/Views/Login/LoginForm.dart';
-// import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
-// import 'package:power_one/Views/Register/register.dart';
-// import 'package:power_one/Views/ReportCard/ReportCard.dart';
-// import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-// import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
+// import 'package:power_of_one_basketball/Views/FeedBack/FeedBack.dart';
+// import 'package:power_of_one_basketball/Views/Help/helpPage.dart';
+// import 'package:power_of_one_basketball/Views/Login/LoginForm.dart';
+// import 'package:power_of_one_basketball/Views/PlayerName/PlayerNameForm.dart';
+// import 'package:power_of_one_basketball/Views/Register/register.dart';
+// import 'package:power_of_one_basketball/Views/ReportCard/ReportCard.dart';
+// import 'package:power_of_one_basketball/Views/ScoreCard/ScoreCard.dart';
+// import 'package:power_of_one_basketball/Views/TermsAndConditions/TermsAndConditions.dart';
 
 // enum routes { Login }
 

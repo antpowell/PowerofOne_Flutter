@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
-import 'package:power_one/Views/TermsAndConditions/TermsAndConditions.dart';
-import 'package:power_one/Views/dialogs.dart';
+import 'package:power_of_one_basketball/Services/authentication_service.dart';
+import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/PlayerName/PlayerNameForm.dart';
+import 'package:power_of_one_basketball/Views/TermsAndConditions/TermsAndConditions.dart';
+import 'package:power_of_one_basketball/Views/dialogs.dart';
 import 'dart:developer' as dev;
 
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
 import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
@@ -72,9 +72,7 @@ class _RegisterState extends State<Register> {
       focusNode: _emailFocus,
       decoration: InputDecoration(
         labelText: 'email',
-        labelStyle: TextStyle(
-          color: Colors.white,
-        ),
+        labelStyle: TextStyle(color: Colors.white),
       ),
       validator: (String? value) {
         if (value != null && value.isEmpty) {
@@ -148,9 +146,7 @@ class _RegisterState extends State<Register> {
       focusNode: _passwordFocus,
       decoration: InputDecoration(
         labelText: 'password',
-        labelStyle: TextStyle(
-          color: Colors.white,
-        ),
+        labelStyle: TextStyle(color: Colors.white),
       ),
       obscureText: true,
       validator: (String? value) {
@@ -167,19 +163,22 @@ class _RegisterState extends State<Register> {
       },
       onSaved: (String? newValue) async {
         String? message = await context.read<AuthenticationService>().register(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim(),
-            );
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
         if (message != '${_emailController.text.trim()} account created') {
           Dialogs.okDialogAction(
             context,
             title: 'ERROR: Something went wrong!',
-            body: message ??
+            body:
+                message ??
                 "message was not found when registering user from Register Screen.\nAccount should have been created.",
           );
         } else {
-          dev.log(message ??
-              "message was not found when registering user from Register Screen");
+          dev.log(
+            message ??
+                "message was not found when registering user from Register Screen",
+          );
           // LogInResult loginResults = await context
           //     .read<InnAppPurchaseService>()
           //     .logIn(context.read<User>().uid);
@@ -207,8 +206,10 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _buildButtonGroup() {
-    final _authService =
-        Provider.of<AuthenticationService>(context, listen: false);
+    final _authService = Provider.of<AuthenticationService>(
+      context,
+      listen: false,
+    );
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -216,17 +217,18 @@ class _RegisterState extends State<Register> {
           GestureDetector(
             child: Text(
               'Sign in instead ',
-              style: TextStyle(
-                color: Colors.blue,
-              ),
+              style: TextStyle(color: Colors.blue),
             ),
             onTap: () {
               Navigator.pop(context);
             },
           ),
-          PO1Button('Sign Up', onPress: () {
-            _formKey.currentState!.save();
-          }),
+          PO1Button(
+            'Sign Up',
+            onPress: () {
+              _formKey.currentState!.save();
+            },
+          ),
         ],
       ),
     );
@@ -242,11 +244,7 @@ class _RegisterState extends State<Register> {
           key: _formKey,
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildLogo(),
-              _buildForm(),
-              _buildTNDText(),
-            ],
+            children: [_buildLogo(), _buildForm(), _buildTNDText()],
           ),
         ),
       ),

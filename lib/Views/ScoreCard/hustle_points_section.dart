@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:power_one/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
 
 import '../../TrackerButton.dart';
 
@@ -8,11 +8,9 @@ class HustlePointsSection extends StatelessWidget {
   final List<Widget> sectionList = [];
 
   _createSectionList(PO1Score activities) {
-    activities.hustlePointsMap.values.forEach(
-      (element) {
-        sectionList.add(TrackerButton(element));
-      },
-    );
+    activities.hustlePointsMap.values.forEach((element) {
+      sectionList.add(TrackerButton(element));
+    });
     return sectionList;
   }
 

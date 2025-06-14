@@ -2,11 +2,11 @@ import 'dart:developer' as dev;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Services/authentication_service.dart';
-import 'package:power_one/Views/PlayerName/PlayerNameForm.dart';
-import 'package:power_one/Views/Register/register.dart';
-import 'package:power_one/Views/dialogs.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Services/authentication_service.dart';
+import 'package:power_of_one_basketball/Views/PlayerName/PlayerNameForm.dart';
+import 'package:power_of_one_basketball/Views/Register/register.dart';
+import 'package:power_of_one_basketball/Views/dialogs.dart';
 import 'package:provider/provider.dart';
 
 class LoginFormScreen extends StatefulWidget {
@@ -46,9 +46,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       focusNode: _emailFocus,
       decoration: InputDecoration(
         labelText: 'email',
-        labelStyle: TextStyle(
-          color: Colors.white,
-        ),
+        labelStyle: TextStyle(color: Colors.white),
       ),
       validator: (String? value) {
         if (value != null && value.isEmpty) {
@@ -75,12 +73,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 600),
-        child: Column(
-          children: [
-            _buildEmail(),
-            _buildPassword(),
-          ],
-        ),
+        child: Column(children: [_buildEmail(), _buildPassword()]),
       ),
     );
   }
@@ -96,9 +89,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       focusNode: _passwordFocus,
       decoration: InputDecoration(
         labelText: 'password',
-        labelStyle: TextStyle(
-          color: Colors.white,
-        ),
+        labelStyle: TextStyle(color: Colors.white),
       ),
       obscureText: true,
       validator: (String? value) {
@@ -117,9 +108,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       },
       onSaved: (String? newValue) async {
         String message = await context.read<AuthenticationService>().login(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim(),
-            );
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
         if (message != '${_emailController.text.trim()} signed in') {
           Dialogs.okDialogAction(
             context,
@@ -129,7 +120,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         } else {
           dev.log(message);
           Navigator.pushNamedAndRemoveUntil(
-              context, PlayerNameForm.id, (route) => false);
+            context,
+            PlayerNameForm.id,
+            (route) => false,
+          );
         }
       },
     );
@@ -144,16 +138,16 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         minHeight: 50,
       ),
       child: Center(
-        child: Image(
-          image: AssetImage('assets/images/POWER_OF_1_SPORT_LO-FF.png'),
-        ),
+        child: Image.asset('assets/images/POWER_OF_1_SPORT_LO-FF.png'),
       ),
     );
   }
 
   Widget _buildButtonGroup() {
-    final _authService =
-        Provider.of<AuthenticationService>(context, listen: false);
+    final _authService = Provider.of<AuthenticationService>(
+      context,
+      listen: false,
+    );
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -161,8 +155,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           TextButton(
             child: Text(
               'New User? Sign Up!',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w200,
+              ),
             ),
             onPressed: () => {
               Navigator.pushNamed(context, Register.id),
@@ -172,8 +168,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           TextButton(
             child: Text(
               'Forgot Password?',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w200,
+              ),
             ),
             onPressed: () async {
               // TODO2: call reset password function here.
@@ -181,7 +179,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
               if (_emailController.text.trim().isNotEmpty) {
                 String? message = await _authService.sendPasswordResetFor(
-                    email: _emailController.text.trim());
+                  email: _emailController.text.trim(),
+                );
                 _authService.signOut();
 
                 if (message == 'email link sent') {
@@ -226,8 +225,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final User? firebaseUser = Provider.of<User?>(context);
-    bool hasUser = firebaseUser != null;
+    // final User? firebaseUser = Provider.of<User?>(context);
+    // bool hasUser = firebaseUser != null;
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -238,11 +237,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildLogo(),
-                _buildForm(),
-                _buildButtonGroup(),
-              ],
+              children: [_buildLogo(), _buildForm(), _buildButtonGroup()],
             ),
           ),
         ),

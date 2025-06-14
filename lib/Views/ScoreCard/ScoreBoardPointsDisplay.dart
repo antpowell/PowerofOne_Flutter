@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:power_one/Objects/Score/Score.dart';
+import 'package:power_of_one_basketball/Objects/Score/Score.dart';
 import 'package:provider/provider.dart';
-import 'package:power_one/Data/constants.dart';
-import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Objects/Point.dart';
+import 'package:power_of_one_basketball/Data/constants.dart';
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Objects/Point.dart';
 
 class ScoreBoardPointsDisplay extends StatelessWidget {
   final String activityName;
@@ -11,17 +11,11 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
   ScoreBoardPointsDisplay(this.activityName);
 
   Text _scoreBoardLabelText(label) {
-    return Text(
-      label,
-      style: kScoreBoardLabelsTextStyle,
-    );
+    return Text(label, style: kScoreBoardLabelsTextStyle);
   }
 
   Text _scoreBoardPointText(label, color) {
-    return Text(
-      label,
-      style: kScoreBoardPointsTextStyle,
-    );
+    return Text(label, style: kScoreBoardPointsTextStyle);
   }
 
   @override
@@ -36,21 +30,23 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 1),
                     child: _scoreBoardPointText(
-                        getScoreBoardPointText(
-                            activity:
-                                activitiesProvider.getActivity(activityName),
-                            lookupValue: IScoreLookupValue.pos),
-                        Colors.green),
+                      getScoreBoardPointText(
+                        activity: activitiesProvider.getActivity(activityName),
+                        lookupValue: IScoreLookupValue.pos,
+                      ),
+                      Colors.green,
+                    ),
                   ),
                   _scoreBoardLabelText(activityName),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 1),
                     child: _scoreBoardPointText(
-                        getScoreBoardPointText(
-                            activity:
-                                activitiesProvider.getActivity(activityName),
-                            lookupValue: IScoreLookupValue.neg),
-                        Colors.red),
+                      getScoreBoardPointText(
+                        activity: activitiesProvider.getActivity(activityName),
+                        lookupValue: IScoreLookupValue.neg,
+                      ),
+                      Colors.red,
+                    ),
                   ),
                 ],
               )
@@ -58,11 +54,12 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
                 children: [
                   _scoreBoardLabelText(activityName),
                   _scoreBoardPointText(
-                      getScoreBoardPointText(
-                          activity:
-                              activitiesProvider.getActivity(activityName),
-                          lookupValue: IScoreLookupValue.pos),
-                      Colors.white),
+                    getScoreBoardPointText(
+                      activity: activitiesProvider.getActivity(activityName),
+                      lookupValue: IScoreLookupValue.pos,
+                    ),
+                    Colors.white,
+                  ),
                 ],
               ),
       ),
@@ -72,8 +69,10 @@ class ScoreBoardPointsDisplay extends StatelessWidget {
 
 enum IScoreLookupValue { pos, neg }
 
-String getScoreBoardPointText(
-    {required IScore? activity, required IScoreLookupValue lookupValue}) {
+String getScoreBoardPointText({
+  required IScore? activity,
+  required IScoreLookupValue lookupValue,
+}) {
   String activityText = '';
   if (activity != null) {
     activityText = lookupValue == IScoreLookupValue.pos

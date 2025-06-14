@@ -1,8 +1,8 @@
-import 'package:power_one/models/PO1HustlePoint.dart';
-import 'package:power_one/models/PO1Level.dart';
-import 'package:power_one/models/PO1Point.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Utils/getPointValue.dart';
+import 'package:power_of_one_basketball/models/PO1HustlePoint.dart';
+import 'package:power_of_one_basketball/models/PO1Level.dart';
+import 'package:power_of_one_basketball/models/PO1Point.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Utils/getPointValue.dart';
 
 class Standard {
   late PO1HustlePoint stl;
@@ -144,142 +144,190 @@ class Standard {
   );
 
   Map<String, num> get getSteals => {
-        'great': findThresholdByPlayerLevel(
-            pointLevelThreshold: stl.great, user: _user),
-        'good': findThresholdByPlayerLevel(
-            pointLevelThreshold: stl.good, user: _user),
-        'average': findThresholdByPlayerLevel(
-            pointLevelThreshold: stl.average, user: _user),
-      };
+    'great': findThresholdByPlayerLevel(
+      pointLevelThreshold: stl.great,
+      user: _user,
+    ),
+    'good': findThresholdByPlayerLevel(
+      pointLevelThreshold: stl.good,
+      user: _user,
+    ),
+    'average': findThresholdByPlayerLevel(
+      pointLevelThreshold: stl.average,
+      user: _user,
+    ),
+  };
   Map<String, num> get getRebounds => {
-        'great': findThresholdByPlayerLevel(
-            pointLevelThreshold: rb.great, user: _user),
-        'good': findThresholdByPlayerLevel(
-            pointLevelThreshold: rb.good, user: _user),
-        'average': findThresholdByPlayerLevel(
-            pointLevelThreshold: rb.average, user: _user),
-      };
+    'great': findThresholdByPlayerLevel(
+      pointLevelThreshold: rb.great,
+      user: _user,
+    ),
+    'good': findThresholdByPlayerLevel(
+      pointLevelThreshold: rb.good,
+      user: _user,
+    ),
+    'average': findThresholdByPlayerLevel(
+      pointLevelThreshold: rb.average,
+      user: _user,
+    ),
+  };
   Map<String, num> get getAssists => {
-        'great': findThresholdByPlayerLevel(
-            pointLevelThreshold: ast.great, user: _user),
-        'good': findThresholdByPlayerLevel(
-            pointLevelThreshold: ast.good, user: _user),
-        'average': findThresholdByPlayerLevel(
-            pointLevelThreshold: ast.average, user: _user),
-      };
+    'great': findThresholdByPlayerLevel(
+      pointLevelThreshold: ast.great,
+      user: _user,
+    ),
+    'good': findThresholdByPlayerLevel(
+      pointLevelThreshold: ast.good,
+      user: _user,
+    ),
+    'average': findThresholdByPlayerLevel(
+      pointLevelThreshold: ast.average,
+      user: _user,
+    ),
+  };
   Map<String, num> get getBlocks => {
-        'great': findThresholdByPlayerLevel(
-            pointLevelThreshold: blk.great, user: _user),
-        'good': findThresholdByPlayerLevel(
-            pointLevelThreshold: blk.good, user: _user),
-        'average': findThresholdByPlayerLevel(
-            pointLevelThreshold: blk.average, user: _user),
-      };
+    'great': findThresholdByPlayerLevel(
+      pointLevelThreshold: blk.great,
+      user: _user,
+    ),
+    'good': findThresholdByPlayerLevel(
+      pointLevelThreshold: blk.good,
+      user: _user,
+    ),
+    'average': findThresholdByPlayerLevel(
+      pointLevelThreshold: blk.average,
+      user: _user,
+    ),
+  };
   Map<String, num> get getTurnOvers => {
-        'great': findThresholdByPlayerLevel(
-            pointLevelThreshold: to.great, user: _user),
-        'good': findThresholdByPlayerLevel(
-            pointLevelThreshold: to.good, user: _user),
-        'average': findThresholdByPlayerLevel(
-            pointLevelThreshold: to.average, user: _user),
-      };
+    'great': findThresholdByPlayerLevel(
+      pointLevelThreshold: to.great,
+      user: _user,
+    ),
+    'good': findThresholdByPlayerLevel(
+      pointLevelThreshold: to.good,
+      user: _user,
+    ),
+    'average': findThresholdByPlayerLevel(
+      pointLevelThreshold: to.average,
+      user: _user,
+    ),
+  };
 
-  final PO1Point _ft = new PO1Point(great: {
-    {PO1Levels.PRO: 95},
-    {PO1Levels.COLHIGH: 90},
-    {PO1Levels.GRADE: 80},
-    {PO1Levels.TEAM: 90},
-  }, good: {
-    {PO1Levels.PRO: 85},
-    {PO1Levels.COLHIGH: 80},
-    {PO1Levels.GRADE: 70},
-    {PO1Levels.TEAM: 80},
-  }, average: {
-    {PO1Levels.PRO: 75},
-    {PO1Levels.COLHIGH: 70},
-    {PO1Levels.GRADE: 65},
-    {PO1Levels.TEAM: 70},
-  }, feedback: {
-    {PO1FeedbackLevel.GREAT: 'Excellent job!'},
-    {PO1FeedbackLevel.GOOD: 'Good job; Keep up the good work'},
-    {
-      PO1FeedbackLevel.AVERAGE:
-          'Improve your free throws and follow through on your release'
+  final PO1Point _ft = new PO1Point(
+    great: {
+      {PO1Levels.PRO: 95},
+      {PO1Levels.COLHIGH: 90},
+      {PO1Levels.GRADE: 80},
+      {PO1Levels.TEAM: 90},
     },
-    {
-      PO1FeedbackLevel.BELOW_AVERAGE: 'Focus more on your free throws and relax'
+    good: {
+      {PO1Levels.PRO: 85},
+      {PO1Levels.COLHIGH: 80},
+      {PO1Levels.GRADE: 70},
+      {PO1Levels.TEAM: 80},
     },
-  });
-  final PO1Point _fg = new PO1Point(great: {
-    {PO1Levels.PRO: 50},
-    {PO1Levels.COLHIGH: 45},
-    {PO1Levels.GRADE: 40},
-    {PO1Levels.TEAM: 45},
-  }, good: {
-    {PO1Levels.PRO: 45},
-    {PO1Levels.COLHIGH: 40},
-    {PO1Levels.GRADE: 35},
-    {PO1Levels.TEAM: 40},
-  }, average: {
-    {PO1Levels.PRO: 40},
-    {PO1Levels.COLHIGH: 35},
-    {PO1Levels.GRADE: 30},
-    {PO1Levels.TEAM: 35},
-  }, feedback: {
-    {PO1FeedbackLevel.GREAT: 'Excellent shooting!'},
-    {PO1FeedbackLevel.GOOD: 'You are taking good shots'},
-    {PO1FeedbackLevel.AVERAGE: 'Follow through on your shot'},
-    {PO1FeedbackLevel.BELOW_AVERAGE: 'Make better shot selections'},
-  });
+    average: {
+      {PO1Levels.PRO: 75},
+      {PO1Levels.COLHIGH: 70},
+      {PO1Levels.GRADE: 65},
+      {PO1Levels.TEAM: 70},
+    },
+    feedback: {
+      {PO1FeedbackLevel.GREAT: 'Excellent job!'},
+      {PO1FeedbackLevel.GOOD: 'Good job; Keep up the good work'},
+      {
+        PO1FeedbackLevel.AVERAGE:
+            'Improve your free throws and follow through on your release',
+      },
+      {
+        PO1FeedbackLevel.BELOW_AVERAGE:
+            'Focus more on your free throws and relax',
+      },
+    },
+  );
+  final PO1Point _fg = new PO1Point(
+    great: {
+      {PO1Levels.PRO: 50},
+      {PO1Levels.COLHIGH: 45},
+      {PO1Levels.GRADE: 40},
+      {PO1Levels.TEAM: 45},
+    },
+    good: {
+      {PO1Levels.PRO: 45},
+      {PO1Levels.COLHIGH: 40},
+      {PO1Levels.GRADE: 35},
+      {PO1Levels.TEAM: 40},
+    },
+    average: {
+      {PO1Levels.PRO: 40},
+      {PO1Levels.COLHIGH: 35},
+      {PO1Levels.GRADE: 30},
+      {PO1Levels.TEAM: 35},
+    },
+    feedback: {
+      {PO1FeedbackLevel.GREAT: 'Excellent shooting!'},
+      {PO1FeedbackLevel.GOOD: 'You are taking good shots'},
+      {PO1FeedbackLevel.AVERAGE: 'Follow through on your shot'},
+      {PO1FeedbackLevel.BELOW_AVERAGE: 'Make better shot selections'},
+    },
+  );
 
   Map<String, num?> get freeThrow => {
-        'great': ft.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': ft.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': ft.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-      };
+    'great': ft.great
+        .where((element) => element.containsKey(_user.playerLevel))
+        .first[_user.playerLevel],
+    'good': ft.good
+        .where((element) => element.containsKey(_user.playerLevel))
+        .first[_user.playerLevel],
+    'average': ft.average
+        .where((element) => element.containsKey(_user.playerLevel))
+        .first[_user.playerLevel],
+  };
   Map<String, num?> get fieldGoal => {
-        'great': fg.great
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'good': fg.good
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-        'average': fg.average
-            .where((element) => element.containsKey(_user.playerLevel))
-            .first[_user.playerLevel],
-      };
+    'great': fg.great
+        .where((element) => element.containsKey(_user.playerLevel))
+        .first[_user.playerLevel],
+    'good': fg.good
+        .where((element) => element.containsKey(_user.playerLevel))
+        .first[_user.playerLevel],
+    'average': fg.average
+        .where((element) => element.containsKey(_user.playerLevel))
+        .first[_user.playerLevel],
+  };
 
   String getFeedbackForHustlePoints(
-      EHustlePoint forPoint, PO1FeedbackLevel atLevel) {
+    EHustlePoint forPoint,
+    PO1FeedbackLevel atLevel,
+  ) {
     Map<PO1FeedbackLevel, String> results;
     switch (forPoint) {
       case EHustlePoint.STL:
-        results =
-            _stl.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _stl.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
       case EHustlePoint.RB:
-        results =
-            _rb.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _rb.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
       case EHustlePoint.TO:
-        results =
-            _to.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _to.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
       case EHustlePoint.BLK:
-        results =
-            _blk.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _blk.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
       case EHustlePoint.PF:
         throw Error();
       case EHustlePoint.AST:
-        results =
-            _ast.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _ast.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
     }
     return results.values.last;
@@ -289,12 +337,14 @@ class Standard {
     late Map<PO1FeedbackLevel, String> results;
     switch (forPoint) {
       case 'FG':
-        results =
-            _fg.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _fg.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
       case 'FT':
-        results =
-            _ft.feedback.where((element) => element.containsKey(atLevel)).last;
+        results = _ft.feedback
+            .where((element) => element.containsKey(atLevel))
+            .last;
         break;
     }
     return results.values.last;
@@ -364,7 +414,7 @@ class Standard {
     return PO1User().playerLevel == PO1Levels.GRADE
         ? 5
         : PO1User().playerLevel == PO1Levels.COLHIGH
-            ? 9
-            : 13;
+        ? 9
+        : 13;
   }
 }

@@ -2,10 +2,10 @@ import 'dart:developer' as dev;
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
-import 'package:power_one/Services/core_services.dart';
-import 'package:power_one/models/PO1Subscription.dart';
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
+import 'package:power_of_one_basketball/models/PO1Subscription.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'PO1Level.dart';
@@ -72,13 +72,14 @@ class PO1User {
     _playerSkill = playerSkill;
   }
 
-  PO1Levels get playerLevel => (_playerSkill == PO1PlayerSkill.elementary ||
+  PO1Levels get playerLevel =>
+      (_playerSkill == PO1PlayerSkill.elementary ||
           _playerSkill == PO1PlayerSkill.middle)
       ? PO1Levels.GRADE
       : (_playerSkill == PO1PlayerSkill.high ||
-              _playerSkill == PO1PlayerSkill.college)
-          ? PO1Levels.COLHIGH
-          : PO1Levels.PRO;
+            _playerSkill == PO1PlayerSkill.college)
+      ? PO1Levels.COLHIGH
+      : PO1Levels.PRO;
 
   factory PO1User() {
     return _instance;

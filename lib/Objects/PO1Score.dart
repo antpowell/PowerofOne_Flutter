@@ -2,16 +2,16 @@ import 'dart:collection';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:power_one/Data/Standard.dart';
-import 'package:power_one/models/PO1HustlePoint.dart';
-import 'package:power_one/models/PO1PlayerSkill.dart';
-import 'package:power_one/models/PO1Point.dart';
-import 'package:power_one/Objects/Play.dart';
-import 'package:power_one/Objects/Point.dart';
-import 'package:power_one/models/PO1Feedback.dart';
-import 'package:power_one/models/PO1Grade.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Services/core_services.dart';
+import 'package:power_of_one_basketball/Data/Standard.dart';
+import 'package:power_of_one_basketball/models/PO1HustlePoint.dart';
+import 'package:power_of_one_basketball/models/PO1PlayerSkill.dart';
+import 'package:power_of_one_basketball/models/PO1Point.dart';
+import 'package:power_of_one_basketball/Objects/Play.dart';
+import 'package:power_of_one_basketball/Objects/Point.dart';
+import 'package:power_of_one_basketball/models/PO1Feedback.dart';
+import 'package:power_of_one_basketball/models/PO1Grade.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
 import 'dart:developer' as dev;
 
 import 'Score/Score.dart';
@@ -37,16 +37,18 @@ class PO1Score extends ChangeNotifier {
     if (_hustlePointsMap.containsValue(activity)) {
       // _hustlePointsMap[EHustlePoint.values.find(activity.title)] =
       //     activity.make();
-      _hustlePointsMap
-          .addAll({EHustlePoint.values.find(activity.title): activity.make()});
+      _hustlePointsMap.addAll({
+        EHustlePoint.values.find(activity.title): activity.make(),
+      });
       madeHistoryEvent = {
         "made":
-            _hustlePointsMap[EHustlePoint.values.find(activity.title)] as IScore
+            _hustlePointsMap[EHustlePoint.values.find(activity.title)]
+                as IScore,
       };
     } else {
       _pointsMap[EPoint.values.find(activity.title)!] = activity.make();
       madeHistoryEvent = {
-        "made": _pointsMap[EPoint.values.find(activity.title)] as IScore
+        "made": _pointsMap[EPoint.values.find(activity.title)] as IScore,
       };
     }
 
@@ -57,8 +59,9 @@ class PO1Score extends ChangeNotifier {
 
   missed(IScore activity) {
     _pointsMap[EPoint.values.find(activity.title)!] = activity.miss();
-    history.addLast(
-        {"miss": _pointsMap[EPoint.values.find(activity.title)] as IScore});
+    history.addLast({
+      "miss": _pointsMap[EPoint.values.find(activity.title)] as IScore,
+    });
     debugPrint('Action: $activity : neg-> ${activity.neg}');
     notifyListeners();
   }
@@ -69,17 +72,22 @@ class PO1Score extends ChangeNotifier {
       Map<String, IScore> undoEvent = history.removeLast();
       (undoEvent.keys.first == "made")
           ? (_hustlePointsMap.containsValue(undoEvent.values.first))
-              ? _hustlePointsMap[
-                      EHustlePoint.values.find(undoEvent.values.first.title)] =
-                  undoEvent.values.first.undoMake()
-              : _pointsMap[EPoint.values.find(undoEvent.values.first.title)!] =
-                  undoEvent.values.first.undoMake()
+                ? _hustlePointsMap[EHustlePoint.values.find(
+                    undoEvent.values.first.title,
+                  )] = undoEvent.values.first
+                      .undoMake()
+                : _pointsMap[EPoint.values.find(
+                    undoEvent.values.first.title,
+                  )!] = undoEvent.values.first
+                      .undoMake()
           : _pointsMap[EPoint.values.find(undoEvent.values.first.title)!] =
-              undoEvent.values.first.undoMiss();
+                undoEvent.values.first.undoMiss();
     } else {
-      dev.log("Empty history list",
-          name: 'Empty history list',
-          error: {'data': 'Event history is empty, no prior events'});
+      dev.log(
+        "Empty history list",
+        name: 'Empty history list',
+        error: {'data': 'Event history is empty, no prior events'},
+      );
     }
     notifyListeners();
   }
@@ -137,36 +145,35 @@ class PO1Score extends ChangeNotifier {
 
   Map<String, double> getAverages() {
     Map<String, double> _averages = {};
-    _pointsMap.forEach(
-      (key, value) {
-        switch (key.translatedName) {
-          case '1PT':
-            _averages[key.translatedName] = value.avg();
-            break;
-          case '2PTs':
-            _averages[key.translatedName] = value.avg();
-            break;
-          case '3PTs':
-            _averages[key.translatedName] = value.avg();
-            break;
-        }
-      },
-    );
+    _pointsMap.forEach((key, value) {
+      switch (key.translatedName) {
+        case '1PT':
+          _averages[key.translatedName] = value.avg();
+          break;
+        case '2PTs':
+          _averages[key.translatedName] = value.avg();
+          break;
+        case '3PTs':
+          _averages[key.translatedName] = value.avg();
+          break;
+      }
+    });
 
     // TODO: Check to see if this solution works for FG average
-    _averages['FG'] = ((pointsMap[EPoint.TWO]!.pos +
+    _averages['FG'] =
+        ((pointsMap[EPoint.TWO]!.pos +
                 pointsMap[EPoint.THREE]!.pos +
                 pointsMap[EPoint.TWO]!.neg +
                 pointsMap[EPoint.THREE]!.neg) ==
             0)
         ? 0.0
         : ((_pointsMap[EPoint.TWO]!.pos + _pointsMap[EPoint.THREE]!.pos) /
-                (_pointsMap[EPoint.TWO]!.pos +
-                    _pointsMap[EPoint.THREE]!.pos +
-                    _pointsMap[EPoint.TWO]!.neg +
-                    _pointsMap[EPoint.THREE]!.neg) *
-                100)
-            .roundToDouble();
+                  (_pointsMap[EPoint.TWO]!.pos +
+                      _pointsMap[EPoint.THREE]!.pos +
+                      _pointsMap[EPoint.TWO]!.neg +
+                      _pointsMap[EPoint.THREE]!.neg) *
+                  100)
+              .roundToDouble();
 
     return _averages;
   }
@@ -214,7 +221,7 @@ class PO1Score extends ChangeNotifier {
       "Feedback": PO1Feedback.toJSON(),
       "Grade": powerOfOneGrade(),
       "Score": _getPowerOfOneScore(),
-      "PointsScored": getTotalPointsScored()
+      "PointsScored": getTotalPointsScored(),
     };
     final scoreCard = {
       'assist': '',
@@ -224,18 +231,12 @@ class PO1Score extends ChangeNotifier {
       'steals': '',
       'threePointers': '',
       'turnOvers': '',
-      'twoPointers': ''
+      'twoPointers': '',
     };
-    final data = {
-      ...reportCard,
-      ...scoreCard,
-    };
+    final data = {...reportCard, ...scoreCard};
     data.addAll({
       "ReportCard": reportCard,
-      "ScoreCard": {
-        ..._hustlePointsMap,
-        ..._pointsMap,
-      },
+      "ScoreCard": {..._hustlePointsMap, ..._pointsMap},
     });
 
     return {

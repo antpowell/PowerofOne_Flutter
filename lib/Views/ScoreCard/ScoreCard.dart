@@ -1,17 +1,17 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:power_one/models/PO1Feedback.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Objects/PO1Score.dart';
-import 'package:power_one/Services/core_services.dart';
-import 'package:power_one/Services/database_service.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/ReportCard/ReportCard.dart';
-import 'package:power_one/Views/ScoreCard/ScoreBoard.dart';
-import 'package:power_one/Views/ScoreCard/hustle_points_section.dart';
-import 'package:power_one/Views/ScoreCard/points_section.dart';
-import 'package:power_one/Views/dialogs.dart';
+import 'package:power_of_one_basketball/models/PO1Feedback.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Objects/PO1Score.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
+import 'package:power_of_one_basketball/Services/database_service.dart';
+import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/ReportCard/ReportCard.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/ScoreBoard.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/hustle_points_section.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/points_section.dart';
+import 'package:power_of_one_basketball/Views/dialogs.dart';
 import 'package:provider/provider.dart';
 
 class ScoreCard extends StatelessWidget {
@@ -25,9 +25,7 @@ class ScoreCard extends StatelessWidget {
 class ScoreCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ScoreCardScreenWidget(),
-    );
+    return Scaffold(body: ScoreCardScreenWidget());
   }
 }
 
@@ -37,28 +35,31 @@ class ScoreCardScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<DialogAction> showDialog() {
-      return Dialogs.yesAbortDialogAction(context,
-          title: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "Are you sure you want to go back?",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-              ],
-            ),
+      return Dialogs.yesAbortDialogAction(
+        context,
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Are you sure you want to go back?",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              ),
+            ],
           ),
-          body: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "Going back will erase your current game state.\n",
-                ),
-              ],
-            ),
-          ), approveFunction: () {
-        _user.score.clear();
-      });
+        ),
+        body: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Going back will erase your current game state.\n",
+              ),
+            ],
+          ),
+        ),
+        approveFunction: () {
+          _user.score.clear();
+        },
+      );
     }
 
     void backButtonHandler(bool? didPop) async {
@@ -102,16 +103,9 @@ class ScoreCardScreenWidget extends StatelessWidget {
               child: Flex(
                 direction: Axis.horizontal,
                 children: <Widget>[
-                  Expanded(
-                    child: HustlePointsSection(),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: ScoreBoard(),
-                  ),
-                  Expanded(
-                    child: PointsSection(),
-                  ),
+                  Expanded(child: HustlePointsSection()),
+                  Expanded(flex: 2, child: ScoreBoard()),
+                  Expanded(child: PointsSection()),
                 ],
               ),
             ),
@@ -158,17 +152,24 @@ class ScoreCardScreenWidget extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               WidgetSpan(
-                                child:
-                                    Icon(Icons.warning, color: Colors.yellow),
+                                child: Icon(
+                                  Icons.warning,
+                                  color: Colors.yellow,
+                                ),
                               ),
                               TextSpan(
-                                  // text: 'Is the game really over?',
-                                  text: 'Warning',
-                                  style: TextStyle(
-                                      fontSize: 24, color: Colors.red)),
+                                // text: 'Is the game really over?',
+                                text: 'Warning',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.red,
+                                ),
+                              ),
                               WidgetSpan(
-                                child:
-                                    Icon(Icons.warning, color: Colors.yellow),
+                                child: Icon(
+                                  Icons.warning,
+                                  color: Colors.yellow,
+                                ),
                               ),
                             ],
                           ),
@@ -188,7 +189,8 @@ class ScoreCardScreenWidget extends StatelessWidget {
                         ),
                         approveFunction: () {
                           _user.setPlayerScore(
-                              Provider.of<PO1Score>(context, listen: false));
+                            Provider.of<PO1Score>(context, listen: false),
+                          );
                           PO1Feedback.calculateFeedback(_user.score);
                           _fbdbService.createNewGame();
                           Navigator.pushNamed(context, ReportCard.id);

@@ -1,9 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
 
 import 'dart:developer' as dev;
 
-import 'package:power_one/Services/core_services.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
 
 final DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 final PO1User _user = PO1User();
@@ -18,8 +18,9 @@ class FBDBService {
   }
 
   getUsersSubscription() async {
-    final userSnapshot =
-        await dbRef.child('users/${_user.email.split(".")[0]}').get();
+    final userSnapshot = await dbRef
+        .child('users/${_user.email.split(".")[0]}')
+        .get();
     if (userSnapshot.exists) {
       print('User found byUserName: ${userSnapshot.value}');
       // _user.subscription.setSubscription(

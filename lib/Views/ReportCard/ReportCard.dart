@@ -1,12 +1,12 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
-import 'package:power_one/main.dart';
-import 'package:power_one/models/PO1User.dart';
-import 'package:power_one/Services/core_services.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/FeedBack/FeedBack.dart';
-import 'package:power_one/Views/dialogs.dart';
+import 'package:power_of_one_basketball/main.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
+import 'package:power_of_one_basketball/Services/core_services.dart';
+import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/FeedBack/FeedBack.dart';
+import 'package:power_of_one_basketball/Views/dialogs.dart';
 
 Column baseColumnButton(Color color, IconData icon, String label) {
   return Column(
@@ -38,10 +38,7 @@ Column columnTitleTotalPointsScored(int points, String label) {
         margin: const EdgeInsets.only(top: 8),
         child: Text(
           label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-          ),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
         ),
       ),
     ],
@@ -61,11 +58,7 @@ class ReportCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('FEEDBACK',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.white,
-              )),
+          Text('FEEDBACK', style: TextStyle(fontSize: 15, color: Colors.white)),
           Column(
             children: [
               Container(
@@ -73,12 +66,10 @@ class ReportCard extends StatelessWidget {
                 width: 145,
                 color: Colors.white10,
                 child: Text(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-                    softWrap: true,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                    )),
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+                  softWrap: true,
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
               ),
             ],
           ),
@@ -91,24 +82,25 @@ class ReportCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('Power of 1 Grade',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.white,
-              )),
+          Text(
+            'Power of 1 Grade',
+            style: TextStyle(fontSize: 15, color: Colors.white),
+          ),
           Column(
             children: [
               Container(
                 height: 100,
                 width: 145,
                 color: Colors.white10,
-                child: Text(_user.score.powerOfOneGrade(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 80,
-                      color: Colors.white,
-                      //backgroundColor: Colors.white24,
-                    )),
+                child: Text(
+                  _user.score.powerOfOneGrade(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 80,
+                    color: Colors.white,
+                    //backgroundColor: Colors.white24,
+                  ),
+                ),
               ),
             ],
           ),
@@ -121,15 +113,19 @@ class ReportCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('Total Points Scored',
-              style: TextStyle(fontSize: 15, color: Colors.white)),
+          Text(
+            'Total Points Scored',
+            style: TextStyle(fontSize: 15, color: Colors.white),
+          ),
           Container(
             height: 100,
             width: 145,
             color: Colors.white10,
-            child: Text(_user.score.getTotalPointsScored().toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 80, color: Colors.white)),
+            child: Text(
+              _user.score.getTotalPointsScored().toString(),
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 80, color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -157,10 +153,7 @@ class ReportCard extends StatelessWidget {
                 top: 0,
                 child: Text(
                   'Power of 1 Score',
-                  style: TextStyle(
-                    fontSize: 45,
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(fontSize: 45, color: Colors.white),
                 ),
               ),
               Positioned(
@@ -172,10 +165,11 @@ class ReportCard extends StatelessWidget {
                     _user.clearData();
                     // FIXME: PlayerNameForm's route stacks ontop of each other here. Need to fix with either only allowing a single instance of a route onto the stack or find a more advanced solution.
                     Navigator.pushAndRemoveUntil(
-                        // user AuthWrapper in stead of LoginForm
-                        context,
-                        MaterialPageRoute(builder: (builder) => AuthWrapper()),
-                        (route) => false);
+                      // user AuthWrapper in stead of LoginForm
+                      context,
+                      MaterialPageRoute(builder: (builder) => AuthWrapper()),
+                      (route) => false,
+                    );
                   },
                 ),
               ),
@@ -247,9 +241,7 @@ class ReportCard extends StatelessWidget {
                   //ColumnTwo
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      powerof1gradetextSection,
-                    ],
+                    children: [powerof1gradetextSection],
                   ),
                 ],
               ),

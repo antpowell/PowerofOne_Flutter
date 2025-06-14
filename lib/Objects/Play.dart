@@ -1,4 +1,4 @@
-import 'package:power_one/models/PO1HustlePoint.dart';
+import 'package:power_of_one_basketball/models/PO1HustlePoint.dart';
 
 import 'Score/Score.dart';
 

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
 
 enum DialogAction { yes, abort }
 
-const TextStyle textStyle = TextStyle(
-  color: Colors.white,
-);
+const TextStyle textStyle = TextStyle(color: Colors.white);
 
 class Dialogs {
   static Future<DialogAction> yesAbortDialogAction(
@@ -74,16 +72,10 @@ class Dialogs {
             borderRadius: BorderRadius.circular(10),
           ),
           title: (title != null && title.isNotEmpty)
-              ? Text(
-                  title,
-                  style: textStyle,
-                )
+              ? Text(title, style: textStyle)
               : null,
           content: (body != null && body.isNotEmpty)
-              ? Text(
-                  body,
-                  style: textStyle,
-                )
+              ? Text(body, style: textStyle)
               : null,
           actions: <Widget>[
             Flex(
@@ -112,21 +104,16 @@ class Dialogs {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-            backgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            title: RichText(
-              text: (TextSpan(
-                text: '',
-                style: textStyle,
-              )),
-            ),
-            content: SpinKitCircle(
-              color: Colors.white,
-              size: 100.0,
-            ),
-            actions: null);
+          backgroundColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: RichText(
+            text: (TextSpan(text: '', style: textStyle)),
+          ),
+          content: SpinKitCircle(color: Colors.white, size: 100.0),
+          actions: null,
+        );
       },
     );
   }

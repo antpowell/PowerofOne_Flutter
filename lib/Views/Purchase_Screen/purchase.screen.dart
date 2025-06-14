@@ -3,12 +3,12 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:power_one/Services/RevenueCat/revenue_cat_service.dart';
-import 'package:power_one/Services/database_service.dart';
-import 'package:power_one/Views/Buttons/PO1Button.dart';
-import 'package:power_one/Views/ScoreCard/ScoreCard.dart';
-import 'package:power_one/Views/dialogs.dart';
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_of_one_basketball/Services/RevenueCat/revenue_cat_service.dart';
+import 'package:power_of_one_basketball/Services/database_service.dart';
+import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/ScoreCard.dart';
+import 'package:power_of_one_basketball/Views/dialogs.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 // video: https://www.youtube.com/watch?v=h-jOMh2KXTA
@@ -21,27 +21,19 @@ Map<String, dynamic> packageTitleConverter(String packageId) {
     case 'po1_599_1m_1w':
       return {
         'name': 'Monthly',
-        'benefits': [
-          'Premium Access',
-        ],
+        'benefits': ['Premium Access'],
       };
     case 'po1_2999_6m_1w:po1-6m-1w':
     case 'po1_2999_6m_1w':
       return {
         'name': 'Semiyearly',
-        'benefits': [
-          'Premium Access',
-          'More than 15% off',
-        ],
+        'benefits': ['Premium Access', 'More than 15% off'],
       };
     case 'po1_5999_12m_1w:po1-12m-1w':
     case 'po1_5999_12m_1w':
       return {
         'name': 'Yearly',
-        'benefits': [
-          'Premium Access',
-          'More than 20% off',
-        ],
+        'benefits': ['Premium Access', 'More than 20% off'],
       };
     default:
       return {};
@@ -105,8 +97,8 @@ class PurchaseScreen extends HookWidget {
                 ),
               );
             } else if (snapshot.hasData) {
-              List<Package> packages =
-                  (snapshot.data as List<Package>).toList();
+              List<Package> packages = (snapshot.data as List<Package>)
+                  .toList();
               return Column(
                 children: [
                   Expanded(
@@ -121,12 +113,14 @@ class PurchaseScreen extends HookWidget {
                             dev.log('checking for offerings from $index ');
                             _selectedPackage = packages[index];
                             dev.log(
-                                'offering is tied to package:::> $_selectedPackage');
+                              'offering is tied to package:::> $_selectedPackage',
+                            );
                           },
                           child: HookBuilder(
                             builder: (_) {
-                              final activeCard =
-                                  useValueListenable(activeCardVN);
+                              final activeCard = useValueListenable(
+                                activeCardVN,
+                              );
                               return SubscriptionCard(
                                 activeCard: activeCard == index,
                                 data: packages[index],
@@ -137,10 +131,7 @@ class PurchaseScreen extends HookWidget {
                       },
                     ),
                   ),
-                  _buttonGroup(
-                    context: context,
-                    isLoading: isLoading,
-                  ),
+                  _buttonGroup(context: context, isLoading: isLoading),
                 ],
               );
             } else {
@@ -172,9 +163,10 @@ Widget _titleArea({required String titleText}) {
           child: Text(
             titleText,
             style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[50]),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[50],
+            ),
           ),
         ),
       ),
@@ -196,9 +188,7 @@ Widget _detailArea({required String details, required List<String> bullets}) {
             children: [
               Flexible(
                 flex: 1,
-                child: _detailBullets(
-                  listItemText: bullets[index],
-                ),
+                child: _detailBullets(listItemText: bullets[index]),
               ),
             ],
           );
@@ -226,22 +216,17 @@ Widget _detailBullets({required String listItemText}) {
     children: [
       Padding(
         padding: const EdgeInsets.only(right: 8.0),
-        child: Icon(
-          Icons.check_circle,
-          size: 20,
-          color: Colors.green[700],
-        ),
+        child: Icon(Icons.check_circle, size: 20, color: Colors.green[700]),
       ),
-      Text(
-        listItemText,
-        style: TextStyle(color: Colors.grey),
-      ),
+      Text(listItemText, style: TextStyle(color: Colors.grey)),
     ],
   );
 }
 
-Widget _buttonGroup(
-    {required BuildContext context, required ValueNotifier<bool> isLoading}) {
+Widget _buttonGroup({
+  required BuildContext context,
+  required ValueNotifier<bool> isLoading,
+}) {
   final fbdbService = FBDBService();
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 36),
@@ -257,9 +242,7 @@ Widget _buttonGroup(
         ),
         (_user.subscription.inTrial
             ? TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.grey,
-                ),
+                style: TextButton.styleFrom(foregroundColor: Colors.grey),
                 onPressed: () {
                   if (_user.subscription.inTrial == true) {
                     fbdbService.createNewUser(_user);
@@ -274,9 +257,7 @@ Widget _buttonGroup(
             : Spacer()),
         (_user.subscription.inTrial != null
             ? TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.grey,
-                ),
+                style: TextButton.styleFrom(foregroundColor: Colors.grey),
                 onPressed: isLoading.value
                     ? null
                     : () async {
@@ -320,8 +301,9 @@ Widget _buttonGroup(
               : () async {
                   try {
                     // TODO: setPurchaseInfo state
-                    final customerInfo =
-                        await Purchases.purchasePackage(_selectedPackage);
+                    final customerInfo = await Purchases.purchasePackage(
+                      _selectedPackage,
+                    );
                     EntitlementInfo? premiumUserEntitlementInfo =
                         customerInfo.entitlements.all['premium_user'];
                     if (premiumUserEntitlementInfo != null &&
@@ -331,8 +313,10 @@ Widget _buttonGroup(
                       Navigator.popAndPushNamed(context, ScoreCard.id);
                     }
                   } on PlatformException catch (e) {
-                    dev.log(e.message ??
-                        'Exception at Subscribe button press on Purchase Screen');
+                    dev.log(
+                      e.message ??
+                          'Exception at Subscribe button press on Purchase Screen',
+                    );
                     Navigator.pop(context);
                   }
                 },
@@ -358,10 +342,12 @@ class SubscriptionCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<double> widthOfScreen =
-        useState(MediaQuery.of(context).size.width);
-    final ValueNotifier<double> heightOfScreen =
-        useState(MediaQuery.of(context).size.height);
+    final ValueNotifier<double> widthOfScreen = useState(
+      MediaQuery.of(context).size.width,
+    );
+    final ValueNotifier<double> heightOfScreen = useState(
+      MediaQuery.of(context).size.height,
+    );
     final double activeCardWidth = widthOfScreen.value * 0.33;
     final double inActiveCardWidth = widthOfScreen.value * 0.30;
     final double activeCardHeight = heightOfScreen.value * 0.85;
@@ -387,9 +373,7 @@ class SubscriptionCard extends HookWidget {
             shape: BoxShape.rectangle,
             color: Color(0xff33333D),
             borderRadius: BorderRadius.all(Radius.circular(16)),
-            boxShadow: [
-              BoxShadow(blurRadius: 12.0, spreadRadius: -0),
-            ],
+            boxShadow: [BoxShadow(blurRadius: 12.0, spreadRadius: -0)],
           ),
           padding: EdgeInsets.all(16),
           child: Flex(
@@ -400,7 +384,8 @@ class SubscriptionCard extends HookWidget {
                 flex: 1,
                 child: _titleArea(
                   titleText: packageTitleConverter(
-                      data.storeProduct.identifier)['name'],
+                    data.storeProduct.identifier,
+                  )['name'],
                 ),
               ),
               Flexible(
@@ -413,9 +398,7 @@ class SubscriptionCard extends HookWidget {
                       color: Colors.orangeAccent,
                     ),
                     children: [
-                      TextSpan(
-                        text: data.storeProduct.priceString,
-                      ),
+                      TextSpan(text: data.storeProduct.priceString),
                       TextSpan(
                         text: '/month',
                         style: TextStyle(
@@ -433,7 +416,8 @@ class SubscriptionCard extends HookWidget {
                 child: _detailArea(
                   details: data.storeProduct.description,
                   bullets: packageTitleConverter(
-                      data.storeProduct.identifier)['benefits'],
+                    data.storeProduct.identifier,
+                  )['benefits'],
                 ),
               ),
             ],

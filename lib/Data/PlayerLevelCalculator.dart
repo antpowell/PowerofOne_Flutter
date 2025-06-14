@@ -1,4 +1,4 @@
-import 'package:power_one/models/PO1User.dart';
+import 'package:power_of_one_basketball/models/PO1User.dart';
 
 const scoreing = {
   'amature': {'A': 9, 'B': 7, 'C': 5, 'D': 3},
@@ -10,12 +10,12 @@ String powerOfOneScoreCalculator(num _po1Score, PO1User user) {
   String eanrdPO1Score = (_po1Score >= 9)
       ? 'A'
       : (_po1Score >= 7)
-          ? 'B'
-          : (_po1Score >= 5)
-              ? 'C'
-              : (_po1Score >= 3)
-                  ? 'D'
-                  : 'F';
+      ? 'B'
+      : (_po1Score >= 5)
+      ? 'C'
+      : (_po1Score >= 3)
+      ? 'D'
+      : 'F';
   // return (_po1Score >= 13) ? 'A' :(_po1Score>=10)? 'B': (_po1Score>=7)? 'C':(_po1Score>=4)? 'D':'F';
   return eanrdPO1Score;
 }
