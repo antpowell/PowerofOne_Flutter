@@ -1,6 +1,6 @@
 name: power_of_one_basketball
 description: "Power of One Basketball player stat tracking application"
-publish_to: 'none'
+publish_to: none
 version: 1.2.0
 
 flutter_localization:
