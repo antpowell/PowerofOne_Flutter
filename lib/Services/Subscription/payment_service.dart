@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'package:flutter/foundation.dart';
@@ -13,6 +15,9 @@ class IAPConnection {
 
   static InAppPurchase get instance {
     _instance ??= InAppPurchase.instance;
+    dev.log('instance created');
+    dev.log('-------------------------------------');
+    dev.log(_instance.toString());
     return _instance;
   }
 

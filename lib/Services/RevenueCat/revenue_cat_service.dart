@@ -22,14 +22,17 @@ class RevenueCatService {
   Future init(/*TODO: String userId */) async {
     await Purchases.setLogLevel(LogLevel.verbose);
     if (Platform.isAndroid) {
+      log('Android init');
       await Purchases.configure(
         new PurchasesConfiguration(
-            _google_public_api_key /*TODO: , appUserId: userId */),
+          _google_public_api_key /* TODO: , appUserId: userId */,
+        ),
       );
     } else if (Platform.isIOS) {
       await Purchases.configure(
         new PurchasesConfiguration(
-            _ios_public_api_key /*TODO: , appUserId: userId */),
+          _ios_public_api_key /* TODO: , appUserId: userId */,
+        ),
       );
     }
   }
@@ -40,20 +43,39 @@ class RevenueCatService {
 
   static Future<List<Offering>> fetchOffers() async {
     try {
+      log('Attempting to fetch offerings...');
       final Offerings offerings = await Purchases.getOfferings();
+      log('Received Offerings object: ${offerings.toString()}');
+
       if (offerings.current != null) {
-        log(offerings.toString());
+        log('Current offering is available.');
+        log(
+          'Number of available packages in current offering: ${offerings.current?.availablePackages.length}',
+        );
+        for (var package in offerings.current!.availablePackages) {
+          log(
+            '  Package Identifier: ${package.identifier}, Store Product ID: ${package.storeProduct.identifier}',
+          );
+        }
+      } else {
+        log('No current offering found.');
       }
+
       final Offering? current = offerings.current;
 
       return current == null ? [] : [current];
     } on PlatformException catch (e) {
-      // TODO: implement
-      // logAndDisplayError(e)
-      dev.log('Purchase fetchOffers call failed with $e');
+      log(
+        'Purchase fetchOffers call failed with PlatformException: ${e.message}',
+      );
+      dev.log(
+        'Purchase fetchOffers call failed with PlatformException: ${e.message}',
+        error: e,
+      );
       return [];
     } on Exception catch (e) {
-      dev.log('Purchase fetchOffers call failed with $e');
+      log('Purchase fetchOffers call failed with Exception: $e');
+      dev.log('Purchase fetchOffers call failed with Exception: $e', error: e);
       return [];
     }
   }
@@ -90,7 +112,8 @@ class RevenueCatService {
   }
 
   static Future<void> setFirebaseAppInstanceId(
-      String firebaseAppInstance) async {
+    String firebaseAppInstance,
+  ) async {
     try {
       await Purchases.setFirebaseAppInstanceId(firebaseAppInstance);
     } catch (e) {
@@ -99,7 +122,7 @@ class RevenueCatService {
     }
   }
 
-// update subscriber attributes https://docs.revenuecat.com/docs/subscriber-attributes
+  // update subscriber attributes https://docs.revenuecat.com/docs/subscriber-attributes
   static Future<void> updateAccount(Map<String, String> args) async {
     // Examples:
     // Purchases.setEmail("test@example.com");

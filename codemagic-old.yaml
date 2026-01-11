@@ -17,7 +17,7 @@ workflows:
       vars:
         # BUILD_VERSION: 1.1.7
         # BUILD_NUMBER: 15
-        PACKAGE_NAME: 'com.power_of_one.basketball'
+        PACKAGE_NAME: 'com.power_of_one_basketball'
         GOOGLE_PLAY_TRACK: 'internal'
       flutter: stable
       xcode: latest

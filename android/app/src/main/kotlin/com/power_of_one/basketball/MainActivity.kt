@@ -1,4 +1,4 @@
-package com.power_of_one.basketball
+package com.power_of_one_basketball
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity

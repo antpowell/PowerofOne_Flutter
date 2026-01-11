@@ -39,7 +39,7 @@ class FBDBService {
 
   createNewGame() {
     final gameRef = dbRef.child('games/byUser/');
-    final gameId = dbRef.child('games/byUser/').push();
+    // final gameId = dbRef.child('games/byUser/').push();
 
     dev.log(_user.score.toJSON().toString());
 

@@ -28,7 +28,7 @@ arch -x86_64 pod install
 
 ## Android
 
-id: com.power_of_one.basketball
+id: com.power_of_one_basketball
 
 ### Build
 

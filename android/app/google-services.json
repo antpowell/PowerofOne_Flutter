@@ -13,12 +13,7 @@
           "package_name": "com.powell.anthony.power_one"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyD-IvG4dUbeoe21la4C9ZFdGs21pjFEt6A"
@@ -26,19 +21,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.powerofone.basketball"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
@@ -49,12 +32,7 @@
           "package_name": "com.power_of_one.basketball"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyD-IvG4dUbeoe21la4C9ZFdGs21pjFEt6A"
@@ -62,19 +40,26 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.powerofone.basketball"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856529158202:android:615675473f052fc0047503",
+        "android_client_info": {
+          "package_name": "com.power_of_one_basketball"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-IvG4dUbeoe21la4C9ZFdGs21pjFEt6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     },
@@ -85,12 +70,7 @@
           "package_name": "com.powerof1.powerof1"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyD-IvG4dUbeoe21la4C9ZFdGs21pjFEt6A"
@@ -98,19 +78,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "856529158202-7opvg8r9kjf3uq7hv4kn03em2ijck5h2.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "856529158202-1j8qi9hbv79u54t8hi6c93e7uta1hh0t.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.powerofone.basketball"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

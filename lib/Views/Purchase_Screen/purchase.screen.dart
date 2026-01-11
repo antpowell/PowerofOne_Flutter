@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
@@ -17,19 +18,19 @@ int active = 1;
 
 Map<String, dynamic> packageTitleConverter(String packageId) {
   switch (packageId) {
-    case 'po1_599_1m_1w:po1-1m-1w':
+    case 'premium_access:po1-1m-1w':
     case 'po1_599_1m_1w':
       return {
         'name': 'Monthly',
         'benefits': ['Premium Access'],
       };
-    case 'po1_2999_6m_1w:po1-6m-1w':
+    case 'premium_access:po1-6m-1w':
     case 'po1_2999_6m_1w':
       return {
         'name': 'Semiyearly',
         'benefits': ['Premium Access', 'More than 15% off'],
       };
-    case 'po1_5999_12m_1w:po1-12m-1w':
+    case 'premium_access:po1-12m-1w':
     case 'po1_5999_12m_1w':
       return {
         'name': 'Yearly',
@@ -257,6 +258,10 @@ Widget _buttonGroup({
             : Spacer()),
         (_user.subscription.inTrial != null
             ? TextButton(
+                child: Text(
+                  'Restore active subscription',
+                  style: TextStyle(fontSize: 10),
+                ),
                 style: TextButton.styleFrom(foregroundColor: Colors.grey),
                 onPressed: isLoading.value
                     ? null
@@ -288,9 +293,10 @@ Widget _buttonGroup({
                           );
                         }
                       },
-                child: Text(
-                  'Restore active subscription',
-                  style: TextStyle(fontSize: 10),
+                onLongPress: () => Dialogs.okDialogAction(
+                  context,
+                  body: 'No active subscription found',
+                  claimSubscription: true,
                 ),
               )
             : Spacer()),

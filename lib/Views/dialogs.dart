@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:power_of_one_basketball/Views/Buttons/PO1Button.dart';
+import 'package:power_of_one_basketball/Views/PlayerName/PlayerNameForm.dart';
+import 'package:power_of_one_basketball/Views/ScoreCard/ScoreCard.dart';
 
 enum DialogAction { yes, abort }
 
@@ -62,20 +66,57 @@ class Dialogs {
     String? title,
     String? body,
     Function? approveFunction,
+    bool claimSubscription = false,
   }) async {
     final action = await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
+        int _actions = 0;
+        Timer? _timer;
+        int _stepsBack = 2;
+
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           title: (title != null && title.isNotEmpty)
-              ? Text(title, style: textStyle)
+              ? TextButton(
+                  child: Text(title, style: textStyle),
+                  onPressed: () {
+                    if (!claimSubscription) {
+                    } else {
+                      _timer = Timer(
+                        const Duration(seconds: 2),
+                        () => _actions = 0,
+                      );
+                      _actions++;
+                      if (_actions == 5) {
+                        Navigator.pop(context);
+                      }
+                    }
+                  },
+                )
               : null,
           content: (body != null && body.isNotEmpty)
-              ? Text(body, style: textStyle)
+              ? TextButton(
+                  child: Text(body, style: textStyle),
+                  style: TextButton.styleFrom(
+                    splashFactory: NoSplash.splashFactory,
+                    overlayColor: Colors.transparent,
+                    enableFeedback: false,
+                  ),
+                  onPressed: () {
+                    if (!claimSubscription) {
+                    } else {
+                      _timer = Timer(
+                        const Duration(seconds: 2),
+                        () => _actions = 0,
+                      );
+                      _actions++;
+                    }
+                  },
+                )
               : null,
           actions: <Widget>[
             Flex(
@@ -85,8 +126,27 @@ class Dialogs {
                 PO1Button(
                   "OK",
                   onPress: () => {
-                    Navigator.pop(context),
-                    approveFunction != null && approveFunction.call(),
+                    if (claimSubscription && _actions == 5)
+                      {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Text('Action completed'),
+                            behavior: SnackBarBehavior
+                                .floating, // Makes it look more like a toast
+                            duration: const Duration(seconds: 2),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                        Navigator.pop(context),
+                        Navigator.popAndPushNamed(context, ScoreCard.id),
+                      }
+                    else
+                      {
+                        Navigator.pop(context),
+                        approveFunction != null && approveFunction.call(),
+                      },
                   },
                 ),
               ],
