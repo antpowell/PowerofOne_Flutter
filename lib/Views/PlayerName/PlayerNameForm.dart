@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
+import 'package:power_of_one_basketball/Services/FeatureFlagService/feature_flag_service.dart';
 import 'package:power_of_one_basketball/main.dart';
 import 'package:power_of_one_basketball/models/PO1PlayerSkill.dart';
 import 'package:power_of_one_basketball/models/PO1User.dart';
@@ -29,6 +30,10 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   bool showTeamTracker = false;
 
   Widget _buildNameField(bool isPlayer) {
+    final flags = context.watch<FeatureFlagService>();
+    dev.log('Feature Flag Status for this UID: ${flags.maintenanceMode}');
+    debugPrint('Feature Flag Status for this UID: ${flags.maintenanceMode}');
+
     return TextFormField(
       obscureText: false,
       decoration: InputDecoration(
@@ -127,6 +132,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
     required Function togglePlayerTeamState,
     required bool isPlayer,
   }) {
+    final FeatureFlagService flags = context.read<FeatureFlagService>();
+
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
@@ -197,7 +204,8 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
 
                   _formKey.currentState!.save();
                   dev.log('current user ${_user.email}');
-                  if (_user.subscription.isActive) {
+                  bool bypassPurchase = flags.maintenanceMode;
+                  if (_user.subscription.isActive || bypassPurchase) {
                     Navigator.pushNamed(context, ScoreCard.id);
                     fbdbService.createNewUser(_user);
                   } else {

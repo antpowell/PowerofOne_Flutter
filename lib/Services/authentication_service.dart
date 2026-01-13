@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:power_of_one_basketball/Services/RevenueCat/revenue_cat_service.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -28,7 +29,9 @@ class AuthenticationService {
         email: email,
         password: password,
       );
+      await setDevGroup();
       // await revenueCatLogin();
+
       return '$email signed in';
     } on FirebaseAuthException catch (e) {
       late authProblems errorType;
@@ -85,6 +88,7 @@ class AuthenticationService {
         password: password,
       );
       // await revenueCatLogin();
+
       return '$email account created';
     } on FirebaseAuthException catch (e) {
       authProblems
@@ -132,6 +136,8 @@ class AuthenticationService {
     String? email = _firebaseAuth.currentUser?.email;
     try {
       await _firebaseAuth.signOut();
+      await removeDevGroup();
+
       return '$email signed out';
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -141,7 +147,9 @@ class AuthenticationService {
   Future<String?> loginWithEmailLink({required String email}) async {
     try {
       await _firebaseAuth.signInWithEmailLink(email: email, emailLink: email);
+      await setDevGroup();
       // await revenueCatLogin();
+
       return 'login successful';
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -175,5 +183,35 @@ class AuthenticationService {
       print('Error logging in to RevenueCat: $e');
     }
     return null;
+  }
+
+  Future<void> setDevGroup() async {
+    User? user = _firebaseAuth.currentUser;
+
+    if (user != null) {
+      await FirebaseAnalytics.instance.setUserId(id: user.uid);
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'dev_group',
+        value: user.uid,
+      );
+    }
+  }
+
+  Future<void> removeDevGroup() async {
+    User? user = _firebaseAuth.currentUser;
+
+    if (user != null) {
+      await FirebaseAnalytics.instance.setUserId(
+        id:
+            /// In the provided Dart code snippet, `user.uid` is used to access the
+            /// unique identifier (UID) of the currently authenticated user in
+            /// Firebase Authentication.
+            user.uid,
+      );
+      await FirebaseAnalytics.instance.setUserProperty(
+        name: 'dev_group',
+        value: null,
+      );
+    }
   }
 }

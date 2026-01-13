@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:power_of_one_basketball/Services/FeatureFlagService/feature_flag_service.dart';
 import 'firebase_options.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -66,6 +67,10 @@ class Power1 extends StatelessWidget {
           create: (context) =>
               context.read<AuthenticationService>().authStateChange,
           initialData: null,
+        ),
+        ChangeNotifierProvider<FeatureFlagService>(
+          create: (_) => FeatureFlagService()..initialize(),
+          lazy: false,
         ),
       ],
       child: MaterialApp(
