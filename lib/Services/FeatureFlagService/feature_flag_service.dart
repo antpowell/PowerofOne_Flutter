@@ -15,7 +15,7 @@ class FeatureFlagService extends ChangeNotifier {
         RemoteConfigSettings(
           fetchTimeout: const Duration(minutes: 1),
           minimumFetchInterval: const Duration(
-            hours: 0,
+            hours: 1,
           ), // Use 0 for development!
         ),
       );

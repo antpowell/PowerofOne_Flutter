@@ -32,7 +32,9 @@ class _PlayerNameFormState extends State<PlayerNameForm> {
   Widget _buildNameField(bool isPlayer) {
     final flags = context.watch<FeatureFlagService>();
     dev.log('Feature Flag Status for this UID: ${flags.maintenanceMode}');
+    dev.log('UID: ${_user.id}');
     debugPrint('Feature Flag Status for this UID: ${flags.maintenanceMode}');
+    debugPrint('UID: ${_user.id}');
 
     return TextFormField(
       obscureText: false,
