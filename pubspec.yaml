@@ -1,10 +1,10 @@
 name: power_of_one_basketball
-description: "Power of One Basketball player stat tracking application"
+description: 'Power of One Basketball player stat tracking application'
 publish_to: none
-version: 1.2.0
+version: 1.2.0+2
 
 flutter_localization:
-  sdk: ">=3.2.0-0 <4.0.0"
+  sdk: '>=3.2.0-0 <4.0.0'
 # environment:
 #   sdk: ">=3.2.0-0 <4.0.0"
 environment:
@@ -18,7 +18,7 @@ dependencies:
   # flutter_neumorphic: ^3.2.0
   firebase_core: ^4.3.0
 
-  cloud_firestore: ^6.1.0 
+  cloud_firestore: ^6.1.0
   firebase_auth: ^6.1.0
   firebase_remote_config: ^6.1.3
   # cloud_firestore: "^2.4.0"
@@ -63,4 +63,4 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/images/
+    - assets/images/
